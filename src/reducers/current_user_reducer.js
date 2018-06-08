@@ -1,7 +1,11 @@
 import {
   FETCH_CURRENT_USER_FULFILLED,
   LOG_IN_FULFILLED,
-  LOG_OUT
+  LOG_OUT,
+  CREATE_PROFILE_FULFILLED,
+  UPDATE_PROFILE_FULFILLED,
+  DELETE_PROFILE_FULFILLED,
+  FETCH_PROFILES_FULFILLED
 } from '../actions/types';
 
 import {
@@ -9,7 +13,25 @@ import {
 } from 'redux';
 
 
-function profile(state = {}, action) {
+function profiles(state = {}, action) {
+  switch (action.type) {
+    case FETCH_PROFILES_FULFILLED:
+      // need to find default profile and set it if not set
+      // need to set current profile if not set
+      return action.payload.data;
+    case CREATE_PROFILE_FULFILLED:
+      // add new profile to state
+    case UPDATE_PROFILE_FULFILLED:
+      // update the existing state with the updated profile
+    case DELETE_PROFILE_FULFILLED:
+      // remove the profile from the state
+    default:
+      return state;
+  }
+}
+
+
+function user(state = {}, action) {
   switch (action.type) {
     case FETCH_CURRENT_USER_FULFILLED:
       return action.payload.data;
@@ -33,4 +55,4 @@ function accessToken(state = {}, action) {
   }
 }
 
-export default combineReducers({profile,accessToken})
+export default combineReducers({profiles,accessToken,user})
