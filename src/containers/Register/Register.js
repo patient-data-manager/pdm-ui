@@ -72,9 +72,15 @@ class Register extends Component {
   }
 
   attemptSignUp() {
-    const successHandler = () => this.props.closer();
+    const successHandler = () => this.registrationSuccess();
     const failureHandler = (failureResponse) => this.setState({errors: failureResponse.response.data.errors});
     signUp(this.state, successHandler, failureHandler);
+  }
+
+  registrationSuccess() {
+    console.log("registrationSuccess");
+    window.location = "#/"; // redirect to / so that it will auto-redirect to /login
+    // TODO: figure out how to show a message saying "registration successful"
   }
 
   handleChange(field) {
