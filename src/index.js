@@ -11,6 +11,7 @@ import 'bootstrap/dist/js/bootstrap.js'
 import './styles/application.css';
 import App from './containers/App';
 import Login from './containers/Login/Login';
+import Logout from './containers/Logout/Logout';
 import Register from './containers/Register/Register';
 import AuthenticatedRoutes from './containers/AuthenticatedRoutes';
 import registerServiceWorker from './registerServiceWorker';
@@ -31,9 +32,11 @@ ReactDOM.render(
 
       <Route component={AuthenticatedRoutes}>
             <Route path='/' component={App}/>
+            <Route path='/logout' component={Logout}/>
       </Route>
       <Route path='/register' component={Register}/>
       <Route path='/login' component={Login}/>
+
     </Router>
   </Provider>, document.getElementById('root'));
 registerServiceWorker();

@@ -21,7 +21,7 @@ class AuthenticatedRoutes extends Component {
 // the current position in the app.
 function mapStateToProps(state) {
   return {
-    isLoggedIn: state.currentUser.accessToken.access_token ? true: false,
+    isLoggedIn: state.currentUser.accessToken && state.currentUser.accessToken.access_token ? true: false,
   };
 }
 

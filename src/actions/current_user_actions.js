@@ -1,6 +1,7 @@
 import {
   FETCH_CURRENT_USER,
   LOG_IN,
+  LOG_OUT,
   SIGN_UP,
   UPDATE_USER
 } from './types';
@@ -30,6 +31,23 @@ export function logIn(user, successHandler=null, failureHandler=null) {
   return {
     type: LOG_IN,
     payload: postPromise
+  };
+}
+
+export function logOut(user, successHandler=null, failureHandler=null) {
+
+  // const postPromise = axios.post('/oauth/token',
+  //                     user,
+  //                     {headers: {'X-Key-Inflection': 'camel', 'Accept': 'application/json'}});
+  // if (failureHandler) {
+  //   postPromise.catch(failureHandler);
+  // }
+  // if (successHandler) {
+  //   postPromise.then(successHandler);
+  // }
+  return {
+    type: LOG_OUT,
+    payload: null
   };
 }
 
