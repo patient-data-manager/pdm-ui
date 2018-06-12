@@ -3,7 +3,7 @@ import { Button, Card, CardBody, CardGroup, Col, Container, Input, InputGroup, I
 import { logIn,fetchCurrentUser } from '../../actions/current_user_actions';
 import { connect } from 'react-redux';
 import { bindActionCreators } from 'redux';
-class Login extends Component {
+export class Login extends Component {
 
   constructor(props) {
     super(props);
@@ -72,7 +72,7 @@ class Login extends Component {
 
   logInSuccess() {
       // this.props.fetchCurrentUser(this.props.currentUser.accessToken.access_token)
-      // window.location = "#/";
+      window.location = "#/";
   }
 
   attemptLogIn() {

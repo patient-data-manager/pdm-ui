@@ -3,7 +3,7 @@ import PropTypes from 'prop-types';
 import { signUp} from '../../actions/current_user_actions';
 import { Button, Card, CardBody, CardFooter, Col, Container, Input, InputGroup, InputGroupAddon, InputGroupText, Row } from 'reactstrap';
 
-class Register extends Component {
+export class Register extends Component {
 
   constructor(props) {
     super(props);

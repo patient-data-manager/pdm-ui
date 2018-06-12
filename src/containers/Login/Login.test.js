@@ -1,9 +1,10 @@
 import React from 'react';
 import ReactDOM from 'react-dom';
-import Login from './Login';
+import { Login } from './Login';
+import { shallow, mount, render } from 'enzyme';
+
 
 it('renders without crashing', () => {
-  const div = document.createElement('div');
-  ReactDOM.render(<Login />, div);
-  ReactDOM.unmountComponentAtNode(div);
+  const wrapper = shallow(<Login />);
+  wrapper.unmount();
 });

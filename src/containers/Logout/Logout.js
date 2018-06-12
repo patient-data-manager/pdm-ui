@@ -3,9 +3,9 @@ import { Button, Card, CardBody, CardGroup, Col, Container, Input, InputGroup, I
 import { logOut } from '../../actions/current_user_actions';
 import { connect } from 'react-redux';
 import { bindActionCreators } from 'redux';
+import { hashHistory, Router, Route } from 'react-router';
 
-
-class Logout extends Component {
+export class Logout extends Component {
 
   constructor(props) {
     super(props);
@@ -13,6 +13,7 @@ class Logout extends Component {
 
   componentWillMount() {
     this.props.logOut({ });
+    (this.props.hashHistory || hashHistory).push('/');
   }
 
   render() {
