@@ -125,73 +125,103 @@
   justify-content: center;
   align-items: center;
   margin-top: 20px;
+  margin-bottom: 20px;
 }
 
 .landing-header {
-    display: flex;
-    justify-content: center;
-    align-items: center;
-    vertical-align: middle;
-    background-image: url("~/landing/landing-desktop.jpg");
-    background-size: 850px;
-    height: 575px;
-    position: relative;
-  }
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  vertical-align: middle;
+  background-image: url("~/landing/landing-desktop.jpg");
+  background-size: 850px;
+  height: 575px;
+  position: relative;
+}
 
+.landing-button-container {
+  align-items: center;
+  position: absolute;
+  bottom: 40px;
+}
 
+.landing-footer {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  background-color: #7e8fa3;
+  padding: 20px;
+}
 
-  .landing-button-container {
-    align-items: center;
-    position: absolute;
-    bottom: 40px;
-  }
+.landing-cms {
+  background-image: url("~/landing/landing-cms.png");
+  background-size: 100px;
+  height: 50px;
+  width: 100px;
+}
 
-  .landing-footer{
-      display: flex;
-      justify-content: center;
-      align-items: center;
-  }
- .landing-cms {
-    background-image: url("~/landing/landing-cms.png");
-    background-size: 100px;
-    height: 50px;
-    width: 100px;
-  }
-  .landing-mitre{
-      background-image: url("~/landing/landing-cms.png");
-      background-size: 100px;
-      height: 50px;
-      width: 100px;
-  }
+.landing-mitre {
+  background-image: url("~/landing/landing-mitre.png");
+  background-size: 100px;
+  height: 50px;
+  width: 100px;
+}
 
-  .landing-problem {
-    background-color: #e7e9ef;
-    padding: 40px;
-  }
-  .landing-solution {
-    background-color: white;
-    padding: 40px;
-  }
-  .landing-highlights {
-    background-color: white;
-    padding: 40px;
-  }
-  .landing-highlights .li {
-    padding: 40px;
-  }
- .login-button {
-   width: 300px;
-   color: white;
-   background-color: blue;
-   margin: 20px;
- }
+.landing-robot {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  vertical-align: middle;
+  background-image: url("~/landing/PDUA-v10.png");
+  background-size: 850px;
+  height: 525px;
+}
 
- .register-button {
-   width: 300px;
-   color: white;
-   background-color: gray;
-   margin: 20px;
- }
+.landing-problem {
+  background-color: #e7eaee;
+  padding: 40px;
+}
+
+.landing-solution {
+  background-color: white;
+  padding: 40px;
+}
+
+.landing-pdc {
+  background-color: #e7eaee;
+  padding: 40px;
+}
+
+.landing-myhd {
+  background-color: #e7eaee;
+  padding: 40px;
+}
+
+.landing-highlights {
+  background-color: white;
+  padding: 40px;
+}
+
+.landing-highlights .li {
+  padding: 40px;
+}
+
+.login-button {
+  width: 300px;
+  color: white;
+  background-color: #6a8eb6;
+  margin: 20px;
+  padding: 10px 75px 10px 75px;
+}
+
+.register-button {
+  width: 300px;
+  color: white;
+  background-color: #7e8fa3;
+  margin: 20px;
+  padding: 10px 75px 10px 75px;
+}
+
 .rotate {
   -moz-transition: all 0.3s linear;
   -ms-transition: all 0.3s linear;
