@@ -133,27 +133,46 @@
     align-items: center;
     vertical-align: middle;
     background-image: url("~/landing/landing-desktop.jpg");
-    background-size: 920px;
-    height: 700px;
+    background-size: 850px;
+    height: 575px;
+    position: relative;
   }
 
-  .landing-footer{
-      display: flex;
-      justify-content: center;
-      align-items: center;
-      vertical-align: middle;
-      background-image: url("~/landing/landing-cms.png");
-      background-size: 1000px;
-      height: 200px;
-    }
+
+
   .landing-button-container {
     align-items: center;
     position: absolute;
     bottom: 40px;
   }
 
+  .landing-footer{
+      display: flex;
+      justify-content: center;
+      align-items: center;
+    }
+ .landing-cms {
+    background-image: url("~/landing/landing-cms.png");
+    background-size: 100px;
+    height: 50px;
+    width: 100px;
+  }
+  .landing-mitre{
+      background-image: url("~/landing/landing-cms.png");
+      background-size: 100px;
+      height: 50px;
+      width: 100px;
+  }
 
-
+  .landing-problem {
+    background-color: #e7e9ef;
+  }
+  .landing-solution {
+    background-color: white;
+  }
+  .landing-highlights {
+    background-color: white;
+  }
  .login-button {
    width: 300px;
    color: white;
