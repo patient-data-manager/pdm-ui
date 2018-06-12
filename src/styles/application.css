@@ -120,6 +120,53 @@
   padding: 10px 75px 10px 75px;
 }
 
+.landing-column {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  margin-top: 20px;
+}
+
+.landing-header {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    vertical-align: middle;
+    background-image: url("~/landing/landing-desktop.jpg");
+    background-size: 1000px;
+    height: 700px;
+  }
+
+  .landing-footer{
+      display: flex;
+      justify-content: center;
+      align-items: center;
+      vertical-align: middle;
+      background-image: url("~/landing/landing-cms.png");
+      background-size: 1000px;
+      height: 200px;
+    }
+  .landing-button-container {
+    align-items: center;
+    position: absolute;
+    bottom: 40px;
+  }
+
+
+
+ .login-button {
+   width: 300px;
+   color: white;
+   background-color: blue;
+   margin: 20px;
+ }
+ 
+ .register-button {
+   width: 300px;
+   color: white;
+   background-color: gray;
+   margin: 20px;
+ }
 .rotate {
   -moz-transition: all 0.3s linear;
   -ms-transition: all 0.3s linear;
