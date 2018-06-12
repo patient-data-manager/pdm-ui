@@ -150,7 +150,7 @@
       display: flex;
       justify-content: center;
       align-items: center;
-    }
+  }
  .landing-cms {
     background-image: url("~/landing/landing-cms.png");
     background-size: 100px;
@@ -166,12 +166,18 @@
 
   .landing-problem {
     background-color: #e7e9ef;
+    padding: 40px;
   }
   .landing-solution {
     background-color: white;
+    padding: 40px;
   }
   .landing-highlights {
     background-color: white;
+    padding: 40px;
+  }
+  .landing-highlights .li {
+    padding: 40px;
   }
  .login-button {
    width: 300px;
