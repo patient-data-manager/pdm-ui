@@ -169,7 +169,6 @@
 
 
 .landing-cms {
-  background-image: url("~/landing/landing-cms.png");
   background-size: 100px;
   height: 50px;
   width: 100px;
@@ -204,7 +203,9 @@
 }
 
 .landing-pdc {
-  background-color: #e7eaee;
+  background-color: #6a8eb6;
+  align-items: center;
+  color: white;
   padding: 40px;
 }
 
