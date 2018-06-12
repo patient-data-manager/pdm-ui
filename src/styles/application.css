@@ -139,6 +139,20 @@
   position: relative;
 }
 
+.cms-alliance {
+  align-items: center;
+  position: absolute;
+  top: 5px;
+  font-size: 60%
+}
+
+.patients-first {
+  align-items: center;
+  position: absolute;
+  top: 60px;
+  font-size: 200%
+}
+
 .landing-button-container {
   align-items: center;
   position: absolute;
@@ -153,12 +167,14 @@
   padding: 20px;
 }
 
+
 .landing-cms {
   background-image: url("~/landing/landing-cms.png");
   background-size: 100px;
   height: 50px;
   width: 100px;
 }
+
 
 .landing-mitre {
   background-image: url("~/landing/landing-mitre.png");
