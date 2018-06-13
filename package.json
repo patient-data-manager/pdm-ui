@@ -95,6 +95,9 @@
     "test-ui-chrome": "testcafe chrome ./test/ui/** --app \"yarn start\"",
     "test-ui-ie": "testcafe ie ./test/ui/** --app \"yarn start\""
   },
+  "optionalDependencies": {
+    "fsevents": "*"
+  },
   "devDependencies": {
     "webpack": "^3.11.0"
   }
