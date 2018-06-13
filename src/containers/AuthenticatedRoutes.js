@@ -1,6 +1,7 @@
 import React, { Component } from 'react';
 import PropTypes from 'prop-types';
 import { connect } from 'react-redux';
+import Login from './Login/Login'
 
 class AuthenticatedRoutes extends Component {
   render() {
@@ -8,15 +9,7 @@ class AuthenticatedRoutes extends Component {
       return this.props.children;
     } else {
       return (
-        <div className="container">
-          <div className="row basic-bg">
-            <div className="col-md-12">
-              <div className="showpage_header_container no-print">
-                You are not authorized to see this content, please login.
-              </div>
-            </div>
-          </div>
-        </div>
+        <Login />
       );
     }
   }
@@ -28,7 +21,7 @@ class AuthenticatedRoutes extends Component {
 // the current position in the app.
 function mapStateToProps(state) {
   return {
-    isLoggedIn: state.currentUser.email ? true: false,
+    isLoggedIn: state.currentUser.accessToken && state.currentUser.accessToken.access_token ? true: false,
   };
 }
 

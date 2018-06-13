@@ -11,22 +11,32 @@ import 'bootstrap/dist/js/bootstrap.js'
 import './styles/application.css';
 import App from './containers/App';
 import Login from './containers/Login/Login';
+import Logout from './containers/Logout/Logout';
 import Register from './containers/Register/Register';
 import AuthenticatedRoutes from './containers/AuthenticatedRoutes';
 import registerServiceWorker from './registerServiceWorker';
-import store from './store/configureStore';
+import { configureStore, saveState } from './store/configureStore';
+let store = configureStore();
 window.store=store;
+
+store.subscribe(() => {
+  saveState(store.getState());
+});
+
 let axiosDefaults = require('axios/lib/defaults');
 axiosDefaults.baseURL = 'http://127.0.0.1:3000';
 
 ReactDOM.render(
   <Provider store={store}>
     <Router history={hashHistory} >
-      <Route path='/' component={App}/>
+
       <Route component={AuthenticatedRoutes}>
+            <Route path='/' component={App}/>
+            <Route path='/logout' component={Logout}/>
       </Route>
       <Route path='/register' component={Register}/>
       <Route path='/login' component={Login}/>
+
     </Router>
   </Provider>, document.getElementById('root'));
 registerServiceWorker();
