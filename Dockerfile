@@ -19,4 +19,4 @@ RUN yarn global add serve
 CMD serve -s build
 
 # Tell Docker about the port we'll run on.
-EXPOSE 5000
+EXPOSE 3000
