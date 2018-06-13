@@ -3,67 +3,110 @@ import { Button, Card, CardBody, CardGroup, Col, Container, Input, InputGroup, I
 import { logIn,fetchCurrentUser } from '../../actions/current_user_actions';
 import { connect } from 'react-redux';
 import { bindActionCreators } from 'redux';
+import robot from '../../../images/robot.png'
+
 export class Login extends Component {
 
   constructor(props) {
     super(props);
-    this.state = {email: '', password: ''};
+    this.state = {email: '', password: '', errors: {}};
   }
 
   render() {
     return (
-      <div className="app flex-row align-items-center">
-        <Container>
-          <Row className="justify-content-center">
-            <Col md="8">
-              <CardGroup>
-                <Card className="p-4">
-                  <CardBody>
-                    <h1>Login</h1>
-                    <p className="text-muted">Sign In to your account</p>
-                    <InputGroup className="mb-3">
-                      <InputGroupAddon addonType="prepend">
-                        <InputGroupText>
-                          <i className="icon-user"></i>
-                        </InputGroupText>
-                      </InputGroupAddon>
-                      <Input type="text" placeholder="Email"  name="email" id="email" onChange={this.handleChange('email')}/>
-                    </InputGroup>
-                    <InputGroup className="mb-4">
-                      <InputGroupAddon addonType="prepend">
-                        <InputGroupText>
-                          <i className="icon-lock"></i>
-                        </InputGroupText>
-                      </InputGroupAddon>
-                      <Input type="password" placeholder="Password"  name="password" id="password" onChange={this.handleChange('password')}/>
-                    </InputGroup>
-                    <Row>
-                      <Col xs="6">
-                        <Button color="primary" className="px-4" onClick={() => this.attemptLogIn() }>Login</Button>
-                      </Col>
-                      <Col xs="6" className="text-right">
-                        <Button color="link" className="px-0">Forgot password?</Button>
-                      </Col>
-                    </Row>
-                  </CardBody>
-                </Card>
-                <Card className="text-white bg-primary py-5 d-md-down-none" style={{ width: 44 + '%' }}>
-                  <CardBody className="text-center">
-                    <div>
-                      <h2>Sign up</h2>
-                      <p>
-                        Dont already have an account?  Click here to register.
-                      </p>
-                      <Button color="primary" className="mt-3" active onClick={() => this.redirectToRegister() }>Register Now!</Button>
-                    </div>
-                  </CardBody>
-                </Card>
-              </CardGroup>
+      <div className="app flex-row align-items-center h-100">
+        <Container fluid={true}>
+          <Row className="justify-content-center align-items-center">
+            <Col xs="3">
+              <img src={robot} className="img-fluid" />
+            </Col>
+            <Col xs="8" className="h-100 bg-white">
+              <div className="h-100 justify-content-center align-items-center align-middle">
+                <h3 className="mb-5">MyHealthEData Login</h3>
+                <InputGroup className="mb-3">
+                  <Input type="text" placeholder="Email" name="email" id="email" onChange={this.handleChange('email')}/>
+                </InputGroup>
+                { this.renderFieldErrorMessage('email') }
+
+                <InputGroup className="mb-1">
+                  <Input type="password" placeholder="Password"  name="password" id="password" 
+                    onChange={this.handleChange('password')} className={this.renderClassName('password')}
+                    onFocus={this.handleFocus('password')} />
+                  { this.renderFieldIcon('password') }
+                </InputGroup>
+                { this.renderFieldErrorMessage('password') }
+
+                <Row>
+                  <Col className="text-right">
+                    <Button color="primary" size="lg" onClick={() => this.attemptLogIn() }>LOG IN</Button>
+                  </Col>
+                </Row>
+                <Row>
+                  <Col className="text-right">
+                    <Button color="link" size="sm" onClick={() => this.redirectToRegister() }>REGISTER</Button>
+                  </Col>
+                </Row>
+              </div>
             </Col>
           </Row>
         </Container>
       </div>
     );
+  }
+
+  renderClassName(field) {
+    const fieldErrors = this.state.errors[field];
+    if (fieldErrors != null && fieldErrors.length > 0) {
+      return 'is-invalid'
+    }
+    return '';
+  }
+
+  renderFieldIcon(field) {
+    const fieldErrors = this.state.errors[field];
+    const fieldValue = this.state[field];
+
+    if (fieldErrors && fieldErrors.length > 0) {
+      // error
+      return (<InputGroupAddon addonType="append">
+                <InputGroupText>
+                  <i className="fa fa-exclamation-circle text-danger"></i>
+                </InputGroupText>
+              </InputGroupAddon>);
+    } else if (fieldErrors != null && fieldValue != null && fieldValue.length > 0) {
+      // valid
+      return (<InputGroupAddon addonType="append">
+                <InputGroupText>
+                  <i className="fa fa-check text-success"></i>
+                </InputGroupText>
+              </InputGroupAddon>);
+    }  else {
+      // empty, do nothing
+      return null;
+    }
+  }
+
+  renderFieldErrorMessage(field) {
+    const fieldErrors = this.state.errors[field];
+    if (fieldErrors != null && fieldErrors.length > 0) {
+      const message = (field + ' '+ fieldErrors[0]).replace(/_/g, ' ').toLowerCase(); // TODO: string join
+      return (<div className="invalid-feedback" style={{display: 'block'}}>{message}</div>);
+    }
+    return null;
+  }
+
+  handleFocus(field) {
+    return (e) => {
+      this.setStateErrors(field, undefined);
+    };
+  }
+
+ setStateErrors(field, newErrors) {
+    this.setState((prevState) => {
+        let newState = { errors: Object.assign({}, prevState.errors) };
+        newState.errors[field] = newErrors;
+        return newState;
+      });
   }
 
   redirectToRegister() {
@@ -75,9 +118,13 @@ export class Login extends Component {
       window.location = "#/";
   }
 
+  logInFailure() {
+    this.setState( { errors: { password: ['is incorrect'] } } );
+  }
+
   attemptLogIn() {
     const successHandler = () => this.logInSuccess();
-    const failureHandler = () => this.setState({invalidCredentials: true});
+    const failureHandler = () => this.logInFailure();
     this.props.logIn({email: this.state.email, password: this.state.password, grant_type: "password"}, successHandler, failureHandler);
   }
 

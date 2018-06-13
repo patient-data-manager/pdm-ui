@@ -19,7 +19,7 @@
   margin: 10px;
   font-weight: 100; }
   .btn.btn-primary {
-    background-color: #658999;
+    background-color: #6b8eb6;
     border: none; }
 
 .Select {
@@ -294,13 +294,23 @@ html, body {
   height: 100%; }
 
 body {
-  background-color: #658999;
+  background-color: #EAEAEA;
   color: #4A4A4A;
   font-family: "Helvetica Neue", Helvetica, sans-serif;
   font-size: 14px;
   overflow-x: hidden; }
 
+input[type="text"], input[type="password"] {
+    background: transparent;
+    border: none;
+    border-bottom: 1px solid #000000;
+}
+
 a {
   color: #658999; }
   a:-webkit-any-link {
     text-decoration: none; }
+
+h1, h2, h3 {
+  color: #6b8eb6;
+}
