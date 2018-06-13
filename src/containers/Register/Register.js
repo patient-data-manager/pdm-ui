@@ -13,64 +13,65 @@ export class Register extends Component {
 
   render() {
     return (
-      <div className="app flex-row align-items-center h-100">
-        <Container fluid={true}>
-          <Row className="justify-content-center align-items-center">
-            <Col xs="3">
-              <img src={robot} className="img-fluid" />
-            </Col>
-            <Col xs="8" className="h-100 bg-white">
-              <h3 className="mb-5">MyHealthEData Registration</h3>
-              <InputGroup className="mb-3">
-                <Input type="text" placeholder="First Name" value={this.state.first_name} name="first_name" id="first_name" 
-                  onChange={this.handleChange('first_name')} className={this.renderClassName('first_name')}
-                  onFocus={this.handleFocus('first_name')} onBlur={() => this.validateFirstName()} />
-                {this.renderFieldIcon('first_name')}
-              </InputGroup>
-              <InputGroup className="mb-3">
-                <Input type="text" placeholder="Last Name" value={this.state.last_name} name="last_name" id="last_name"
-                  onChange={this.handleChange('last_name')} className={this.renderClassName('last_name')}
-                  onFocus={this.handleFocus('last_name')} onBlur={() => this.validateLastName()} />
-                {this.renderFieldIcon('last_name')}
-              </InputGroup>
-              <InputGroup className="mb-3">
-                <Input type="text" placeholder="Email" value={this.state.email} name="email" id="email" 
-                 onChange={this.handleChange('email')} className={this.renderClassName('email')}
-                 onFocus={this.handleFocus('email')} onBlur={() => this.validateEmail()} />
-                {this.renderFieldIcon('email')}
-              </InputGroup>
-              { this.renderFieldErrorMessage('email') }
+      <Container className="bg-white">
+        <Row className="justify-content-center align-items-center">
+          <Col xs="3">
+            <img src={robot} className="img-fluid" />
+          </Col>
+          <Col xs="8">
+            <h3 className="mb-5">MyHealthEData Registration</h3>
+            <InputGroup className="mb-3">
+              <Input type="text" placeholder="First Name" value={this.state.first_name} name="first_name" id="first_name" 
+                onChange={this.handleChange('first_name')} className={this.renderClassName('first_name')}
+                onFocus={this.handleFocus('first_name')} onBlur={() => this.validateFirstName()} />
+              {this.renderFieldIcon('first_name')}
+            </InputGroup>
+            <InputGroup className="mb-3">
+              <Input type="text" placeholder="Last Name" value={this.state.last_name} name="last_name" id="last_name"
+                onChange={this.handleChange('last_name')} className={this.renderClassName('last_name')}
+                onFocus={this.handleFocus('last_name')} onBlur={() => this.validateLastName()} />
+              {this.renderFieldIcon('last_name')}
+            </InputGroup>
+            <InputGroup className="mb-3">
+              <Input type="text" placeholder="Email" value={this.state.email} name="email" id="email" 
+               onChange={this.handleChange('email')} className={this.renderClassName('email')}
+               onFocus={this.handleFocus('email')} onBlur={() => this.validateEmail()} />
+              {this.renderFieldIcon('email')}
+            </InputGroup>
+            { this.renderFieldErrorMessage('email') }
 
-              <InputGroup className="mb-3">
-                <Input type="password" placeholder="Password" name="password" id="password"
-                 onChange={this.handleChange('password')} className={this.renderClassName('password')}
-                 onFocus={this.handleFocus('password')} onBlur={() => this.validatePassword()} />
-                {this.renderFieldIcon('password')}
-              </InputGroup>
-              { this.renderFieldErrorMessage('password') }
+            <InputGroup className="mb-3">
+              <Input type="password" placeholder="Password" name="password" id="password"
+               onChange={this.handleChange('password')} className={this.renderClassName('password')}
+               onFocus={this.handleFocus('password')} onBlur={() => this.validatePassword()} />
+              {this.renderFieldIcon('password')}
+            </InputGroup>
+            { this.renderFieldErrorMessage('password') }
 
-              <InputGroup className="mb-4">
-                <Input type="password"  placeholder="Repeat password"  name="password_confirmation" id="password_confirmation"
-                 onChange={this.handleChange('password_confirmation')} className={this.renderClassName('password_confirmation')}
-                 onFocus={this.handleFocus('password_confirmation')} onBlur={() => this.validateConfirmation()} />
-                {this.renderFieldIcon('password_confirmation')}
-              </InputGroup>
-              { this.renderFieldErrorMessage('password_confirmation') }
+            <InputGroup className="mb-4">
+              <Input type="password"  placeholder="Repeat password"  name="password_confirmation" id="password_confirmation"
+               onChange={this.handleChange('password_confirmation')} className={this.renderClassName('password_confirmation')}
+               onFocus={this.handleFocus('password_confirmation')} onBlur={() => this.validateConfirmation()} />
+              {this.renderFieldIcon('password_confirmation')}
+            </InputGroup>
+            { this.renderFieldErrorMessage('password_confirmation') }
 
-              <Row>
-                <Col className="text-right">
-                  <Button color="primary" size="lg" onClick={() => this.attemptSignUp() }>REGISTER</Button>
-                </Col>
-              </Row>
-              <Row>
-                <Col className="text-right">
-                  <Button color="link" size="sm" active onClick={() => this.redirectToLogin() }>LOGIN</Button>
-                </Col>
-              </Row>
-            </Col>
-          </Row>
-        </Container>
-      </div>
+            <Row>
+              <Col className="text-right">
+                <Button color="primary" className="btn-block wide-text" size="lg" onClick={() => this.attemptSignUp() }>REGISTER</Button>
+              </Col>
+            </Row>
+            <Row>
+              <Col className="text-right">
+                <div>
+                  Already have an account?
+                  <Button color="link" size="sm" active onClick={() => this.redirectToLogin() }>LOG IN</Button>
+                </div>
+              </Col>
+            </Row>
+          </Col>
+        </Row>
+      </Container>
     );
   }
 

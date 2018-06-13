@@ -15,7 +15,6 @@
   display: block; }
 
 .btn {
-  border-radius: 0;
   margin: 10px;
   font-weight: 100; }
   .btn.btn-primary {
@@ -294,11 +293,18 @@ html, body {
   height: 100%; }
 
 body {
-  background-color: #EAEAEA;
+  background-color: #FFFFFF;
   color: #4A4A4A;
   font-family: "Helvetica Neue", Helvetica, sans-serif;
   font-size: 14px;
-  overflow-x: hidden; }
+  overflow-x: hidden; 
+  background: url('../../images/background.png') no-repeat center center fixed; 
+  -webkit-background-size: cover;
+  -moz-background-size: cover;
+  -o-background-size: cover;
+  background-size: cover;
+}
+
 
 input[type="text"], input[type="password"] {
     background: transparent;
@@ -313,4 +319,8 @@ a {
 
 h1, h2, h3 {
   color: #6b8eb6;
+}
+
+.wide-text {
+  letter-spacing: 0.2em;
 }

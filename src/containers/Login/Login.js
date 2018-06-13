@@ -14,43 +14,44 @@ export class Login extends Component {
 
   render() {
     return (
-      <div className="app flex-row align-items-center h-100">
-        <Container fluid={true}>
-          <Row className="justify-content-center align-items-center">
-            <Col xs="3">
-              <img src={robot} className="img-fluid" />
-            </Col>
-            <Col xs="8" className="h-100 bg-white">
-              <div className="h-100 justify-content-center align-items-center align-middle">
-                <h3 className="mb-5">MyHealthEData Login</h3>
-                <InputGroup className="mb-3">
-                  <Input type="text" placeholder="Email" name="email" id="email" onChange={this.handleChange('email')}/>
-                </InputGroup>
-                { this.renderFieldErrorMessage('email') }
+      <Container className="bg-white">
+        <Row className="justify-content-center align-items-center">
+          <Col xs="3">
+            <img src={robot} className="img-fluid" />
+          </Col>
+          <Col xs="8">
+            <div className="h-100 justify-content-center align-items-center align-middle">
+              <h3 className="mb-5">MyHealthEData Login</h3>
+              <InputGroup className="mb-3">
+                <Input type="text" placeholder="Email" name="email" id="email" onChange={this.handleChange('email')}/>
+              </InputGroup>
+              { this.renderFieldErrorMessage('email') }
 
-                <InputGroup className="mb-1">
-                  <Input type="password" placeholder="Password"  name="password" id="password" 
-                    onChange={this.handleChange('password')} className={this.renderClassName('password')}
-                    onFocus={this.handleFocus('password')} />
-                  { this.renderFieldIcon('password') }
-                </InputGroup>
-                { this.renderFieldErrorMessage('password') }
+              <InputGroup className="mb-1">
+                <Input type="password" placeholder="Password"  name="password" id="password" 
+                  onChange={this.handleChange('password')} className={this.renderClassName('password')}
+                  onFocus={this.handleFocus('password')} />
+                { this.renderFieldIcon('password') }
+              </InputGroup>
+              { this.renderFieldErrorMessage('password') }
 
-                <Row>
-                  <Col className="text-right">
-                    <Button color="primary" size="lg" onClick={() => this.attemptLogIn() }>LOG IN</Button>
-                  </Col>
-                </Row>
-                <Row>
-                  <Col className="text-right">
+              <Row>
+                <Col className="text-right">
+                  <Button color="primary" className="btn-block wide-text" size="lg" onClick={() => this.attemptLogIn() }>LOG IN</Button>
+                </Col>
+              </Row>
+              <Row>
+                <Col className="text-right">
+                  <div>
+                    Don't have an account?
                     <Button color="link" size="sm" onClick={() => this.redirectToRegister() }>REGISTER</Button>
-                  </Col>
-                </Row>
-              </div>
-            </Col>
-          </Row>
-        </Container>
-      </div>
+                  </div>
+                </Col>
+              </Row>
+            </div>
+          </Col>
+        </Row>
+      </Container>
     );
   }
 
