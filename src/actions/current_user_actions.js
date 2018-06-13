@@ -34,17 +34,7 @@ export function logIn(user, successHandler=null, failureHandler=null) {
   };
 }
 
-export function logOut(user, successHandler=null, failureHandler=null) {
-
-  // const postPromise = axios.post('/oauth/token',
-  //                     user,
-  //                     {headers: {'X-Key-Inflection': 'camel', 'Accept': 'application/json'}});
-  // if (failureHandler) {
-  //   postPromise.catch(failureHandler);
-  // }
-  // if (successHandler) {
-  //   postPromise.then(successHandler);
-  // }
+export function logOut() {
   return {
     type: LOG_OUT,
     payload: null

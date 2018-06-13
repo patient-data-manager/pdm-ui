@@ -1,18 +1,13 @@
 import React, { Component } from 'react';
-import { Button, Card, CardBody, CardGroup, Col, Container, Input, InputGroup, InputGroupAddon, InputGroupText, Row } from 'reactstrap';
 import { logOut } from '../../actions/current_user_actions';
 import { connect } from 'react-redux';
 import { bindActionCreators } from 'redux';
-import { hashHistory, Router, Route } from 'react-router';
+import { hashHistory } from 'react-router';
 
 export class Logout extends Component {
 
-  constructor(props) {
-    super(props);
-  }
-
   componentWillMount() {
-    this.props.logOut({ });
+    this.props.logOut();
     (this.props.hashHistory || hashHistory).push('/');
   }
 
