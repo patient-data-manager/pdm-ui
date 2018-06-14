@@ -14,6 +14,7 @@
   vertical-align: middle;
   background-image: url("~/landing/landing-desktop.jpg");
   background-size: cover;
+  background-repeat: no-repeat;
   height: 575px;
   position: relative;
 }
@@ -67,6 +68,7 @@
   align-items: center;
   vertical-align: middle;
   background-image: url("~/landing/PDUA-v10.png");
+  background-repeat: no-repeat;
   background-size: cover;
   height: 605px;
 }
@@ -139,7 +141,7 @@
 .btn {
   margin: 10px;
   font-weight: 100; }
-  
+
   .btn.btn-primary {
     background-color: #6b8eb6;
     border: none; }
