@@ -28,7 +28,7 @@ export class Login extends Component {
               { this.renderFieldErrorMessage('email') }
 
               <InputGroup className="mb-1">
-                <Input type="password" placeholder="Password"  name="password" id="password" 
+                <Input type="password" placeholder="Password"  name="password" id="password"
                   onChange={this.handleChange('password')} className={this.renderClassName('password')}
                   onFocus={this.handleFocus('password')} />
                 { this.renderFieldIcon('password') }
@@ -116,7 +116,7 @@ export class Login extends Component {
 
   logInSuccess() {
       // this.props.fetchCurrentUser(this.props.currentUser.accessToken.access_token)
-      window.location = "#/";
+      window.location = "#/dashboard";
   }
 
   logInFailure() {
