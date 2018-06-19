@@ -25,7 +25,7 @@ store.subscribe(() => {
 });
 
 let axiosDefaults = require('axios/lib/defaults');
-axiosDefaults.baseURL = 'http://127.0.0.1:3000';
+axiosDefaults.baseURL = process.env.REACT_APP_BACKEND_URL || 'http://127.0.0.1:3000';
 
 ReactDOM.render(
   <Provider store={store}>
