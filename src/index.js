@@ -31,6 +31,7 @@ ReactDOM.render(
   <Provider store={store}>
     <Router history={hashHistory} >
       <Route path='/' component={App}/>
+      <Route path='/dashboard' component={Dashboard}/>
       <Route component={AuthenticatedRoutes}>
         <Route path='/dashboard' component={Dashboard}/>
         <Route path='/logout' component={Logout}/>

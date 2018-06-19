@@ -12,9 +12,6 @@ class Nav extends Component {
         <Logo />
           <ul className="navbar-nav ml-auto">
             <li className="nav-item">
-              <a href="/" className="active">
-                <FontAwesome name="pie-chart" /> Dashboard
-              </a>
             </li>
             {this.props.currentUser.accessToken ? this.renderUserMenu() : this.renderLoginMenu()}
           </ul>

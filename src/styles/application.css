@@ -656,6 +656,9 @@
 .fa.fa-link {
   color: #FF8889;
 }
+.topper {
+  text-decoration : underline;
+}
 
 html, body {
   margin: 0;
@@ -694,4 +697,9 @@ h1, h2, h3 {
 .wide-text {
   letter-spacing: 0.2em;
 
+}
+
+.Options {
+  font-size: 16px;
+  text-align: left;
 }
