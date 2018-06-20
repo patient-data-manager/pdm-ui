@@ -33,7 +33,6 @@ ReactDOM.render(
       <Route path='/' component={App}/>
       <Route path='/dashboard' component={Dashboard}/>
       <Route component={AuthenticatedRoutes}>
-        <Route path='/dashboard' component={Dashboard}/>
         <Route path='/logout' component={Logout}/>
       </Route>
       <Route path='/register' component={Register}/>
