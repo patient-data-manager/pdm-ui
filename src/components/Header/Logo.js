@@ -1,5 +1,5 @@
 import React, { Component } from 'react';
-import robot from '../../../../designs/assets/images/robot.png'
+import robot from '../../../public/landing/robot.png'
 import { BrowserRouter as Router, Route, Link } from "react-router-dom";
 
 
