@@ -36,9 +36,9 @@ class Nav extends Component {
         }
 
   renderLoginMenu(){
-        return(<li role="presentation" className="nav-item dropdown">
-                  <a href="#/login">Login</a>
-                </li>)
+      return(<li role="presentation" className="nav-item dropdown">
+              <a href="#/login">Login</a>
+            </li>)
       }
 }
 function mapStateToProps(state) {
