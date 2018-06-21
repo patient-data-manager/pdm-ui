@@ -1,4 +1,4 @@
-export function loadState() {
+function loadState() {
   try {
     let persistedState = localStorage.getItem('hdm_state');
     if (persistedState === null) {
@@ -12,18 +12,14 @@ export function loadState() {
 }
 
 export function getToken() {
-  var currentState = localStorage.getItem('hdm_state');
-  if (currentState === null) {
-    return undefined
-  }
-  currentState = JSON.parse(currentState);
+  var currentState = loadState();
   if (typeof currentState === "undefined") {
     return undefined;
   }
   else if ('currentUser' in currentState) {
     if ('accessToken' in currentState['currentUser']) {
-      if ('access_token' in currentState['currentUser']['accessToken']) {
-        return(currentState['currentUser']['accessToken']['access_token']);
+      if ('accessToken' in currentState['currentUser']['accessToken']) {
+        return currentState['currentUser']['accessToken']['accessToken'];
       }
       else {
         return undefined;
