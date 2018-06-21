@@ -1,10 +1,5 @@
 export function getToken() {
-  console.log("about to enter");
-  var currentState = localStorage.getItem('hdm_state');
-  if (currentState === null) {
-    return undefined
-  }
-  currentState = JSON.parse(currentState);
+  let currentState = loadState()
   if (typeof currentState === "undefined") {
     return undefined;
   }
