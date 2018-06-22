@@ -18,6 +18,6 @@ export default class Sidebar extends Component {
           <li><FontAwesome name='hospital-o' /> PROVIDERS </li>
         </a>
       </div>
-    )
+    );
   }
 }

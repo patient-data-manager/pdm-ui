@@ -700,11 +700,9 @@ h1, h2, h3 {
 }
 
 .sidebar {
-  margin-top: 100px;
-  margin-left: 10px;
   height: 100%;
-  position: absolute;
-  background-color: #F5F5F5;
+  float: left;
+  background-color: #DCDCDC;
   width: 20%;
 }
 
@@ -713,7 +711,7 @@ h1, h2, h3 {
   text-align: left;
   height: 50px;
   list-style-type: none;
-  color: #808080;
+  color: 	#606060;
   border-bottom: 1px #808080 solid;
   padding: 10px 20px;
   width: 100%;
@@ -723,4 +721,19 @@ h1, h2, h3 {
 .sidebar li:hover {
   color: #FFF;
   background-color: #6699CC;
+}
+
+.dashboard-body {
+  margin-top: 100px;
+  margin-left: 15px;
+  position: absolute;
+  height: 100%;
+  width: 100%;
+}
+
+.dashboard-content {
+    background-color: #FFF;
+    float: right;
+    width: 80%;
+    height: 100%;
 }
