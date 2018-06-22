@@ -9,7 +9,9 @@ export default class Dashboard extends Component {
     return (
       <div className="content-wrapper">
         <Header />
-        <Sidebar />
+        <div className='dashboard-body'>
+          <Sidebar />
+        </div>
       </div>
     );
   }
