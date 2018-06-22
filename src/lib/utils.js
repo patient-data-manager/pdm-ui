@@ -1,5 +1,7 @@
 export function getToken() {
   let currentState = loadState()
+  console.log("current state");
+  console.log(currentState);
   if (typeof currentState === "undefined") {
     return undefined;
   }
@@ -61,6 +63,18 @@ export function tokenExpired() {
 function loadState() {
   try {
     let persistedState = localStorage.getItem('hdm_state');
+    console.log("persist");
+    console.log(persistedState);
+    try {
+      let a = JSON.parse(persistedState);
+      console.log(a);
+      console.log(typeof persistedState);
+    }
+
+    catch (err) {
+      console.log(err);
+    }
+
     if (persistedState === null) {
       return undefined;
     }
