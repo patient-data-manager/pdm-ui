@@ -1,8 +1,5 @@
 import React, { Component } from 'react';
-import FontAwesome from 'react-fontawesome';
-// import { Link } from 'react-router';
 import { connect } from 'react-redux';
-
 import Logo from './Logo';
 
 class Nav extends Component {
