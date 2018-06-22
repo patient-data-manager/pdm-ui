@@ -13,6 +13,7 @@ import App from './containers/App';
 import Dashboard from './containers/Dashboard';
 import Login from './containers/Login/Login';
 import Logout from './containers/Logout/Logout';
+import Profile from './containers/Profile/Profile';
 import Register from './containers/Register/Register';
 import AuthenticatedRoutes from './containers/AuthenticatedRoutes';
 import registerServiceWorker from './registerServiceWorker';
@@ -32,6 +33,7 @@ ReactDOM.render(
     <Router history={hashHistory} >
       <Route path='/' component={App}/>
       <Route path='/dashboard' component={Dashboard}/>
+      <Route path='/profiles' component={Profile}/>
       <Route component={AuthenticatedRoutes}>
         <Route path='/logout' component={Logout}/>
       </Route>

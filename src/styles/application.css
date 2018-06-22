@@ -700,12 +700,27 @@ h1, h2, h3 {
 }
 
 .sidebar {
-  background: #2c3e50;
   margin-top: 100px;
   margin-left: 10px;
   height: 100%;
   position: absolute;
-  color: #808080;
   background-color: #F5F5F5;
   width: 20%;
+}
+
+.sidebar li {
+  font-size: 20px;
+  text-align: left;
+  height: 50px;
+  list-style-type: none;
+  color: #808080;
+  border-bottom: 1px #808080 solid;
+  padding: 10px 20px;
+  width: 100%;
+
+}
+
+.sidebar li:hover {
+  color: #FFF;
+  background-color: #6699CC;
 }
