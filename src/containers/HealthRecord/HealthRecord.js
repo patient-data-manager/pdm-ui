@@ -2,7 +2,7 @@ import React, { Component } from 'react';
 import Header from '../../components/Header/Header'
 import Sidebar from '../../components/Body/Sidebar'
 
-export default class HealthRecord extends Component {
+export class HealthRecord extends Component {
   render() {
     return (
       <div className='content-wrapper'>
@@ -17,3 +17,5 @@ export default class HealthRecord extends Component {
     );
   }
 }
+
+export default HealthRecord;

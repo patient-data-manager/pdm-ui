@@ -2,7 +2,7 @@ import React, { Component } from 'react';
 import Header from '../../components/Header/Header'
 import Sidebar from '../../components/Body/Sidebar'
 
-export default class Profile extends Component {
+export class Profile extends Component {
   render() {
     return (
       <div className='content-wrapper'>
@@ -17,3 +17,5 @@ export default class Profile extends Component {
     );
   }
 }
+
+export default Profile;
