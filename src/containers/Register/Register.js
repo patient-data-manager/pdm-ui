@@ -1,5 +1,4 @@
 import React, { Component } from 'react';
-import PropTypes from 'prop-types';
 import { signUp } from '../../actions/current_user_actions';
 import { Button, Col, Container, Input, InputGroup, InputGroupAddon, InputGroupText, Row } from 'reactstrap';
 import robot from '../../../images/robot.png'
@@ -21,7 +20,7 @@ export class Register extends Component {
           <Col xs="8">
             <h3 className="mb-5">MyHealthEData Registration</h3>
             <InputGroup className="mb-3">
-              <Input type="text" placeholder="First Name" value={this.state.first_name} name="first_name" id="first_name" 
+              <Input type="text" placeholder="First Name" value={this.state.first_name} name="first_name" id="first_name"
                 onChange={this.handleChange('first_name')} className={this.renderClassName('first_name')}
                 onFocus={this.handleFocus('first_name')} onBlur={() => this.validateFirstName()} />
               {this.renderFieldIcon('first_name')}
@@ -33,7 +32,7 @@ export class Register extends Component {
               {this.renderFieldIcon('last_name')}
             </InputGroup>
             <InputGroup className="mb-3">
-              <Input type="text" placeholder="Email" value={this.state.email} name="email" id="email" 
+              <Input type="text" placeholder="Email" value={this.state.email} name="email" id="email"
                onChange={this.handleChange('email')} className={this.renderClassName('email')}
                onFocus={this.handleFocus('email')} onBlur={() => this.validateEmail()} />
               {this.renderFieldIcon('email')}
@@ -91,7 +90,7 @@ export class Register extends Component {
 
   validateFirstName() {
     let firstName = this.state.first_name;
-    let errors = []; 
+    let errors = [];
 
     if (this.isBlank(firstName)) {
       errors.push("can't be blank");
@@ -102,19 +101,19 @@ export class Register extends Component {
 
   validateLastName() {
     let lastName = this.state.last_name;
-    let errors = []; 
+    let errors = [];
 
     if (this.isBlank(lastName)) {
       errors.push("can't be blank");
     }
-    
+
     this.setStateErrors('last_name', errors);
   }
 
   validateEmail() {
     console.log("validating email");
     let email = this.state.email;
-    let errors = []; 
+    let errors = [];
 
     if (this.isBlank(email)) {
       errors.push("can't be blank");
@@ -127,7 +126,7 @@ export class Register extends Component {
 
   validatePassword() {
     let password = this.state.password;
-    let errors = []; 
+    let errors = [];
 
     if (this.isBlank(password)) {
       errors.push("can't be blank");
@@ -141,7 +140,7 @@ export class Register extends Component {
   validateConfirmation() {
     let password = this.state.password;
     let confirmation = this.state.password_confirmation;
-    let errors = []; 
+    let errors = [];
 
     if (this.isBlank(confirmation)) {
       errors.push("can't be blank");
@@ -153,7 +152,7 @@ export class Register extends Component {
   }
 
   isBlank(str) {
-    return str == null || str.length == 0;
+    return str === null || str.length === 0;
   }
 
   isValidEmail(email) {
@@ -168,7 +167,7 @@ export class Register extends Component {
 
   isMatchingPassword(password, confirmation) {
     return password && confirmation
-          && password == confirmation;
+          && password === confirmation;
   }
 
   renderClassName(field) {

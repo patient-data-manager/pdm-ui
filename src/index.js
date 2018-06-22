@@ -10,9 +10,13 @@ import 'bootstrap/dist/css/bootstrap.css'
 import 'bootstrap/dist/js/bootstrap.js'
 import './styles/application.css';
 import App from './containers/App';
+import Alert from './containers/Alert/Alert';
 import Dashboard from './containers/Dashboard';
 import Login from './containers/Login/Login';
 import Logout from './containers/Logout/Logout';
+import HealthRecord from './containers/HealthRecord/HealthRecord';
+import Profile from './containers/Profile/Profile';
+import _Provider from './containers/Provider/Provider';
 import Register from './containers/Register/Register';
 import AuthenticatedRoutes from './containers/AuthenticatedRoutes';
 import registerServiceWorker from './registerServiceWorker';
@@ -32,8 +36,12 @@ ReactDOM.render(
     <Router history={hashHistory} >
       <Route path='/' component={App}/>
       <Route component={AuthenticatedRoutes}>
-        <Route path='/dashboard' component={Dashboard}/>
         <Route path='/logout' component={Logout}/>
+        <Route path='/dashboard' component={Dashboard}/>
+        <Route path='/profiles' component={Profile}/>
+        <Route path='/health-record' component={HealthRecord}/>
+        <Route path='/alerts' component={Alert}/>
+        <Route path='/providers' component={_Provider}/>
       </Route>
       <Route path='/register' component={Register}/>
       <Route path='/login' component={Login}/>

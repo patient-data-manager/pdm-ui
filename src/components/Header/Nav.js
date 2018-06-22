@@ -1,8 +1,5 @@
 import React, { Component } from 'react';
-import FontAwesome from 'react-fontawesome';
-// import { Link } from 'react-router';
 import { connect } from 'react-redux';
-
 import Logo from './Logo';
 
 class Nav extends Component {
@@ -12,9 +9,6 @@ class Nav extends Component {
         <Logo />
           <ul className="navbar-nav ml-auto">
             <li className="nav-item">
-              <a href="/" className="active">
-                <FontAwesome name="pie-chart" /> Dashboard
-              </a>
             </li>
             {this.props.currentUser.accessToken ? this.renderUserMenu() : this.renderLoginMenu()}
           </ul>
@@ -39,9 +33,9 @@ class Nav extends Component {
         }
 
   renderLoginMenu(){
-        return(<li role="presentation" className="nav-item dropdown">
-                  <a href="#/login">Login</a>
-                </li>)
+      return(<li role="presentation" className="nav-item dropdown">
+              <a href="#/login">Login</a>
+            </li>)
       }
 }
 function mapStateToProps(state) {

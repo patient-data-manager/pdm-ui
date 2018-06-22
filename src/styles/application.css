@@ -120,6 +120,125 @@
   padding: 10px 75px 10px 75px;
 }
 
+.landing-column {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  margin-top: 20px;
+  margin-bottom: 20px;
+}
+
+.landing-header {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  vertical-align: middle;
+  background-image: url("~/landing/landing-desktop.jpg");
+  background-size: 850px;
+  height: 575px;
+  position: relative;
+}
+
+.cms-alliance {
+  align-items: center;
+  position: absolute;
+  top: 5px;
+  font-size: 60%
+}
+
+.patients-first {
+  align-items: center;
+  position: absolute;
+  top: 60px;
+  font-size: 200%
+}
+
+.landing-button-container {
+  align-items: center;
+  position: absolute;
+  bottom: 40px;
+}
+
+.landing-footer {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  background-color: #7e8fa3;
+  padding: 20px;
+}
+
+
+.landing-cms {
+  background-size: 100px;
+  height: 50px;
+  width: 100px;
+}
+
+
+.landing-mitre {
+  background-image: url("~/landing/landing-mitre.png");
+  background-size: 100px;
+  height: 50px;
+  width: 100px;
+}
+
+.landing-robot {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  vertical-align: middle;
+  background-image: url("~/landing/PDUA-v10.png");
+  background-size: 850px;
+  height: 525px;
+}
+
+.landing-problem {
+  background-color: #e7eaee;
+  padding: 40px;
+}
+
+.landing-solution {
+  background-color: white;
+  padding: 40px;
+}
+
+.landing-pdc {
+  background-color: #6a8eb6;
+  align-items: center;
+  color: white;
+  padding: 40px;
+}
+
+.landing-myhd {
+  background-color: #e7eaee;
+  padding: 40px;
+}
+
+.landing-highlights {
+  background-color: white;
+  padding: 40px;
+}
+
+.landing-highlights .li {
+  padding: 40px;
+}
+
+.login-button {
+  width: 300px;
+  color: white;
+  background-color: #6a8eb6;
+  margin: 20px;
+  padding: 10px 75px 10px 75px;
+}
+
+.register-button {
+  width: 300px;
+  color: white;
+  background-color: #7e8fa3;
+  margin: 20px;
+  padding: 10px 75px 10px 75px;
+}
+
 .rotate {
   -moz-transition: all 0.3s linear;
   -ms-transition: all 0.3s linear;
@@ -537,6 +656,9 @@
 .fa.fa-link {
   color: #FF8889;
 }
+.topper {
+  text-decoration : underline;
+}
 
 html, body {
   margin: 0;
@@ -575,4 +697,43 @@ h1, h2, h3 {
 .wide-text {
   letter-spacing: 0.2em;
 
+}
+
+.sidebar {
+  height: 100%;
+  float: left;
+  background-color: #E8E8E8;
+  width: 20%;
+}
+
+.sidebar li {
+  font-size: 20px;
+  text-align: left;
+  height: 50px;
+  list-style-type: none;
+  color: 	#606060;
+  border-bottom: 1px #808080 solid;
+  padding: 10px 20px;
+  width: 100%;
+
+}
+
+.sidebar li:hover {
+  color: #FFF;
+  background-color: #6699CC;
+}
+
+.dashboard-body {
+  margin-top: 100px;
+  margin-left: 15px;
+  position: absolute;
+  height: 100%;
+  width: 100%;
+}
+
+.dashboard-content {
+    background-color: #FFF;
+    float: right;
+    width: 80%;
+    height: 100%;
 }

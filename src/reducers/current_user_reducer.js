@@ -1,7 +1,11 @@
 import {
   FETCH_CURRENT_USER_FULFILLED,
   LOG_IN_FULFILLED,
-  LOG_OUT
+  LOG_OUT,
+  CREATE_PROFILE_FULFILLED,
+  UPDATE_PROFILE_FULFILLED,
+  DELETE_PROFILE_FULFILLED,
+  FETCH_PROFILES_FULFILLED
 } from '../actions/types';
 
 import {
@@ -9,7 +13,9 @@ import {
 } from 'redux';
 
 
-function profile(state = {}, action) {
+
+
+function user(state = {}, action) {
   switch (action.type) {
     case FETCH_CURRENT_USER_FULFILLED:
       return action.payload.data;
@@ -25,6 +31,7 @@ function profile(state = {}, action) {
 function accessToken(state = {}, action) {
   switch (action.type) {
     case LOG_IN_FULFILLED:
+      // should call get user here
       return action.payload.data;
     case LOG_OUT:
       return null
@@ -33,4 +40,4 @@ function accessToken(state = {}, action) {
   }
 }
 
-export default combineReducers({profile,accessToken})
+export default combineReducers({accessToken,user})
