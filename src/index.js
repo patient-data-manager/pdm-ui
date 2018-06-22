@@ -35,13 +35,13 @@ ReactDOM.render(
   <Provider store={store}>
     <Router history={hashHistory} >
       <Route path='/' component={App}/>
-      <Route path='/dashboard' component={Dashboard}/>
-      <Route path='/profiles' component={Profile}/>
-      <Route path='/health-record' component={HealthRecord}/>
-      <Route path='/alerts' component={Alert}/>
-      <Route path='/providers' component={_Provider}/>
       <Route component={AuthenticatedRoutes}>
         <Route path='/logout' component={Logout}/>
+        <Route path='/dashboard' component={Dashboard}/>
+        <Route path='/profiles' component={Profile}/>
+        <Route path='/health-record' component={HealthRecord}/>
+        <Route path='/alerts' component={Alert}/>
+        <Route path='/providers' component={_Provider}/>
       </Route>
       <Route path='/register' component={Register}/>
       <Route path='/login' component={Login}/>
