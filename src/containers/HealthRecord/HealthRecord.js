@@ -2,7 +2,7 @@ import React, { Component } from 'react';
 import Header from '../../components/Header/Header'
 import Sidebar from '../../components/Body/Sidebar'
 
-export default class Profile extends Component {
+export default class HealthRecord extends Component {
   render() {
     return (
       <div className='content-wrapper'>
@@ -10,7 +10,7 @@ export default class Profile extends Component {
         <div className='dashboard-body'>
           <Sidebar />
           <div className='dashboard-content'>
-            Insert profile content here.
+            Insert health record content here.
           </div>
         </div>
       </div>
