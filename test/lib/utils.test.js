@@ -68,4 +68,10 @@ describe('test the library functions', () => {
     expect(g).to.equal(true);
   });
 
+  it('could not find any key data at all and says token expired', () => {
+    localStorage.setItem("hdm_state", JSON.stringify({"currentUser":{"profile":{}}}));
+    let g = tokenExpired();
+    expect(g).to.equal(true);
+  });
+
 });
