@@ -2,19 +2,21 @@ import {
   CREATE_PROFILE,
   DELETE_PROFILE
 } from './types';
-
+import {getToken} from '../lib/utils.js';
 import axios from 'axios';
 
-export function fetchProfiles(access_token) {
+export function fetchProfiles() {
+  let access_token = getToken();
   return {
-    type: CREATE_PROFILE,
-    payload: axios.get('/api/v1/profiles',{access_token},
+    type: FETCH_PROFILES,
+    payload: axios.get('/api/v1/profiles?access_token='+access_token,{},
      {headers: {'X-Key-Inflection': 'camel',
         'Accept': 'application/json'}})
   };
 }
 
-export function createProfile(access_token, profile) {
+export function createProfile(profile) {
+  let access_token = getToken();
   return {
     type: CREATE_PROFILE,
     payload: axios.post('/api/v1/profiles',{access_token, profile},
@@ -23,19 +25,21 @@ export function createProfile(access_token, profile) {
   };
 }
 
-export function updateProfile(access_token, profile) {
+export function updateProfile(profile) {
+  let access_token = getToken();
   return {
-    type: CREATE_PROFILE,
+    type: UPDATE_PROFILE,
     payload: axios.put('/api/v1/profiles/'+profile.id ,{access_token, profile},
      {headers: {'X-Key-Inflection': 'camel',
         'Accept': 'application/json'}})
   };
 }
 
-export function deleteProfile(access_token, id) {
+export function deleteProfile(id) {
+  let access_token = getToken();
   return {
     type: DELETE_PROFILE,
-    payload: axios.delete('/api/v1/profiles'+id,{access_token},
+    payload: axios.delete('/api/v1/profiles/'+id+"?access_token="+access_token,{},
      {headers: {'X-Key-Inflection': 'camel',
         'Accept': 'application/json'}})
   };

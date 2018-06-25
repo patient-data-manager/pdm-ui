@@ -8,7 +8,8 @@ import {
   combineReducers
 } from 'redux';
 
-function user(state = {}, action) {
+
+function profile(state = {}, action) {
   switch (action.type) {
     case FETCH_CURRENT_USER_FULFILLED:
       return action.payload.data;
@@ -24,7 +25,6 @@ function user(state = {}, action) {
 function accessToken(state = {}, action) {
   switch (action.type) {
     case LOG_IN_FULFILLED:
-      // should call get user here
       return action.payload.data;
     case LOG_OUT:
       return null

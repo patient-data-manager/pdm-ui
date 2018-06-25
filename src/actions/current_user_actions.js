@@ -33,7 +33,6 @@ export function logIn(user, successHandler=null, failureHandler=null) {
     payload: postPromise
   };
 }
-
 export function logOut() {
   return {
     type: LOG_OUT,
