@@ -12,7 +12,6 @@ import Login from './containers/Login/Login';
 import Logout from './containers/Logout/Logout';
 import HealthRecord from './containers/HealthRecord/HealthRecord';
 import Profile from './containers/Profile/Profile';
-// import ProfileList from './containers/Profile/ProfileList';
 import _Provider from './containers/Provider/Provider';
 import Register from './containers/Register/Register';
 import AuthenticatedRoutes from './containers/AuthenticatedRoutes';

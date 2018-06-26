@@ -28,7 +28,7 @@ export class ProfileList extends Component {
             }
         ]
 
-        var profilesList = profiles.map(function(profile) {
+        const profilesList = profiles.map(function(profile) {
             return <ProfileListRow profile={profile}/>;
         })
 
