@@ -4,23 +4,22 @@ import FontAwesome from 'react-fontawesome';
 export class ProfileListRow extends Component {
     render() {
         return (
-            <tr className='profile-list-row'>
-                <td className='profile-list-row-icon'>
-                    <FontAwesome name='user-circle' />
-                </td>
-                <td className='profile-list-row-info'>
-                    <tr className='profile-list-first-info-row'>
-                        <td className='profile-list-row-name'> Sarah Ober </td>
-                    </tr>
-                    <tr className='profile-list-second-info-row'>
-                        <td className='profile-list-row-age'> 25 Yrs </td>
-                        <td className='profile-list-row-gender'> Female </td>
-                    </tr>
-                </td>
-                <td className='profile-list-row-edit'>
-                    <FontAwesome name='edit' />  EDIT
-                </td>
-            </tr>
+            <div className='profile-row-container'>
+                <div className='profile-row-icon'><FontAwesome name='user-circle' /></div>
+                <div className='profile-row-info'>
+                    <div className='profile-first-info-row'> 
+                        <div className='profile-row-name'> {this.props.profile.name } </div>
+                        <div className='profile-row-alerts'>
+                            <FontAwesome name='circle'></FontAwesome>
+                        </div>
+                    </div>
+                    <div className='profile-second-info-row'>
+                        <div className='profile-row-age'> {this.props.profile.age } Yrs </div>
+                        <div className='profile-row-gender'> {this.props.profile.gender } </div>
+                    </div>
+                </div>
+                <div className='profile-row-edit'><FontAwesome name='edit' />  EDIT</div>    
+            </div>
         );
     }
 }

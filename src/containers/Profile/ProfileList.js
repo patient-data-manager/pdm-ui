@@ -1,27 +1,46 @@
 import React, { Component } from 'react';
 import ProfileListRow from './ProfileListRow'
+import FontAwesome from 'react-fontawesome';
 
 export class ProfileList extends Component {
     render() {
-        // TO-DO loop over ProfileListRowComponent
+        // TO-DO remove mock data
+        const profiles = [
+            {   'name': 'Sarah Ober',
+                'age': 25,
+                'gender': 'Female',
+                'alertCount': 2
+            },
+            {   'name': 'Jessica Ober',
+                'age': 23,
+                'gender': 'Female',
+                'alertCount': 1
+            },
+            {   'name': 'Peg Ober',
+                'age': 54,
+                'gender': 'Female',
+                'alertCount': 5
+            },
+            {   'name': 'Steve Ober',
+                'age': 61,
+                'gender': 'Male',
+                'alertCount': 0
+            }
+        ]
+
+        var profilesList = profiles.map(function(profile) {
+            return <ProfileListRow profile={profile}/>;
+        })
+
         return (
-            <table className='profile-list-table'>
-                <ProfileListRow />
-                <ProfileListRow />
-                <ProfileListRow />
-                <ProfileListRow />
-                <ProfileListRow />
-                <ProfileListRow />
-                <ProfileListRow />
-                <ProfileListRow />
-                <ProfileListRow />
-                <ProfileListRow />
-                <ProfileListRow />
-                <ProfileListRow />
-                <ProfileListRow />
-                <ProfileListRow />
-                <ProfileListRow />
-            </table>
+            <div className='profile-list-container'>
+                { profilesList }
+                <div className='profile-new-container'>
+                    <div className='profile-new-btn'>
+                        <FontAwesome name='plus-circle' /> NEW
+                    </div>
+                </div>
+            </div>
         );
     }
 }
