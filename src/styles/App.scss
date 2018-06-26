@@ -441,13 +441,12 @@
 .sidebar li {
   font-size: 20px;
   text-align: left;
-  height: 50px;
+  height: 75px;
   list-style-type: none;
   color: 	#606060;
   border-bottom: 1px #808080 solid;
-  padding: 10px 20px;
+  padding: 20px;
   width: 100%;
-
 }
 
 .sidebar li:hover {
@@ -456,7 +455,7 @@
 }
 
 .dashboard-body {
-  margin-top: 100px;
+  padding-top: 100px;
   margin-left: 15px;
   position: absolute;
   height: 100%;
@@ -464,8 +463,60 @@
 }
 
 .dashboard-content {
-    background-color: #FFF;
-    float: right;
-    width: 80%;
-    height: 100%;
+  background-color: #FFF;
+  float: right;
+  width: 80%;
+  height: 100%;
+}
+
+.profile-list-table {
+  width: 100%;
+  background-color: #FFF;
+  padding-top: 1px;
+}
+
+.profile-list-row {
+  height: 75px;
+  border-bottom: 1px #808080 solid;
+}
+
+.profile-list-row-icon {
+  font-size: 35px;
+  width: 8%;
+  text-align: center;
+  color: #DCDCDC;
+}
+
+.profile-list-row-info {
+  width: 80%;
+  text-align: left;
+}
+
+.profile-list-row-edit {
+  font-size: 12px;
+  width: 12%;
+  text-align: left;
+  color: #538cc6;
+}
+
+.profile-list-first-info-row {
+  height: 60%;
+}
+
+.profile-list-row-name {
+  font-size: 20px;
+  color: #538cc6;
+  vertical-align: top;
+}
+
+.profile-list-second-info-row {
+  font-size: 12px;
+  color: #808080;
+  height: 40%;
+  vertical-align: top;
+}
+
+.profile-list-row-age,
+.profile-list-row-gender {
+  width: 50%;
 }
