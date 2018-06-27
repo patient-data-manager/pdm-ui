@@ -3,13 +3,13 @@ import {
   UPDATE_PROFILE_FULFILLED,
   DELETE_PROFILE_FULFILLED,
   FETCH_PROFILES_FULFILLED,
-  SET_CURRENT_PROFILE
+  SET_CURRENT_PROFILE,
+  LOG_OUT
 } from '../actions/types';
 
 
 
 function profiles(state = [], action) {
-
   switch (action.type) {
     case FETCH_PROFILES_FULFILLED:
       const profiles = action.payload.data;
@@ -31,6 +31,8 @@ function profiles(state = [], action) {
       const updated = [state[foundIndex]].concat(filtered);
       updated.currentProfile = state[foundIndex];
       return updated;
+    case  LOG_OUT:
+      return null;
     default:
       return state;
   }
