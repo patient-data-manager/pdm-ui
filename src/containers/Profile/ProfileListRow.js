@@ -9,10 +9,10 @@ export class ProfileListRow extends Component {
         }
 
         return (
-            <div className='profile-row-container'>
+            <div className='profile-row-container' >
                 <div className='profile-row-icon'><FontAwesome name='user-circle' /></div>
-                <div className='profile-row-info'>
-                    <div className='profile-first-info-row'> 
+                <div className='profile-row-info' onClick={() => this.setCurrentProfile()}>
+                    <div className='profile-first-info-row'>
                         <div className='profile-row-name'> {this.props.profile.name } </div>
                         <div className='profile-row-alerts'>  { alerts } </div>
                     </div>
@@ -21,9 +21,13 @@ export class ProfileListRow extends Component {
                         <div className='profile-row-gender'> {this.props.profile.gender } </div>
                     </div>
                 </div>
-                <div className='profile-row-edit'><FontAwesome name='edit' />  EDIT</div>    
+                <div className='profile-row-edit'><FontAwesome name='edit' />  EDIT</div>
             </div>
         );
+    }
+
+    setCurrentProfile(){
+      this.props.setCurrentProfile(this.props.profile.id);
     }
 }
 

@@ -2,23 +2,35 @@ import {
   CREATE_PROFILE_FULFILLED,
   UPDATE_PROFILE_FULFILLED,
   DELETE_PROFILE_FULFILLED,
-  FETCH_PROFILES_FULFILLED
+  FETCH_PROFILES_FULFILLED,
+  SET_CURRENT_PROFILE
 } from '../actions/types';
-import keyBy from 'lodash/keyBy';
 
-function profiles(state = {}, action) {
+
+
+function profiles(state = [], action) {
+
   switch (action.type) {
     case FETCH_PROFILES_FULFILLED:
-      return keyBy(action.payload.data,"id");
+      const profiles = action.payload.data;
+      profiles.currentProfile = profiles[0];
+      return profiles;
     case CREATE_PROFILE_FULFILLED:
-       state[action.payload.data.id] = action.payload.data;
-       return state;
+      const newState = [].concat(state);
+      newState.push(action.payload.data);
+      return newState;
     case UPDATE_PROFILE_FULFILLED:
-        state[action.payload.data.id] = action.payload.data;
-        return state;
+      var foundIndex = state.findIndex(e => e.id == action.payload.data.id);
+      state[foundIndex] = action.payload.data;
+      return [].concat(state);
     case DELETE_PROFILE_FULFILLED:
-      delete state[action.payload.data.id];
-      return state;
+      return state.filter(e => e.id !== action.payload.data.id);
+    case SET_CURRENT_PROFILE:
+      var foundIndex = state.findIndex(e => e.id == action.payload);
+      const filtered = state.filter(e => e.id !== action.payload);
+      const updated = [state[foundIndex]].concat(filtered);
+      updated.currentProfile = state[foundIndex];
+      return updated;
     default:
       return state;
   }

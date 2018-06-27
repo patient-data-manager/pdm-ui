@@ -1,6 +1,9 @@
 import {
   CREATE_PROFILE,
-  DELETE_PROFILE
+  UPDATE_PROFILE,
+  DELETE_PROFILE,
+  FETCH_PROFILES,
+  SET_CURRENT_PROFILE
 } from './types';
 import {getToken} from '../lib/utils.js';
 import axios from 'axios';
@@ -42,5 +45,12 @@ export function deleteProfile(id) {
     payload: axios.delete('/api/v1/profiles/'+id+"?access_token="+access_token,{},
      {headers: {'X-Key-Inflection': 'camel',
         'Accept': 'application/json'}})
+  };
+}
+
+export function setCurrentProfile(id) {
+  return {
+    type: SET_CURRENT_PROFILE,
+    payload: id
   };
 }

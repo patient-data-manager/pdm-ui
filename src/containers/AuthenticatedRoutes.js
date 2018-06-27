@@ -1,9 +1,17 @@
 import React, { Component } from 'react';
 import PropTypes from 'prop-types';
 import { connect } from 'react-redux';
+import { bindActionCreators } from 'redux';
 import Login from './Login/Login'
-
+import {fetchProfiles} from '../actions/profiles'
 class AuthenticatedRoutes extends Component {
+
+  componentDidMount(){
+    if (this.props.isLoggedIn && !this.props.profiles) {
+      this.props.fetchProfiles();
+    }
+  }
+
   render() {
     if (this.props.isLoggedIn) {
       return this.props.children;
@@ -22,7 +30,13 @@ class AuthenticatedRoutes extends Component {
 function mapStateToProps(state) {
   return {
     isLoggedIn: state.currentUser.accessToken && state.currentUser.accessToken.access_token ? true: false,
+    profiles: state.profiles
   };
+}
+
+
+function mapDispatchToProps(dispatch) {
+  return bindActionCreators({fetchProfiles}, dispatch);
 }
 
 AuthenticatedRoutes.propTypes = {
@@ -30,4 +44,4 @@ AuthenticatedRoutes.propTypes = {
   children: PropTypes.object
 };
 
-export default connect(mapStateToProps)(AuthenticatedRoutes);
+export default connect(mapStateToProps,mapDispatchToProps)(AuthenticatedRoutes);
