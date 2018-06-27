@@ -14,12 +14,11 @@ export class ProfileList extends Component {
     this.state = {profiles: props.profiles};
   }
 
-
   render() {
     let profilesList = this.props.profiles.map(profile => <ProfileListRow key={profile.id} profile={profile} setCurrentProfile={this.props.setCurrentProfile}/>)
     return (
       <div className='profile-list-container'>
-      <FlipMove>
+      <FlipMove className="profile-flip-list">
         { profilesList }
       </FlipMove>
         <div className='profile-new-container'>
@@ -34,15 +33,11 @@ export class ProfileList extends Component {
     createP(){
       this.props.createProfile({name: "Testy Jones"})
     }
-    rotate(){
-      this.props.setCurrentProfile(this.props.profiles[1].id)
-    }
+
   }
 
 
 function mapStateToProps(state) {
-  console.log("Its State");
-  console.log(state);
   return {
     profiles: state.profiles
   };

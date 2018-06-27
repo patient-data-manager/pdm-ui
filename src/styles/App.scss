@@ -544,3 +544,8 @@
   font-size: 12px;
   color: #538cc6;
 }
+
+.profile-flip-list {
+  display: flex;
+  flex-direction: column;
+}
