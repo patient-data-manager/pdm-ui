@@ -1,0 +1,42 @@
+html,
+body {
+  margin: 0;
+  padding: 0;
+}
+
+body {
+  font-family: 'Open Sans', sans-serif;
+  color: $color-black;
+  font-size: 14px;
+  overflow-x: hidden;
+}
+
+input[type="text"], input[type="password"] {
+  background: transparent;
+  border: none;
+  border-bottom: 1px solid #000000;
+}
+
+a {
+  color: $color-blue;
+}
+
+a:-webkit-any-link {
+  text-decoration: none;
+}
+
+h1, h2 {
+  font-size: calc(0.8em + 0.8vw);
+  font-weight: 600;
+  letter-spacing: 2px;
+  text-transform: uppercase;
+}
+
+h1 {
+  margin-bottom: 20px;
+}
+
+h2 {
+  margin-bottom: 10px;
+  color: $color-blue;
+}

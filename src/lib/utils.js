@@ -8,11 +8,10 @@ export function getToken() {
   //otherwise, check the resulting JavaScript object for the proper keys.
   //If any of the keys do not exist in the correponsing order, return undefined.
   if (currentState.currentUser && currentState.currentUser.accessToken) {
-        //if access_token key exists, obtain the key and return it.
-        return(currentState['currentUser']['accessToken']['access_token']);
-      }
-    }
-
+    //if access_token key exists, obtain the key and return it.
+    return(currentState['currentUser']['accessToken']['access_token']);
+  }
+}
 
 //function which determines if the token has expired.
 export function tokenExpired() {
@@ -35,12 +34,11 @@ export function tokenExpired() {
   return true;
 }
 
-
 function loadState() {
   try {
     let persistedState = localStorage.getItem('hdm_state');
     try {
-      let a = JSON.parse(persistedState);
+      let a = JSON.parse(persistedState); // eslint-disable-line no-unused-vars
     }
 
     catch (err) {

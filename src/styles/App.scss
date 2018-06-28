@@ -1,0 +1,471 @@
+/* ------------------------- IMPORT VARIABLES ------------------------------ */
+@import "elements/variables";
+
+/* ------------------------- IMPORT 3RD PARTY VENDORS ---------------------- */
+@import "node_modules/bootstrap/scss/bootstrap.scss";
+
+/* ------------------------- IMPORT CUSTOM SCSS ---------------------------- */
+// site-wide elements
+@import "elements/base";
+@import "elements/buttons";
+
+// component-specific
+@import "components/landing";
+
+// ---- TODO: Move to appropriate sass files ---- //
+.rotate {
+  -moz-transition: all 0.3s linear;
+  -ms-transition: all 0.3s linear;
+  -webkit-transition: all 0.3s linear;
+  transition: all 0.3s linear;
+}
+
+.rotate.left {
+  -moz-transform: rotate(-90deg);
+  -ms-transform: rotate(-90deg);
+  -webkit-transform: rotate(-90deg);
+  transform: rotate(-90deg);
+}
+
+.collapse.in {
+  display: block;
+}
+
+.Select {
+  width: 100%;
+  margin-top: -3px;
+}
+
+.Select.is-focused:not(.is-open)>.Select-control {
+  border: none;
+  box-shadow: none;
+}
+
+.Select .Select-control {
+  border: none;
+}
+
+.Select .Select-control:active:focus, .Select .Select-control:focus {
+  outline: none;
+  box-shadow: none;
+}
+
+.Select .Select-control .Select-placeholder {
+  font-style: italic;
+}
+
+
+/* ------------------------- COLLAPSIBLE PANEL ----------------------------- */
+
+.collapsible-panel {
+  border: 0;
+  box-shadow: none;
+  border-bottom: 1px solid #F5F5F5;
+}
+
+.collapsible-panel.is-nested .panel-heading {
+  padding-left: 10px;
+  background-color: #646464;
+}
+
+.collapsible-panel.is-nested .source.source1 {
+  margin-left: 20px !important;
+}
+
+.collapsible-panel.is-nested .source.source2 {
+  margin-right: 10px !important;
+}
+
+.collapsible-panel.has-nested>.panel-body {
+  border-left: 10px solid #4A4A4A;
+}
+
+.collapsible-panel .panel-heading {
+  background-color: #4A4A4A;
+  border-radius: 0;
+  color: #FFF;
+  height: 48px;
+  line-height: 2em;
+  padding: 0;
+}
+
+.collapsible-panel .panel-heading.has-nested {
+  margin-bottom: 0;
+}
+
+.collapsible-panel .panel-heading .panel-title {
+  font-size: 18px;
+  font-weight: normal;
+}
+
+.collapsible-panel .panel-heading a {
+  color: #FFF;
+  cursor: pointer;
+  display: block;
+  padding: 10px 15px;
+  text-decoration: none;
+}
+
+.collapsible-panel .panel-heading a i.collapsible-chevron {
+  font-size: 2em;
+  color: #4CD7C0;
+}
+
+.collapsible-panel .panel-heading a i.collapsible-chevron.has-conflicts {
+  color: #FF8889;
+}
+
+.collapsible-panel .panel-body {
+  margin: 0;
+  padding: 0;
+  background-color: #F5F5F5;
+}
+
+.logo {
+  font-size: 1.5em;
+  letter-spacing: 2px;
+  color: #FFF;
+  font-weight: 300;
+}
+
+.logo .header-logo {
+  margin: 0 10px 5px 20px;
+  width: 2em;
+}
+
+.navbar {
+  border-bottom: 1px solid white;
+  background-color: #4A4A4A;
+}
+
+.navbar .navbar-brand {
+  color: #FFF;
+}
+
+.navbar .navbar-nav {
+  margin-top: 2px;
+}
+
+.navbar .navbar-nav li a {
+  padding: 15px 35px;
+  color: #FFF;
+  font-weight: 300;
+  letter-spacing: 1px;
+}
+
+.navbar .navbar-nav li a.active {
+  border-bottom: 3px solid #FF8889;
+}
+
+.navbar .navbar-nav .open a.dropdown-toggle {
+  background-color: #4A4A4A;
+}
+
+.navbar .navbar-nav .dropdown-menu {
+  margin-top: 15px;
+  border-radius: 0;
+  box-shadow: none;
+}
+
+.navbar .navbar-nav .dropdown-menu a {
+  color: #4A4A4A;
+}
+
+.page-header {
+  background-color: #FFF;
+  margin: 55px -9999rem 20px -9999rem;
+  padding: 0.25rem 9999rem;
+}
+
+.page-header .page-header-text {
+  padding: 20px;
+  font-size: 3em;
+  font-weight: 100;
+}
+
+.dashboard .completed-merges {
+  background-color: #FFF;
+  margin: 100px;
+  padding: 30px;
+}
+
+.merge {
+  margin: 0;
+}
+
+.merge .merge-tool .merge-tool-placeholder {
+  width: 50px;
+}
+
+.merge .merge-tool .merge-tool-header .source.source1, .merge .merge-tool .merge-tool-body .source.source1, .merge .merge-tool .merge-tool-footer .source.source1 {
+  margin-left: 25px;
+}
+
+.merge .merge-tool .merge-tool-header .source.source2, .merge .merge-tool .merge-tool-body .source.source2, .merge .merge-tool .merge-tool-footer .source.source2 {
+  margin-right: 25px;
+}
+
+.merge .merge-tool .merge-tool-header {
+  margin-bottom: -3px;
+}
+
+.merge .merge-tool .merge-tool-header .merge-tool-header-titles {
+  margin-bottom: 5px;
+  text-align: center;
+  color: #FFF;
+  font-size: 1.2em;
+  font-weight: 300;
+  letter-spacing: 1px;
+}
+
+.merge .merge-tool .merge-tool-header .merge-tool-header-selectors {
+  margin: 0;
+}
+
+.merge .merge-tool .merge-tool-header .merge-tool-header-selectors .merge-button {
+  background-color: #4A4A4A;
+  color: #FFF;
+  border: none;
+  width: 400px;
+  margin: 0 0 3px 0;
+  justify-content: center;
+}
+
+.merge .merge-tool .merge-tool-header .merge-tool-header-selectors .merge-tool-header-selector {
+  display: block;
+  width: 400px;
+  background-color: #FFF;
+  padding: 5px 10px 0 10px;
+}
+
+.merge .merge-tool .merge-tool-header .merge-tool-header-selectors .merge-tool-header-selector.source {
+  margin-bottom: 3px;
+}
+
+.merge .merge-tool .merge-tool-header .merge-tool-header-selectors .merge-tool-header-selector.target {
+  border: 3px solid #4A4A4A;
+}
+
+.merge .merge-tool .merge-tool-header .merge-tool-header-selectors .merge-tool-header-selector .merge-tool-header-selector-icon {
+  position: relative;
+  padding-top: 5px;
+}
+
+.merge .merge-tool .merge-tool-header .merge-tool-header-selectors .merge-tool-header-selector .merge-tool-header-selector-icon.source-1>.fa {
+  color: #49C6DF;
+}
+
+.merge .merge-tool .merge-tool-header .merge-tool-header-selectors .merge-tool-header-selector .merge-tool-header-selector-icon.source-2>.fa {
+  color: #A16CDB;
+}
+
+.merge .merge-tool .merge-tool-header .merge-tool-header-selectors .merge-tool-header-selector .merge-tool-header-selector-icon .fa {
+  position: relative;
+  z-index: 1;
+  padding: 0 10px;
+  font-size: 1.3em;
+  text-align: center;
+}
+
+.merge .merge-tool .merge-tool-header .merge-tool-header-selectors .merge-tool-header-selector .merge-tool-header-selector-icon .icon-line {
+  display: block;
+  position: absolute;
+  margin-left: 16px;
+  width: 3px;
+  height: 75%;
+  top: 25%;
+  background-color: #EBEBEB;
+}
+
+.merge .merge-tool .merge-tool-header .merge-tool-header-selectors .merge-tool-header-selector .source-name {
+  padding-bottom: 10px;
+}
+
+.merge .merge-tool .merge-tool-body, .merge .merge-tool .merge-tool-footer {
+  background-color: #FFF;
+}
+
+.merge .merge-tool .merge-tool-body .line, .merge .merge-tool .merge-tool-footer .line {
+  display: block;
+  position: absolute;
+  margin-left: 26px;
+  width: 3px;
+  height: 100%;
+  top: 0;
+  background-color: #EBEBEB;
+}
+
+.merge .merge-tool .merge-tool-body .source, .merge .merge-tool .merge-tool-body .target, .merge .merge-tool .merge-tool-footer .source, .merge .merge-tool .merge-tool-footer .target {
+  position: relative;
+  background-color: #FFF;
+  width: 400px;
+  padding-bottom: 1px;
+}
+
+.merge .merge-tool .merge-tool-body .target, .merge .merge-tool .merge-tool-footer .target {
+  border-left: 3px solid #4A4A4A;
+  border-right: 3px solid #4A4A4A;
+}
+
+.merge .merge-tool .merge-tool-body .merge-row .key, .merge .merge-tool .merge-tool-footer .merge-row .key {
+  text-align: right;
+  font-weight: bold;
+}
+
+.merge .merge-tool .merge-tool-body .arrow, .merge .merge-tool .merge-tool-footer .arrow {
+  position: absolute;
+  cursor: pointer;
+}
+
+.merge .merge-tool .merge-tool-body .arrow.arrow-source1, .merge .merge-tool .merge-tool-footer .arrow.arrow-source1 {
+  right: -25px;
+  color: #49C6DF;
+}
+
+.merge .merge-tool .merge-tool-body .arrow.arrow-source2, .merge .merge-tool .merge-tool-footer .arrow.arrow-source2 {
+  left: -25px;
+  color: #A16CDB;
+}
+
+.merge .merge-tool .merge-tool-body .conflict-count {
+  float: right;
+  padding-left: 20px;
+  font-size: 1.2em;
+  font-weight: bold;
+  color: #FF8889;
+}
+
+.merge .merge-tool .merge-tool-body .has-conflict-buttons {
+  margin: 0;
+  float: right;
+}
+
+.merge .merge-tool .merge-tool-body .has-conflict-buttons .accept-conflict-button, .merge .merge-tool .merge-tool-body .has-conflict-buttons .send-mail-button {
+  margin: -4px 0 0 0;
+  padding: 8px 20px;
+  background-color: #4CD7C0;
+}
+
+.merge .merge-tool .merge-tool-body .has-conflict-buttons .send-mail-button {
+  margin-right: 10px;
+  padding: 8px;
+}
+
+.merge .merge-tool .merge-tool-body .divider {
+  border-bottom: 2px dashed #EBEBEB;
+  margin: 10px 0 10px 30px;
+}
+
+.merge .merge-tool .merge-tool-body .panel-body .d-flex:last-child .divider {
+  border-bottom: none;
+}
+
+.merge .merge-tool .merge-tool-body .empty-resource .empty-resource-text {
+  color: #C0BEBE;
+  text-align: center;
+  margin-top: 10px;
+  font-style: italic;
+}
+
+.merge .merge-tool .merge-tool-footer {
+  background-color: #EBEBEB;
+  margin: 0;
+  padding: 0;
+}
+
+.merge .merge-tool .merge-tool-footer .line {
+  height: 50%;
+}
+
+.merge .merge-tool .merge-tool-footer .source {
+  height: 40px;
+}
+
+.merge .merge-tool .merge-tool-footer .target {
+  margin-bottom: 40px;
+  border-bottom: 3px solid #4A4A4A;
+}
+
+.merge .merge-tool .merge-tool-footer .conflict-count {
+  margin: 50px 0 5px 0;
+  color: #FF8889;
+  text-align: center;
+  font-size: 1.2em;
+}
+
+.merge .merge-tool .merge-tool-footer .conflict-count.done {
+  color: #4CD7C0;
+}
+
+.merge .merge-tool .merge-tool-footer .action-buttons {
+  text-align: center;
+}
+
+.merge .col.value {
+  text-overflow: ellipsis;
+  overflow: hidden;
+}
+
+.merge .has-conflict {
+  margin: 0;
+}
+
+.merge .has-conflict.patient-source1, .merge .has-conflict.value-from-source1 {
+  background-color: rgba(73, 198, 222, 0.3);
+}
+
+.merge .has-conflict.patient-source2, .merge .has-conflict.value-from-source2 {
+  background-color: rgba(160, 108, 219, 0.3);
+}
+
+.fa.fa-link {
+  color: #FF8889;
+}
+
+.topper {
+  text-decoration : underline;
+}
+
+.wide-text {
+  letter-spacing: 0.2em;
+
+}
+
+.sidebar {
+  height: 100%;
+  float: left;
+  background-color: #E8E8E8;
+  width: 20%;
+}
+
+.sidebar li {
+  font-size: 20px;
+  text-align: left;
+  height: 50px;
+  list-style-type: none;
+  color: 	#606060;
+  border-bottom: 1px #808080 solid;
+  padding: 10px 20px;
+  width: 100%;
+
+}
+
+.sidebar li:hover {
+  color: #FFF;
+  background-color: #6699CC;
+}
+
+.dashboard-body {
+  margin-top: 100px;
+  margin-left: 15px;
+  position: absolute;
+  height: 100%;
+  width: 100%;
+}
+
+.dashboard-content {
+    background-color: #FFF;
+    float: right;
+    width: 80%;
+    height: 100%;
+}

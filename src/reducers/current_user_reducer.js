@@ -1,19 +1,12 @@
 import {
   FETCH_CURRENT_USER_FULFILLED,
   LOG_IN_FULFILLED,
-  LOG_OUT,
-  CREATE_PROFILE_FULFILLED,
-  UPDATE_PROFILE_FULFILLED,
-  DELETE_PROFILE_FULFILLED,
-  FETCH_PROFILES_FULFILLED
+  LOG_OUT
 } from '../actions/types';
 
 import {
   combineReducers
 } from 'redux';
-
-
-
 
 function user(state = {}, action) {
   switch (action.type) {
@@ -40,4 +33,4 @@ function accessToken(state = {}, action) {
   }
 }
 
-export default combineReducers({accessToken,user})
+export default combineReducers({accessToken,user});

@@ -6,7 +6,6 @@ import {
 } from '../actions/types';
 import keyBy from 'lodash/keyBy';
 
-
 function profiles(state = {}, action) {
   switch (action.type) {
     case FETCH_PROFILES_FULFILLED:
@@ -25,4 +24,4 @@ function profiles(state = {}, action) {
   }
 }
 
-export default profiles
+export default profiles;

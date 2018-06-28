@@ -4,7 +4,6 @@ import { Button, Col, Container, Input, InputGroup, InputGroupAddon, InputGroupT
 import robot from '../../../images/robot.png'
 
 export class Register extends Component {
-
   constructor(props) {
     super(props);
     this.state = {email: '', first_name: '', last_name: '', password: '', password_confirmation: '', errors: {} };
@@ -15,56 +14,101 @@ export class Register extends Component {
       <Container className="bg-white">
         <Row className="justify-content-center align-items-center">
           <Col xs="3">
-            <img src={robot} className="img-fluid" />
+            <img src={robot} alt="robot" className="img-fluid" />
           </Col>
+
           <Col xs="8">
             <h3 className="mb-5">MyHealthEData Registration</h3>
             <InputGroup className="mb-3">
-              <Input type="text" placeholder="First Name" value={this.state.first_name} name="first_name" id="first_name"
-                onChange={this.handleChange('first_name')} className={this.renderClassName('first_name')}
-                onFocus={this.handleFocus('first_name')} onBlur={() => this.validateFirstName()} />
+              <Input
+                type="text"
+                placeholder="First Name"
+                value={this.state.first_name}
+                name="first_name"
+                id="first_name"
+                onChange={this.handleChange('first_name')}
+                className={this.renderClassName('first_name')}
+                onFocus={this.handleFocus('first_name')}
+                onBlur={() => this.validateFirstName()} />
               {this.renderFieldIcon('first_name')}
             </InputGroup>
+
             <InputGroup className="mb-3">
-              <Input type="text" placeholder="Last Name" value={this.state.last_name} name="last_name" id="last_name"
-                onChange={this.handleChange('last_name')} className={this.renderClassName('last_name')}
-                onFocus={this.handleFocus('last_name')} onBlur={() => this.validateLastName()} />
+              <Input
+                type="text"
+                placeholder="Last Name"
+                value={this.state.last_name}
+                name="last_name"
+                id="last_name"
+                onChange={this.handleChange('last_name')}
+                className={this.renderClassName('last_name')}
+                onFocus={this.handleFocus('last_name')}
+                onBlur={() => this.validateLastName()} />
               {this.renderFieldIcon('last_name')}
             </InputGroup>
+
             <InputGroup className="mb-3">
-              <Input type="text" placeholder="Email" value={this.state.email} name="email" id="email"
-               onChange={this.handleChange('email')} className={this.renderClassName('email')}
-               onFocus={this.handleFocus('email')} onBlur={() => this.validateEmail()} />
+              <Input
+                type="text"
+                placeholder="Email"
+                value={this.state.email}
+                name="email" id="email"
+                onChange={this.handleChange('email')}
+                className={this.renderClassName('email')}
+                onFocus={this.handleFocus('email')}
+                onBlur={() => this.validateEmail()} />
               {this.renderFieldIcon('email')}
             </InputGroup>
-            { this.renderFieldErrorMessage('email') }
+
+            {this.renderFieldErrorMessage('email')}
 
             <InputGroup className="mb-3">
-              <Input type="password" placeholder="Password" name="password" id="password"
-               onChange={this.handleChange('password')} className={this.renderClassName('password')}
-               onFocus={this.handleFocus('password')} onBlur={() => this.validatePassword()} />
+              <Input
+                type="password"
+                placeholder="Password"
+                name="password"
+                id="password"
+                onChange={this.handleChange('password')}
+                className={this.renderClassName('password')}
+                onFocus={this.handleFocus('password')}
+                onBlur={() => this.validatePassword()} />
               {this.renderFieldIcon('password')}
             </InputGroup>
-            { this.renderFieldErrorMessage('password') }
+
+            {this.renderFieldErrorMessage('password')}
 
             <InputGroup className="mb-4">
-              <Input type="password"  placeholder="Repeat password"  name="password_confirmation" id="password_confirmation"
-               onChange={this.handleChange('password_confirmation')} className={this.renderClassName('password_confirmation')}
-               onFocus={this.handleFocus('password_confirmation')} onBlur={() => this.validateConfirmation()} />
+              <Input
+                type="password"
+                placeholder="Repeat password"
+                name="password_confirmation"
+                id="password_confirmation"
+                onChange={this.handleChange('password_confirmation')}
+                className={this.renderClassName('password_confirmation')}
+                onFocus={this.handleFocus('password_confirmation')}
+                onBlur={() => this.validateConfirmation()} />
               {this.renderFieldIcon('password_confirmation')}
             </InputGroup>
-            { this.renderFieldErrorMessage('password_confirmation') }
+
+            {this.renderFieldErrorMessage('password_confirmation')}
 
             <Row>
               <Col className="text-right">
-                <Button color="primary" className="btn-block wide-text" size="lg" onClick={() => this.attemptSignUp() }>REGISTER</Button>
+                <Button
+                  color="primary"
+                  className="btn-block wide-text"
+                  size="lg"
+                  onClick={() => this.attemptSignUp()}>
+                  REGISTER
+                </Button>
               </Col>
             </Row>
+
             <Row>
               <Col className="text-right">
                 <div>
                   Already have an account?
-                  <Button color="link" size="sm" active onClick={() => this.redirectToLogin() }>LOG IN</Button>
+                  <Button color="link" size="sm" active onClick={() => this.redirectToLogin()}>LOG IN</Button>
                 </div>
               </Col>
             </Row>
@@ -157,13 +201,12 @@ export class Register extends Component {
 
   isValidEmail(email) {
     // regex just checks for @ and .
-    return email && email.length > 0 && /.+\@.+\..+/.test(email);
+    return email && email.length > 0 && /.+@.+\..+/.test(email);
   }
 
   isValidPassword(password) {
     return password && password.length >= 6;
   }
-
 
   isMatchingPassword(password, confirmation) {
     return password && confirmation
@@ -184,18 +227,22 @@ export class Register extends Component {
 
     if (fieldErrors && fieldErrors.length > 0) {
       // error
-      return (<InputGroupAddon addonType="append">
-                <InputGroupText>
-                  <i className="fa fa-exclamation-circle text-danger"></i>
-                </InputGroupText>
-              </InputGroupAddon>);
+      return (
+        <InputGroupAddon addonType="append">
+          <InputGroupText>
+            <i className="fa fa-exclamation-circle text-danger"></i>
+          </InputGroupText>
+        </InputGroupAddon>
+      );
     } else if (fieldErrors != null && fieldValue != null && fieldValue.length > 0) {
       // valid
-      return (<InputGroupAddon addonType="append">
-                <InputGroupText>
-                  <i className="fa fa-check text-success"></i>
-                </InputGroupText>
-              </InputGroupAddon>);
+      return (
+        <InputGroupAddon addonType="append">
+          <InputGroupText>
+            <i className="fa fa-check text-success"></i>
+          </InputGroupText>
+        </InputGroupAddon>
+      );
     }  else {
       // empty, do nothing
       return null;

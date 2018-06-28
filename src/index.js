@@ -1,14 +1,10 @@
 import 'es6-shim';
 import 'babel-polyfill'
 import React from 'react';
-import ReactDOM from 'react-dom';
+import { render } from 'react-dom';
 import { Provider } from 'react-redux';
-
 import { hashHistory, Router, Route } from 'react-router';
-import 'font-awesome/css/font-awesome.css'
-import 'bootstrap/dist/css/bootstrap.css'
-import 'bootstrap/dist/js/bootstrap.js'
-import './styles/application.css';
+
 import App from './containers/App';
 import Alert from './containers/Alert/Alert';
 import Dashboard from './containers/Dashboard';
@@ -21,6 +17,12 @@ import Register from './containers/Register/Register';
 import AuthenticatedRoutes from './containers/AuthenticatedRoutes';
 import registerServiceWorker from './registerServiceWorker';
 import { configureStore, saveState } from './store/configureStore';
+
+import 'font-awesome/css/font-awesome.css';
+import 'bootstrap/dist/css/bootstrap.css';
+import 'bootstrap/dist/js/bootstrap.js';
+import './styles/App.css';
+
 let store = configureStore();
 window.store=store;
 
@@ -31,7 +33,7 @@ store.subscribe(() => {
 let axiosDefaults = require('axios/lib/defaults');
 axiosDefaults.baseURL = process.env.REACT_APP_BACKEND_URL || 'http://127.0.0.1:3000';
 
-ReactDOM.render(
+render(
   <Provider store={store}>
     <Router history={hashHistory} >
       <Route path='/' component={App}/>
@@ -45,7 +47,6 @@ ReactDOM.render(
       </Route>
       <Route path='/register' component={Register}/>
       <Route path='/login' component={Login}/>
-
     </Router>
   </Provider>, document.getElementById('root'));
 registerServiceWorker();
