@@ -3,7 +3,7 @@ import Header from '../../components/Header/Header'
 import Sidebar from '../../components/Body/Sidebar'
 import ProfileListRow from '../../containers/Profile/ProfileListRow'
 import { connect } from 'react-redux';
-import { bindActionCreators } from 'redux';
+
 
 export class Alert extends Component {
   render() {

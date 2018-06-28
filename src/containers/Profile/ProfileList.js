@@ -20,7 +20,11 @@ export class ProfileList extends Component {
   }
 
   render() {
-    let profilesList = this.props.profiles.map(profile => <ProfileListRow key={profile.id} deleteProfile={this.props.deleteProfile} updateProfile={this.props.updateProfile} profile={profile} setCurrentProfile={this.props.setCurrentProfile}/>)
+    let profilesList = this.props.profiles.map(profile => <ProfileListRow key={profile.id}
+                                                           deleteProfile={this.props.deleteProfile}
+                                                           updateProfile={this.props.updateProfile}
+                                                           profile={profile}
+                                                           setCurrentProfile={this.props.setCurrentProfile}/>)
     return (
       <div className='profile-list-container'>
         <FlipMove className='profile-flip-list'>
@@ -47,16 +51,22 @@ export class ProfileList extends Component {
             return (
                 <div className='profile-new-form'>
                     <div className='profile-new-form-title'>
-                        <div className='profile-row-icon'><FontAwesome name='user-circle' /></div>
-                        <div className='profile-new-form-label'> Create new profile: </div>
+                        <div className='profile-row-icon'>
+                        <FontAwesome name='user-circle' /></div>
+                        <div className='profile-new-form-label'>
+                          Create new profile:
+                        </div>
                     </div>
-                    <ProfileForm saveProfile={this.props.createProfile} profile={this.newProfile()} cancel={this.handleFormCancel} />
+                    <ProfileForm saveProfile={this.props.createProfile}
+                                 profile={this.newProfile()}
+                                 cancel={this.handleFormCancel} />
                 </div>
             );
         } else {
             return(
                 <div className='profile-new-btn'>
-                    <a onClick={ this.loadNewForm }> <FontAwesome name='plus-circle' /> NEW </a>
+                    <a onClick={ this.loadNewForm }>
+                      <FontAwesome name='plus-circle' /> NEW </a>
                 </div>
             );
         }

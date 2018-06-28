@@ -6,7 +6,6 @@ import {
   DELETE_PROFILE_FULFILLED,
   FETCH_PROFILES_FULFILLED
 } from '../../actions/types';
-import keyBy from 'lodash/keyBy';
 
 function findProfile(profiles, id){
   var found = profiles.find(function(element) {
@@ -32,7 +31,6 @@ describe('profiles reducer', () => {
   it('should create profiles', () => {
     const payloadData = {data: newProfile};
     const action = {type: CREATE_PROFILE_FULFILLED, payload: payloadData};
-    const startState = []
     const nextState = profiles(profileData.slice(), action);
     expect(nextState.length).to.equal(3);
   });

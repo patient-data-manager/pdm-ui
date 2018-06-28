@@ -20,6 +20,7 @@ function profiles(state = [], action) {
       newState.push(action.payload.data);
       return newState;
     case UPDATE_PROFILE_FULFILLED:
+      console.log(action.payload.data);
       var foundIndex = state.findIndex(e => e.id == action.payload.data.id);
       state[foundIndex] = action.payload.data;
       return [].concat(state);
