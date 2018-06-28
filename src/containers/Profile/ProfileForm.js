@@ -2,6 +2,7 @@ import React, { Component } from 'react';
 import { Button, Input } from 'reactstrap';
 import { ButtonToolbar, ToggleButtonGroup, ToggleButton} from 'react-bootstrap'
 import DayPickerInput from 'react-day-picker/DayPickerInput';
+import StatesSelect from 'react-form-states-select';
 import profiles from '../../reducers/profiles_reducer';
 
 export class ProfileForm extends Component {
@@ -49,7 +50,7 @@ export class ProfileForm extends Component {
                         <Input type='text' placeholder='City' />
                     </div>
                     <div className='profile-form-state'>
-                        <Input type='text' placeholder='State' />
+                        <StatesSelect />
                     </div>
                     <div className='profile-form-zip-code'>
                         <Input type='text' placeholder='Zip Code' />

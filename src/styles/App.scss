@@ -618,25 +618,29 @@
 }
 
 .profile-form-first-name,
-.profile-form-last-name,
-.profile-form-street-address {
+.profile-form-last-name {
   flex-basis: 35%;
 }
 
+.profile-form-street-address,
 .profile-form-phone-number {
   flex-basis: 30%;
 }
 
-.profile-form-city {
-  flex-basis: 20%;
+.profile-form-city,
+.profile-form-state {
+  flex-basis: 15%;
 }
 
 .profile-form-middle-initial,
-.profile-form-state,
-.profile-form-zip-code,
+.profile-form-zip-code
 .profile-form-phone-type {
   flex-basis: 15%;
 }
+
+/* .profile-form-state-select {
+  width: 15%
+} */
 
 .profile-form-btns {
   display: flex;

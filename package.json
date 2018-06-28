@@ -51,6 +51,7 @@
     "react-flexbox-grid": "1.1.3",
     "react-flip-move": "^3.0.2",
     "react-fontawesome": "^1.6.1",
+    "react-form-states-select": "^0.1.3",
     "react-ga": "2.2.0",
     "react-minimap": "0.7.2",
     "react-redux": "^5.0.6",
