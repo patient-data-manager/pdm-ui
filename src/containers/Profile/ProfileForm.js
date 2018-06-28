@@ -9,12 +9,13 @@ import 'react-confirm-alert/src/react-confirm-alert.css' // Import css
 export class ProfileForm extends Component {
     constructor(props) {
         super(props)
-        this.state = {};
+        let state = {};
         // set the state to the profile params.  Dont use the profile object
         // as it may need to be reset on cancelation and could be used elsewhere
         for(var x in props.profile){
-          this.setState[x]=props.profile[x] || ""
+          state[x]=(props.profile[x] || "")
         }
+        this.state = state;
         this.handleChange = this.handleChange.bind(this);
         this.handleGenderChange = this.handleGenderChange.bind(this);
         this.handleDayChange = this.handleDayChange.bind(this);
@@ -154,11 +155,11 @@ export class ProfileForm extends Component {
          id="state"
          name="state"
          onChange={this.handleChange}
+         value={this.state.state}
        >
          {states.map((state, i) => {
-           let selected = (state.abbreviation === this.state.state);
            return (
-             <option selected={selected} key={state.name} value={state.abbreviation} >
+             <option  key={state.name} value={state.abbreviation} >
                {state.name}
              </option>
            );
