@@ -1,8 +1,6 @@
 import {
   CREATE_PROFILE,
-  UPDATE_PROFILE,
-  DELETE_PROFILE,
-  FETCH_PROFILES
+  DELETE_PROFILE
 } from './types';
 
 import axios from 'axios';

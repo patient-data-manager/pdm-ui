@@ -1,0 +1,66 @@
+.button {
+  display: block;
+  padding: 15px;
+  margin: 0 20px;
+  color: $color-white;
+  font-size: 1.2em;
+  letter-spacing: 2px;
+  text-transform: uppercase;
+  text-align: center;
+  border-radius: 10px;
+  min-width: 300px;
+
+  &:hover {
+    color: $color-white;
+  }
+
+  &-primary {
+    background-color: $color-blue;
+
+    &:hover {
+      background-color: darken($color-blue, 10%);
+    }
+  }
+
+  &-secondary {
+    background-color: $color-blue-gray;
+
+    &:hover {
+      background-color: darken($color-blue-gray, 10%);
+    }
+  }
+
+  &-responsive {
+    font-size: calc(0.8em + 0.6vw);
+    min-width: calc(100px + 14vw);
+    margin: 0 calc(5px + 1vw);
+    padding: calc(4px + 0.6vw);
+    border-radius: calc(2px + 0.5vw);
+  }
+}
+
+.login-button {
+  width: 300px;
+  color: white;
+  background-color: #6a8eb6;
+  margin: 20px;
+  padding: 10px 75px 10px 75px;
+}
+
+.register-button {
+  width: 300px;
+  color: white;
+  background-color: #7e8fa3;
+  margin: 20px;
+  padding: 10px 75px 10px 75px;
+}
+
+.btn {
+  margin: 10px;
+  font-weight: 100;
+}
+
+.btn.btn-primary {
+  background-color: #6b8eb6;
+  border: none;
+}

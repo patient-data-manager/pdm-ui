@@ -1,6 +1,6 @@
 import React, { Component } from 'react';
+import Landing from '../components/Landing';
 
-import Landing from './Landing'
 export default class App extends Component {
   render() {
     let { children } = this.props; //eslint-disable-line

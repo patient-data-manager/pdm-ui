@@ -16,9 +16,10 @@ export function configureStore() {
   let persistedState = loadState();
 
   // Sets up http://zalmoxisus.github.io/redux-devtools-extension/
-  const composeEnhancers = (process.env.NODE_ENV !== 'production' && window.__REDUX_DEVTOOLS_EXTENSION_COMPOSE__) || compose;
+  // eslint-disable-next-line no-underscore-dangle
+  const enhancers = (process.env.NODE_ENV !== 'production' && window.__REDUX_DEVTOOLS_EXTENSION_COMPOSE__) || compose;
 
-  let store = createStore(rootReducer, persistedState, composeEnhancers(middleware));
+  let store = createStore(rootReducer, persistedState, enhancers(middleware));
 
   return store;
 }
