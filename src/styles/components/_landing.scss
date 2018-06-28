@@ -9,13 +9,15 @@
     }
 
     &-tagline {
-      align-items: center;
+      display: block;
       position: absolute;
       top: calc(2vw);
       font-size: calc(0.7em + 2vw);
       letter-spacing: 3px;
       font-weight: 300;
-      margin-left: calc(-1vw);
+      left: 0;
+      right: 0;
+      text-align: center;
     }
 
     &-buttons {
@@ -23,6 +25,10 @@
       align-items: center;
       position: absolute;
       bottom: calc(-20px + 10vw);
+      left: 0;
+      right: 0;
+      text-align: center;
+      justify-content: center;
     }
   }
 
