@@ -435,6 +435,7 @@
   height: 100%;
   float: left;
   background-color: #E8E8E8;
+  border-right: 1px #808080 solid;
   width: 20%;
 }
 
@@ -489,6 +490,14 @@
   flex-direction: row;
   flex-basis: 75px;
   border-bottom: 1px #808080 solid;
+}
+
+.profile-flip-list > .profile-item-container:first-of-type > .profile-row-container {
+  background-color: #E8E8E8;
+}
+
+.profile-flip-list > .profile-item-container:first-of-type > .profile-row-container > .profile-row-icon {
+  color: #808080;
 }
 
 .profile-row-icon {
