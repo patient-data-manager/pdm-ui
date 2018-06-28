@@ -638,10 +638,6 @@
   flex-basis: 15%;
 }
 
-/* .profile-form-state-select {
-  width: 15%
-} */
-
 .profile-form-btns {
   display: flex;
   flex-direction: row;
@@ -650,6 +646,11 @@
   padding-right: 20px;
 }
 
-.profile-form-btns Button {
+.profile-form-cancel-btn {
+  flex-basis: 10%;
+  font-size: 10px;
+}
+
+.profile-form-save-btn {
   flex-basis: 15%;
 }

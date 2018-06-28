@@ -13,6 +13,7 @@ export class ProfileListRow extends Component {
             edit: false
         };
         this.loadEditForm = this.loadEditForm.bind(this);
+        this.handleFormCancel = this.handleFormCancel.bind(this);
     }
 
     render() {

@@ -69,8 +69,8 @@ export class ProfileForm extends Component {
                     </div>
                 </div>
                 <div className='profile-form-btns'>
-                    <Button color='default' className='btn-block wide-text' size='md' onClick={ this.props.cancel }>CANCEL</Button>
-                    <Button color='primary' className='btn-block wide-text' size='md' onClick={ this.submitNewProfile }>SUBMIT</Button>
+                    <Button color='default' className='btn-block wide-text profile-form-cancel-btn' size='sm' onClick={ this.props.cancel }>CANCEL</Button>
+                    <Button color='primary' className='btn-block wide-text profile-form-save-btn' size='lg' onClick={ this.submitNewProfile }>SAVE</Button>
                 </div> 
             </div>
         );
