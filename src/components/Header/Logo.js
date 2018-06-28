@@ -5,8 +5,12 @@ export default class Logo extends Component {
   render() {
     return (
       <a className="logo navbar-brand" href="/">
-        <span><img className="header-logo" alt="robot" src={robot} width="25px" /></span>
-        <span className="topper">Health Data Manager</span>
+        <div className='navbar-logo-name'> Rosie </div>
+        <div className='navbar-logo-description'> 
+          <div> the </div>
+          <div> HEALTH DATA </div>
+          <div> MANAGER </div>
+        </div>
       </a>
     );
   }
