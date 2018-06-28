@@ -4,7 +4,11 @@ import React from 'react';
 import { render } from 'react-dom';
 import { Provider } from 'react-redux';
 import { hashHistory, Router, Route } from 'react-router';
-
+import 'react-day-picker/lib/style.css';
+import 'font-awesome/css/font-awesome.css'
+import 'bootstrap/dist/css/bootstrap.css'
+import 'bootstrap/dist/js/bootstrap.js'
+import './styles/application.css';
 import App from './containers/App';
 import Alert from './containers/Alert/Alert';
 import Dashboard from './containers/Dashboard';
