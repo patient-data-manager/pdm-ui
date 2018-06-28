@@ -28,9 +28,11 @@ export class ProfileForm extends Component {
     handleDayChange(day){
       this.setState({dob: new Date(day).toLocaleDateString()})
     }
+
     handleGenderChange(vals){
       this.setState({gender: vals})
     }
+
     onStateSelect = (event, state) => {
     // event {SyntheticEvent<HTMLSelectElement>} - React HTML event
     // state {Object} - Object representing the state
@@ -166,27 +168,28 @@ export class ProfileForm extends Component {
     }
 
     submitProfile() {
-      if(!this.state.id || this.state.id===""){
-        this.state.name =  this.state.first_name +" "+this.state.last_name;
-      }
-      this.props.saveProfile(this.state);
+        if (!this.state.id || this.state.id=="") {
+            this.state.name =  this.state.first_name +" "+this.state.last_name;
+        }
+        this.props.saveProfile(this.state);
+        this.props.cancel();
     }
 
-    deleteProfile(){
-      confirmAlert({
-      title: 'Confirm Profile Delete',
-      message: 'Are you sure you want to delete this profile?',
-      buttons: [
-        {
-          label: 'Yes',
-          onClick: () => this.props.deleteProfile(this.state.id)
-        },
-        {
-          label: 'No',
-          onClick: () => {}
-        }
-      ]
-    })
+    deleteProfile() {
+        confirmAlert({
+            title: 'Confirm Profile Delete',
+            message: 'Are you sure you want to delete this profile?',
+            buttons: [
+                {
+                label: 'Yes',
+                onClick: () => this.props.deleteProfile(this.state.id)
+                },
+                {
+                label: 'No',
+                onClick: () => {}
+                }
+            ]
+        })
     }
 }
 

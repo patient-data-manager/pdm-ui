@@ -134,12 +134,26 @@
 }
 
 .navbar {
-  border-bottom: 1px solid white;
-  background-color: #4A4A4A;
+  background-color: #708090;
 }
 
 .navbar .navbar-brand {
   color: #FFF;
+  display: flex;
+  flex-direction: row;
+  justify-content: flex-start;
+}
+
+.navbar-logo-name {
+  font-size: 30px;
+  padding-right: 15px;
+  align-self: center;
+}
+
+.navbar-logo-description {
+  font-size: 10px;
+  padding-left: 15px;
+  border-left: white 2px solid;
 }
 
 .navbar .navbar-nav {
@@ -422,10 +436,6 @@
   color: #FF8889;
 }
 
-.topper {
-  text-decoration : underline;
-}
-
 .wide-text {
   letter-spacing: 0.2em;
 
@@ -434,8 +444,7 @@
 .sidebar {
   height: 100%;
   float: left;
-  background-color: #E8E8E8;
-  border-right: 1px #808080 solid;
+  background-color: #e7eaee;
   width: 20%;
 }
 
@@ -445,7 +454,6 @@
   height: 75px;
   list-style-type: none;
   color: 	#606060;
-  border-bottom: 1px #808080 solid;
   padding: 23px 20px;
   width: 100%;
 }
@@ -456,8 +464,7 @@
 }
 
 .dashboard-body {
-  padding-top: 100px;
-  margin-left: 15px;
+  padding-top: 70px;
   position: absolute;
   height: 100%;
   width: 100%;
@@ -489,15 +496,13 @@
   display: flex;
   flex-direction: row;
   flex-basis: 75px;
-  border-bottom: 1px #808080 solid;
+  // border-bottom: 1px #808080 solid;
 }
 
 .profile-flip-list > .profile-item-container:first-of-type > .profile-row-container {
-  background-color: #E8E8E8;
-}
-
-.profile-flip-list > .profile-item-container:first-of-type > .profile-row-container > .profile-row-icon {
-  color: #808080;
+  background-color:	#f7f7f7;
+  color: #6c7b8b;
+  border: none;
 }
 
 .profile-row-icon {
@@ -597,7 +602,7 @@
   width: 100%;
   height: 100%;
   padding: 10px;
-  border-bottom: 1px #808080 solid;
+  // border-bottom: 1px #808080 solid;
 }
 
 .profile-form-first-row,
