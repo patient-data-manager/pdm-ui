@@ -20,7 +20,7 @@ export class ProfileList extends Component {
   }
 
   render() {
-    let profilesList = this.props.profiles.map(profile => <ProfileListRow key={profile.id} profile={profile} setCurrentProfile={this.props.setCurrentProfile}/>)
+    let profilesList = this.props.profiles.map(profile => <ProfileListRow key={profile.id} updateProfile={this.props.updateProfile} profile={profile} setCurrentProfile={this.props.setCurrentProfile}/>)
     return (
       <div className='profile-list-container'>
         <FlipMove className='profile-flip-list'>
@@ -35,13 +35,13 @@ export class ProfileList extends Component {
     }
 
     loadNewForm() {
-        this.setState({new: true});  
+        this.setState({new: true});
     }
 
     handleFormCancel() {
-        this.setState({new: false}); 
+        this.setState({new: false});
     }
-    
+
     renderNewForm(showNewForm) {
         if (showNewForm) {
             return (
@@ -50,7 +50,7 @@ export class ProfileList extends Component {
                         <div className='profile-row-icon'><FontAwesome name='user-circle' /></div>
                         <div className='profile-new-form-label'> Create new profile: </div>
                     </div>
-                    <ProfileForm cancel={this.handleFormCancel} />
+                    <ProfileForm saveProfile={this.props.createProfile} profile={this.newProfile()} cancel={this.handleFormCancel} />
                 </div>
             );
         } else {
@@ -62,6 +62,17 @@ export class ProfileList extends Component {
         }
     }
 
+    newProfile(){
+      return {name: "New Profile",
+              dob: null,
+              first_name: "",
+              last_name: "",
+              street: "",
+              city: "",
+              state: "",
+              zip: "",
+              gender: null}
+    }
     // TO DO: remove this later
     createP(){
         this.props.createProfile({name: "Testy Jones"})

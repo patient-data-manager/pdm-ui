@@ -22,7 +22,7 @@ export class ProfileListRow extends Component {
                 <div className='profile-row-container'>
                     <div className='profile-row-icon'><FontAwesome name='user-circle' /></div>
                     <div className='profile-row-info' onClick={() => this.setCurrentProfile()}>
-                        <div className='profile-first-info-row'> 
+                        <div className='profile-first-info-row'>
                             <div className='profile-row-name'> {this.state.name } </div>
                             <div className='profile-row-alerts'>  { this.renderAlertBadge(this.state.alertCount) } </div>
                         </div>
@@ -33,7 +33,7 @@ export class ProfileListRow extends Component {
                     </div>
                     <div className='profile-row-edit'>
                         { this.renderEditBtn(this.state.edit) }
-                    </div>    
+                    </div>
                 </div>
                 { this.renderEditForm(this.state.edit) }
             </div>
@@ -43,13 +43,13 @@ export class ProfileListRow extends Component {
     setCurrentProfile() {
       this.props.setCurrentProfile(this.props.profile.id);
 	}
-	
+
     loadEditForm() {
-        this.setState({edit: true});       
+        this.setState({edit: true});
     }
 
     handleFormCancel() {
-        this.setState({edit: false}); 
+        this.setState({edit: false});
     }
 
     renderAlertBadge(alertCount) {
@@ -68,7 +68,7 @@ export class ProfileListRow extends Component {
 
     renderEditForm(edit) {
         if (edit) {
-            return(<ProfileForm cancel={this.handleFormCancel}/>);
+            return(<ProfileForm saveProfile={this.props.updateProfile} profile={this.props.profile} cancel={this.handleFormCancel}/>);
         }
         return null;
     }
