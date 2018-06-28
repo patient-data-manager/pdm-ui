@@ -9,18 +9,6 @@ import {
 } from 'redux';
 
 
-function profile(state = {}, action) {
-  switch (action.type) {
-    case FETCH_CURRENT_USER_FULFILLED:
-      return action.payload.data;
-    case LOG_OUT:
-      // In this case we want to blank out currentUser because our session has been invalidated.
-      // This will force the user to log back in.
-      return {};
-    default:
-      return state;
-  }
-}
 
 function accessToken(state = {}, action) {
   switch (action.type) {
@@ -33,4 +21,4 @@ function accessToken(state = {}, action) {
   }
 }
 
-export default combineReducers({accessToken,user});
+export default combineReducers({accessToken});
