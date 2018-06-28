@@ -20,7 +20,7 @@ export class ProfileList extends Component {
   }
 
   render() {
-    let profilesList = this.props.profiles.map(profile => <ProfileListRow key={profile.id} updateProfile={this.props.updateProfile} profile={profile} setCurrentProfile={this.props.setCurrentProfile}/>)
+    let profilesList = this.props.profiles.map(profile => <ProfileListRow key={profile.id} deleteProfile={this.props.deleteProfile} updateProfile={this.props.updateProfile} profile={profile} setCurrentProfile={this.props.setCurrentProfile}/>)
     return (
       <div className='profile-list-container'>
         <FlipMove className='profile-flip-list'>

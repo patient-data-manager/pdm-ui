@@ -46,6 +46,8 @@
     "react-bootstrap": "^0.32.1",
     "react-calendar-timeline": "0.15.2",
     "react-copy-to-clipboard": "5.0.0",
+    "react-confirm-alert" : "",
+    "react-hot-loader": "",
     "react-day-picker": "6.2.1",
     "react-dom": "15.5.4",
     "react-flexbox-grid": "1.1.3",

@@ -68,7 +68,7 @@ export class ProfileListRow extends Component {
 
     renderEditForm(edit) {
         if (edit) {
-            return(<ProfileForm saveProfile={this.props.updateProfile} profile={this.props.profile} cancel={this.handleFormCancel}/>);
+            return(<ProfileForm deleteProfile={this.props.deleteProfile} saveProfile={this.props.updateProfile} profile={this.props.profile} cancel={this.handleFormCancel}/>);
         }
         return null;
     }

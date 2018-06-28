@@ -4,6 +4,8 @@ import { ButtonToolbar, ToggleButtonGroup, ToggleButton} from 'react-bootstrap'
 import DayPickerInput from 'react-day-picker/DayPickerInput';
 import StatesSelect from 'react-form-states-select';
 import profiles from '../../reducers/profiles_reducer';
+import { confirmAlert } from 'react-confirm-alert'; // Import
+import 'react-confirm-alert/src/react-confirm-alert.css' // Import css
 
 export class ProfileForm extends Component {
     constructor(props) {
@@ -38,6 +40,7 @@ export class ProfileForm extends Component {
       this.setState({state: state.name})
     }
     render() {
+        let delProfile = this.props.deleteProfile ? (<Button color='danger' className='btn-block wide-text profile-form-save-btn' size='lg' onClick={ () => this.deleteProfile() }>Delete</Button>) : ""
         return (
             <div className='profile-form-container'>
                 <div className='profile-form-first-row'>
@@ -98,15 +101,34 @@ export class ProfileForm extends Component {
                 <div className='profile-form-btns'>
                     <Button color='default' className='btn-block wide-text profile-form-cancel-btn' size='sm' onClick={ this.props.cancel }>CANCEL</Button>
                     <Button color='primary' className='btn-block wide-text profile-form-save-btn' size='lg' onClick={ () => this.submitProfile() }>SAVE</Button>
+                    {delProfile}
                 </div>
             </div>
         );
     }
 
     submitProfile() {
-      console.log(this.state);
-
+      if(!this.state.id || this.state.id==""){
+        this.state.name =  this.state.first_name +" "+this.state.last_name;
+      }
       this.props.saveProfile(this.state);
+    }
+
+    deleteProfile(){
+      confirmAlert({
+      title: 'Confirm Profile Delete',
+      message: 'Are you sure you want to delete this profile?',
+      buttons: [
+        {
+          label: 'Yes',
+          onClick: () => this.props.deleteProfile(this.state.id)
+        },
+        {
+          label: 'No',
+          onClick: () => {}
+        }
+      ]
+    })
     }
 }
 
