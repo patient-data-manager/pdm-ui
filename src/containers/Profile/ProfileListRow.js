@@ -1,15 +1,12 @@
 import React, { Component } from 'react';
 import ProfileForm from './ProfileForm'
 import FontAwesome from 'react-fontawesome';
+import moment from 'moment';
 
 export class ProfileListRow extends Component {
     constructor(props) {
         super(props)
         this.state = {
-            name: props.profile.name,
-            age: props.profile.age,
-            gender: props.profile.gender,
-            alertCount: props.profile.alertCount,
             edit: false
         };
         this.loadEditForm = this.loadEditForm.bind(this);
@@ -23,12 +20,12 @@ export class ProfileListRow extends Component {
                     <div className='profile-row-icon'><FontAwesome name='user-circle' /></div>
                     <div className='profile-row-info' onClick={() => this.setCurrentProfile()}>
                         <div className='profile-first-info-row'>
-                            <div className='profile-row-name'> {this.state.name } </div>
-                            <div className='profile-row-alerts'>  { this.renderAlertBadge(this.state.alertCount) } </div>
+                            <div className='profile-row-name'> {this.props.profile.name } </div>
+                            <div className='profile-row-alerts'>  {this.renderAlertBadge(this.state.alertCount) } </div>
                         </div>
                         <div className='profile-second-info-row'>
-                            <div className='profile-row-age'> {this.state.age } Yrs </div>
-                            <div className='profile-row-gender'> {this.state.gender } </div>
+                            <div className='profile-row-age'> {this.computeAgeString(this.props.profile.dob)} </div>
+                            <div className='profile-row-gender'> {this.props.profile.gender } </div>
                         </div>
                     </div>
                     <div className='profile-row-edit'>
@@ -41,7 +38,7 @@ export class ProfileListRow extends Component {
     }
 
     setCurrentProfile() {
-      this.props.setCurrentProfile(this.props.profile.id);
+        this.props.setCurrentProfile(this.props.profile.id);
 	}
 
     loadEditForm() {
@@ -50,6 +47,19 @@ export class ProfileListRow extends Component {
 
     handleFormCancel() {
         this.setState({edit: false});
+    }
+
+    computeAgeString(dob) {
+        let years = moment().diff(dob, 'years');
+        let months = moment().diff(dob, 'months');
+        let days = moment().diff(dob, 'days');
+        if (years > 0) {
+            return years + ' YRS';
+        } else if (months > 0) {
+            return months + ' MO';
+        } else {
+            return days + ' DAYS';
+        }
     }
 
     renderAlertBadge(alertCount) {

@@ -3,7 +3,7 @@ import { Button, Input } from 'reactstrap';
 import { ButtonToolbar, ToggleButtonGroup, ToggleButton} from 'react-bootstrap'
 import DayPickerInput from 'react-day-picker/DayPickerInput';
 import { confirmAlert } from 'react-confirm-alert'; // Import
-import { states } from "./data/us-states";
+import { states } from './data/us-states';
 import 'react-confirm-alert/src/react-confirm-alert.css' // Import css
 
 export class ProfileForm extends Component {
@@ -12,8 +12,8 @@ export class ProfileForm extends Component {
         let state = {};
         // set the state to the profile params.  Dont use the profile object
         // as it may need to be reset on cancelation and could be used elsewhere
-        for(var x in props.profile){
-          state[x]=(props.profile[x] || "")
+        for(var x in props.profile) {
+          state[x]=(props.profile[x] || '')
         }
         this.state = state;
         this.handleChange = this.handleChange.bind(this);
@@ -22,16 +22,16 @@ export class ProfileForm extends Component {
         this.onStateSelect = this.onStateSelect.bind(this);
     }
 
-    handleChange(evt){
-      this.setState({[evt.target.name]: evt.target.value})
+    handleChange(evt) {
+        this.setState({[evt.target.name]: evt.target.value})
     }
 
-    handleDayChange(day){
-      this.setState({dob: new Date(day).toLocaleDateString()})
+    handleDayChange(day) {
+        this.setState({dob: new Date(day).toLocaleDateString()})
     }
 
-    handleGenderChange(vals){
-      this.setState({gender: vals})
+    handleGenderChange(vals) {
+        this.setState({gender: vals})
     }
 
     onStateSelect = (event, state) => {
@@ -49,26 +49,26 @@ export class ProfileForm extends Component {
                                  size='lg'
                                  onClick={ () => this.deleteProfile() }>
                                  Delete
-                          </Button>) : ""
+                          </Button>) : ''
         return (
             <div className='profile-form-container'>
                 <div className='profile-form-first-row'>
                     <div className='profile-form-first-name'>
-                        <Input name="first_name"
+                        <Input name='first_name'
                                 type='text'
                                 placeholder='First Name'
                                 value={this.state.first_name}
                                 onChange={this.handleChange} />
                     </div>
                     <div className='profile-form-middle-initial'>
-                        <Input name="middle_name"
+                        <Input name='middle_name'
                                type='text'
                                placeholder='Middle Initial'
                                value={this.state.middle_name}
                                onChange={this.handleChange}/>
                     </div>
                     <div className='profile-form-last-name'>
-                        <Input name="last_name"
+                        <Input name='last_name'
                                type='text'
                                placeholder='Last Name'
                                value={this.state.last_name}
@@ -84,26 +84,26 @@ export class ProfileForm extends Component {
                     <div className='profile-form-gender'>
                         <div> Gender: </div>
                         <ButtonToolbar>
-                            <ToggleButtonGroup name='gender' type="radio"
+                            <ToggleButtonGroup name='gender' type='radio'
                                 value={this.state.gender}
                                 onChange={this.handleGenderChange}>
-                                <ToggleButton value={'M'}>Male</ToggleButton>
-                                <ToggleButton value={'F'}>Female</ToggleButton>
-                                <ToggleButton value={'O'}>Other</ToggleButton>
+                                <ToggleButton value={'Male'}>Male</ToggleButton>
+                                <ToggleButton value={'Female'}>Female</ToggleButton>
+                                <ToggleButton value={'Other'}>Other</ToggleButton>
                             </ToggleButtonGroup>
                         </ButtonToolbar>
                     </div>
                 </div>
                 <div className='profile-form-third-row'>
                     <div className='profile-form-street-address'>
-                        <Input name="street"
+                        <Input name='street'
                                type='text'
                                placeholder='Street Address'
                                value={this.state.street}
                                onChange={this.handleChange}/>
                     </div>
                     <div className='profile-form-city'>
-                        <Input name="city"
+                        <Input name='city'
                                type='text'
                                placeholder='City'
                                value={this.state.city}
@@ -114,7 +114,7 @@ export class ProfileForm extends Component {
                     </div>
                     <div className='profile-form-zip-code'>
                         <Input type='text'
-                                name="zip"
+                                name='zip'
                                 placeholder='Zip Code'
                                 value={this.state.zip}
                                 onChange={this.handleChange}/>
@@ -149,11 +149,12 @@ export class ProfileForm extends Component {
         );
     }
 
-    renderStateSelect(){
+    renderStateSelect() {
       return (
-        <select
-         id="state"
-         name="state"
+        <Input
+         type='select'
+         id='state'
+         name='state'
          onChange={this.handleChange}
          value={this.state.state}
        >
@@ -164,13 +165,13 @@ export class ProfileForm extends Component {
              </option>
            );
          })}
-       </select>
+       </Input>
       )
     }
 
     submitProfile() {
-        if (!this.state.id || this.state.id=="") {
-            this.state.name =  this.state.first_name +" "+this.state.last_name;
+        if (!this.state.id || this.state.id=='') {
+            this.state.name =  this.state.first_name +' '+this.state.last_name;
         }
         this.props.saveProfile(this.state);
         this.props.cancel();
