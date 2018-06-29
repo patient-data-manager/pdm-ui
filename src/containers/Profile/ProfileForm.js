@@ -13,25 +13,26 @@ export class ProfileForm extends Component {
         // set the state to the profile params.  Dont use the profile object
         // as it may need to be reset on cancelation and could be used elsewhere
         for(var x in props.profile) {
-          state[x]=(props.profile[x] || '')
+            state[x]=(props.profile[x] || undefined);
         }
         this.state = state;
         this.handleChange = this.handleChange.bind(this);
         this.handleGenderChange = this.handleGenderChange.bind(this);
         this.handleDayChange = this.handleDayChange.bind(this);
         this.onStateSelect = this.onStateSelect.bind(this);
+        this.submitProfile = this.submitProfile.bind(this);
     }
 
     handleChange(evt) {
-        this.setState({[evt.target.name]: evt.target.value})
+        this.setState({[evt.target.name]: evt.target.value});
     }
 
     handleDayChange(day) {
-        this.setState({dob: new Date(day).toLocaleDateString()})
+        this.setState({dob: new Date(day).toLocaleDateString()});
     }
 
     handleGenderChange(vals) {
-        this.setState({gender: vals})
+        this.setState({gender: vals});
     }
 
     onStateSelect = (event, state) => {
@@ -39,7 +40,7 @@ export class ProfileForm extends Component {
     // state {Object} - Object representing the state
     // state.name {string} - The full name of the selected state
     // state.abbreviation {string} - The two letter abbreviation of the states name
-      this.setState({state: state.name})
+        this.setState({state: state.name});
     }
 
     render() {
@@ -166,10 +167,14 @@ export class ProfileForm extends Component {
     }
 
     submitProfile() {
-        if (!this.state.id || this.state.id=='') {
-            this.state.name =  this.state.first_name +' '+this.state.last_name;
-        }
-        this.props.saveProfile(this.state);
+        let profile = this.state;
+        let fullName = this.state.first_name + ' ';
+        if (this.state.middle_name != undefined) {
+            fullName += this.state.middle_name + ' ';
+         }
+        fullName += this.state.last_name;
+        profile.name = fullName;
+        this.props.saveProfile(profile);
         this.props.cancel();
     }
 
