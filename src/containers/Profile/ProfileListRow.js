@@ -15,7 +15,6 @@ export class ProfileListRow extends Component {
     }
 
     render() {
-        console.log(this.props)
         return (
             <div className='profile-item-container'>
                 <div className='profile-row-container'>
@@ -82,7 +81,11 @@ export class ProfileListRow extends Component {
 
     renderEditForm(showEditForm) {
         if (showEditForm) {
-            return(<ProfileForm deleteProfile={this.props.deleteProfile} saveProfile={this.props.updateProfile} profile={this.props.profile} cancel={this.handleFormCancel}/>);
+            return(
+                <ProfileForm deleteProfile={this.props.deleteProfile}
+                    saveProfile={this.props.updateProfile}
+                    profile={this.props.profile}
+                    cancel={this.handleFormCancel}/>);
         }
         return null;
     }

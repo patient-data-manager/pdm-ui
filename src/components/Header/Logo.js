@@ -1,5 +1,4 @@
 import React, { Component } from 'react';
-import robot from '../../../images/robot.png'
 
 export default class Logo extends Component {
   render() {

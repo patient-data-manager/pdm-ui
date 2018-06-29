@@ -20,14 +20,13 @@ function profiles(state = [], action) {
       newState.push(action.payload.data);
       return newState;
     case UPDATE_PROFILE_FULFILLED:
-      console.log(action.payload.data);
-      var foundIndex = state.findIndex(e => e.id == action.payload.data.id);
+      var foundIndex = state.findIndex(e => e.id === action.payload.data.id);
       state[foundIndex] = action.payload.data;
       return [].concat(state);
     case DELETE_PROFILE_FULFILLED:
       return state.filter(e => e.id !== action.payload.data.id);
     case SET_CURRENT_PROFILE:
-      var foundIndex = state.findIndex(e => e.id == action.payload);
+      foundIndex = state.findIndex(e => e.id === action.payload);
       const filtered = state.filter(e => e.id !== action.payload);
       const updated = [state[foundIndex]].concat(filtered);
       updated.currentProfile = state[foundIndex];

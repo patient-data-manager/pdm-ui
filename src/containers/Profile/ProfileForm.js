@@ -169,7 +169,7 @@ export class ProfileForm extends Component {
     submitProfile() {
         let profile = this.state;
         let fullName = this.state.first_name + ' ';
-        if (this.state.middle_name != undefined) {
+        if (this.state.middle_name !== undefined) {
             fullName += this.state.middle_name + ' ';
          }
         fullName += this.state.last_name;

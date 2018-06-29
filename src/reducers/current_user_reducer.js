@@ -1,5 +1,4 @@
 import {
-  FETCH_CURRENT_USER_FULFILLED,
   LOG_IN_FULFILLED,
   LOG_OUT
 } from '../actions/types';

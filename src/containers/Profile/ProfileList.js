@@ -5,7 +5,6 @@ import FontAwesome from 'react-fontawesome';
 import { connect } from 'react-redux';
 import { bindActionCreators } from 'redux';
 import {createProfile, updateProfile, setCurrentProfile, deleteProfile} from '../../actions/profiles'
-import { Button } from 'reactstrap';
 import FlipMove from 'react-flip-move';
 
 export class ProfileList extends Component {
