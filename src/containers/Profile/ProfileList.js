@@ -33,7 +33,6 @@ export class ProfileList extends Component {
         <div className='profile-new-container'>
             { this.renderNewForm(this.state.new) }
         </div>
-        <Button color="link" size="sm" onClick={() => this.createP() }>create</Button>
       </div>
       );
     }
@@ -82,10 +81,6 @@ export class ProfileList extends Component {
               state: "",
               zip: "",
               gender: null}
-    }
-    // TO DO: remove this later
-    createP(){
-        this.props.createProfile({name: "Testy Jones"})
     }
 }
 

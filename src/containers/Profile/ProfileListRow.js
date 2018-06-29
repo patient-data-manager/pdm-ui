@@ -57,8 +57,10 @@ export class ProfileListRow extends Component {
             return years + ' YRS';
         } else if (months > 0) {
             return months + ' MO';
-        } else {
+        } else if (days >=0) {
             return days + ' DAYS';
+        } else {
+            return '';
         }
     }
 

@@ -1,6 +1,6 @@
 import React, { Component } from 'react';
 import { Button, Input } from 'reactstrap';
-import { ButtonToolbar, ToggleButtonGroup, ToggleButton} from 'react-bootstrap'
+import { Radio, RadioGroup } from 'react-radio-group';
 import DayPickerInput from 'react-day-picker/DayPickerInput';
 import { confirmAlert } from 'react-confirm-alert'; // Import
 import { states } from './data/us-states';
@@ -83,15 +83,11 @@ export class ProfileForm extends Component {
                     </div>
                     <div className='profile-form-gender'>
                         <div> Gender: </div>
-                        <ButtonToolbar>
-                            <ToggleButtonGroup name='gender' type='radio'
-                                value={this.state.gender}
-                                onChange={this.handleGenderChange}>
-                                <ToggleButton value={'Male'}>Male</ToggleButton>
-                                <ToggleButton value={'Female'}>Female</ToggleButton>
-                                <ToggleButton value={'Other'}>Other</ToggleButton>
-                            </ToggleButtonGroup>
-                        </ButtonToolbar>
+                        <RadioGroup name='gender' selectedValue={this.state.gender} onChange={this.handleGenderChange}>
+                            <Radio value='Male' />Male
+                            <Radio value='Female' />Female
+                            <Radio value='Other' />Other
+                        </RadioGroup>
                     </div>
                 </div>
                 <div className='profile-form-third-row'>
