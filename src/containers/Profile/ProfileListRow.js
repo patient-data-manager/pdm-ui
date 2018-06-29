@@ -7,13 +7,15 @@ export class ProfileListRow extends Component {
     constructor(props) {
         super(props)
         this.state = {
-            edit: false
+            showEditBtn: this.props.showEditBtn,
+            showEditForm: false
         };
         this.loadEditForm = this.loadEditForm.bind(this);
         this.handleFormCancel = this.handleFormCancel.bind(this);
     }
 
     render() {
+        console.log(this.props)
         return (
             <div className='profile-item-container'>
                 <div className='profile-row-container'>
@@ -29,10 +31,10 @@ export class ProfileListRow extends Component {
                         </div>
                     </div>
                     <div className='profile-row-edit'>
-                        { this.renderEditBtn(this.state.edit) }
+                        { this.renderEditBtn(this.state.showEditBtn) }
                     </div>
                 </div>
-                { this.renderEditForm(this.state.edit) }
+                { this.renderEditForm(this.state.showEditForm) }
             </div>
         );
     }
@@ -42,11 +44,11 @@ export class ProfileListRow extends Component {
 	}
 
     loadEditForm() {
-        this.setState({edit: true});
+        this.setState({showEditForm: true});
     }
 
     handleFormCancel() {
-        this.setState({edit: false});
+        this.setState({showEditForm: false});
     }
 
     computeAgeString(dob) {
@@ -71,15 +73,15 @@ export class ProfileListRow extends Component {
         return null;
     }
 
-    renderEditBtn(edit) {
-        if (!edit) {
-        return(<a onClick={ this.loadEditForm }><FontAwesome name='edit' />  EDIT</a>);
+    renderEditBtn(showEditBtn) {
+        if (showEditBtn) {
+            return(<a onClick={ this.loadEditForm }><FontAwesome name='edit' />  EDIT</a>);
         }
         return null;
     }
 
-    renderEditForm(edit) {
-        if (edit) {
+    renderEditForm(showEditForm) {
+        if (showEditForm) {
             return(<ProfileForm deleteProfile={this.props.deleteProfile} saveProfile={this.props.updateProfile} profile={this.props.profile} cancel={this.handleFormCancel}/>);
         }
         return null;

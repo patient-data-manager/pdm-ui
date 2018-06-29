@@ -24,7 +24,8 @@ export class ProfileList extends Component {
                                                            deleteProfile={this.props.deleteProfile}
                                                            updateProfile={this.props.updateProfile}
                                                            profile={profile}
-                                                           setCurrentProfile={this.props.setCurrentProfile}/>)
+                                                           setCurrentProfile={this.props.setCurrentProfile}
+                                                           showEditBtn={true}/>)
     return (
       <div className='profile-list-container'>
         <FlipMove className='profile-flip-list'>
