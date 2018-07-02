@@ -1,8 +1,16 @@
-import React from 'react';
-import { HealthRecord } from '../../containers/HealthRecord/HealthRecord';
-import { shallow } from 'enzyme';
+import { fullRenderContainer } from '../../utils/testHelpers';
+import HealthRecord from '../../containers/HealthRecord/HealthRecord';
 
-it('renders without crashing', () => {
-  const wrapper = shallow(<HealthRecord />);
-  wrapper.unmount();
+function setup() {
+  const store = {};
+
+  const props = {};
+
+  return fullRenderContainer(HealthRecord, props, store);
+}
+
+it('renders self and self components', () => {
+  const component = setup();
+
+  expect(component).toBeDefined();
 });

@@ -19,6 +19,10 @@ global.navigator = {
   userAgent: 'node.js'
 };
 
+global.requestAnimationFrame = function(callback) {
+  setTimeout(callback, 0);
+};
+
 // Handle Promise Rejection Warnings
 process.on('unhandledRejection', warning => {});
 
@@ -56,7 +60,7 @@ function renderComponent(ComponentClass, props = {}, state = {}) {
   return $(ReactDOM.findDOMNode(componentInstance));
 }
 
-$.fn.simulate = function(eventName, value) {
+_$.fn.simulate = function(eventName, value) {
   if (value) {
     this.val(value);
   }

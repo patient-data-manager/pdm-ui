@@ -40,3 +40,9 @@ h2 {
   margin-bottom: 10px;
   color: $color-blue;
 }
+
+h3 {
+  font-size: calc(1em + 1vw);
+  color: $color-blue-gray;
+  letter-spacing: 1px;
+}

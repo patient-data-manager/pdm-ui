@@ -1,4 +1,5 @@
-import React, { Component, PropTypes } from 'react';
+import React, { Component } from 'react';
+import PropTypes from 'prop-types';
 
 export default class PageHeader extends Component {
   render() {
@@ -9,8 +10,6 @@ export default class PageHeader extends Component {
     );
   }
 }
-
-PageHeader.displayName = 'PageHeader';
 
 PageHeader.propTypes = {
   title: PropTypes.string.isRequired

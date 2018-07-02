@@ -1,4 +1,4 @@
-import { expect } from '../../lib/test_helper';
+import { expect } from '../../utils/test_helper';
 import profiles from '../../reducers/profiles_reducer';
 import {
   CREATE_PROFILE_FULFILLED,

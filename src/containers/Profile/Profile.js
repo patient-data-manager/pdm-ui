@@ -13,7 +13,7 @@ export class Profile extends Component {
   render() {
     return (
       <div className='content-wrapper'>
-        <Header />
+        <Header isAuthenticated={false} authUser={null} logoutUser={() => {}} />
         <div className='dashboard-body'>
           <Sidebar />
           <div className='dashboard-content'>

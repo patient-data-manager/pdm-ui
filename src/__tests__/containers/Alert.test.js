@@ -1,8 +1,16 @@
-import React from 'react';
-import { Alert } from '../../containers/Alert/Alert';
-import { shallow } from 'enzyme';
+import { fullRenderContainer } from '../../utils/testHelpers';
+import Alert from '../../containers/Alert/Alert';
 
-it('renders without crashing', () => {
-  const wrapper = shallow(<Alert />);
-  wrapper.unmount();
+function setup() {
+  const store = {};
+
+  const props = {};
+
+  return fullRenderContainer(Alert, props, store);
+}
+
+it('renders self and self components', () => {
+  const component = setup();
+
+  expect(component).toBeDefined();
 });

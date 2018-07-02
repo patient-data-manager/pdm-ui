@@ -1,8 +1,18 @@
-import React from 'react';
-import { Profile } from '../../containers/Profile/Profile';
-import { shallow } from 'enzyme';
+import { fullRenderContainer } from '../../utils/testHelpers';
+import Profile from '../../containers/Profile/Profile';
 
-it('renders without crashing', () => {
-  const wrapper = shallow(<Profile />);
-  wrapper.unmount();
+function setup() {
+  const store = {
+    isAuthenticated: false
+  };
+
+  const props = {};
+
+  return fullRenderContainer(Profile, props, store);
+}
+
+it('renders self and self components', () => {
+  const component = setup();
+
+  expect(component).toBeDefined();
 });

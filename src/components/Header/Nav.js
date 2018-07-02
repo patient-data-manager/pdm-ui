@@ -1,50 +1,58 @@
 import React, { Component } from 'react';
-import { connect } from 'react-redux';
+import PropTypes from 'prop-types';
+import { Link } from 'react-router-dom';
+
 import Logo from './Logo';
 
-class Nav extends Component {
+export default class Nav extends Component {
+  handleLogout = () => {
+    this.props.logoutUser();
+  }
+
+  renderUserMenu() {
+    return(
+      <li role="presentation" className="nav-item dropdown">
+        <a
+          href="/"
+          className="dropdown-toggle"
+          data-toggle="dropdown"
+          role="button"
+          aria-haspopup="true"
+          aria-expanded="false">
+          {this.props.authUser} <span className="caret"></span>
+        </a>
+
+        <ul className="dropdown-menu">
+          <li><button onClick={this.handleLogout}>Logout</button></li>
+        </ul>
+      </li>
+    );
+  }
+
+  renderLoginMenu(){
+    return(
+      <li role="presentation" className="nav-item dropdown">
+        <Link to="/login">Login</Link>
+      </li>
+    );
+  }
+
   render() {
     return (
       <nav className="nav navbar navbar-expand-sm  fixed-top">
         <Logo />
-          <ul className="navbar-nav ml-auto">
-            <li className="nav-item">
-            </li>
-            {this.props.currentUser.accessToken ? this.renderUserMenu() : this.renderLoginMenu()}
-          </ul>
-
+        <ul className="navbar-nav ml-auto">
+          <li className="nav-item">
+          </li>
+          {this.props.isAuthenticated ? this.renderUserMenu() : this.renderLoginMenu()}
+        </ul>
       </nav>
     );
   }
-  renderUserMenu(){
-    return(<li role="presentation" className="nav-item dropdown">
-          <a href="#"
-               className="dropdown-toggle"
-               data-toggle="dropdown"
-               role="button"
-               aria-haspopup="true"
-               aria-expanded="false">
-              Name <span className="caret"></span>
-            </a>
-            <ul className="dropdown-menu">
-              <li><a href="#/logout">Logout</a></li>
-            </ul>
-          </li>)
-        }
-
-  renderLoginMenu(){
-      return(<li role="presentation" className="nav-item dropdown">
-              <a href="#/login">Login</a>
-            </li>)
-      }
-}
-function mapStateToProps(state) {
-  return {
-    currentUser: state.currentUser,
-  };
 }
 
-
-export default connect(mapStateToProps)(Nav);
-
-Nav.displayName = 'Nav';
+Nav.propTypes = {
+  isAuthenticated: PropTypes.bool.isRequired,
+  authUser: PropTypes.string,
+  logoutUser: PropTypes.func.isRequired
+}

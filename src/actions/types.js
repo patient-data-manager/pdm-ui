@@ -1,16 +1,18 @@
-// Current User
-export const LOG_OUT = 'LOG_OUT';
-export const LOG_OUT_FULFILLED = 'LOG_OUT_FULFILLED';
-export const LOG_IN = 'LOG_IN';
-export const LOG_IN_FULFILLED = 'LOG_IN_FULFILLED';
-export const SIGN_UP = 'SIGN_UP';
-export const SIGN_UP_FULFILLED = 'SIGN_UP_FULFILLED';
-export const UPDATE_USER = 'UPDATE_USER'
-export const UPDATE_USER_FULFILLED = 'UPDATE_USER_FULFILLED'
-export const REFRESH_TOKEN = 'REFRESH_TOKEN'
-export const FETCH_CURRENT_USER = 'FETCH_CURRENT_USER';
-export const FETCH_CURRENT_USER_FULFILLED = 'FETCH_CURRENT_USER_FULFILLED';
-// Publisher and admin types
+// ------------------------- AUTH ------------------------------------------ //
+export const USER_REQUEST = 'USER_REQUEST';
+export const USER_RECEIVED = 'USER_RECEIVED';
+export const LOGIN_REQUEST = 'LOGIN_REQUEST';
+export const LOGIN_SUCCESS = 'LOGIN_SUCCESS';
+export const LOGIN_FAILURE = 'LOGIN_FAILURE';
+export const SET_LOGIN_STATUS = 'SET_LOGIN_STATUS';
+export const RESET_LOGIN_STATUS = 'RESET_LOGIN_STATUS';
+export const LOGOUT_USER = 'LOGOUT_USER';
+export const REGISTER_REQUEST = 'REGISTER_REQUEST';
+export const REGISTER_SUCCESS = 'REGISTER_SUCCESS';
+export const REGISTER_FAILURE = 'REGISTER_FAILURE';
+export const RESET_REGISTRATION_STATUS = 'RESET_REGISTRATION_STATUS';
+
+// ------------------------- PROFILES -------------------------------------- //
 export const FETCH_PROFILE = 'FETCH_PROFILE';
 export const FETCH_PROFILE_FULFILLED  = 'FETCH_PROFILE_FULFILLED';
 export const FETCH_PROFILES = 'FETCH_PROFILES';

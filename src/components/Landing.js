@@ -1,4 +1,5 @@
 import React from 'react';
+import { Link } from 'react-router-dom';
 
 const Landing = () => {
   return (
@@ -13,8 +14,8 @@ const Landing = () => {
         </div>
 
         <div className="landing__header-buttons">
-          <a href="/#login" className="button button-primary button-responsive">Log In</a>
-          <a href="/#register" className="button button-secondary button-responsive">Register</a>
+          <Link to="/login" className="button button-primary button-responsive">Log In</Link>
+          <Link to="/register" className="button button-secondary button-responsive">Register</Link>
         </div>
       </div>
 
@@ -108,7 +109,7 @@ const Landing = () => {
       </div>
 
       <div className="landing__footer">
-        <a href="https://www.mitre.org" target="_blank">
+        <a href="https://www.mitre.org" target="_blank" rel="nofollow noopener noreferrer">
           <img className="logo-mitre" src="assets/images/landing/landing-mitre.png" alt="mitre logo" />
         </a>
       </div>

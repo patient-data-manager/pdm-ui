@@ -1,47 +1,25 @@
 import { createStore, applyMiddleware, compose } from 'redux';
 import promiseMiddleware from 'redux-promise-middleware';
-import createLogger from 'redux-logger';
-
-// import unauthenticatedResponse from '../middleware/unauthenticated_response';
-
+import thunkMiddleware from 'redux-thunk';
+import { createLogger } from 'redux-logger';
+import { persistStore } from 'redux-persist';
 import rootReducer from '../reducers';
 
-export function configureStore() {
-  let middleware = applyMiddleware(
-    promiseMiddleware(),
-    createLogger()
-    // ,unauthenticatedResponse
+export default function configureStore(initialState) {
+  const middleware = [promiseMiddleware(), thunkMiddleware];
+
+  // disable the redux-logger in a production environment
+  if (process.env.NODE_ENV !== 'production') {
+    middleware.push(createLogger());
+  }
+
+  const composeEnhancers = window.__REDUX_DEVTOOLS_EXTENSION_COMPOSE__ || compose; // eslint-disable-line no-underscore-dangle
+  const store = createStore(
+    rootReducer,
+    initialState,
+    composeEnhancers(applyMiddleware(...middleware))
   );
+  const persistor = persistStore(store);
 
-  let persistedState = loadState();
-
-  // Sets up http://zalmoxisus.github.io/redux-devtools-extension/
-  // eslint-disable-next-line no-underscore-dangle
-  const enhancers = (process.env.NODE_ENV !== 'production' && window.__REDUX_DEVTOOLS_EXTENSION_COMPOSE__) || compose;
-
-  let store = createStore(rootReducer, persistedState, enhancers(middleware));
-
-  return store;
-}
-
-function loadState() {
-  try {
-    let persistedState = localStorage.getItem('hdm_state');
-    if (persistedState === null) {
-      return undefined;
-    }
-    return JSON.parse(persistedState);
-
-  } catch (err) {
-    return undefined;
-  }
-}
-
-export function saveState(state) {
-  try {
-    let persistedState = JSON.stringify(state);
-    localStorage.setItem('hdm_state', persistedState);
-  } catch (err) {
-    console.log(err);
-  }
+  return { store, persistor };
 }
