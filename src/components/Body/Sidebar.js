@@ -9,7 +9,7 @@ export default class Sidebar extends Component {
           <li><FontAwesome name='user-circle' /> PROFILES </li>
         </a>
         <a href='#/health-record'>
-          <li><FontAwesome name='heart' /> HEALTH RECORD </li>
+          <li><FontAwesome name='file-text' /> HEALTH RECORD </li>
         </a>
         <a href='#/alerts'>
           <li><FontAwesome name='exclamation-circle' /> ALERTS </li>

@@ -6,7 +6,6 @@ import {
   DELETE_PROFILE_FULFILLED,
   FETCH_PROFILES_FULFILLED
 } from '../../actions/types';
-import keyBy from 'lodash/keyBy';
 
 function findProfile(profiles, id){
   var found = profiles.find(function(element) {
@@ -24,16 +23,16 @@ describe('profiles reducer', () => {
   it('should fetch profiles', () => {
     const payloadData = {data: profileData.slice()};
     const action = {type: FETCH_PROFILES_FULFILLED, payload: payloadData};
-    const startState = {}
+    const startState = []
     const nextState = profiles(startState, action);
-    expect(Object.keys(nextState).length).to.equal(2);
+    expect(nextState.length).to.equal(2);
   });
 
   it('should create profiles', () => {
     const payloadData = {data: newProfile};
     const action = {type: CREATE_PROFILE_FULFILLED, payload: payloadData};
-    const nextState = profiles(keyBy(profileData.slice(), 'id'), action);
-    expect(Object.keys(nextState).length).to.equal(3);
+    const nextState = profiles(profileData.slice(), action);
+    expect(nextState.length).to.equal(3);
   });
 
   it('should update profiles', () => {
@@ -41,15 +40,15 @@ describe('profiles reducer', () => {
     const current = findProfile(profileData, 1);
     expect(current.name).to.equal("TestP1");
     const action = {type: UPDATE_PROFILE_FULFILLED, payload: payloadData};
-    const nextState = profiles(keyBy(profileData.slice(), 'id'), action);
-    const updated = nextState[1];
+    const nextState = profiles(profileData.slice(), action);
+    const updated = findProfile(nextState, 1);
     expect(updated.name).to.equal("Updated Profile");
   });
 
   it('should remove profiles', () => {
     const payloadData = {data: {id: 1}};
     const action = {type: DELETE_PROFILE_FULFILLED, payload: payloadData};
-    const nextState = profiles(keyBy(profileData.slice(), 'id'), action);
+    const nextState = profiles(profileData.slice(), action);
     expect(Object.keys(nextState).length).to.equal(1);
   });
 });

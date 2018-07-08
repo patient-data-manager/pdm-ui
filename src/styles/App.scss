@@ -134,12 +134,26 @@
 }
 
 .navbar {
-  border-bottom: 1px solid white;
-  background-color: #4A4A4A;
+  background-color: #708090;
 }
 
 .navbar .navbar-brand {
   color: #FFF;
+  display: flex;
+  flex-direction: row;
+  justify-content: flex-start;
+}
+
+.navbar-logo-name {
+  font-size: 30px;
+  padding-right: 15px;
+  align-self: center;
+}
+
+.navbar-logo-description {
+  font-size: 10px;
+  padding-left: 15px;
+  border-left: white 2px solid;
 }
 
 .navbar .navbar-nav {
@@ -422,10 +436,6 @@
   color: #FF8889;
 }
 
-.topper {
-  text-decoration : underline;
-}
-
 .wide-text {
   letter-spacing: 0.2em;
 
@@ -434,20 +444,18 @@
 .sidebar {
   height: 100%;
   float: left;
-  background-color: #E8E8E8;
+  background-color: #e7eaee;
   width: 20%;
 }
 
 .sidebar li {
   font-size: 20px;
   text-align: left;
-  height: 50px;
+  height: 75px;
   list-style-type: none;
   color: 	#606060;
-  border-bottom: 1px #808080 solid;
-  padding: 10px 20px;
+  padding: 23px 20px;
   width: 100%;
-
 }
 
 .sidebar li:hover {
@@ -456,16 +464,205 @@
 }
 
 .dashboard-body {
-  margin-top: 100px;
-  margin-left: 15px;
+  padding-top: 70px;
   position: absolute;
   height: 100%;
   width: 100%;
 }
 
 .dashboard-content {
-    background-color: #FFF;
-    float: right;
-    width: 80%;
-    height: 100%;
+  background-color: #FFF;
+  float: right;
+  width: 80%;
+  height: 100%;
+}
+
+.profile-list-container {
+  display: flex;
+  flex-direction: column;
+}
+
+.profile-flip-list {
+  display: flex;
+  flex-direction: column;
+}
+
+.profile-item-container {
+  display: flex;
+  flex-direction: column;
+}
+
+.profile-row-container {
+  display: flex;
+  flex-direction: row;
+  flex-basis: 75px;
+}
+
+.profile-flip-list > .profile-item-container:first-of-type > .profile-row-container {
+  background-color:	#f7f7f7;
+  color: #6c7b8b;
+  border: none;
+}
+
+.profile-row-icon {
+  flex-basis: 8%;
+  align-self: center;
+  text-align: center;
+  font-size: 35px;
+  color: #DCDCDC;
+}
+
+.profile-row-info {
+  flex-basis: 80%;
+}
+
+.profile-first-info-row {
+  display: flex;
+  flex-direction: row;
+  height: 60%;
+  font-size: 20px;
+  color: #538cc6;
+}
+
+.profile-row-name {
+  align-self: flex-end;
+}
+
+.profile-row-alerts {
+  align-self: center;
+  font-size: 15px;
+}
+
+.profile-second-info-row {
+  display: flex;
+  flex-direction: row;
+  height: 40%;
+  font-size: 12px;
+  color: #808080;
+}
+
+.profile-row-age,
+.profile-row-gender {
+  align-self: flex-start;
+  flex-basis: 8%;
+}
+
+.profile-row-edit {
+  flex-basis: 12%;
+  align-self: center;
+  text-align: center;
+  font-size: 12px;
+  color: #538cc6;
+}
+
+.profile-row-edit a:hover,
+.profile-new-btn a:hover {
+  cursor: pointer;
+}
+
+.profile-new-form {
+  display: flex;
+  flex-direction: column;
+  height: 100%;
+  width: 100%;
+}
+
+.profile-new-form-title {
+  flex-basis: 75px;
+  display: flex;
+  flex-direction: row;
+}
+
+.profile-new-form-label {
+  flex-basis: 80%;
+  align-self: center;
+  font-size: 20px;
+  color: #538cc6;
+}
+
+.profile-new-btn {
+  align-self: center;
+  padding: 20px;
+  font-size: 12px;
+  color: #538cc6;
+}
+
+.profile-new-container,
+.profile-edit-container {
+  width: 100%;
+  height: 100%;
+  display: flex;
+  flex-direction: column;
+}
+
+.profile-form-container {
+  display: flex;
+  flex-direction: column;
+  width: 100%;
+  height: 100%;
+  padding: 10px;
+}
+
+.profile-form-first-row,
+.profile-form-second-row,
+.profile-form-third-row,
+.profile-form-fourth-row {
+  align-self: center;
+  width: 90%;
+  display: flex;
+  flex-direction: row;
+  justify-content: space-between;
+  padding: 5px;
+}
+
+.profile-form-second-row {
+  align-self: center;
+  width: 90%;
+  display: flex;
+  flex-direction: row;
+  justify-content: flex-start;
+  padding: 5px;
+}
+
+.profile-form-birthday,
+.profile-form-gender {
+  flex-basis: 50%;
+}
+
+.profile-form-first-name,
+.profile-form-last-name {
+  flex-basis: 35%;
+}
+
+.profile-form-street-address,
+.profile-form-phone-number {
+  flex-basis: 30%;
+}
+
+.profile-form-city,
+.profile-form-state {
+  flex-basis: 15%;
+}
+
+.profile-form-middle-initial,
+.profile-form-zip-code
+.profile-form-phone-type {
+  flex-basis: 15%;
+}
+
+.profile-form-btns {
+  display: flex;
+  flex-direction: row;
+  width: 100%;
+  justify-content: flex-end;
+  padding-right: 20px;
+}
+
+.profile-form-cancel-btn {
+  flex-basis: 10%;
+  font-size: 10px;
+}
+
+.profile-form-save-btn {
+  flex-basis: 15%;
 }

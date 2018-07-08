@@ -155,7 +155,6 @@ export class Register extends Component {
   }
 
   validateEmail() {
-    console.log("validating email");
     let email = this.state.email;
     let errors = [];
 

@@ -18,6 +18,7 @@ import AuthenticatedRoutes from './containers/AuthenticatedRoutes';
 import registerServiceWorker from './registerServiceWorker';
 import { configureStore, saveState } from './store/configureStore';
 
+import 'react-day-picker/lib/style.css';
 import 'font-awesome/css/font-awesome.css';
 import 'bootstrap/dist/css/bootstrap.css';
 import 'bootstrap/dist/js/bootstrap.js';

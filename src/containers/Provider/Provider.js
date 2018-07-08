@@ -1,6 +1,8 @@
 import React, { Component } from 'react';
 import Header from '../../components/Header/Header'
 import Sidebar from '../../components/Body/Sidebar'
+import ProfileListRow from '../../containers/Profile/ProfileListRow'
+import { connect } from 'react-redux';
 
 export class Provider extends Component {
   render() {
@@ -10,7 +12,7 @@ export class Provider extends Component {
         <div className='dashboard-body'>
           <Sidebar />
           <div className='dashboard-content'>
-            Insert providers content here.
+            {this.props.profile ? <ProfileListRow profile={this.props.profile}/> : ''}
           </div>
         </div>
       </div>
@@ -18,4 +20,12 @@ export class Provider extends Component {
   }
 }
 
-export default Provider;
+
+function mapStateToProps(state) {
+  return {
+    profile: state.profiles.currentProfile
+  };
+}
+
+
+export default connect(mapStateToProps)(Provider);
