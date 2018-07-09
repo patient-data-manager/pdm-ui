@@ -4,7 +4,7 @@ import ProfileForm from './ProfileForm';
 import FontAwesome from 'react-fontawesome';
 import { connect } from 'react-redux';
 import { bindActionCreators } from 'redux';
-import {createProfile, updateProfile, setCurrentProfile, deleteProfile} from '../../actions/profiles'
+import { createProfile, updateProfile, setCurrentProfile, deleteProfile } from '../../actions/profiles'
 import FlipMove from 'react-flip-move';
 
 export class ProfileList extends Component {
@@ -62,25 +62,28 @@ export class ProfileList extends Component {
                 </div>
             );
         } else {
-            return(
-                <div className='profile-new-btn'>
-                    <a onClick={ this.loadNewForm }>
-                      <FontAwesome name='plus-circle' /> NEW </a>
-                </div>
-            );
+        return(
+          <div className='profile-new-btn'>
+            <button onClick={ this.loadNewForm }>
+              <FontAwesome name='plus-circle' /> NEW
+            </button>
+          </div>
+        );
         }
     }
 
-    newProfile(){
-      return {name: "New Profile",
-              dob: null,
-              first_name: "",
-              last_name: "",
-              street: "",
-              city: "",
-              state: "",
-              zip: "",
-              gender: null}
+    newProfile() {
+      return {
+        name: "New Profile",
+        dob: null,
+        first_name: "",
+        last_name: "",
+        street: "",
+        city: "",
+        state: "",
+        zip: "",
+        gender: null
+      };
     }
 }
 
@@ -92,7 +95,7 @@ function mapStateToProps(state) {
 }
 
 function mapDispatchToProps(dispatch) {
-    return bindActionCreators({createProfile,updateProfile,deleteProfile,setCurrentProfile}, dispatch);
+    return bindActionCreators({ createProfile, updateProfile, deleteProfile, setCurrentProfile }, dispatch);
 }
 
 export default connect(mapStateToProps, mapDispatchToProps)(ProfileList)

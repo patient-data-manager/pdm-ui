@@ -1,13 +1,16 @@
 import React, { Component } from 'react';
-import Header from '../../components/Header/Header'
-import Sidebar from '../../components/Body/Sidebar'
-import ProfileList from './ProfileList'
+import PropTypes from 'prop-types';
+import { connect } from 'react-redux';
+import { bindActionCreators } from 'redux';
+
+import Header from '../../components/Header/Header';
+import Sidebar from '../../components/Body/Sidebar';
+import ProfileList from './ProfileList';
+import { fetchProfiles } from '../../actions/profiles';
 
 export class Profile extends Component {
-
-  constructor(props) {
-    super(props);
-    this.state = {profiles: []};
+  componentDidMount() {
+    this.props.fetchProfiles();
   }
 
   render() {
@@ -17,7 +20,7 @@ export class Profile extends Component {
         <div className='dashboard-body'>
           <Sidebar />
           <div className='dashboard-content'>
-            <ProfileList profiles={this.state.profiles}/>
+            <ProfileList profiles={this.props.profiles}/>
           </div>
         </div>
       </div>
@@ -25,4 +28,21 @@ export class Profile extends Component {
   }
 }
 
-export default Profile;
+Profile.propTypes = {
+  profiles: PropTypes.array,
+  fetchProfiles: PropTypes.func.isRequired
+};
+
+function mapDispatchToProps(dispatch) {
+  return bindActionCreators({
+    fetchProfiles
+  }, dispatch);
+}
+
+function mapStateToProps(state) {
+  return {
+    profiles: state.profiles
+  };
+}
+
+export default connect(mapStateToProps, mapDispatchToProps)(Profile);

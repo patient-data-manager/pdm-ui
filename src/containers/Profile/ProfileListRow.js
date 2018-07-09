@@ -19,7 +19,12 @@ export class ProfileListRow extends Component {
             <div className='profile-item-container'>
                 <div className='profile-row-container'>
                     <div className='profile-row-icon'><FontAwesome name='user-circle' /></div>
-                    <div className='profile-row-info' onClick={() => this.setCurrentProfile()}>
+                    <div
+                      className='profile-row-info'
+                      onKeyPress={this.setCurrentProfile}
+                      onClick={this.setCurrentProfile}
+                      role="button"
+                      tabIndex={0}>
                         <div className='profile-first-info-row'>
                             <div className='profile-row-name'> {this.props.profile.name } </div>
                             <div className='profile-row-alerts'>  {this.renderAlertBadge(this.state.alertCount) } </div>
@@ -38,7 +43,7 @@ export class ProfileListRow extends Component {
         );
     }
 
-    setCurrentProfile() {
+    setCurrentProfile = () => {
         this.props.setCurrentProfile(this.props.profile.id);
 	}
 
@@ -74,7 +79,11 @@ export class ProfileListRow extends Component {
 
     renderEditBtn(showEditBtn) {
         if (showEditBtn) {
-            return(<a onClick={ this.loadEditForm }><FontAwesome name='edit' />  EDIT</a>);
+            return(
+              <button onClick={ this.loadEditForm }>
+                <FontAwesome name='edit' /> EDIT
+              </button>
+            );
         }
         return null;
     }
