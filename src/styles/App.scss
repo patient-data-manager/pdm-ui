@@ -10,8 +10,10 @@
 @import "elements/buttons";
 
 // component-specific
+@import "components/header";
 @import "components/landing";
 @import "containers/auth";
+@import "containers/dashboard";
 
 // ---- TODO: Move to appropriate sass files ---- //
 .rotate {
@@ -120,82 +122,6 @@
   margin: 0;
   padding: 0;
   background-color: #F5F5F5;
-}
-
-.logo {
-  font-size: 1.5em;
-  letter-spacing: 2px;
-  color: #FFF;
-  font-weight: 300;
-}
-
-.logo .header-logo {
-  margin: 0 10px 5px 20px;
-  width: 2em;
-}
-
-.navbar {
-  background-color: #708090;
-}
-
-.navbar .navbar-brand {
-  color: #FFF;
-  display: flex;
-  flex-direction: row;
-  justify-content: flex-start;
-}
-
-.navbar-logo-name {
-  font-size: 30px;
-  padding-right: 15px;
-  align-self: center;
-}
-
-.navbar-logo-description {
-  font-size: 10px;
-  padding-left: 15px;
-  border-left: white 2px solid;
-}
-
-.navbar .navbar-nav {
-  margin-top: 2px;
-}
-
-.navbar .navbar-nav li a {
-  padding: 15px 35px;
-  color: #FFF;
-  font-weight: 300;
-  letter-spacing: 1px;
-}
-
-.navbar .navbar-nav li a.active {
-  border-bottom: 3px solid #FF8889;
-}
-
-.navbar .navbar-nav .open a.dropdown-toggle {
-  background-color: #4A4A4A;
-}
-
-.navbar .navbar-nav .dropdown-menu {
-  margin-top: 15px;
-  border-radius: 0;
-  box-shadow: none;
-}
-
-.navbar .navbar-nav .dropdown-menu a {
-  color: #4A4A4A;
-}
-
-.page-header {
-  background-color: #FFF;
-  margin: 55px -9999rem 20px -9999rem;
-  padding: 0.25rem 9999rem;
-}
-
-.page-header .page-header-text {
-  padding: 20px;
-  font-size: 3em;
-  font-weight: 100;
 }
 
 .dashboard .completed-merges {
@@ -440,42 +366,6 @@
 .wide-text {
   letter-spacing: 0.2em;
 
-}
-
-.sidebar {
-  height: 100%;
-  float: left;
-  background-color: #e7eaee;
-  width: 20%;
-}
-
-.sidebar li {
-  font-size: 20px;
-  text-align: left;
-  height: 75px;
-  list-style-type: none;
-  color: 	#606060;
-  padding: 23px 20px;
-  width: 100%;
-}
-
-.sidebar li:hover {
-  color: #FFF;
-  background-color: #6699CC;
-}
-
-.dashboard-body {
-  padding-top: 70px;
-  position: absolute;
-  height: 100%;
-  width: 100%;
-}
-
-.dashboard-content {
-  background-color: #FFF;
-  float: right;
-  width: 80%;
-  height: 100%;
 }
 
 .profile-list-container {

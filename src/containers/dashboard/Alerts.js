@@ -1,17 +1,13 @@
 import React, { Component } from 'react';
-import Header from '../../components/Header/Header'
-import Sidebar from '../../components/Body/Sidebar'
-import ProfileListRow from '../../containers/Profile/ProfileListRow'
+import ProfileListRow from '../../components/dashboard/profiles/ProfileListRow';
 import { connect } from 'react-redux';
 
 
-export class HealthRecord extends Component {
+export class Alert extends Component {
   render() {
     return (
       <div className='content-wrapper'>
-        <Header isAuthenticated={false} authUser={null} logoutUser={() => {}} />
         <div className='dashboard-body'>
-          <Sidebar />
           <div className='dashboard-content'>
             {this.props.profile ? <ProfileListRow profile={this.props.profile}/> : ''}
           </div>
@@ -21,12 +17,10 @@ export class HealthRecord extends Component {
   }
 }
 
-
 function mapStateToProps(state) {
   return {
     profile: state.profiles.currentProfile
   };
 }
 
-
-export default connect(mapStateToProps)(HealthRecord)
+export default connect(mapStateToProps)(Alert);

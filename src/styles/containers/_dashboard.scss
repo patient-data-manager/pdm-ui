@@ -1,0 +1,40 @@
+.dashboard {
+  &__nav {
+    height: 100%;
+    float: left;
+    background-color: #e7eaee;
+    width: 20%;
+
+    a {
+      display: block;
+      font-size: 20px;
+      text-align: left;
+      height: 75px;
+      list-style-type: none;
+      color:  #606060;
+      padding: 23px 20px;
+      width: 100%;
+
+      &:hover {
+        color: #FFF;
+        background-color: #6699CC;
+      }
+    }
+  }
+}
+
+// --------------
+
+.dashboard-body {
+  padding-top: 80px;
+  position: absolute;
+  height: 100%;
+  width: 100%;
+}
+
+.dashboard-content {
+  background-color: #FFF;
+  float: right;
+  width: 80%;
+  height: 100%;
+}

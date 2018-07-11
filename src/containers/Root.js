@@ -3,19 +3,25 @@ import PropTypes from 'prop-types';
 import { Provider } from 'react-redux';
 import { BrowserRouter as Router, Route, Switch } from 'react-router-dom';
 import { MuiThemeProvider, createMuiTheme } from 'material-ui/styles';
+import { library } from '@fortawesome/fontawesome-svg-core';
+import { faUserCircle, faFile, faExclamationCircle, faHospital } from '@fortawesome/free-solid-svg-icons';
 
 import PrivateRoute from './PrivateRoute';
 import Landing from '../components/Landing';
 import Login from './auth/Login';
 import Register from './auth/Register';
-import Dashboard from './Dashboard';
-import Profile from './Profile/Profile';
-import HealthRecord from './HealthRecord/HealthRecord';
+import Dashboard from './dashboard/Dashboard';
+import Profiles from './dashboard/Profiles';
+import HealthRecord from './dashboard/HealthRecord';
+import Alerts from './dashboard/Alerts';
+import Providers from './dashboard/Providers';
+import NoMatch from '../components/pages/Page404';
 import OAuth from './OAuth/OAuth';
-import Alert from './Alert/Alert';
-import _Provider from './Provider/Provider';
-import NoMatch from '../components/Pages/Page404';
 
+// add fontawesome icons to library
+library.add(faUserCircle, faFile, faExclamationCircle, faHospital);
+
+// material ui theme
 const THEME = createMuiTheme({
   typography: {
     "fontFamily": "\"Open Sans\", \"Helvetica\", \"Arial\", sans-serif",
@@ -41,12 +47,20 @@ const Root = ({ store }) => {
             <Route exact path="/" component={Landing} />
             <Route path='/login' component={Login} />
             <Route path='/register' component={Register} />
-            <PrivateRoute path='/dashboard' component={Dashboard} />
-            <PrivateRoute path='/health-record' component={HealthRecord}/>
-            <PrivateRoute path='/profiles' component={Profile} />
-            <PrivateRoute path='/alerts' component={Alert} />
-            <PrivateRoute path='/providers' component={_Provider} />
-            <PrivateRoute path='/oauth' component={OAuth}/>
+
+            <PrivateRoute path='/dashboard'>
+              <Dashboard>
+                <Switch>
+                  <PrivateRoute path='/dashboard/profiles' component={Profiles} />
+                  <PrivateRoute path='/dashboard/health-record' component={HealthRecord}/>
+                  <PrivateRoute path='/dashboard/alerts' component={Alerts} />
+                  <PrivateRoute path='/dashboard/providers' component={Providers} />
+                 <PrivateRoute path='/oauth' component={OAuth} />
+                  <Route component={NoMatch} />
+                </Switch>
+              </Dashboard>
+            </PrivateRoute>
+
             <Route component={NoMatch} />
           </Switch>
         </Router>

@@ -1,5 +1,5 @@
 import React from 'react';
-import Page404 from '../../components/Pages/Page404';
+import Page404 from '../../components/pages/Page404';
 import { shallow } from 'enzyme';
 
 it('renders without crashing', () => {

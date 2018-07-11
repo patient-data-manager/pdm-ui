@@ -118,7 +118,7 @@ export class Login extends Component {
           </div>
         </div>
 
-        {this.state.redirectToDashboard && <Redirect to="/dashboard" />}
+        {this.state.redirectToDashboard && <Redirect to="/dashboard/profiles" />}
       </div>
     );
   }

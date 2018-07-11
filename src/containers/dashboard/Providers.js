@@ -1,10 +1,8 @@
 import React, { Component } from 'react';
-import Header from '../../components/Header/Header'
-import Sidebar from '../../components/Body/Sidebar'
-import ProfileListRow from '../../containers/Profile/ProfileListRow'
-import {linkProvider, fetchProviders} from '../../actions/providers'
 import { connect } from 'react-redux';
 import { bindActionCreators } from 'redux';
+
+import ProfileListRow from '../../components/dashboard/profiles/ProfileListRow';
 
 export class Provider extends Component {
 
@@ -16,9 +14,8 @@ export class Provider extends Component {
     let providers = (this.props.providers || []).map((p) => this.renderProvider(p));
     return (
       <div className='content-wrapper'>
-        <Header isAuthenticated={false} authUser={null} logoutUser={() => {}} />
         <div className='dashboard-body'>
-          <Sidebar />
+
           <div className='dashboard-content'>
             {this.props.profile ? <ProfileListRow profile={this.props.profile}/> : ''}
             {providers}
@@ -39,7 +36,7 @@ export class Provider extends Component {
 function mapStateToProps(state) {
     return {
         providers: state.providers,
-        profile: state.profiles.currentProfile
+        profile: state.profiles.activeProfile
     };
 }
 
