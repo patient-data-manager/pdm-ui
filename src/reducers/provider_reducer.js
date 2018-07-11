@@ -1,7 +1,7 @@
 import {
   FETCH_PROVIDERS_FULFILLED,
   LINK_PROVIDER_FULFILLED,
-  LOG_OUT
+  LOGOUT_USER
 } from '../actions/types';
 
 
@@ -15,7 +15,7 @@ function providers(state = [], action) {
       return providers;
     case LINK_PROVIDER_FULFILLED:
       return state;
-    case  LOG_OUT:
+    case  LOGOUT_USER:
       return null;
     default:
       return state;
