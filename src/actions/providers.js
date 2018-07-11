@@ -17,7 +17,9 @@ export function fetchProviders() {
 
 export function linkProvider(provider_id, profile_id) {
   let access_token = getToken();
-  axios.post('/api/v1/profiles/'+profile_id+'/providers',{access_token,provider_id},
+  let redirect_uri = window.location.protocol + '//' + window.location.host + '/oauth';
+  let data = { access_token, provider_id, redirect_uri };
+  axios.post('/api/v1/profiles/'+profile_id+'/providers', data,
      {headers: {'X-Key-Inflection': 'camel',
         'Accept': 'application/json'}}).then((response) => {
           window.location=response.data.redirect_uri;
