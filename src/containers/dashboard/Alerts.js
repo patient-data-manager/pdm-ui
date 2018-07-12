@@ -1,7 +1,7 @@
 import React, { Component } from 'react';
-import ProfileListRow from '../../components/dashboard/profiles/ProfileListRow';
 import { connect } from 'react-redux';
 
+import ProfileCard from '../../components/dashboard/profiles/ProfileCard';
 
 export class Alert extends Component {
   render() {
@@ -9,7 +9,7 @@ export class Alert extends Component {
       <div className='content-wrapper'>
         <div className='dashboard-body'>
           <div className='dashboard-content'>
-            {this.props.profile ? <ProfileListRow profile={this.props.profile}/> : ''}
+            {this.props.profile ? <ProfileCard profile={this.props.profile}/> : ''}
           </div>
         </div>
       </div>
@@ -19,7 +19,7 @@ export class Alert extends Component {
 
 function mapStateToProps(state) {
   return {
-    profile: state.profiles.currentProfile
+    profile: state.profiles.avtiveProfile
   };
 }
 

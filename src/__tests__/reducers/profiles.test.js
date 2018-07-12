@@ -5,6 +5,7 @@ describe('profiles reducer', () => {
   it('should return the initial state', () => {
     expect(reducer(undefined, {})).toEqual({
       profiles: [],
+      activeProfileId: null,
       activeProfile: null,
       statusMessage: null,
       loadProfiles: { isLoading: false, loadStatus: null },
@@ -23,7 +24,11 @@ describe('profiles reducer', () => {
     expect(reducer([], action)).toEqual(newState);
 
     action = { type: types.LOAD_PROFILES_SUCCESS, profiles: ['profile 1', 'profile 2'] };
-    newState = { profiles: ['profile 1', 'profile 2'], loadProfiles: { isLoading: false, loadStatus: 'success' } };
+    newState = {
+      profiles: ['profile 1', 'profile 2'],
+      activeProfile: 'profile 1',
+      loadProfiles: { isLoading: false, loadStatus: 'success' }
+    };
     expect(reducer(previousState, action)).toEqual(newState);
 
     action = { type: types.LOAD_PROFILES_FAILURE, status: 'Test status', statusText: 'Test status message' };
@@ -36,7 +41,7 @@ describe('profiles reducer', () => {
     const previousState = { profiles: [{ id: 1 }, { id: 2 }], activeProfile: { id: 1 } };
 
     let action = { type: types.SET_ACTIVE_PROFILE, profileId: 2 };
-    let newState = { profiles: [{ id: 1 }, { id: 2 }], activeProfile: { id: 2 } };
+    let newState = { profiles: [{ id: 1 }, { id: 2 }], activeProfile: { id: 2 }, activeProfileId: 2 };
     expect(reducer(previousState, action)).toEqual(newState);
   });
 

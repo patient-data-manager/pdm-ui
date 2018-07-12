@@ -13,7 +13,6 @@ import List from '@material-ui/core/List';
 import ListItem from '@material-ui/core/ListItem';
 import ListItemIcon from '@material-ui/core/ListItemIcon';
 import ListItemText from '@material-ui/core/ListItemText';
-import Typography from '@material-ui/core/Typography';
 import Divider from '@material-ui/core/Divider';
 import IconButton from '@material-ui/core/IconButton';
 import MenuIcon from '@material-ui/icons/Menu';
@@ -24,6 +23,7 @@ import { logoutUser } from '../../actions/auth';
 import { loadProfiles } from '../../actions/profiles';
 
 import Header from '../../components/Header';
+import ProfileCard from '../../components/dashboard/profiles/ProfileCard';
 
 const drawerWidth = 280;
 
@@ -33,14 +33,15 @@ const styles = theme => ({
     zIndex: 1,
     overflow: 'hidden',
     position: 'relative',
-    display: 'flex',
+    display: 'flex'
   },
   appBar: {
     zIndex: theme.zIndex.drawer + 1,
     transition: theme.transitions.create(['width', 'margin'], {
       easing: theme.transitions.easing.sharp,
-      duration: theme.transitions.duration.leavingScreen,
+      duration: theme.transitions.duration.leavingScreen
     }),
+    fill: 'white'
   },
   appBarShift: {
     marginLeft: drawerWidth,
@@ -48,14 +49,14 @@ const styles = theme => ({
     transition: theme.transitions.create(['width', 'margin'], {
       easing: theme.transitions.easing.sharp,
       duration: theme.transitions.duration.enteringScreen,
-    }),
+    })
   },
   menuButton: {
     marginLeft: 12,
-    marginRight: 36,
+    marginRight: 12
   },
   hide: {
-    display: 'none',
+    display: 'none'
   },
   drawerPaper: {
     position: 'relative',
@@ -64,7 +65,7 @@ const styles = theme => ({
     transition: theme.transitions.create('width', {
       easing: theme.transitions.easing.sharp,
       duration: theme.transitions.duration.enteringScreen,
-    }),
+    })
   },
   drawerPaperClose: {
     overflowX: 'hidden',
@@ -75,19 +76,19 @@ const styles = theme => ({
     width: theme.spacing.unit * 7,
     [theme.breakpoints.up('sm')]: {
       width: theme.spacing.unit * 9,
-    },
+    }
   },
   toolbar: {
     display: 'flex',
     alignItems: 'center',
     justifyContent: 'flex-end',
     padding: '0 8px',
-    ...theme.mixins.toolbar,
+    height: '80px',
+    ...theme.mixins.toolbar
   },
   content: {
     flexGrow: 1,
-    backgroundColor: theme.palette.background.default,
-    padding: theme.spacing.unit * 3,
+    backgroundColor: theme.palette.background.default
   },
 });
 
@@ -121,7 +122,7 @@ export class Dashboard extends Component {
     return navList.map((navItem, index) => {
       return (
         <ListItem button key={index} component={Link} to={navItem.path}>
-          <ListItemIcon><FontAwesomeIcon icon={navItem.iconName} /></ListItemIcon>
+          <ListItemIcon><FontAwesomeIcon icon={navItem.iconName} fixedWidth /></ListItemIcon>
           <ListItemText primary={navItem.name} />
         </ListItem>
       );
@@ -129,7 +130,7 @@ export class Dashboard extends Component {
   }
 
   render() {
-    const { authUser, classes, theme, children } = this.props;
+    const { authUser, classes, theme, children, activeProfile } = this.props;
 
     return (
       <div className="dashboard">
@@ -138,20 +139,17 @@ export class Dashboard extends Component {
         <div className={classes.root}>
           <AppBar
             position="absolute"
-            className={classNames(classes.appBar, this.state.open && classes.appBarShift)}
-          >
+            className={classNames(classes.appBar, this.state.open && classes.appBarShift)}>
             <Toolbar disableGutters={!this.state.open}>
               <IconButton
                 color="inherit"
                 aria-label="open drawer"
                 onClick={this.handleDrawerOpen}
-                className={classNames(classes.menuButton, this.state.open && classes.hide)}
-              >
+                className={classNames(classes.menuButton, this.state.open && classes.hide)}>
                 <MenuIcon />
               </IconButton>
-              <Typography variant="title" color="inherit" noWrap>
-                Current Profile
-              </Typography>
+
+              {activeProfile && <ProfileCard profile={activeProfile} isHeader={true} />}
             </Toolbar>
           </AppBar>
 
@@ -160,8 +158,7 @@ export class Dashboard extends Component {
             classes={{
               paper: classNames(classes.drawerPaper, !this.state.open && classes.drawerPaperClose),
             }}
-            open={this.state.open}
-          >
+            open={this.state.open}>
             <div className={classes.toolbar}>
               <IconButton onClick={this.handleDrawerClose}>
                 {theme.direction === 'rtl' ? <ChevronRightIcon /> : <ChevronLeftIcon />}
@@ -192,6 +189,7 @@ export class Dashboard extends Component {
 
 Dashboard.propTypes = {
   authUser: PropTypes.string.isRequired,
+  activeProfile: PropTypes.object,
   classes: PropTypes.object.isRequired,
   theme: PropTypes.object.isRequired,
   logoutUser: PropTypes.func.isRequired
@@ -207,7 +205,8 @@ function mapDispatchToProps(dispatch) {
 function mapStateToProps(state) {
   return {
     isAuthenticated: state.auth.isAuthenticated,
-    authUser: state.auth.username
+    authUser: state.auth.username,
+    activeProfile: state.profiles.activeProfile
   };
 }
 

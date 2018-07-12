@@ -21,20 +21,13 @@
       }
     }
   }
+
+  &__body {
+    // margin-top: 10px;
+  }
 }
 
-// --------------
-
-.dashboard-body {
-  padding-top: 80px;
-  position: absolute;
-  height: 100%;
-  width: 100%;
-}
-
-.dashboard-content {
-  background-color: #FFF;
-  float: right;
-  width: 80%;
-  height: 100%;
+.nav-list-items {
+  a { padding: 15px; }
+  svg { font-size: 2em; }
 }

@@ -1,7 +1,10 @@
+import { persistReducer } from 'redux-persist';
+import storageSession from 'redux-persist/lib/storage/session';
 import * as types from '../actions/types';
 
 const defaultState = {
   profiles: [],
+  activeProfileId: null,
   activeProfile: null,
   statusMessage: null,
   loadProfiles: { isLoading: false, loadStatus: null },
@@ -10,8 +13,14 @@ const defaultState = {
   deleteProfile: { isDeleting: false, deleteStatus: null }
 };
 
-export default function profiles(state = defaultState, action) {
-  let profileIndex, newProfiles;
+const persistConfig = {
+  key: 'profiles',
+  storage: storageSession,
+  whitelist: ['activeProfileId']
+};
+
+function profiles(state = defaultState, action) {
+  let profileIndex, newProfiles, activeProfile;
 
   switch (action.type) {
     case types.PROFILES_REQUEST:
@@ -20,9 +29,19 @@ export default function profiles(state = defaultState, action) {
         loadProfiles: { isLoading: true, loadStatus: null }
       };
     case types.LOAD_PROFILES_SUCCESS:
+      activeProfile = action.profiles[0] || null;
+      if (state.activeProfileId) {
+        let activeProfileIdx = action.profiles.findIndex((profile) => profile.id === state.activeProfileId);
+        if (activeProfileIdx >= 0) {
+          activeProfile = action.profiles[activeProfileIdx];
+        }
+      }
+
       return {
         ...state,
         profiles: action.profiles,
+        activeProfile,
+        activeProfileId: activeProfile ? activeProfile.id : null,
         loadProfiles: { isLoading: false, loadStatus: 'success' }
       };
     case types.LOAD_PROFILES_FAILURE:
@@ -31,9 +50,12 @@ export default function profiles(state = defaultState, action) {
         loadProfiles: { isLoading: false, loadStatus: 'failure' }
       };
     case types.SET_ACTIVE_PROFILE:
+      activeProfile = state.profiles.find(profile => profile.id === action.profileId);
+
       return {
         ...state,
-        activeProfile: state.profiles.find(profile => profile.id === action.profileId)
+        activeProfile,
+        activeProfileId: activeProfile ? activeProfile.id : null
       };
     case types.ADD_PROFILE_REQUEST:
       return {
@@ -100,3 +122,5 @@ export default function profiles(state = defaultState, action) {
       return state;
   }
 }
+
+export default persistReducer(persistConfig, profiles);

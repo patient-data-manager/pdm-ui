@@ -2,7 +2,7 @@ import React, { Component } from 'react';
 import { connect } from 'react-redux';
 import { bindActionCreators } from 'redux';
 
-import ProfileListRow from '../../components/dashboard/profiles/ProfileListRow';
+import ProfileCard from '../../components/dashboard/profiles/ProfileCard';
 
 export class Provider extends Component {
 
@@ -11,14 +11,15 @@ export class Provider extends Component {
   }
 
   render() {
-    let providers = (this.props.providers || []).map((p) => this.renderProvider(p));
+    const providers = (this.props.providers || []).map((p) => this.renderProvider(p));
+
     return (
       <div className='content-wrapper'>
         <div className='dashboard-body'>
 
           <div className='dashboard-content'>
-            {this.props.profile ? <ProfileListRow profile={this.props.profile}/> : ''}
-            {providers}
+            {this.props.profile ? <ProfileCard profile={this.props.profile}/> : ''}
+           {providers}
           </div>
         </div>
       </div>
@@ -34,14 +35,17 @@ export class Provider extends Component {
 }
 
 function mapStateToProps(state) {
-    return {
-        providers: state.providers,
-        profile: state.profiles.activeProfile
-    };
+  return {
+    providers: state.providers,
+    profile: state.profiles.activeProfile
+  };
 }
 
 function mapDispatchToProps(dispatch) {
-    return bindActionCreators({linkProvider,fetchProviders}, dispatch);
+  return bindActionCreators({
+    linkProvider,
+    fetchProviders
+  }, dispatch);
 }
 
 export default connect(mapStateToProps, mapDispatchToProps)(Provider)

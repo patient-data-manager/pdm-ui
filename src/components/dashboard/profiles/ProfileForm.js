@@ -1,11 +1,22 @@
 import React, { Component } from 'react';
 import PropTypes from 'prop-types';
-import { Button, Input } from 'reactstrap';
-import { Radio, RadioGroup } from 'react-radio-group';
-import DayPickerInput from 'react-day-picker/DayPickerInput';
+import Button from '@material-ui/core/Button';
+import FormControlLabel from '@material-ui/core/FormControlLabel';
+import FormControl from '@material-ui/core/FormControl';
+import FormLabel from '@material-ui/core/FormLabel';
+import Input from '@material-ui/core/Input';
+import InputLabel from '@material-ui/core/InputLabel';
+import MenuItem from '@material-ui/core/MenuItem';
+import Radio from '@material-ui/core/Radio';
+import TextField from '@material-ui/core/TextField';
+import { ValidatorForm, TextValidator} from 'react-material-ui-form-validator';
 import { confirmAlert } from 'react-confirm-alert';
 
-import { states } from '../../../utils/us-states';
+import { states } from '../../../utils/usStates';
+import { phoneTypes } from '../../../utils/phoneTypes';
+import { relationshipTypes } from '../../../utils/relationshipTypes';
+
+import TextMaskPhone from '../../elements/TextMaskPhone';
 
 import 'react-confirm-alert/src/react-confirm-alert.css';
 
@@ -14,7 +25,7 @@ export default class ProfileForm extends Component {
     super(props)
 
     const state = {};
-    // set the state to the profile params.  Dont use the profile object
+    // set the state to the profile params -- dont use the profile object
     // as it may need to be reset on cancelation and could be used elsewhere
     for (let x in props.profile) {
       if (props.profile.hasOwnProperty(x)) {
@@ -25,21 +36,13 @@ export default class ProfileForm extends Component {
     this.state = state;
   }
 
-  handleChange = (evt) => {
-    this.setState({ [evt.target.name]: evt.target.value });
-  }
+  handleChange = name => event => {
+    this.setState({ [name]: event.target.value });
+  };
 
-  handleDayChange = (day) => {
-    this.setState({ dob: new Date(day).toLocaleDateString() });
-  }
-
-  handleGenderChange = (gender) => {
-    this.setState({ gender });
-  }
-
-  onStateSelect = (event) => {
-    this.setState({ state: event.target.value });
-  }
+  handleBlur = ({ target }) => {
+    this.refs[target.name].validate(target.value);
+  };
 
   submitProfile = () => {
     let profile = this.state;
@@ -56,7 +59,7 @@ export default class ProfileForm extends Component {
     this.props.cancel();
   }
 
-  deleteProfile() {
+  deleteProfile = () => {
     confirmAlert({
       title: 'Confirm Profile Delete',
       message: 'Are you sure you want to delete this profile?',
@@ -67,148 +70,161 @@ export default class ProfileForm extends Component {
     });
   }
 
-  renderStateSelect() {
+  renderTextField = (label, field, name, autoComplete, classname='', isRequired=false) => {
     return (
-      <Input
-       type='select'
-       id='state'
-       name='state'
-       onChange={this.onStateSelect}
-       value={this.state.state}
-     >
-       {states.map((state, i) => {
-         return (
-           <option key={state.name} value={state.abbreviation}>
-             {state.name}
-           </option>
-         );
-       })}
-     </Input>
-    )
+      <TextValidator
+        label={label}
+        onChange={this.handleChange(field)}
+        onBlur={this.handleBlur}
+        name={name}
+        ref={name}
+        autoComplete={autoComplete}
+        className={`profile-form__inputfield ${classname}`}
+        margin="normal"
+        value={this.state[field]}
+        {...(isRequired ? {validators: ['required']} : {})}
+        {...(isRequired ? {errorMessages: ['this field is required']} : {})}
+        {...(isRequired ? {required: true} : {})}
+      />
+    );
+  }
+
+  renderRadioButton = (value) => {
+    return (
+      <FormControlLabel
+        className="gender-radio"
+        control={
+          <Radio
+            checked={this.state.gender === value}
+            onChange={this.handleChange('gender')}
+            value={value}
+            name="gender"
+            aria-label={value}
+          />
+        }
+        label={value}
+      />
+    );
+  }
+
+  renderDatePicker = (label, name, value) => {
+    return (
+      <TextField
+        label={label}
+        name={name}
+        type="date"
+        className="profile-form__inputfield"
+        value={this.state[value]}
+        InputLabelProps={{ shrink: true }}
+      />
+    );
+  }
+
+  renderSelect = (label, name, field, selectArray, classname) => {
+    return (
+      <TextField
+        id={name}
+        select
+        label={label}
+        className={`profile-form__inputfield ${classname}`}
+        value={this.state[field]}
+        onChange={this.handleChange(field)}
+        margin="normal"
+      >
+        {selectArray.map(option => (
+          <MenuItem key={option.value} value={option.value}>
+            {option.label}
+          </MenuItem>
+        ))}
+      </TextField>
+    );
+  }
+
+  renderPhoneInput = (label, name, field, classname='') => {
+    return (
+      <FormControl className={`profile-form__inputfield ${classname}`}>
+        <InputLabel htmlFor={name}>{label}</InputLabel>
+        <Input
+          value={this.state[field] || '(  )    -    '}
+          onChange={this.handleChange(field)}
+          id={name}
+          inputComponent={TextMaskPhone}
+        />
+      </FormControl>
+    );
   }
 
   render() {
     return (
-      <div className='profile-form-container'>
-        <div className='profile-form-first-row'>
-          <div className='profile-form-first-name'>
-            <Input
-              name='first_name'
-              type='text'
-              placeholder='First Name'
-              value={this.state.first_name}
-              onChange={this.handleChange} />
+      <div className='profile-form'>
+        <ValidatorForm
+          className="profile-form__form"
+          ref="form"
+          onSubmit={this.submitProfile}
+          instantValidate={false} >
+          <div className="profile-form__form-group">
+            {this.renderTextField('FIRST NAME', 'first_name', 'firstName', 'given-name', '', true)}
           </div>
 
-          <div className='profile-form-middle-initial'>
-              <Input
-                name='middle_name'
-                type='text'
-                placeholder='Middle Initial'
-                value={this.state.middle_name}
-                onChange={this.handleChange} />
+          <div className="profile-form__form-group">
+            {this.renderTextField('MIDDLE INITIAL', 'middle_name', 'middleName', 'additional-name', 'middle-initial')}
+            {this.renderTextField('LAST NAME', 'last_name', 'lastName', 'family-name', 'last-name', true)}
           </div>
 
-          <div className='profile-form-last-name'>
-              <Input
-                name='last_name'
-                type='text'
-                placeholder='Last Name'
-                value={this.state.last_name}
-                onChange={this.handleChange} />
-          </div>
-        </div>
-
-        <div className='profile-form-second-row'>
-          <div className='profile-form-birthday'>
-            <div>Birthday:</div>
-
-            <DayPickerInput onDayChange={this.handleDayChange} placeholder={this.state.dob} />
+          <div className="profile-form__form-group">
+            {this.renderDatePicker('DATE OF BIRTH', 'dob', 'dob')}
           </div>
 
-          <div className='profile-form-gender'>
-              <div>Gender:</div>
-
-              <RadioGroup name='gender' selectedValue={this.state.gender} onChange={this.handleGenderChange}>
-                <Radio value='Male' />Male
-                <Radio value='Female' />Female
-                <Radio value='Other' />Other
-              </RadioGroup>
-          </div>
-        </div>
-
-        <div className='profile-form-third-row'>
-          <div className='profile-form-street-address'>
-            <Input
-              name='street'
-              type='text'
-              placeholder='Street Address'
-              value={this.state.street}
-              onChange={this.handleChange} />
+          <div className="profile-form__form-group gender-group">
+            <FormLabel component="label" className="gender-label">GENDER</FormLabel>
+            {this.renderRadioButton('female')}
+            {this.renderRadioButton('male')}
+            {this.renderRadioButton('other')}
           </div>
 
-          <div className='profile-form-city'>
-            <Input
-              name='city'
-              type='text'
-              placeholder='City'
-              value={this.state.city}
-              onChange={this.handleChange} />
+          <div className="profile-form__form-group">
+            {this.renderTextField('STREET ADDRESS', 'street', 'street', 'street-address')}
           </div>
 
-          <div className='profile-form-state'>
-            {this.renderStateSelect()}
+          <div className="profile-form__form-group">
+            {this.renderTextField('CITY', 'city', 'city', 'address-line1', 'city')}
+            {this.renderSelect('STATE', 'state', 'state', states, 'state')}
+            {this.renderTextField('ZIP CODE', 'zip', 'zip', 'postal-code', 'zip-code')}
           </div>
 
-          <div className='profile-form-zip-code'>
-            <Input
-              type='text'
-              name='zip'
-              placeholder='Zip Code'
-              value={this.state.zip}
-              onChange={this.handleChange} />
-          </div>
-        </div>
-
-        <div className='profile-form-fourth-row'>
-          <div className='profile-form-phone-number'>
-            <Input type='text' placeholder='Phone' />
+          <div className="profile-form__form-group">
+            {this.renderPhoneInput('PHONE', 'phone', 'telephone', 'phone')}
+            {this.renderSelect('PHONE TYPE', 'phoneType', 'telephone_use', phoneTypes, 'phone-type')}
           </div>
 
-          <div className='profile-form-phone-type'>
-            <Input type='select' placeholder='Type'>
-              <option>Home</option>
-              <option>Cell</option>
-              <option>Work</option>
-            </Input>
+          <div className="profile-form__form-group">
+            {this.renderSelect('RELATIONSHIP', 'relationship', 'relationship', relationshipTypes)}
           </div>
-        </div>
 
-        <div className='profile-form-btns'>
-          <Button
-            color='default'
-            className='btn-block wide-text profile-form-cancel-btn'
-            size='sm'
-            onClick={this.props.cancel}>
-            CANCEL
-          </Button>
+          <div className="profile-form__buttons">
+            <Button
+              variant="outlined"
+              onClick={this.props.cancel}
+              className="profile-form__button button-cancel">
+              CANCEL
+            </Button>
 
-          <Button
-            color='primary'
-            className='btn-block wide-text profile-form-save-btn'
-            size='lg'
-            onClick={() => this.submitProfile()}>
-            SAVE
-          </Button>
+            <Button
+              variant="contained"
+              onClick={this.deleteProfile}
+              className="profile-form__button button-delete">
+              DELETE
+            </Button>
 
-          <Button
-            color='danger'
-            className='btn-block wide-text profile-form-save-btn'
-            size='lg'
-            onClick={() => this.deleteProfile()}>
-            Delete
-          </Button>
-        </div>
+            <Button
+              variant="contained"
+              color="primary"
+              type="submit"
+              className="profile-form__button button-save">
+              SAVE
+            </Button>
+          </div>
+        </ValidatorForm>
       </div>
     );
   }
