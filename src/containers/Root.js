@@ -11,6 +11,7 @@ import Register from './auth/Register';
 import Dashboard from './Dashboard';
 import Profile from './Profile/Profile';
 import HealthRecord from './HealthRecord/HealthRecord';
+import OAuth from './OAuth/OAuth';
 import Alert from './Alert/Alert';
 import _Provider from './Provider/Provider';
 import NoMatch from '../components/Pages/Page404';
@@ -45,6 +46,7 @@ const Root = ({ store }) => {
             <PrivateRoute path='/profiles' component={Profile} />
             <PrivateRoute path='/alerts' component={Alert} />
             <PrivateRoute path='/providers' component={_Provider} />
+            <PrivateRoute path='/oauth' component={OAuth}/>
             <Route component={NoMatch} />
           </Switch>
         </Router>
