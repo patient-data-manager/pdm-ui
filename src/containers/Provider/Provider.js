@@ -1,6 +1,7 @@
 import React, { Component } from 'react';
 import Header from '../../components/Header/Header'
 import Sidebar from '../../components/Body/Sidebar'
+import ProfileListRow from '../../containers/Profile/ProfileListRow'
 import {linkProvider, fetchProviders} from '../../actions/providers'
 import { connect } from 'react-redux';
 import { bindActionCreators } from 'redux';
@@ -19,6 +20,7 @@ export class Provider extends Component {
         <div className='dashboard-body'>
           <Sidebar />
           <div className='dashboard-content'>
+            {this.props.profile ? <ProfileListRow profile={this.props.profile}/> : ''}
             {providers}
           </div>
         </div>
@@ -28,7 +30,7 @@ export class Provider extends Component {
   renderProvider(p){
     return(
       <div>
-        <a onClick={() => this.props.linkProvider(p.id, this.props.currentProfile.id)}> {p.name} </a>
+        <a onClick={() => this.props.linkProvider(p.id, this.props.profile.id)}> {p.name} </a>
       </div>
     )
   }
@@ -37,7 +39,7 @@ export class Provider extends Component {
 function mapStateToProps(state) {
     return {
         providers: state.providers,
-        currentProfile: state.profiles.currentProfile
+        profile: state.profiles.currentProfile
     };
 }
 
