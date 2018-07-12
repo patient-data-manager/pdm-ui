@@ -1,21 +1,12 @@
-import {
-  FETCH_PROVIDERS_FULFILLED,
-  LINK_PROVIDER_FULFILLED,
-  LOGOUT_USER
-} from '../actions/types';
-
-
+import * as types from '../actions/types';
 
 function providers(state = [], action) {
-  console.log("PROVIDERESSSSSSSS");
   switch (action.type) {
-    case FETCH_PROVIDERS_FULFILLED:
-
-      const providers = action.payload.data;
-      return providers;
-    case LINK_PROVIDER_FULFILLED:
+    case types.FETCH_PROVIDERS_FULFILLED:
+      return action.payload.data;
+    case types.LINK_PROVIDER_FULFILLED:
       return state;
-    case  LOGOUT_USER:
+    case types.LOGOUT_USER:
       return null;
     default:
       return state;

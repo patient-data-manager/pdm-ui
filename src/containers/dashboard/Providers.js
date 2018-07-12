@@ -1,45 +1,49 @@
 import React, { Component } from 'react';
+import PropTypes from 'prop-types';
 import { connect } from 'react-redux';
 import { bindActionCreators } from 'redux';
 
-import ProfileCard from '../../components/dashboard/profiles/ProfileCard';
+import { linkProvider, fetchProviders } from '../../actions/providers';
 
-export class Provider extends Component {
-
+export class Providers extends Component {
   componentDidMount(){
     this.props.fetchProviders();
   }
 
-  render() {
-    const providers = (this.props.providers || []).map((p) => this.renderProvider(p));
+  renderProvider(provider){
+    const profileId = this.props.profile.id;
 
     return (
-      <div className='content-wrapper'>
-        <div className='dashboard-body'>
-
-          <div className='dashboard-content'>
-            {this.props.profile ? <ProfileCard profile={this.props.profile}/> : ''}
-           {providers}
-          </div>
-        </div>
+      <div>
+        <a
+          onClick={this.props.linkProvider(provider.id, profileId)}
+          onKeyPress={this.props.linkProvider(provider.id, profileId)}
+          role="button"
+          tabIndex={-1}
+        >
+          {provider.name}
+        </a>
       </div>
     );
   }
-  renderProvider(p){
-    return(
-      <div>
-        <a onClick={() => this.props.linkProvider(p.id, this.props.profile.id)}> {p.name} </a>
+
+  render() {
+    const providers = (this.props.providers || []).map(provider => this.renderProvider(provider));
+
+    return (
+      <div className="providers">
+        {providers}
       </div>
-    )
+    );
   }
 }
 
-function mapStateToProps(state) {
-  return {
-    providers: state.providers,
-    profile: state.profiles.activeProfile
-  };
-}
+Providers.propTypes = {
+  providers: PropTypes.array,
+  profile: PropTypes.object,
+  linkProvider: PropTypes.func.isRequired,
+  fetchProviders: PropTypes.func.isRequired
+};
 
 function mapDispatchToProps(dispatch) {
   return bindActionCreators({
@@ -48,4 +52,11 @@ function mapDispatchToProps(dispatch) {
   }, dispatch);
 }
 
-export default connect(mapStateToProps, mapDispatchToProps)(Provider)
+function mapStateToProps(state) {
+  return {
+    providers: state.providers.providers,
+    profile: state.profiles.activeProfile
+  };
+}
+
+export default connect(mapStateToProps, mapDispatchToProps)(Providers);

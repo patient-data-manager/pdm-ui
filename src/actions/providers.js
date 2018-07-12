@@ -1,8 +1,4 @@
-import {
-  FETCH_PROVIDERS,
-  LINK_PROVIDER,
-  PROVIDE_OAUTH_TOKEN
-} from './types';
+import * as types from './types';
 import axios from 'axios';
 
 export function fetchProviders() {
@@ -10,7 +6,7 @@ export function fetchProviders() {
     const access_token = getState().auth.accessToken;
 
     return dispatch({
-      type: FETCH_PROVIDERS,
+      type: types.FETCH_PROVIDERS,
       payload: axios.get('/api/v1/providers?access_token='+access_token,{},
        {headers: {'X-Key-Inflection': 'camel',
           'Accept': 'application/json'}})
@@ -34,7 +30,7 @@ export function linkProvider(provider_id, profile_id) {
 export function oauthCallback(state, code) {
   return (dispatch, getState) => {
     return {
-      type: PROVIDE_OAUTH_TOKEN,
+      type: types.PROVIDE_OAUTH_TOKEN,
       payload: axios.get('/oauth/callback?state=' + state +'&code=' + code, {},
        {headers: {'X-Key-Inflection': 'camel',
           'Accept': 'application/json'}})
