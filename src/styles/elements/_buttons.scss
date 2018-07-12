@@ -14,7 +14,7 @@
     color: $color-white;
   }
 
-  &-primary {
+  &.button-primary {
     background-color: $color-blue;
 
     &:hover {
@@ -22,7 +22,7 @@
     }
   }
 
-  &-secondary {
+  &.button-secondary {
     background-color: $color-blue-gray;
 
     &:hover {
@@ -30,7 +30,7 @@
     }
   }
 
-  &-responsive {
+  &.button-responsive {
     font-size: calc(0.8em + 0.6vw);
     min-width: calc(100px + 14vw);
     margin: 0 calc(5px + 1vw);

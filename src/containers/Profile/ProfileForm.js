@@ -9,38 +9,32 @@ import 'react-confirm-alert/src/react-confirm-alert.css' // Import css
 export class ProfileForm extends Component {
     constructor(props) {
         super(props)
-        let state = {};
+
+        const state = {};
         // set the state to the profile params.  Dont use the profile object
         // as it may need to be reset on cancelation and could be used elsewhere
-        for(var x in props.profile) {
-            state[x]=(props.profile[x] || undefined);
+        for (let x in props.profile) {
+            if (props.profile.hasOwnProperty(x)) {
+              state[x] = props.profile[x] || undefined;
+            }
         }
         this.state = state;
-        this.handleChange = this.handleChange.bind(this);
-        this.handleGenderChange = this.handleGenderChange.bind(this);
-        this.handleDayChange = this.handleDayChange.bind(this);
-        this.onStateSelect = this.onStateSelect.bind(this);
-        this.submitProfile = this.submitProfile.bind(this);
     }
 
-    handleChange(evt) {
-        this.setState({[evt.target.name]: evt.target.value});
+    handleChange = (evt) => {
+        this.setState({ [evt.target.name]: evt.target.value });
     }
 
-    handleDayChange(day) {
-        this.setState({dob: new Date(day).toLocaleDateString()});
+    handleDayChange = (day) => {
+        this.setState({ dob: new Date(day).toLocaleDateString() });
     }
 
-    handleGenderChange(vals) {
-        this.setState({gender: vals});
+    handleGenderChange = (gender) => {
+        this.setState({ gender });
     }
 
-    onStateSelect = (event, state) => {
-    // event {SyntheticEvent<HTMLSelectElement>} - React HTML event
-    // state {Object} - Object representing the state
-    // state.name {string} - The full name of the selected state
-    // state.abbreviation {string} - The two letter abbreviation of the states name
-        this.setState({state: state.name});
+    onStateSelect = (event) => {
+      this.setState({ state: event.target.value });
     }
 
     render() {
@@ -152,12 +146,12 @@ export class ProfileForm extends Component {
          type='select'
          id='state'
          name='state'
-         onChange={this.handleChange}
+         onChange={this.onStateSelect}
          value={this.state.state}
        >
          {states.map((state, i) => {
            return (
-             <option  key={state.name} value={state.abbreviation} >
+             <option key={state.name} value={state.abbreviation}>
                {state.name}
              </option>
            );
@@ -166,7 +160,7 @@ export class ProfileForm extends Component {
       )
     }
 
-    submitProfile() {
+    submitProfile = () => {
         let profile = this.state;
         let fullName = this.state.first_name + ' ';
         if (this.state.middle_name !== undefined) {
