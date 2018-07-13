@@ -1,0 +1,19 @@
+.health-record__body {
+    display: flex;
+    flex-direction: row;
+    height: 100%;
+}
+
+.js-toc {
+    flex-basis: 10%;
+    background-color: #e7eaee;
+}
+
+.js-toc > ol {
+    list-style-type: none;
+}
+
+.js-toc-content {
+    flex-basis: 90%;
+    padding: 20px 40px;
+}

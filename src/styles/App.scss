@@ -3,6 +3,7 @@
 
 /* ------------------------- IMPORT 3RD PARTY VENDORS ---------------------- */
 @import "node_modules/bootstrap/scss/bootstrap.scss";
+@import "node_modules/tocbot/src/scss/tocbot.scss";
 
 /* ------------------------- IMPORT CUSTOM SCSS ---------------------------- */
 // site-wide elements
@@ -17,6 +18,7 @@
 @import "containers/auth";
 @import "containers/dashboard";
 @import "containers/profiles";
+@import "containers/health-record";
 
 #root {
   min-height: 100vh;
