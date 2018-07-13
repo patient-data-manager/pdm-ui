@@ -14,6 +14,11 @@
 @import "components/dashboard/profiles/profile-card";
 @import "components/dashboard/profiles/profile-form";
 @import "components/dashboard/health-record/summary";
+@import "components/dashboard/health-record/procedures";
+@import "components/dashboard/health-record/conditions";
+@import "components/dashboard/health-record/labs";
+@import "components/dashboard/health-record/medications";
+@import "components/dashboard/health-record/allergies";
 @import "components/header";
 @import "components/landing";
 @import "containers/auth";
