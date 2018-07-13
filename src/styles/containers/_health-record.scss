@@ -18,13 +18,13 @@
     background-color: #fff;
 }
 
-.health-record__summary {
+.health-record__header {
     display: flex;
     flex-direction: row;
-    margin-bottom: 20px;
+    color: #6b8eb6;
+    font-size: 10px;
 }
 
-.divider {
-    border-left: 2px solid #e7eaee;
-    margin: 0px 30px;
+.health-record__header hr {
+    color: red;
 }
