@@ -10,47 +10,54 @@ import Medications from '../../components/dashboard/health-record/Medications';
 import Allergies from '../../components/dashboard/health-record/Allergies';
 
 export class HealthRecord extends Component {
-
   componentDidMount() {
     tocbot.init({
-      tocSelector: '.js-toc',           // where to render the table of contents
-      contentSelector: '.js-toc-content',   // where to grab the headings to build the table of contents
-      headingSelector: 'h1'              // which headings to grab inside of the contentSelector element
+      tocSelector: '.health-record__toc',           // where to render the table of contents
+      contentSelector: '.health-record__content',   // where to grab the headings to build the table of contents
+      headingSelector: '.header-title',             // which headings to grab inside of the contentSelector element
+      positionFixedSelector: '.health-record__toc', // element to add the positionFixedClass to
+      collapseDepth: 0,                             // how many heading levels should not be collpased
+      includeHtml: true,                            // include the HTML markup from the heading node
+      fixedSidebarOffset: 160                       // offset from top
     });
+  }
+
+  componentWillUnmount() {
+    tocbot.destroy();
+  }
+
+  renderHeader = (header) => {
+    return (
+      <div className="health-record__header">
+        <div className="header-title" id={header}>{header}</div>
+        <div className="header-divider"></div>
+      </div>
+    );
   }
 
   render() {
     return (
-      <div className='health-record'>
-        <div className='health-record__body'>
-          <div className='js-toc'></div>
-          <div className='js-toc-content'>
-            <div className='health-record__header'>
-              <h1 id='summary'> SUMMARY</h1>
-              <hr />
-            </div>
-            <Summary />
-            <div className='health-record__header'>
-              <h1 id='procedures'> PROCEDURES</h1>
-            </div>
-            <Procedures />
-            <div className='health-record__header'>
-              <h1 id='conditions'> CONDITIONS</h1>
-            </div>
-            <Conditions />
-            <div className='health-record__header'>
-              <h1 id='labs'> LABS</h1>
-            </div>
-            <Labs />
-            <div className='health-record__header'>
-              <h1 id='medications'> MEDICATIONS</h1>
-            </div>
-            <Medications />
-            <div className='health-record__header'>
-              <h1 id='allergies'> ALLERGIES</h1>
-            </div>
-            <Allergies />
-          </div>
+      <div className="health-record">
+        <div className="health-record__toc"></div>
+
+        <div className="health-record__content">
+          {this.renderHeader("summary")}
+          <Summary />
+
+          {this.renderHeader("procedures")}
+          <Procedures />
+
+          {this.renderHeader("conditions")}
+          <Conditions />
+
+          {this.renderHeader("labs")}
+          <Labs />
+
+          {this.renderHeader("medications")}
+          <Medications />
+
+          {this.renderHeader("allergies")}
+          <Allergies />
         </div>
       </div>
     );
@@ -59,7 +66,7 @@ export class HealthRecord extends Component {
 
 function mapStateToProps(state) {
   return {
-    profile: state.profiles.currentProfile
+    profile: state.profiles.activeProfile
   };
 }
 
