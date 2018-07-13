@@ -1,8 +1,4 @@
 .profile-card {
-  // border: 3px solid transparent;
-
-  // &:hover { border: 3px solid $color-blue; }
-
   &__wrapper {
     display: flex;
     justify-content: space-between;
@@ -18,9 +14,18 @@
     }
 
     &.is-header {
-      .profile-card__icon svg { fill: $color-white; }
-      .profile-card__details .details-age-gender-relation { color: $color-white; }
+      .profile-card__icon svg {
+        fill: $color-white;
+        color: $color-white;
+      }
+
+      .profile-card__details .details-age-gender-relation,
+      .profile-card__details .details-name-alerts {
+        color: $color-white;
+      }
     }
+
+    &.active { background-color: $color-gray-lightest; }
   }
 
   &__info {
@@ -34,12 +39,20 @@
     margin-right: 20px;
 
     svg {
+      fill: $color-gray;
+      color: $color-gray;
+    }
+
+    svg.active {
       fill: $color-text;
+      color: $color-text;
     }
   }
 
   &__details {
     .details-name-alerts {
+      color: $color-blue-gray-dark;
+
       .details-name {
         font-size: 1.6em;
       }
@@ -67,10 +80,5 @@
 
   &__edit-button button {
     svg { margin-right: 5px; }
-
-    &:focus,
-    &:active {
-      outline: none;
-    }
   }
 }

@@ -17,3 +17,7 @@
 @import "containers/auth";
 @import "containers/dashboard";
 @import "containers/profiles";
+
+#root {
+  min-height: 100vh;
+}

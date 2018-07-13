@@ -19,8 +19,22 @@ const persistConfig = {
   whitelist: ['activeProfileId']
 };
 
+function sortProfiles(profiles, activeProfileId) {
+  let sortedProfiles = profiles.slice().sort((a, b) => a.name.localeCompare(b.name));
+
+  if (activeProfileId) {
+    let activeProfileIndex = sortedProfiles.findIndex(profile => profile.id === activeProfileId);
+    if (activeProfileIndex !== -1) {
+      let activeProfile = sortedProfiles.splice(activeProfileIndex, 1)[0];
+      sortedProfiles.unshift(activeProfile);
+    }
+  }
+
+  return sortedProfiles;
+}
+
 function profiles(state = defaultState, action) {
-  let profileIndex, newProfiles, activeProfile;
+  let profileIndex, profiles, activeProfile, activeProfileId, activeProfileIdx;
 
   switch (action.type) {
     case types.PROFILES_REQUEST:
@@ -29,9 +43,9 @@ function profiles(state = defaultState, action) {
         loadProfiles: { isLoading: true, loadStatus: null }
       };
     case types.LOAD_PROFILES_SUCCESS:
-      activeProfile = action.profiles[0] || null;
+      activeProfile = action.profiles[0];
       if (state.activeProfileId) {
-        let activeProfileIdx = action.profiles.findIndex((profile) => profile.id === state.activeProfileId);
+        activeProfileIdx = action.profiles.findIndex((profile) => profile.id === state.activeProfileId);
         if (activeProfileIdx >= 0) {
           activeProfile = action.profiles[activeProfileIdx];
         }
@@ -39,7 +53,7 @@ function profiles(state = defaultState, action) {
 
       return {
         ...state,
-        profiles: action.profiles,
+        profiles: sortProfiles(action.profiles, activeProfile ? activeProfile.id : null),
         activeProfile,
         activeProfileId: activeProfile ? activeProfile.id : null,
         loadProfiles: { isLoading: false, loadStatus: 'success' }
@@ -54,6 +68,7 @@ function profiles(state = defaultState, action) {
 
       return {
         ...state,
+        profiles: sortProfiles(state.profiles, activeProfile ? activeProfile.id : null),
         activeProfile,
         activeProfileId: activeProfile ? activeProfile.id : null
       };
@@ -63,10 +78,15 @@ function profiles(state = defaultState, action) {
         addProfile: { isAdding: true, addStatus: null }
       };
     case types.ADD_PROFILE_SUCCESS:
+      activeProfile = state.activeProfile;
+      if (activeProfile == null) activeProfile = action.profile;
+
       return {
         ...state,
         addProfile: { isAdding: false, addStatus: 'success' },
-        profiles: state.profiles.concat(action.profile)
+        profiles: sortProfiles(state.profiles.concat(action.profile), activeProfile ? activeProfile.id : null),
+        activeProfile,
+        activeProfileId: activeProfile ? activeProfile.id : null
       };
     case types.ADD_PROFILE_FAILURE:
       return {
@@ -80,13 +100,13 @@ function profiles(state = defaultState, action) {
         updateProfile: { isUpdating: true, updateStatus: null }
       };
     case types.UPDATE_PROFILE_SUCCESS:
-      profileIndex = state.profiles.findIndex(profile => profile.id === action.profile.id);
-      newProfiles = state.profiles.slice();
-      newProfiles[profileIndex] = action.profile;
+      profiles = state.profiles.slice();
+      profileIndex = profiles.findIndex(profile => profile.id === action.profile.id);
+      profiles[profileIndex] = action.profile;
 
       return {
         ...state,
-        profiles: newProfiles,
+        profiles: sortProfiles(profiles, state.activeProfile ? state.activeProfile.id : null),
         updateProfile: { isUpdating: false, updateStatus: 'success' }
       };
     case types.UPDATE_PROFILE_FAILURE:
@@ -103,12 +123,21 @@ function profiles(state = defaultState, action) {
       };
     case types.DELETE_PROFILE_SUCCESS:
       profileIndex = state.profiles.findIndex(profile => profile.id === action.profileId);
-      newProfiles = state.profiles.slice();
-      newProfiles.splice(profileIndex, 1);
+      profiles = state.profiles.slice();
+      profiles.splice(profileIndex, 1);
+
+      activeProfile = state.activeProfile;
+      activeProfileId = state.activeProfileId;
+      if (activeProfileId === action.profileId) {
+        activeProfile = profiles[0];
+        activeProfileId = activeProfile ? activeProfile.id : null;
+      }
 
       return {
         ...state,
-        profiles: newProfiles,
+        profiles: sortProfiles(profiles, activeProfileId),
+        activeProfile,
+        activeProfileId,
         statusMessage: `Deleted profile with ID: ${action.profileId}`,
         deleteProfile: { isDeleting: false, deleteStatus: 'success' }
       };

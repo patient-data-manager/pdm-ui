@@ -8,6 +8,7 @@ import Input from '@material-ui/core/Input';
 import InputLabel from '@material-ui/core/InputLabel';
 import MenuItem from '@material-ui/core/MenuItem';
 import Radio from '@material-ui/core/Radio';
+import Select from '@material-ui/core/Select';
 import TextField from '@material-ui/core/TextField';
 import { ValidatorForm, TextValidator} from 'react-material-ui-form-validator';
 import { confirmAlert } from 'react-confirm-alert';
@@ -27,9 +28,9 @@ export default class ProfileForm extends Component {
     const state = {};
     // set the state to the profile params -- dont use the profile object
     // as it may need to be reset on cancelation and could be used elsewhere
-    for (let x in props.profile) {
-      if (props.profile.hasOwnProperty(x)) {
-        state[x] = props.profile[x] || undefined;
+    for (let profileAttribute in props.profile) {
+      if (props.profile.hasOwnProperty(profileAttribute)) {
+        state[profileAttribute] = props.profile[profileAttribute] || undefined;
       }
     }
 
@@ -73,7 +74,7 @@ export default class ProfileForm extends Component {
   renderTextField = (label, field, name, autoComplete, classname='', isRequired=false) => {
     return (
       <TextValidator
-        label={label}
+        label={`${label}${isRequired ? ' *' : ''}`}
         onChange={this.handleChange(field)}
         onBlur={this.handleBlur}
         name={name}
@@ -81,10 +82,9 @@ export default class ProfileForm extends Component {
         autoComplete={autoComplete}
         className={`profile-form__inputfield ${classname}`}
         margin="normal"
-        value={this.state[field]}
-        {...(isRequired ? {validators: ['required']} : {})}
-        {...(isRequired ? {errorMessages: ['this field is required']} : {})}
-        {...(isRequired ? {required: true} : {})}
+        value={this.state[field] || ''}
+        validators={isRequired ? ['required'] : []}
+        errorMessages={['this field is required']}
       />
     );
   }
@@ -114,7 +114,8 @@ export default class ProfileForm extends Component {
         name={name}
         type="date"
         className="profile-form__inputfield"
-        value={this.state[value]}
+        onChange={this.handleChange(value)}
+        value={this.state[value] || ''}
         InputLabelProps={{ shrink: true }}
       />
     );
@@ -122,21 +123,23 @@ export default class ProfileForm extends Component {
 
   renderSelect = (label, name, field, selectArray, classname) => {
     return (
-      <TextField
-        id={name}
-        select
-        label={label}
-        className={`profile-form__inputfield ${classname}`}
-        value={this.state[field]}
-        onChange={this.handleChange(field)}
-        margin="normal"
-      >
-        {selectArray.map(option => (
-          <MenuItem key={option.value} value={option.value}>
-            {option.label}
-          </MenuItem>
-        ))}
-      </TextField>
+      <FormControl className={`profile-form__inputfield ${classname}`}>
+        <InputLabel htmlFor={name}>{label}</InputLabel>
+        <Select
+          value={this.state[field] || ''}
+          onChange={this.handleChange(field)}
+          inputProps={{
+            name,
+            id: name,
+          }}
+        >
+          {selectArray.map(option => (
+            <MenuItem key={option.value} value={option.value}>
+              {option.label}
+            </MenuItem>
+          ))}
+        </Select>
+      </FormControl>
     );
   }
 
@@ -145,16 +148,19 @@ export default class ProfileForm extends Component {
       <FormControl className={`profile-form__inputfield ${classname}`}>
         <InputLabel htmlFor={name}>{label}</InputLabel>
         <Input
-          value={this.state[field] || '(  )    -    '}
+          value={this.state[field] || ''}
           onChange={this.handleChange(field)}
           id={name}
           inputComponent={TextMaskPhone}
+          autoComplete="tel-national"
         />
       </FormControl>
     );
   }
 
   render() {
+    const { showDelete } = this.props;
+
     return (
       <div className='profile-form'>
         <ValidatorForm
@@ -209,12 +215,14 @@ export default class ProfileForm extends Component {
               CANCEL
             </Button>
 
-            <Button
-              variant="contained"
-              onClick={this.deleteProfile}
-              className="profile-form__button button-delete">
-              DELETE
-            </Button>
+            {showDelete &&
+              <Button
+                variant="contained"
+                onClick={this.deleteProfile}
+                className="profile-form__button button-delete">
+                DELETE
+              </Button>
+            }
 
             <Button
               variant="contained"
@@ -231,6 +239,12 @@ export default class ProfileForm extends Component {
 }
 
 ProfileForm.propTypes = {
+  showDelete: PropTypes.bool,
   saveProfile: PropTypes.func.isRequired,
-  deleteProfile: PropTypes.func.isRequired
+  deleteProfile: PropTypes.func,
+  cancel: PropTypes.func.isRequired
+}
+
+ProfileForm.defaultProps = {
+  showDelete: true
 }

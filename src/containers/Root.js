@@ -5,7 +5,7 @@ import { BrowserRouter as Router, Route, Switch } from 'react-router-dom';
 import { MuiThemeProvider, createMuiTheme } from 'material-ui/styles';
 import { library } from '@fortawesome/fontawesome-svg-core';
 import {
-  faUserCircle, faFile, faExclamationCircle, faHospital, faEdit, faPlusCircle
+  faUserCircle, faFileMedicalAlt, faExclamationCircle, faHospital, faEdit, faPlusCircle
 } from '@fortawesome/free-solid-svg-icons';
 
 import PrivateRoute from './PrivateRoute';
@@ -21,7 +21,7 @@ import NoMatch from '../components/pages/Page404';
 import OAuth from './OAuth/OAuth';
 
 // add fontawesome icons to library
-library.add(faUserCircle, faFile, faExclamationCircle, faHospital, faEdit, faPlusCircle);
+library.add(faUserCircle, faFileMedicalAlt, faExclamationCircle, faHospital, faEdit, faPlusCircle);
 
 // material ui theme
 const THEME = createMuiTheme({
@@ -33,9 +33,10 @@ const THEME = createMuiTheme({
     "fontWeightMedium": 500
   },
   palette: {
-    primary: { light: '#85A1C2', main: '#6b8eb6', dark: '#5c7ca1', contrastText: '#fff' },
+    primary: { light: '#d4e4f6', main: '#6b8eb6', dark: '#5c7ca1', contrastText: '#fff' },
     secondary: { light: '#96A5B7', main: '#7E90A3', dark: '#6C7988', contrastText: '#fff' },
-    error: { light: '#d08c9f', main: '#b66b80', dark: '#a44d65', contrastText: '#fff' }
+    error: { light: '#d08c9f', main: '#b66b80', dark: '#a44d65', contrastText: '#fff' },
+    action: { selected: '#d4e4f6' }
   },
   shape: {}
 });

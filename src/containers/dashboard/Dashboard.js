@@ -10,12 +10,12 @@ import Drawer from '@material-ui/core/Drawer';
 import AppBar from '@material-ui/core/AppBar';
 import Toolbar from '@material-ui/core/Toolbar';
 import List from '@material-ui/core/List';
-import ListItem from '@material-ui/core/ListItem';
 import ListItemIcon from '@material-ui/core/ListItemIcon';
 import ListItemText from '@material-ui/core/ListItemText';
 import Divider from '@material-ui/core/Divider';
 import IconButton from '@material-ui/core/IconButton';
 import MenuIcon from '@material-ui/icons/Menu';
+import MenuItem from '@material-ui/core/MenuItem';
 import ChevronLeftIcon from '@material-ui/icons/ChevronLeft';
 import ChevronRightIcon from '@material-ui/icons/ChevronRight';
 
@@ -25,7 +25,7 @@ import { loadProfiles } from '../../actions/profiles';
 import Header from '../../components/Header';
 import ProfileCard from '../../components/dashboard/profiles/ProfileCard';
 
-const drawerWidth = 280;
+const drawerWidth = 260;
 
 const styles = theme => ({
   root: {
@@ -40,8 +40,7 @@ const styles = theme => ({
     transition: theme.transitions.create(['width', 'margin'], {
       easing: theme.transitions.easing.sharp,
       duration: theme.transitions.duration.leavingScreen
-    }),
-    fill: 'white'
+    })
   },
   appBarShift: {
     marginLeft: drawerWidth,
@@ -61,7 +60,9 @@ const styles = theme => ({
   drawerPaper: {
     position: 'relative',
     whiteSpace: 'nowrap',
+    backgroundColor: '#C3C7CE',
     width: drawerWidth,
+    height: '100%',
     transition: theme.transitions.create('width', {
       easing: theme.transitions.easing.sharp,
       duration: theme.transitions.duration.enteringScreen,
@@ -89,14 +90,16 @@ const styles = theme => ({
   content: {
     flexGrow: 1,
     backgroundColor: theme.palette.background.default
-  },
+  }
 });
 
 export class Dashboard extends Component {
   constructor(props) {
     super(props);
 
-    this.state = { open: false };
+    this.state = {
+      open: false
+    };
   }
 
   componentWillMount() {
@@ -114,17 +117,25 @@ export class Dashboard extends Component {
   renderNavListItems = () => {
     const navList = [
       { name: 'Profiles', iconName: 'user-circle', path: '/dashboard/profiles' },
-      { name: 'Health Record', iconName: 'file', path: '/dashboard/health-record' },
+      { name: 'Health Record', iconName: 'file-medical-alt', path: '/dashboard/health-record' },
       { name: 'Alerts', iconName: 'exclamation-circle', path: '/dashboard/alerts' },
       { name: 'Providers', iconName: 'hospital', path: '/dashboard/providers' }
     ];
 
     return navList.map((navItem, index) => {
+      const selected = navItem.path === this.props.location.pathname;
+      const menuClassname = classNames({ selected });
+
       return (
-        <ListItem button key={index} component={Link} to={navItem.path}>
+        <MenuItem
+          button key={index}
+          component={Link}
+          to={navItem.path}
+          selected={navItem.path === this.props.location.pathname}
+          className={menuClassname}>
           <ListItemIcon><FontAwesomeIcon icon={navItem.iconName} fixedWidth /></ListItemIcon>
           <ListItemText primary={navItem.name} />
-        </ListItem>
+        </MenuItem>
       );
     });
   }
@@ -140,7 +151,7 @@ export class Dashboard extends Component {
           <AppBar
             position="absolute"
             className={classNames(classes.appBar, this.state.open && classes.appBarShift)}>
-            <Toolbar disableGutters={!this.state.open}>
+            <Toolbar disableGutters={!this.state.open} className="app-toolbar">
               <IconButton
                 color="inherit"
                 aria-label="open drawer"

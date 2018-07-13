@@ -20,7 +20,9 @@ export default class ProfileCard extends Component {
   }
 
   setActiveProfile = () => {
-    this.props.setActiveProfile(this.props.profile.id);
+    if (this.props.activeProfile && this.props.activeProfile.id !== this.props.profile.id) {
+      this.props.setActiveProfile(this.props.profile.id);
+    }
   }
 
   loadEditForm = (event) => {
@@ -60,9 +62,9 @@ export default class ProfileCard extends Component {
     if (this.state.showEditForm) {
       return (
         <ProfileForm
+          profile={this.props.profile}
           deleteProfile={this.props.deleteProfile}
           saveProfile={this.props.updateProfile}
-          profile={this.props.profile}
           cancel={this.handleFormCancel} />
       );
     }
@@ -71,28 +73,41 @@ export default class ProfileCard extends Component {
   }
 
   renderIcon = () => {
-    const { profile } = this.props;
+    const { profile, activeProfile } = this.props;
+    const iconClassnames = classNames('user-icon', {'active': activeProfile && profile.id === activeProfile.id });
 
     if (profile.relationship === 'self') {
-      return <UserStarIcon height="43" />;
+      return <UserStarIcon height="43" className={iconClassnames} />;
     }
 
-    return <FontAwesomeIcon icon="user-circle" />;
+    return <FontAwesomeIcon icon="user-circle" className={iconClassnames} />;
+  }
+
+  setActiveProfileViaKeyboard = (event) => {
+    if (event.key === ' ') {
+      event.preventDefault();
+      this.setActiveProfile();
+    }
   }
 
   render() {
-    const { profile, isHeader } = this.props;
+    const { profile, isHeader, activeProfile } = this.props;
     const { showEditForm } = this.state;
-    const wrapperClassnames = classNames('profile-card__wrapper', { 'is-header': isHeader }, { editing: showEditForm });
+    const wrapperClassnames = classNames(
+      'profile-card__wrapper',
+      { 'is-header': isHeader },
+      { editing: showEditForm },
+      { 'active': activeProfile && profile.id === activeProfile.id }
+    );
 
     return (
-      <div
-        className="profile-card"
-        onClick={this.setActiveProfile}
-        onKeyPress={this.setActiveProfile}
-        role="button"
-        tabIndex={-1}>
-        <div className={wrapperClassnames}>
+      <div className="profile-card">
+        <div
+          className={wrapperClassnames}
+          onClick={this.setActiveProfile}
+          onKeyPress={this.setActiveProfileViaKeyboard}
+          role="button"
+          tabIndex={-1}>
           <div className="profile-card__info">
             <div className="profile-card__icon">
               {this.renderIcon()}
@@ -120,6 +135,7 @@ export default class ProfileCard extends Component {
 
 ProfileCard.propTypes = {
   profile: PropTypes.object,
+  activeProfile: PropTypes.object,
   isHeader: PropTypes.bool,
   alertsCount: PropTypes.number,
   updateProfile: PropTypes.func,

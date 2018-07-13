@@ -29,14 +29,15 @@ export class Profiles extends Component {
   newProfile() {
     return {
       name: 'New Profile',
-      dob: null,
       first_name: '',
+      middle_name: '',
       last_name: '',
+      dob: null,
+      gender: null,
       street: '',
       city: '',
       state: '',
       zip: '',
-      gender: null,
       relationship: ''
     };
   }
@@ -49,6 +50,7 @@ export class Profiles extends Component {
           deleteProfile={this.props.deleteProfile}
           updateProfile={this.props.updateProfile}
           profile={profile}
+          activeProfile={this.props.activeProfile}
           setActiveProfile={this.props.setActiveProfile}
           showEditBtn={true} />
       );
@@ -73,7 +75,7 @@ export class Profiles extends Component {
             saveProfile={this.props.addProfile}
             profile={this.newProfile()}
             cancel={this.handleFormCancel}
-            deleteProfile={this.props.deleteProfile} />
+            showDelete={false} />
         </div>
       );
     }
@@ -106,6 +108,7 @@ export class Profiles extends Component {
 
 Profiles.propTypes = {
   profiles: PropTypes.array,
+  activeProfile: PropTypes.object,
   accessToken: PropTypes.string.isRequired,
   loadProfiles: PropTypes.func.isRequired,
   addProfile: PropTypes.func.isRequired,
@@ -127,6 +130,7 @@ function mapDispatchToProps(dispatch) {
 function mapStateToProps(state) {
   return {
     profiles: state.profiles.profiles,
+    activeProfile: state.profiles.activeProfile,
     accessToken: state.auth.accessToken
   };
 }

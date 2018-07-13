@@ -23,10 +23,11 @@ describe('profiles reducer', () => {
     let newState = { loadProfiles: { isLoading: true, loadStatus: null } };
     expect(reducer([], action)).toEqual(newState);
 
-    action = { type: types.LOAD_PROFILES_SUCCESS, profiles: ['profile 1', 'profile 2'] };
+    action = { type: types.LOAD_PROFILES_SUCCESS, profiles: [{ id: 1, name: 'a' }, { id: 2, name: 'b' }] };
     newState = {
-      profiles: ['profile 1', 'profile 2'],
-      activeProfile: 'profile 1',
+      profiles: [{ id: 1, name: 'a' }, { id: 2, name: 'b' }],
+      activeProfile: { id: 1, name: 'a' },
+      activeProfileId: 1,
       loadProfiles: { isLoading: false, loadStatus: 'success' }
     };
     expect(reducer(previousState, action)).toEqual(newState);
@@ -38,10 +39,17 @@ describe('profiles reducer', () => {
 
   // ------------------------- SET ACTIVE PROFILE -------------------------- //
   it('should handle setting an active profile', () => {
-    const previousState = { profiles: [{ id: 1 }, { id: 2 }], activeProfile: { id: 1 } };
+    const previousState = {
+      profiles: [{ id: 1, name: 'a' }, { id: 2, name: 'b' }],
+      activeProfile: { id: 1, name: 'a' }
+    };
 
     let action = { type: types.SET_ACTIVE_PROFILE, profileId: 2 };
-    let newState = { profiles: [{ id: 1 }, { id: 2 }], activeProfile: { id: 2 }, activeProfileId: 2 };
+    let newState = {
+      profiles: [{ id: 2, name: 'b' }, { id: 1, name: 'a' }],
+      activeProfile: { id: 2, name: 'b' },
+      activeProfileId: 2
+    };
     expect(reducer(previousState, action)).toEqual(newState);
   });
 
@@ -53,8 +61,13 @@ describe('profiles reducer', () => {
     let newState = { addProfile: { isAdding: true, addStatus: null } };
     expect(reducer([], action)).toEqual(newState);
 
-    action = { type: types.ADD_PROFILE_SUCCESS, profile: 'profile 1' };
-    newState = { profiles: ['profile 1'], addProfile: { isAdding: false, addStatus: 'success' } };
+    action = { type: types.ADD_PROFILE_SUCCESS, profile: { id: 1 } };
+    newState = {
+      profiles: [{ id: 1 }],
+      activeProfile: { id: 1 },
+      activeProfileId: 1,
+      addProfile: { isAdding: false, addStatus: 'success' }
+    };
     expect(reducer(previousState, action)).toEqual(newState);
 
     action = { type: types.ADD_PROFILE_FAILURE, status: 'Test status', statusText: 'Test status message' };

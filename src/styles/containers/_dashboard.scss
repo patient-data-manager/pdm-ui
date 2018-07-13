@@ -1,33 +1,38 @@
 .dashboard {
-  &__nav {
-    height: 100%;
-    float: left;
-    background-color: #e7eaee;
-    width: 20%;
+  min-height: 100vh;
+  display: flex;
+  flex-direction: column;
 
+  &__body {
+    margin-bottom: 60px;
+  }
+
+  .nav-list-items {
     a {
-      display: block;
-      font-size: 20px;
-      text-align: left;
-      height: 75px;
-      list-style-type: none;
-      color:  #606060;
-      padding: 23px 20px;
-      width: 100%;
+      padding: 22px 15px;
+    }
 
-      &:hover {
-        color: #FFF;
-        background-color: #6699CC;
-      }
+    svg {
+      font-size: 2em;
+      color: $color-text;
+    }
+
+    span {
+      color: $color-text;
+      font-size: 1.3em;
+      text-transform: uppercase;
+      margin-left: -14px;
+    }
+
+    .selected {
+      background-color: $color-blue;
+
+      span { color: $color-white; }
+      svg { color: $color-white; }
     }
   }
 
-  &__body {
-    // margin-top: 10px;
+  .app-toolbar {
+    padding-left: 0;
   }
-}
-
-.nav-list-items {
-  a { padding: 15px; }
-  svg { font-size: 2em; }
 }
