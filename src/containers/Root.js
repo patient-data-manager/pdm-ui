@@ -9,7 +9,7 @@ import {
 } from '@fortawesome/free-solid-svg-icons';
 
 import PrivateRoute from './PrivateRoute';
-import Landing from '../components/Landing';
+import Landing from './Landing';
 import Login from './auth/Login';
 import Register from './auth/Register';
 import Dashboard from './dashboard/Dashboard';
@@ -51,6 +51,7 @@ const Root = ({ store }) => {
             <Route path='/login' component={Login} />
             <Route path='/register' component={Register} />
 
+            <PrivateRoute path='/oauth' component={OAuth} />
             <PrivateRoute path='/dashboard'>
               <Dashboard>
                 <Switch>
@@ -58,7 +59,6 @@ const Root = ({ store }) => {
                   <PrivateRoute path='/dashboard/health-record' component={HealthRecord}/>
                   <PrivateRoute path='/dashboard/alerts' component={Alerts} />
                   <PrivateRoute path='/dashboard/providers' component={Providers} />
-                 <PrivateRoute path='/oauth' component={OAuth} />
                   <Route component={NoMatch} />
                 </Switch>
               </Dashboard>

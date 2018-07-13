@@ -71,7 +71,7 @@ export class Register extends Component {
       <div className="register">
         <div className="register__wrapper">
           <div className="register__image">
-            <Link to="/"><img src="assets/images/robot.png" alt="robot" /></Link>
+            <Link to="/"><img src="/assets/images/robot.png" alt="robot" /></Link>
           </div>
 
           <div className="register__form-group">

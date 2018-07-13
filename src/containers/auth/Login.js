@@ -46,7 +46,7 @@ export class Login extends Component {
       <div className="login">
         <div className="login__wrapper">
           <div className="login__image">
-            <Link to="/"><img src="assets/images/robot.png" alt="robot" /></Link>
+            <Link to="/"><img src="/assets/images/robot.png" alt="robot" /></Link>
           </div>
 
           <div className="login__form-group">
