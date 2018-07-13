@@ -3,6 +3,11 @@ import { connect } from 'react-redux';
 import tocbot from 'tocbot';
 
 import Summary from '../../components/dashboard/health-record/Summary';
+import Procedures from '../../components/dashboard/health-record/Procedures';
+import Conditions from '../../components/dashboard/health-record/Conditions';
+import Labs from '../../components/dashboard/health-record/Labs';
+import Medications from '../../components/dashboard/health-record/Medications';
+import Allergies from '../../components/dashboard/health-record/Allergies';
 
 export class HealthRecord extends Component {
 
@@ -20,18 +25,31 @@ export class HealthRecord extends Component {
         <div className='health-record__body'>
           <div className='js-toc'></div>
           <div className='js-toc-content'>
-            <h1 id='summary'>Summary </h1>
+            <div className='health-record__header'>
+              <h1 id='summary'> SUMMARY</h1>
+              <hr />
+            </div>
             <Summary />
-            <h1 id='procedures'>Procedures</h1>
-            <p> Insert procedures component here.</p>
-            <h1 id='conditions'>Conditions</h1>
-            <p> Insert conditions component here.</p>
-            <h1 id='labs'>Labs</h1>
-            <p> Insert labs component here.</p>
-            <h1 id='medications'>Medications</h1>
-            <p> Insert medications component here.</p>
-            <h1 id='allergies'>Allergies</h1>
-            <p> Insert allergies component here.</p>
+            <div className='health-record__header'>
+              <h1 id='procedures'> PROCEDURES</h1>
+            </div>
+            <Procedures />
+            <div className='health-record__header'>
+              <h1 id='conditions'> CONDITIONS</h1>
+            </div>
+            <Conditions />
+            <div className='health-record__header'>
+              <h1 id='labs'> LABS</h1>
+            </div>
+            <Labs />
+            <div className='health-record__header'>
+              <h1 id='medications'> MEDICATIONS</h1>
+            </div>
+            <Medications />
+            <div className='health-record__header'>
+              <h1 id='allergies'> ALLERGIES</h1>
+            </div>
+            <Allergies />
           </div>
         </div>
       </div>
