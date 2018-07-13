@@ -1,7 +1,6 @@
 .health-record__body {
     display: flex;
     flex-direction: row;
-    height: 100%;
 }
 
 .js-toc {
@@ -16,4 +15,16 @@
 .js-toc-content {
     flex-basis: 90%;
     padding: 20px 40px;
+    background-color: #fff;
+}
+
+.health-record__summary {
+    display: flex;
+    flex-direction: row;
+    margin-bottom: 20px;
+}
+
+.divider {
+    border-left: 2px solid #e7eaee;
+    margin: 0px 30px;
 }
