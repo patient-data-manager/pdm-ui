@@ -1,0 +1,62 @@
+.health-record {
+  display: flex;
+  min-height: calc(100vh - 160px);
+
+  &__header {
+    display: flex;
+    color: $color-blue;
+    font-size: 1em;
+    font-weight: bold;
+    text-transform: uppercase;
+    margin: 40px 0;
+
+    .header-title {
+      margin-right: 5px;
+    }
+
+    .header-divider {
+      width: 100%;
+      border-bottom: 1px solid $color-blue-gray;
+      margin-bottom: 10px;
+    }
+  }
+
+  &__toc {
+    min-width: 200px;
+    height: 100vh;
+    padding: 20px;
+    background-color: $color-gray-lightest;
+
+    .toc-list {
+      padding: 0;
+      list-style-type: none;
+
+      &-item {
+        padding: 5px 0;
+        font-size: 1.1em;
+
+        a {
+          text-transform: uppercase;
+
+          &.is-active-link {
+            color: $color-blue;
+
+            &:before {
+              background-color: $color-blue;
+              margin-top: -4px;
+            }
+          }
+        }
+      }
+    }
+
+    &.is-position-fixed + div {
+      margin-left: 200px;
+    }
+  }
+
+  &__content {
+    width: 100%;
+    padding: 20px 40px;
+  }
+}
