@@ -5,6 +5,10 @@
     cursor: pointer;
 }
 
+.vertical-list__view-more-text {
+    color: $color-blue;
+}
+
 .vertical-list__item {
     display: flex;
     flex-direction: row;
@@ -22,7 +26,12 @@
     flex-direction: column;
 }
 
-.vertical-list__item-date,
+.vertical-list__item-date {
+    flex-basis: 50%;
+    color: $color-blue;
+}
+
 .vertical-list__item-description {
     flex-basis: 50%;
+    color: $color-blue-gray;
 }

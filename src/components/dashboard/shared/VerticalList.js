@@ -54,7 +54,7 @@ export class VerticalList extends Component {
                             <span></span>
                         </Badge>
                     </div>
-                    <div className='vertical-list__'>View More</div>
+                    <div className='vertical-list__view-more-text'>View More</div>
                 </div>
             );
         }
