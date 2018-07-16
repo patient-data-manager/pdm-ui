@@ -1,10 +1,55 @@
 import React, { Component } from 'react';
+import VerticalList from '../shared/VerticalList';
+
+let mockList = [
+    {
+        'date': 'date field',
+        'description': 'description goes here'
+    },
+    {
+        'date': 'date field',
+        'description': 'description goes here'
+    },
+    {
+        'date': 'date field',
+        'description': 'description goes here'
+    },
+    {
+        'date': 'date field',
+        'description': 'description goes here'
+    },
+    {
+        'date': 'date field',
+        'description': 'description goes here'
+    },
+    {
+        'date': 'date field',
+        'description': 'description goes here'
+    },
+    {
+        'date': 'date field',
+        'description': 'description goes here'
+    },
+    {
+        'date': 'date field',
+        'description': 'description goes here'
+    },
+
+    {
+        'date': 'date field',
+        'description': 'description goes here'
+    },        {
+        'date': 'date field',
+        'description': 'description goes here'
+    }
+]
 
 export class Procedures extends Component {
+
     render() {
         return(
             <div className='health-record__procedures'>
-                <p> Insert procedures content here.</p>
+                <VerticalList list={mockList}/>
             </div>
         );
     }
