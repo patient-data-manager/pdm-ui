@@ -7,6 +7,7 @@ import { PersistGate } from 'redux-persist/integration/react';
 import registerServiceWorker from './utils/registerServiceWorker';
 import configureStore from './store/configureStore';
 import Root from './containers/Root';
+import './utils/fontAwesomeConfig';
 
 import 'react-day-picker/lib/style.css';
 import 'font-awesome/css/font-awesome.css';

@@ -3,10 +3,6 @@ import PropTypes from 'prop-types';
 import { Provider } from 'react-redux';
 import { BrowserRouter as Router, Route, Switch } from 'react-router-dom';
 import { MuiThemeProvider, createMuiTheme } from 'material-ui/styles';
-import { library } from '@fortawesome/fontawesome-svg-core';
-import {
-  faUserCircle, faFileMedicalAlt, faExclamationCircle, faHospital, faEdit, faPlusCircle
-} from '@fortawesome/free-solid-svg-icons';
 
 import PrivateRoute from './PrivateRoute';
 import Landing from './Landing';
@@ -19,9 +15,6 @@ import Alerts from './dashboard/Alerts';
 import Providers from './dashboard/Providers';
 import NoMatch from '../components/pages/Page404';
 import OAuth from './OAuth/OAuth';
-
-// add fontawesome icons to library
-library.add(faUserCircle, faFileMedicalAlt, faExclamationCircle, faHospital, faEdit, faPlusCircle);
 
 // material ui theme
 const THEME = createMuiTheme({
