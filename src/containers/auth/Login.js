@@ -43,82 +43,82 @@ export class Login extends Component {
     const { authStatusText, registrationStatusText } = this.props;
 
     return (
-      <div className="login">
-        <div className="login__wrapper">
-          <div className="login__image">
-            <Link to="/"><img src="/assets/images/robot.png" alt="robot" /></Link>
+      <div className='login'>
+        <div className='login__wrapper'>
+          <div className='login__image'>
+            <Link to='/'><img src='/assets/images/robot.png' alt='robot' /></Link>
           </div>
 
-          <div className="login__form-group">
-            <h3 className="auth-title">Rosie Login</h3>
+          <div className='login__form-group'>
+            <h3 className='auth-title'>Rosie Login</h3>
 
             <ValidatorForm
-              className="login__form"
-              ref="form"
+              className='login__form'
+              ref='form'
               onSubmit={this.handleLogin}
               instantValidate={false}
             >
               <TextValidator
-                label="EMAIL"
+                label='EMAIL'
                 onChange={this.handleChange('email')}
                 onBlur={this.handleBlur}
-                name="email"
-                ref="email"
-                autoComplete="username"
-                className="login__textfield"
+                name='email'
+                ref='email'
+                autoComplete='username'
+                className='login__textfield'
                 fullWidth
-                margin="normal"
+                margin='normal'
                 value={email}
                 validators={['required', 'isEmail']}
                 errorMessages={['this field is required', 'email is not valid']}
               />
 
               <TextValidator
-                label="PASSWORD"
+                label='PASSWORD'
                 onChange={this.handleChange('password')}
-                name="password"
-                ref="password"
-                type="password"
-                autoComplete="current-password"
-                className="login__textfield"
+                name='password'
+                ref='password'
+                type='password'
+                autoComplete='current-password'
+                className='login__textfield'
                 fullWidth
-                margin="normal"
+                margin='normal'
                 value={password}
                 validators={['required']}
                 errorMessages={['this field is required']}
               />
 
               <Button
-                variant="contained"
-                color="primary"
-                type="submit"
-                className="button button-primary button-responsive auth-button">
+                variant='contained'
+                color='primary'
+                type='submit'
+                className='button button-primary button-responsive auth-button'>
                 LOG IN
               </Button>
 
               {registrationStatusText &&
-                <div className="auth-message auth-success">
-                  <FontAwesome name="check" />
+                <div className='auth-message auth-success'>
+                  <FontAwesome name='check' />
                   {registrationStatusText}
                 </div>
               }
 
               {authStatusText &&
-                <div className="auth-message auth-error">
-                  <FontAwesome name="exclamation-circle" />
+                <div className='auth-message auth-error'>
+                  <FontAwesome name='exclamation-circle' />
                   {authStatusText}
                 </div>
               }
 
-              <div className="login__register-link">
+              <div className='login__register-link'>
                 Don't have an account?
-                <Link to="/register" className="">REGISTER</Link>
+                <Link to='/register' className=''>REGISTER</Link>
               </div>
             </ValidatorForm>
           </div>
         </div>
 
-        {this.state.redirectToDashboard && <Redirect to="/dashboard/profiles" />}
+        {this.state.redirectToDashboard && <Redirect to='/dashboard/profiles' />}
       </div>
     );
   }
