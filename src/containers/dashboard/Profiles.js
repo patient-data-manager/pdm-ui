@@ -60,13 +60,13 @@ export class Profiles extends Component {
   renderNewForm = (showNewForm) => {
     if (showNewForm) {
       return (
-        <div className='profiles__new-form'>
-          <div className='profiles__new-form-title'>
-            <div className='profiles__new-form-icon'>
+        <div className="profiles__new-form">
+          <div className="profiles__new-form-title">
+            <div className="profiles__new-form-icon">
               <FontAwesomeIcon icon="user-circle" />
             </div>
 
-            <div className='profiles__new-form-label'>
+            <div className="profiles__new-form-label">
               Create new profile:
             </div>
           </div>
@@ -93,12 +93,12 @@ export class Profiles extends Component {
     const { showNewForm } = this.state;
 
     return (
-      <div className='profiles'>
-        <FlipMove className='profiles__flip-list'>
+      <div className="profiles">
+        <FlipMove className="profiles__flip-list">
           {this.renderProfilesList()}
         </FlipMove>
 
-        <div className='profiles__new'>
+        <div className="profiles__new">
           {this.renderNewForm(showNewForm)}
         </div>
       </div>

@@ -1,19 +1,17 @@
 import React, { Component } from 'react';
 import { connect } from 'react-redux';
 
-import ProfileCard from '../../components/dashboard/profiles/ProfileCard';
-
 export class HealthRecord extends Component {
   render() {
     return (
-      this.props.profile ? <ProfileCard profile={this.props.profile} /> : ''
+      <div className="health-record"></div>
     );
   }
 }
 
 function mapStateToProps(state) {
   return {
-    profile: state.profiles.currentProfile
+
   };
 }
 

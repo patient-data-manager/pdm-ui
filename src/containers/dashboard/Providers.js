@@ -14,7 +14,7 @@ export class Providers extends Component {
     const profileId = this.props.profile.id;
 
     return (
-      <div>
+      <div className="providers">
         <a
           onClick={this.props.linkProvider(provider.id, profileId)}
           onKeyPress={this.props.linkProvider(provider.id, profileId)}
