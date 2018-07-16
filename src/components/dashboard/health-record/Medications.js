@@ -3,45 +3,45 @@ import VerticalList from '../shared/VerticalList';
 
 let mockList = [
     {
-        'date': 'date field',
-        'description': 'description goes here'
+        'grape': 'Mar 25 2015',
+        'apple': '5'
     },
     {
-        'date': 'date field',
-        'description': 'description goes here'
+        'grape': 'Apr 18 2015',
+        'apple': '4'
     },
     {
-        'date': 'date field',
-        'description': 'description goes here'
+        'grape': 'Apr 18 2016',
+        'apple': '3'
     },
     {
-        'date': 'date field',
-        'description': 'description goes here'
+        'grape': 'Apr 18 2017',
+        'apple': '2'
     },
     {
-        'date': 'date field',
-        'description': 'description goes here'
+        'grape': 'Apr 18 2018',
+        'apple': '1'
     },
     {
-        'date': 'date field',
-        'description': 'description goes here'
+        'grape': 'Apr 18 2014',
+        'apple': '6'
     },
     {
-        'date': 'date field',
-        'description': 'description goes here'
+        'grape': 'Apr 18 2011',
+        'apple': '9'
+    },   
+    {
+        'grape': 'Apr 18 2013',
+        'apple': '7'
+    },    
+    {
+        'grape': 'Apr 18 2010',
+        'apple': '10'
     },
     {
-        'date': 'date field',
-        'description': 'description goes here'
+        'grape': 'Apr 18 2012',
+        'apple': '8'
     },
-
-    {
-        'date': 'date field',
-        'description': 'description goes here'
-    },        {
-        'date': 'date field',
-        'description': 'description goes here'
-    }
 ]
 
 export class Medications extends Component {
@@ -50,7 +50,9 @@ export class Medications extends Component {
             <div className='health-record__medications'>
                 <VerticalList 
                     list={mockList} 
-                    listType='medications'/>
+                    listType='medications'
+                    dateProperty='grape'
+                    descriptionProperty='apple'/>
             </div>
         );
     }

@@ -51,7 +51,9 @@ export class Procedures extends Component {
             <div className='health-record__procedures'>
                 <VerticalList 
                     list={mockList} 
-                    listType='procedures'/>
+                    listType='procedures'
+                    dateProperty='date'
+                    descriptionProperty='description'/>
             </div>
         );
     }

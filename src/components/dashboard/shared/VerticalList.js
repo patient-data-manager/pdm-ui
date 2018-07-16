@@ -15,14 +15,13 @@ export class VerticalList extends Component {
     }
 
     sortList = (list) => {
-        list.sort(((a,b) => moment(b.date) - moment(a.date)));
-        return list;
+        return list.sort(((a,b) => moment(b[this.props.dateProperty]) - moment(a[this.props.dateProperty])));
     }
 
     viewMore = () => {
         let newDisplayCount = this.state.itemDisplayCount + 3;
-        if (newDisplayCount > this.props.list.length) {
-            this.setState({ itemDisplayCount: this.props.list.length });
+        if (newDisplayCount > this.state.listItems.length) {
+            this.setState({ itemDisplayCount: this.state.listItems.length });
         }
         this.setState({ itemDisplayCount: newDisplayCount });
     }
@@ -47,7 +46,7 @@ export class VerticalList extends Component {
     }
 
     renderViewMore = () => {
-        if (this.state.itemDisplayCount < this.props.list.length) {
+        if (this.state.itemDisplayCount < this.state.listItems.length) {
             return (
                 <div className='vertical-list__view-more' onClick={this.viewMore}>
                     <div className='vertical-list__item-icon'>
@@ -65,7 +64,7 @@ export class VerticalList extends Component {
     render() {
         return(
             <div className='vertical-timeline'>
-                {this.props.list.slice(0, this.state.itemDisplayCount).map((listItem, i) => 
+                {this.state.listItems.slice(0, this.state.itemDisplayCount).map((listItem, i) => 
                     <li key={i} className='vertical-list__item'>
                         <div className='vertical-list__item-icon' >
                             <Badge badgeContent={this.renderListIcon()} color='primary'> 
@@ -74,10 +73,10 @@ export class VerticalList extends Component {
                         </div>
                         <div className='vertical-list__item-info'>
                             <div className='vertical-list__item-date'>
-                                {listItem.date}
+                                {listItem[this.props.dateProperty]}
                             </div>
                             <div className='vertical-list__item-description'>
-                                {listItem.description} 
+                                {listItem[this.props.descriptionProperty]}
                             </div>
                         </div>
                         <div className='vertical-list__item-btn'></div>
