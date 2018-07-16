@@ -22,7 +22,7 @@ export class OAuth extends Component {
       // assume either the record to show new stuff popping in
       // or
       // the list of providers that are registered
-      <Redirect to="dashboard/" />
+      <Redirect to="/dashboard/providers" />
     );
   }
 }
