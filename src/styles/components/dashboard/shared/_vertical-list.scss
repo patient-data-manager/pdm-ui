@@ -1,5 +1,8 @@
 .vertical-list__view-more {
     width: 100%;
+    display: flex;
+    flex-direction: row;
+    cursor: pointer;
 }
 
 .vertical-list__item {

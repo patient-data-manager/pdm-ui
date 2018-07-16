@@ -1,15 +1,22 @@
 import React, { Component } from 'react';
 import FontAwesome from 'react-fontawesome';
 import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
-import Button from '@material-ui/core/Button';
+import Badge from '@material-ui/core/Badge';
+import moment from 'moment';
 
 export class VerticalList extends Component {
     constructor(props) {
         super(props);
     
         this.state = {
+            listItems: this.sortList(this.props.list),
             itemDisplayCount: 3
         };
+    }
+
+    sortList = (list) => {
+        list.sort(((a,b) => moment(b.date) - moment(a.date)));
+        return list;
     }
 
     viewMore = () => {
@@ -19,20 +26,22 @@ export class VerticalList extends Component {
         }
         this.setState({ itemDisplayCount: newDisplayCount });
     }
+
+    renderViewMoreIcon = () => {
+        return (<FontAwesome name='ellipsis-h' />);
+    }
     
     renderListIcon = () => {
-        let icon;
+        let icon = '';
         if (this.props.listType === 'procedures') {
             icon = <FontAwesomeIcon icon='hospital' />;
         } else if (this.props.listType === 'conditions') {
             icon = <FontAwesome name='heartbeat' />;
         } else if (this.props.listType === 'labs') {
             icon = <FontAwesome name='flask' />;
-        } else if (this.props.listType === 'medications') {
-            // TO-DO: find pill icon
-            icon = <FontAwesomeIcon icon={'pills'} />;
-        } else {
-            icon = <FontAwesomeIcon icon='circle' />;
+        // TO-DO: find pill icon
+        // } else if (this.props.listType === 'medications') {
+        //     icon = <FontAwesomeIcon icon={'pills'} />;
         }
         return (icon);
     }
@@ -40,11 +49,13 @@ export class VerticalList extends Component {
     renderViewMore = () => {
         if (this.state.itemDisplayCount < this.props.list.length) {
             return (
-                <div>
-                    <Button color='primary' className='vertical-list__view-more' onClick={this.viewMore}>
-                        <FontAwesome name='ellipsis-h' />
-                        <span> view more </span>
-                    </Button>
+                <div className='vertical-list__view-more' onClick={this.viewMore}>
+                    <div className='vertical-list__item-icon'>
+                        <Badge badgeContent={this.renderViewMoreIcon()} color='primary'> 
+                            <span></span>
+                        </Badge>
+                    </div>
+                    <div className='vertical-list__'>View More</div>
                 </div>
             );
         }
@@ -53,11 +64,13 @@ export class VerticalList extends Component {
 
     render() {
         return(
-            <div>
+            <div className='vertical-timeline'>
                 {this.props.list.slice(0, this.state.itemDisplayCount).map((listItem, i) => 
-                    <div key={i} className='vertical-list__item'>
-                        <div className='vertical-list__item-icon'>
-                            {this.renderListIcon()}
+                    <li key={i} className='vertical-list__item'>
+                        <div className='vertical-list__item-icon' >
+                            <Badge badgeContent={this.renderListIcon()} color='primary'> 
+                                <span></span>
+                            </Badge>
                         </div>
                         <div className='vertical-list__item-info'>
                             <div className='vertical-list__item-date'>
@@ -68,7 +81,7 @@ export class VerticalList extends Component {
                             </div>
                         </div>
                         <div className='vertical-list__item-btn'></div>
-                    </div>
+                    </li>
                 )}
                 {this.renderViewMore()}
             </div>
