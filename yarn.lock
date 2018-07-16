@@ -23,6 +23,29 @@
     core-js "^2.5.7"
     regenerator-runtime "^0.12.0"
 
+"@fortawesome/fontawesome-common-types@^0.2.0-9":
+  version "0.2.0"
+  resolved "https://registry.yarnpkg.com/@fortawesome/fontawesome-common-types/-/fontawesome-common-types-0.2.0.tgz#6bcf6481030f59e7ffd1a40a67cd464d47780f6a"
+
+"@fortawesome/fontawesome-svg-core@^1.2.0-14":
+  version "1.2.0-14"
+  resolved "https://registry.yarnpkg.com/@fortawesome/fontawesome-svg-core/-/fontawesome-svg-core-1.2.0-14.tgz#48100da29b39658fad374ebd1386161ab35af564"
+  dependencies:
+    "@fortawesome/fontawesome-common-types" "^0.2.0-9"
+
+"@fortawesome/free-solid-svg-icons@^5.1.0-11":
+  version "5.1.0-11"
+  resolved "https://registry.yarnpkg.com/@fortawesome/free-solid-svg-icons/-/free-solid-svg-icons-5.1.0-11.tgz#4a346eaada93276edb133b140492e8d7cfa2aa47"
+  dependencies:
+    "@fortawesome/fontawesome-common-types" "^0.2.0-9"
+
+"@fortawesome/react-fontawesome@^0.1.0-11":
+  version "0.1.0-11"
+  resolved "https://registry.yarnpkg.com/@fortawesome/react-fontawesome/-/react-fontawesome-0.1.0-11.tgz#83299a5c09bec79522abba33e93bff796f2f6d4e"
+  dependencies:
+    humps "^2.0.1"
+    prop-types "^15.5.10"
+
 "@material-ui/core@^1.3.1":
   version "1.3.1"
   resolved "https://registry.yarnpkg.com/@material-ui/core/-/core-1.3.1.tgz#8b4e6db9ed4536e8ccbea0eeff3da0d524e6af2c"
@@ -54,6 +77,12 @@
     recompose "^0.27.0"
     scroll "^2.0.3"
     warning "^4.0.1"
+
+"@material-ui/icons@^1.1.0":
+  version "1.1.0"
+  resolved "https://registry.yarnpkg.com/@material-ui/icons/-/icons-1.1.0.tgz#4d025df7b0ba6ace8d6710079ed76013a4d26595"
+  dependencies:
+    recompose "^0.26.0 || ^0.27.0"
 
 "@types/error-stack-parser@^1.3.18":
   version "1.3.18"
@@ -4427,6 +4456,10 @@ https-browserify@^1.0.0:
   version "1.0.0"
   resolved "https://registry.yarnpkg.com/https-browserify/-/https-browserify-1.0.0.tgz#ec06c10e0a34c0f2faf199f7fd7fc78fffd03c73"
 
+humps@^2.0.1:
+  version "2.0.1"
+  resolved "https://registry.yarnpkg.com/humps/-/humps-2.0.1.tgz#dd02ea6081bd0568dc5d073184463957ba9ef9aa"
+
 hyphenate-style-name@^1.0.1, hyphenate-style-name@^1.0.2:
   version "1.0.2"
   resolved "https://registry.yarnpkg.com/hyphenate-style-name/-/hyphenate-style-name-1.0.2.tgz#31160a36930adaf1fc04c6074f7eb41465d4ec4b"
@@ -8024,6 +8057,12 @@ react-test-renderer@16.4.1, react-test-renderer@^16.0.0-0:
     object-assign "^4.1.1"
     prop-types "^15.6.0"
     react-is "^16.4.1"
+
+react-text-mask@^5.4.2:
+  version "5.4.2"
+  resolved "https://registry.yarnpkg.com/react-text-mask/-/react-text-mask-5.4.2.tgz#6c9ecce97d354698557d14699963081f9621e997"
+  dependencies:
+    prop-types "^15.5.6"
 
 react-themeable@^1.1.0:
   version "1.1.0"

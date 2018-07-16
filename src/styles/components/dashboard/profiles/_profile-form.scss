@@ -1,0 +1,74 @@
+.profile-form {
+  padding: 0 80px 40px 80px;
+  border-bottom: 1px solid $color-gray-lightest;
+
+  &__form {
+    .profile-form__form-group {
+      display: inline-block;
+      width: 50%;
+      min-width: 300px;
+      position: relative;
+
+      .gender-label {
+        color: $color-blue-gray-dark;
+        transform: translate(0, 1.5px) scale(0.75);
+        transform-origin: top left;
+        top: 0;
+        left: 0;
+        position: absolute;
+      }
+
+      .gender-radio {
+        margin-top: 10px;
+        margin-right: 20px;
+      }
+    }
+
+    .gender-group {
+      margin-top: 16px;
+      margin-bottom: 8px;
+    }
+
+    .profile-form__inputfield {
+      margin-top: 16px;
+      margin-bottom: 8px;
+      padding-right: calc(3vw);
+      width: 100%;
+
+      input { border-color: $color-blue-gray-dark; }
+      &.middle-initial { width: 40%; }
+      &.last-name { width: 60%; }
+      &.city { width: 40%; }
+      &.state { width: 35%; }
+      &.zip-code { width: 25%; }
+      &.phone { width: 60%; }
+      &.phone-type { width: 40%; }
+
+      label {
+        color: $color-blue-gray-dark;
+        white-space: nowrap;
+      }
+    }
+  }
+
+  .profile-form__buttons {
+    display: flex;
+    justify-content: flex-end;
+    margin-top: 40px;
+
+    button {
+      margin-right: 40px;
+      min-width: 120px;
+      border: 0;
+
+      &.button-delete {
+        background-color: $color-red;
+        color: $color-white;
+
+        &:hover {
+          background-color: darken($color-red, 10%);
+        }
+      }
+    }
+  }
+}

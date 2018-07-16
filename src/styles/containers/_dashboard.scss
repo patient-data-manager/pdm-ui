@@ -1,0 +1,38 @@
+.dashboard {
+  min-height: 100vh;
+  display: flex;
+  flex-direction: column;
+
+  &__body {
+    margin-bottom: 60px;
+  }
+
+  .nav-list-items {
+    a {
+      padding: 22px 15px;
+    }
+
+    svg {
+      font-size: 2em;
+      color: $color-text;
+    }
+
+    span {
+      color: $color-text;
+      font-size: 1.3em;
+      text-transform: uppercase;
+      margin-left: -14px;
+    }
+
+    .selected {
+      background-color: $color-blue;
+
+      span { color: $color-white; }
+      svg { color: $color-white; }
+    }
+  }
+
+  .app-toolbar {
+    padding-left: 0;
+  }
+}

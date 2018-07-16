@@ -1,0 +1,32 @@
+.header {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  background-color: $color-blue-gray-dark;
+  height: 80px;
+  padding: 0 40px;
+
+  &__logo img {
+    height: 60px;
+  }
+
+  &__menu {
+    button {
+      color: $color-white;
+      text-transform: lowercase;
+
+      .menu-arrow {
+        margin-left: 10px;
+      }
+    }
+  }
+}
+
+div.header__menu-items {
+  top: 50px;
+}
+
+li.header__menu-item {
+  width: 150px;
+  color: $color-text;
+}

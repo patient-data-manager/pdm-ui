@@ -9,7 +9,9 @@ import { setLoginStatus } from '../actions/auth';
 class PrivateRoute extends Component {
   render() {
     if (this.props.isAuthenticated) {
-      return <Route path={this.props.path} component={this.props.component} />;
+      return (
+        <Route {...this.props} />
+      );
     }
     return <Route path={this.props.path} render={props => {
       this.props.setLoginStatus('You must be logged in to access this page.');
@@ -21,8 +23,7 @@ class PrivateRoute extends Component {
 PrivateRoute.propTypes = {
   isAuthenticated: PropTypes.bool.isRequired,
   path: PropTypes.string.isRequired,
-  component: PropTypes.func.isRequired,
-
+  component: PropTypes.func
 };
 
 function mapDispatchToProps(dispatch) {

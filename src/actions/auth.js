@@ -22,8 +22,8 @@ function sendUserRequest(accessToken) {
   return new Promise((resolve, reject) => {
     axios.get(
       `/api/v1/users`, // TODO: test when backend works
-      { access_token: accessToken },
-      { headers: { 'X-Key-Inflection': 'camel', Accept: 'application/json' } }
+      {},
+      { headers: { 'X-Key-Inflection': 'camel', Accept: 'application/json', Authorization: `Bearer ${accessToken}` } }
     )
       .then(result => resolve(result.data))
       .catch(error => reject(error));

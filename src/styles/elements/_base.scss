@@ -9,6 +9,8 @@ body {
   color: $color-black;
   font-size: 14px;
   overflow-x: hidden;
+  -moz-osx-font-smoothing: grayscale;
+  -webkit-font-smoothing: antialiased;
 }
 
 input[type="text"], input[type="password"] {
@@ -45,4 +47,9 @@ h3 {
   font-size: calc(1em + 1vw);
   color: $color-blue-gray;
   letter-spacing: 1px;
+}
+
+button:active,
+button:focus {
+  outline: none !important;
 }

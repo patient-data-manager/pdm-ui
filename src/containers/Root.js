@@ -5,17 +5,18 @@ import { BrowserRouter as Router, Route, Switch } from 'react-router-dom';
 import { MuiThemeProvider, createMuiTheme } from 'material-ui/styles';
 
 import PrivateRoute from './PrivateRoute';
-import Landing from '../components/Landing';
+import Landing from './Landing';
 import Login from './auth/Login';
 import Register from './auth/Register';
-import Dashboard from './Dashboard';
-import Profile from './Profile/Profile';
-import HealthRecord from './HealthRecord/HealthRecord';
+import Dashboard from './dashboard/Dashboard';
+import Profiles from './dashboard/Profiles';
+import HealthRecord from './dashboard/HealthRecord';
+import Alerts from './dashboard/Alerts';
+import Providers from './dashboard/Providers';
+import NoMatch from '../components/pages/Page404';
 import OAuth from './OAuth/OAuth';
-import Alert from './Alert/Alert';
-import _Provider from './Provider/Provider';
-import NoMatch from '../components/Pages/Page404';
 
+// material ui theme
 const THEME = createMuiTheme({
   typography: {
     "fontFamily": "\"Open Sans\", \"Helvetica\", \"Arial\", sans-serif",
@@ -25,9 +26,10 @@ const THEME = createMuiTheme({
     "fontWeightMedium": 500
   },
   palette: {
-    primary: { light: '#85A1C2', main: '#6b8eb6', dark: '#5c7ca1', contrastText: '#fff' },
+    primary: { light: '#d4e4f6', main: '#6b8eb6', dark: '#5c7ca1', contrastText: '#fff' },
     secondary: { light: '#96A5B7', main: '#7E90A3', dark: '#6C7988', contrastText: '#fff' },
-    error: { light: '#d08c9f', main: '#b66b80', dark: '#a44d65', contrastText: '#fff' }
+    error: { light: '#d08c9f', main: '#b66b80', dark: '#a44d65', contrastText: '#fff' },
+    action: { selected: '#d4e4f6' }
   },
   shape: {}
 });
@@ -41,12 +43,20 @@ const Root = ({ store }) => {
             <Route exact path="/" component={Landing} />
             <Route path='/login' component={Login} />
             <Route path='/register' component={Register} />
-            <PrivateRoute path='/dashboard' component={Dashboard} />
-            <PrivateRoute path='/health-record' component={HealthRecord}/>
-            <PrivateRoute path='/profiles' component={Profile} />
-            <PrivateRoute path='/alerts' component={Alert} />
-            <PrivateRoute path='/providers' component={_Provider} />
-            <PrivateRoute path='/oauth' component={OAuth}/>
+
+            <PrivateRoute path='/oauth' component={OAuth} />
+            <PrivateRoute path='/dashboard'>
+              <Dashboard>
+                <Switch>
+                  <PrivateRoute path='/dashboard/profiles' component={Profiles} />
+                  <PrivateRoute path='/dashboard/health-record' component={HealthRecord}/>
+                  <PrivateRoute path='/dashboard/alerts' component={Alerts} />
+                  <PrivateRoute path='/dashboard/providers' component={Providers} />
+                  <Route component={NoMatch} />
+                </Switch>
+              </Dashboard>
+            </PrivateRoute>
+
             <Route component={NoMatch} />
           </Switch>
         </Router>

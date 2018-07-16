@@ -1,0 +1,84 @@
+.profile-card {
+  &__wrapper {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    height: 80px;
+    padding: 0 20px;
+    border-bottom: 1px solid $color-gray-lightest;
+    cursor: pointer;
+
+    &.is-header,
+    &.editing {
+      border: 0;
+    }
+
+    &.is-header {
+      .profile-card__icon svg {
+        fill: $color-white;
+        color: $color-white;
+      }
+
+      .profile-card__details .details-age-gender-relation,
+      .profile-card__details .details-name-alerts {
+        color: $color-white;
+      }
+    }
+
+    &.active { background-color: $color-gray-lightest; }
+  }
+
+  &__info {
+    display: flex;
+    align-items: center;
+  }
+
+  &__icon {
+    display: flex;
+    font-size: 3em;
+    margin-right: 20px;
+
+    svg {
+      fill: $color-gray;
+      color: $color-gray;
+    }
+
+    svg.active {
+      fill: $color-text;
+      color: $color-text;
+    }
+  }
+
+  &__details {
+    .details-name-alerts {
+      color: $color-blue-gray-dark;
+
+      .details-name {
+        font-size: 1.6em;
+      }
+
+      .details-alerts span {
+        margin: 8px -10px 0;
+      }
+    }
+
+    .details-age-gender-relation {
+      display: flex;
+      font-size: 0.9em;
+      font-weight: 600;
+      text-transform: uppercase;
+      letter-spacing: 1px;
+      color: $color-gray;
+
+      .details-age,
+      .details-gender,
+      .details-relation {
+        margin-right: 40px;
+      }
+    }
+  }
+
+  &__edit-button button {
+    svg { margin-right: 5px; }
+  }
+}

@@ -1,0 +1,34 @@
+.profiles {
+  &__new {
+    margin-top: 20px;
+
+    &-button {
+      text-align: center;
+      margin-top: 20px;
+
+      button svg {
+        margin-right: 5px;
+      }
+    }
+
+    &-form {
+      text-align: left;
+
+      &-title {
+        display: flex;
+        margin-left: 20px;
+      }
+
+      &-icon {
+        display: flex;
+        font-size: 3em;
+        margin-right: 20px;
+        color: $color-gray;
+      }
+
+      &-label {
+        font-size: 1.6em;
+      }
+    }
+  }
+}
