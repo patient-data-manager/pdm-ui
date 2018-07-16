@@ -49,7 +49,9 @@ export class Procedures extends Component {
     render() {
         return(
             <div className='health-record__procedures'>
-                <VerticalList list={mockList}/>
+                <VerticalList 
+                    list={mockList} 
+                    listType='procedures'/>
             </div>
         );
     }
