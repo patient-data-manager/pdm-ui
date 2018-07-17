@@ -79,10 +79,10 @@ export class HealthRecord extends Component {
       { header: 'summary', component: Summary, props: { patient, profile } },
       { header: 'conditions', component: Conditions, props: { conditions: healthRecord.Condition || [] } },
       { header: 'allergies', component: Allergies, props: { allergies: healthRecord.AllergyIntolerance || [] } },
-      { header: 'medications', 
-        component: Medications, 
+      { header: 'medications',
+        component: Medications,
         props: {
-          medicationRequests: healthRecord.MedicationRequest || [], 
+          medicationRequests: healthRecord.MedicationRequest || [],
           medicationStatements: healthRecord.MedicationStatement || []
         }
       },
