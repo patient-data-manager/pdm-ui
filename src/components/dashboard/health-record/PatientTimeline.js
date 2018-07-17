@@ -2,10 +2,9 @@ import React, { Component } from 'react';
 import moment from 'moment';
 import Timeline from 'react-calendar-timeline/lib';
 import Legend from './TimelineLegend';
-import ReactTooltip from 'react-tooltip'
+
 import 'react-calendar-timeline/lib/lib/Timeline.css';
 import 'font-awesome/css/font-awesome.min.css';
-import './PatientTimeline.css'
 
 export default class PatientTimeline extends Component {
 
@@ -191,9 +190,8 @@ getMaxGroup = (items) => {
           sidebarWidth={0}
           sidebarContent={null}
           timeSteps={this.state.timeSteps}
-          lineHeight={60}
-          lineWidth={40}
-          itemHeightRatio={1.0}
+          lineHeight={40}
+          itemHeightRatio={0.7}
           canMove={false}
           canResize={false}
           canSelect={false}
