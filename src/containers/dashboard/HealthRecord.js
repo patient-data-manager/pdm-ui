@@ -96,7 +96,7 @@ export class HealthRecord extends Component {
 
 function mapStateToProps(state) {
   return {
-    profile: state.profiles.activeProfile
+    profile: state.profiles.activeProfile,
     healthRecord: state.healthRecord.healthRecord
   };
 }
