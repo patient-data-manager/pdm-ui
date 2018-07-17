@@ -2,12 +2,12 @@ import React, { Component } from 'react';
 import VerticalList from '../shared/VerticalList';
 
 
-export class Medications extends Component {
+export class Immunizations extends Component {
     render() {
         return(
             <div className='health-record__medications'>
                 <VerticalList
-                    list={this.medications()}
+                    list={this.immunizations()}
                     listType='medications'
                     dateProperty='date'
                     descriptionProperty='text'/>
@@ -15,9 +15,9 @@ export class Medications extends Component {
         );
     }
 
-    medications(){
-      return this.props.medications.map(function(m){return {date: m.effectivePeriod.start, text: m.medicationCodeableConcept.text}})
+    immunizations(){
+      return this.props.immunizations.map(function(i){return {date: i.date, text: i.vaccineCode.text}});
     }
 }
 
-export default Medications;
+export default Immunizations;
