@@ -62,11 +62,42 @@ export class HealthRecord extends Component {
       </div>
     );
   }
-}
+  renderGroups() {
+  if (!this.props.healthRecord) {
+    return ""
+  };
+  var sections = []
+  for (var x in this.props.healthRecord) {
+    sections.push(this.renderGroup(x, this.props.healthRecord[x]))
+    }
+  return sections;
+  }
+
+  renderGroup(name, entries) {
+    return ( <div>
+      <h2> {
+        name
+      } </h2> <ul> {
+        this.renderItems(entries)
+      } </ul> </div>)
+    }
+
+  renderItems(entries) {
+    return entries.map((e) => {
+      return this.renderDefualt(e)
+    })
+  }
+  renderDefualt(entry) {
+    return ( <li> {
+        JSON.stringify(entry)
+      } </li>)
+    }
+  }
 
 function mapStateToProps(state) {
   return {
     profile: state.profiles.activeProfile
+    healthRecord: state.healthRecord.healthRecord
   };
 }
 
