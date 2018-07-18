@@ -2,7 +2,7 @@ import React, { Component } from 'react';
 import moment from 'moment';
 import Timeline from 'react-calendar-timeline/lib';
 import Legend from './TimelineLegend';
-
+import ReactTooltip from 'react-tooltip'
 import 'react-calendar-timeline/lib/lib/Timeline.css';
 import 'font-awesome/css/font-awesome.min.css';
 
