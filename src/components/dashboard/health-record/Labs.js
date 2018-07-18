@@ -3,46 +3,50 @@ import VerticalList from '../shared/VerticalList';
 
 let mockList = [
     {
-        'blue': 'Mar 25 2015',
-        'pink': '5'
+        'date': '2014-07-13T02:27:04.196Z',
+        'description': '5'
     },
     {
-        'blue': 'Apr 18 2015',
-        'pink': '4'
+        'date': '2010-07-13T02:27:04.196Z',
+        'description': '9'
     },
     {
-        'blue': 'Apr 18 2016',
-        'pink': '3'
+        'date': '2018-07-13T02:27:04.196Z',
+        'description': '1'
     },
     {
-        'blue': 'Apr 18 2017',
-        'pink': '2'
+        'date': '2016-07-13T02:27:04.196Z',
+        'description': '3'
     },
     {
-        'blue': 'Apr 18 2018',
-        'pink': '1'
+        'date': '2011-07-13T02:27:04.196Z',
+        'description': '8'
+    }, 
+    {
+        'date': '2015-07-13T02:27:04.196Z',
+        'description': '4'
     },
     {
-        'blue': 'Apr 18 2014',
-        'pink': '6'
+        'date': '2009-07-13T02:27:04.196Z',
+        'description': '10'
     },
     {
-        'blue': 'Apr 18 2011',
-        'pink': '9'
+        'date': '2013-07-13T02:27:04.196Z',
+        'description': '6'
+    },
+    {
+        'date': '2015-07-13T02:27:04.196Z',
+        'description': '4'
+    },
+    {
+        'date': '2012-07-13T02:27:04.196Z',
+        'description': '7'
     },   
     {
-        'blue': 'Apr 18 2013',
-        'pink': '7'
-    },    
-    {
-        'blue': 'Apr 18 2010',
-        'pink': '10'
-    },
-    {
-        'blue': 'Apr 18 2012',
-        'pink': '8'
-    },
-]
+        'date': '2017-07-13T02:27:04.196Z',
+        'description': '2'
+    }
+];
 
 export class Labs extends Component {
     render() {
@@ -51,8 +55,8 @@ export class Labs extends Component {
                 <VerticalList 
                     list={mockList} 
                     listType='labs'
-                    dateProperty='blue'
-                    descriptionProperty='pink'/>
+                    dateProperty='date'
+                    descriptionProperty='description'/>
             </div>
         );
     }

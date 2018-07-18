@@ -3,46 +3,50 @@ import VerticalList from '../shared/VerticalList';
 
 let mockList = [
     {
-        'date': 'Mar 25 2015',
+        'date': '2014-07-13T02:27:04.196Z',
         'description': '5'
     },
     {
-        'date': 'Apr 18 2015',
-        'description': '4'
+        'date': '2010-07-13T02:27:04.196Z',
+        'description': '9'
     },
     {
-        'date': 'Apr 18 2016',
-        'description': '3'
-    },
-    {
-        'date': 'Apr 18 2017',
-        'description': '2'
-    },
-    {
-        'date': 'Apr 18 2018',
+        'date': '2018-07-13T02:27:04.196Z',
         'description': '1'
     },
     {
-        'date': 'Apr 18 2014',
-        'description': '6'
+        'date': '2016-07-13T02:27:04.196Z',
+        'description': '3'
     },
     {
-        'date': 'Apr 18 2011',
-        'description': '9'
-    },   
+        'date': '2011-07-13T02:27:04.196Z',
+        'description': '8'
+    }, 
     {
-        'date': 'Apr 18 2013',
-        'description': '7'
-    },    
+        'date': '2015-07-13T02:27:04.196Z',
+        'description': '4'
+    },
     {
-        'date': 'Apr 18 2010',
+        'date': '2009-07-13T02:27:04.196Z',
         'description': '10'
     },
     {
-        'date': 'Apr 18 2012',
-        'description': '8'
+        'date': '2013-07-13T02:27:04.196Z',
+        'description': '6'
     },
-]
+    {
+        'date': '2015-07-13T02:27:04.196Z',
+        'description': '4'
+    },
+    {
+        'date': '2012-07-13T02:27:04.196Z',
+        'description': '7'
+    },   
+    {
+        'date': '2017-07-13T02:27:04.196Z',
+        'description': '2'
+    }
+];
 
 export class Procedures extends Component {
 

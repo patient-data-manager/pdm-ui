@@ -3,46 +3,50 @@ import VerticalList from '../shared/VerticalList';
 
 let mockList = [
     {
-        'dog': 'Mar 25 2015',
-        'cat': '5'
+        'date': '2014-07-13T02:27:04.196Z',
+        'description': '5'
     },
     {
-        'dog': 'Apr 18 2015',
-        'cat': '4'
+        'date': '2010-07-13T02:27:04.196Z',
+        'description': '9'
     },
     {
-        'dog': 'Apr 18 2016',
-        'cat': '3'
+        'date': '2018-07-13T02:27:04.196Z',
+        'description': '1'
     },
     {
-        'dog': 'Apr 18 2017',
-        'cat': '2'
+        'date': '2016-07-13T02:27:04.196Z',
+        'description': '3'
     },
     {
-        'dog': 'Apr 18 2018',
-        'cat': '1'
+        'date': '2011-07-13T02:27:04.196Z',
+        'description': '8'
+    }, 
+    {
+        'date': '2015-07-13T02:27:04.196Z',
+        'description': '4'
     },
     {
-        'dog': 'Apr 18 2014',
-        'cat': '6'
+        'date': '2009-07-13T02:27:04.196Z',
+        'description': '10'
     },
     {
-        'dog': 'Apr 18 2011',
-        'cat': '9'
+        'date': '2013-07-13T02:27:04.196Z',
+        'description': '6'
+    },
+    {
+        'date': '2015-07-13T02:27:04.196Z',
+        'description': '4'
+    },
+    {
+        'date': '2012-07-13T02:27:04.196Z',
+        'description': '7'
     },   
     {
-        'dog': 'Apr 18 2013',
-        'cat': '7'
-    },    
-    {
-        'dog': 'Apr 18 2010',
-        'cat': '10'
-    },
-    {
-        'dog': 'Apr 18 2012',
-        'cat': '8'
-    },
-]
+        'date': '2017-07-13T02:27:04.196Z',
+        'description': '2'
+    }
+];
 
 export class Conditions extends Component {
     render() {
@@ -51,8 +55,8 @@ export class Conditions extends Component {
                 <VerticalList 
                     list={mockList} 
                     listType='conditions'
-                    dateProperty='dog'
-                    descriptionProperty='cat'/>
+                    dateProperty='date'
+                    descriptionProperty='description'/>
             </div>
         );
     }

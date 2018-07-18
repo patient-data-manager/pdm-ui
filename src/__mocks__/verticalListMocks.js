@@ -1,7 +1,4 @@
-import React, { Component } from 'react';
-import VerticalList from '../shared/VerticalList';
-
-let mockList = [
+const verticalListMock = [
     {
         'date': '2014-07-13T02:27:04.196Z',
         'description': '5'
@@ -48,18 +45,6 @@ let mockList = [
     }
 ];
 
-export class Medications extends Component {
-    render() {
-        return(
-            <div className='health-record__medications'>
-                <VerticalList 
-                    list={mockList} 
-                    listType='medications'
-                    dateProperty='date'
-                    descriptionProperty='description'/>
-            </div>
-        );
-    }
-}
-
-export default Medications;
+export {
+    verticalListMock
+};
