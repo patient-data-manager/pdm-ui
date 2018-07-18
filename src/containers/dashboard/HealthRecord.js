@@ -29,27 +29,64 @@ export class HealthRecord extends Component {
 
   renderHeader = (header) => {
     return (
-      <div className='health-record__header'>
-        <div className='header-title' id={header}>{header}</div>
-        <div className='header-divider'></div>
+      <div className="health-record__header">
+        <div className="header-title" id={header}>{header}</div>
+        <div className="header-divider"></div>
       </div>
     );
   }
 
+  renderGroup = (name, entries) => {
+    return (
+      <div>
+        <h2>{name}</h2>
+
+        <ul>
+          {this.renderItems(entries)}
+        </ul>
+      </div>
+    );
+  }
+
+  renderItems = (entries) => {
+    return entries.map((e) => {
+      return this.renderDefualt(e)
+    });
+  }
+
+  renderDefualt = (entry) => {
+    return (
+      <li>
+        {JSON.stringify(entry)}
+      </li>
+    );
+  }
+
+  renderGroups = () => {
+    if(!this.props.healthRecord) return "";
+
+    let sections = []
+    for(var x in this.props.healthRecord) {
+      sections.push(this.renderGroup(x,this.props.healthRecord[x]));
+    }
+
+    return sections;
+  }
+
   render() {
     return (
-      <div className='health-record'>
-        <div className='health-record__toc'></div>
+      <div className="health-record">
+        <div className="health-record__toc"></div>
 
-        <div className='health-record__content'>
-          {this.renderHeader('summary')}
+        <div className="health-record__content">
+          {this.renderHeader("summary")}
           <Summary />
 
           {this.renderHeader('procedures')}
           <Procedures procedures={this.procedures()}/>
 
           {this.renderHeader('conditions')}
-          <Conditions conditions={this.condtions()}/>
+          <Conditions conditions={this.conditions()}/>
 
           {this.renderHeader('labs')}
           <Labs labs={this.labs()}/>
@@ -71,7 +108,7 @@ export class HealthRecord extends Component {
 
   }
 
-  condtions(){
+  conditions(){
     return this.props.healthRecord.Condition || [];
   }
 

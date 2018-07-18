@@ -106,6 +106,12 @@ export class Dashboard extends Component {
     this.props.loadProfiles();
   }
 
+  // componentDidUpdate(prevProps) {
+  //   if (this.props.activeProfile !== prevProps.activeProfile) {
+  //     this.props.loadProfiles();
+  //   }
+  // }
+
   handleDrawerOpen = () => {
     this.setState({ open: true });
   };

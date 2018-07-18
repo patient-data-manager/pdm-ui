@@ -2,7 +2,7 @@ import configureMockStore from 'redux-mock-store';
 import thunk from 'redux-thunk';
 import moxios from 'moxios';
 
-import * as actions from '../../actions/PROFILES';
+import * as actions from '../../actions/profiles';
 import * as types from '../../actions/types';
 
 const mockProfileA = { id: 1, name: "Jane Doe" };
