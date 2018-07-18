@@ -1,5 +1,7 @@
 import React, { Component } from 'react';
+import PropTypes from 'prop-types';
 import { connect } from 'react-redux';
+import { bindActionCreators } from 'redux';
 import tocbot from 'tocbot';
 
 import Summary from '../../components/dashboard/health-record/Summary';
@@ -27,6 +29,44 @@ export class HealthRecord extends Component {
     tocbot.destroy();
   }
 
+  conditions() {
+    return this.props.healthRecord.Condition || [];
+  }
+
+  procedures() {
+    return this.props.healthRecord.Procedure || [];
+  }
+
+  medications() {
+    return this.props.healthRecord.MedicationStatement || [];
+  }
+
+  immunizations() {
+    return this.props.healthRecord.Immunization || [];
+  }
+
+  labs() {
+    return this.filterObservationsByCategory('laboratory') || [];
+  }
+
+  vitals() {
+    return this.filterObservationsByCategory('vital-signs') || [];
+  }
+
+  allergies() {
+    return [];
+  }
+
+  filterObservationsByCategory(cat) {
+    const { healthRecord } = this.props;
+
+    if (!healthRecord || (!healthRecord.Observation)) return null;
+
+    return this.props.healthRecord.Observation.filter((o) => {
+        return o.category.filter(c => c.coding.filter(coding => coding.code === cat).length > 0).length > 0;
+    });
+  }
+
   renderHeader = (header) => {
     return (
       <div className="health-record__header">
@@ -49,12 +89,12 @@ export class HealthRecord extends Component {
   }
 
   renderItems = (entries) => {
-    return entries.map((e) => {
-      return this.renderDefualt(e)
+    return entries.map((entry) => {
+      return this.renderDefault(entry)
     });
   }
 
-  renderDefualt = (entry) => {
+  renderDefault = (entry) => {
     return (
       <li>
         {JSON.stringify(entry)}
@@ -65,12 +105,45 @@ export class HealthRecord extends Component {
   renderGroups = () => {
     if(!this.props.healthRecord) return "";
 
-    let sections = []
+    let sections = [];
     for(var x in this.props.healthRecord) {
       sections.push(this.renderGroup(x,this.props.healthRecord[x]));
     }
 
     return sections;
+  }
+
+  renderGroups() {
+    if (!this.props.healthRecord) return "";
+
+    let sections = [];
+    for (let x in this.props.healthRecord) {
+      sections.push(this.renderGroup(x, this.props.healthRecord[x]));
+    }
+
+    return sections;
+  }
+
+  renderGroup = (name, entries) => {
+    return (
+      <div>
+        <h2>{name}</h2>
+
+        <ul>{this.renderItems(entries)}</ul>
+      </div>
+    );
+  }
+
+  renderItems = (entries) => {
+    return entries.map((e) => {
+      return this.renderDefault(e);
+    });
+  }
+
+  renderDefault = (entry) => {
+    return (
+      <li>{JSON.stringify(entry)}</li>
+    );
   }
 
   render() {
@@ -83,102 +156,47 @@ export class HealthRecord extends Component {
           <Summary />
 
           {this.renderHeader('procedures')}
-          <Procedures procedures={this.procedures()}/>
+          <Procedures procedures={this.procedures()} />
 
           {this.renderHeader('conditions')}
-          <Conditions conditions={this.conditions()}/>
+          <Conditions conditions={this.conditions()} />
 
           {this.renderHeader('labs')}
-          <Labs labs={this.labs()}/>
+          <Labs labs={this.labs()} />
 
           {this.renderHeader('vitals')}
-          <Labs labs={this.vitals()}/>
+          <Labs labs={this.vitals()} />
 
           {this.renderHeader('medications')}
-          <Medications medications={this.medications()}/>
+          <Medications medications={this.medications()} />
 
           {this.renderHeader('immunizations')}
-          <Immunizations immunizations={this.immunizations()}/>
+          <Immunizations immunizations={this.immunizations()} />
 
           {this.renderHeader('allergies')}
-          <Allergies allergies={this.allergies()}/>
+          <Allergies allergies={this.allergies()} />
         </div>
       </div>
     );
-
   }
+}
 
-  conditions(){
-    return this.props.healthRecord.Condition || [];
-  }
+HealthRecord.propTypes = {
+  profile: PropTypes.object,
+  healthRecord: PropTypes.object
+};
 
-  procedures(){
-    return this.props.healthRecord.Procedure || [];
-  }
+function mapDispatchToProps(dispatch) {
+  return bindActionCreators({
 
-  medications(){
-    return this.props.healthRecord.MedicationStatement || [];
-  }
-
-  immunizations(){
-    return this.props.healthRecord.Immunization || [];
-  }
-
-  labs(){
-    return this.filterObservationsByCategory('laboratory') || [];
-  }
-
-  vitals(){
-    return this.filterObservationsByCategory('vital-signs') || [];
-  }
-
-  allergies(){
-    return [];
-  }
-
-  filterObservationsByCategory(cat){
-    return this.props.healthRecord.Observation.filter(function(o){
-        return o.category.filter(c => c.coding.filter(coding => coding.code == cat).length >0).length>0
-    });
-  }
-  renderGroups() {
-  if (!this.props.healthRecord) {
-    return ""
-  };
-  var sections = []
-  for (var x in this.props.healthRecord) {
-    sections.push(this.renderGroup(x, this.props.healthRecord[x]))
-    }
-  return sections;
-  }
-
-  renderGroup(name, entries) {
-    return ( <div>
-      <h2> {
-        name
-      } </h2> <ul> {
-        this.renderItems(entries)
-      } </ul> </div>)
-    }
-
-  renderItems(entries) {
-    return entries.map((e) => {
-      return this.renderDefualt(e)
-    })
-  }
-  renderDefualt(entry) {
-    return ( <li> {
-        JSON.stringify(entry)
-      } </li>)
-    }
-  }
-
+  }, dispatch);
+}
 
 function mapStateToProps(state) {
   return {
     profile: state.profiles.activeProfile,
-    healthRecord: state.healthRecord.healthRecord
+    healthRecord: state.healthRecords.healthRecord
   };
 }
 
-export default connect(mapStateToProps)(HealthRecord);
+export default connect(mapStateToProps, mapDispatchToProps)(HealthRecord);

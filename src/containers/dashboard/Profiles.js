@@ -7,7 +7,7 @@ import FlipMove from 'react-flip-move';
 import Button from '@material-ui/core/Button';
 
 import { loadProfiles, addProfile, updateProfile, deleteProfile, setActiveProfile} from '../../actions/profiles';
-import {loadHealthRecord} from '../../actions/health_record'
+import { loadHealthRecord } from '../../actions/healthRecords';
 import ProfileCard from '../../components/dashboard/profiles/ProfileCard';
 import ProfileForm from '../../components/dashboard/profiles/ProfileForm';
 

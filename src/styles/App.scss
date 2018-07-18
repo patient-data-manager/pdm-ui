@@ -22,11 +22,10 @@
 @import "components/dashboard/shared/vertical-list";
 @import "components/header";
 @import "components/landing";
+
+// container-specific
 @import "containers/auth";
 @import "containers/dashboard";
 @import "containers/profiles";
+@import "containers/providers";
 @import "containers/health-record";
-
-#root {
-  min-height: 100vh;
-}

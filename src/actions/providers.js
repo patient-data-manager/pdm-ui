@@ -70,16 +70,22 @@ function linkProviderFailure(error) {
 }
 
 function sendLinkProviderRequest(providerId, profileId, accessToken) {
+  console.debug('calling with providerId: ', providerId);
+  console.debug('calling with profileId: ', profileId);
+
   return new Promise((resolve, reject) => {
     const redirectUri = `${window.location.protocol}//${window.location.host}/oauth`;
     const data = { provider_id: providerId, redirect_uri: redirectUri };
 
     axios.get(
       `/api/v1/profiles/${profileId}/providers`,
-      data,
-      { headers: { 'X-Key-Inflection': 'camel', Accept: 'application/json', Authorization: `Bearer ${accessToken}` } }
+      {
+        data,
+        headers: { 'X-Key-Inflection': 'camel', Accept: 'application/json', Authorization: `Bearer ${accessToken}` }
+      }
     )
-      .then(result => window.location = result.data.redirect_uri)
+      // .then(result => window.location = result.data.redirect_uri)
+      .then(result => console.debug('response: %O', result.data))
       .catch(error => reject(error));
   });
 }
