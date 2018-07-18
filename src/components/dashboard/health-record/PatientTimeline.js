@@ -2,7 +2,7 @@ import React, { Component } from 'react';
 import moment from 'moment';
 import Timeline from 'react-calendar-timeline/lib';
 import Legend from './TimelineLegend';
-
+import ReactTooltip from 'react-tooltip'
 import 'react-calendar-timeline/lib/lib/Timeline.css';
 import 'font-awesome/css/font-awesome.min.css';
 
@@ -10,21 +10,19 @@ export default class PatientTimeline extends Component {
 
   constructor(props){
     super(props);
-    const groups = [{ id: 1, title: 'Clara' }];
-
+    const groups = [{ id: 1, title: 'procedure' }, {id: 2, title: 'condition'}, {id: 3, title: 'lab'}, {id: 4, title: 'medication'}];
+    let groupHash = {}
+    groupHash['Procedure'] = ['fa fa-hospital-o', 1]
+    groupHash['Condition'] = ['fa fa-heartbeat', 2]
+    groupHash['Lab'] = ['fa fa-flask', 3]
+    groupHash['Medication'] = ['fa fa-stethoscope', 4]
     var i = 0;
     let items = [];
     for(i = 0; i < props.patientEvents.length; i++)
     {
-      items.push({id: i + 1, group: 1, title: props.patientEvents[i]["Description"], start_time: moment(props.patientEvents[i]["Date"]), end_time: moment(props.patientEvents[i]["Date"]).add(1, 'day'), style: {class: 'fa fa-heartbeat'} })
+      let descriptionTerm = props.patientEvents[i]['Description']
+      items.push({id: i + 1, group: groupHash[props.patientEvents[i]['Type']][1], title: descriptionTerm, start_time: moment(props.patientEvents[i]["Date"]), end_time: moment(props.patientEvents[i]["Date"]).add(1, 'day'), className: groupHash[props.patientEvents[i]['Type']][0], itemProps: {onClick: () => {alert(descriptionTerm) }}})
     }
-
-    //const items = [
-      //{ id: 1, group: 1, title: 'CBC - Complete Blood Count', start_time: moment('2018-06-18'), end_time: moment('2018-06-18').add(1, 'day') },
-      //{ id: 2, group: 1, title: 'CT of thorax, and pelvis with contrast', start_time: moment("2018-04-01"), end_time: moment('2018-04-01').add(0.5, 'hour') },
-      //{ id: 3, group: 1, title: 'CT of abdomen with contrast', start_time: moment('2015-08-04').add(2, 'hour'), end_time: moment('2015-08-04').add(3, 'hour') }
-
-    //];
 
     // Define the bounds of the timeline
     let visibleTimeStart = moment().clone().add(-2, 'years');
@@ -190,7 +188,8 @@ getMaxGroup = (items) => {
           sidebarContent={null}
           timeSteps={this.state.timeSteps}
           lineHeight={60}
-          itemHeightRatio={0.7}
+          lineWidth={40}
+          itemHeightRatio={1.0}
           canMove={false}
           canResize={false}
           canSelect={false}

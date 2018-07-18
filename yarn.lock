@@ -7705,7 +7705,7 @@ react-calendar-timeline@0.15.2:
     interact.js "^1.2.6"
     react-pure-render "^1.0.2"
 
-react-confirm-alert@:
+react-confirm-alert@^2.0.5:
   version "2.0.5"
   resolved "https://registry.yarnpkg.com/react-confirm-alert/-/react-confirm-alert-2.0.5.tgz#a450c4c773484da774298c3fa6c584f442ccfa4b"
 
@@ -8073,6 +8073,13 @@ react-themeable@^1.1.0:
   resolved "https://registry.yarnpkg.com/react-themeable/-/react-themeable-1.1.0.tgz#7d4466dd9b2b5fa75058727825e9f152ba379a0e"
   dependencies:
     object-assign "^3.0.0"
+
+react-tooltip@^3.6.1:
+  version "3.6.1"
+  resolved "https://registry.yarnpkg.com/react-tooltip/-/react-tooltip-3.6.1.tgz#2ca993baa50d7e0271b8d13c6024445a883842eb"
+  dependencies:
+    classnames "^2.2.5"
+    prop-types "^15.6.0"
 
 react-transition-group@^2.0.0, react-transition-group@^2.2.0, react-transition-group@^2.2.1, react-transition-group@^2.3.1:
   version "2.4.0"
