@@ -13,11 +13,7 @@ import Profiles from './dashboard/Profiles';
 import HealthRecord from './dashboard/HealthRecord';
 import Alerts from './dashboard/Alerts';
 import Providers from './dashboard/Providers';
-<<<<<<< HEAD
 import NoMatch from '../components/error-pages/Page404';
-=======
-import NoMatch from '../components/Pages/Page404';
->>>>>>> Implement the timeline for patients
 import OAuth from './OAuth/OAuth';
 
 // material ui theme
