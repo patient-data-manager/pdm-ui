@@ -14,11 +14,11 @@ export class Providers extends Component {
     const profileId = this.props.profile.id;
 
     return (
-      <div className="providers">
+      <div className='providers'>
         <a
           onClick={this.props.linkProvider(provider.id, profileId)}
           onKeyPress={this.props.linkProvider(provider.id, profileId)}
-          role="button"
+          role='button'
           tabIndex={-1}
         >
           {provider.name}
@@ -31,7 +31,7 @@ export class Providers extends Component {
     const providers = (this.props.providers || []).map(provider => this.renderProvider(provider));
 
     return (
-      <div className="providers">
+      <div className='providers'>
         {providers}
       </div>
     );

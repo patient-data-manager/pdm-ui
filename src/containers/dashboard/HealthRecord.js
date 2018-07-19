@@ -28,35 +28,35 @@ export class HealthRecord extends Component {
 
   renderHeader = (header) => {
     return (
-      <div className="health-record__header">
-        <div className="header-title" id={header}>{header}</div>
-        <div className="header-divider"></div>
+      <div className='health-record__header'>
+        <div className='header-title' id={header}>{header}</div>
+        <div className='header-divider'></div>
       </div>
     );
   }
 
   render() {
     return (
-      <div className="health-record">
-        <div className="health-record__toc"></div>
+      <div className='health-record'>
+        <div className='health-record__toc'></div>
 
-        <div className="health-record__content">
-          {this.renderHeader("summary")}
+        <div className='health-record__content'>
+          {this.renderHeader('summary')}
           <Summary />
 
-          {this.renderHeader("procedures")}
+          {this.renderHeader('procedures')}
           <Procedures />
 
-          {this.renderHeader("conditions")}
+          {this.renderHeader('conditions')}
           <Conditions />
 
-          {this.renderHeader("labs")}
+          {this.renderHeader('labs')}
           <Labs />
 
-          {this.renderHeader("medications")}
+          {this.renderHeader('medications')}
           <Medications />
 
-          {this.renderHeader("allergies")}
+          {this.renderHeader('allergies')}
           <Allergies />
         </div>
       </div>
