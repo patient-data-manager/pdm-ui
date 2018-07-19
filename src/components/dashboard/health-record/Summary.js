@@ -57,6 +57,11 @@ export default class Summary extends Component {
     );
   }
 }
+function mapStateToProps(state) {
+  return {
+    profile: state.profiles.activeProfile
+  };
+}
 
 Summary.propTypes = {
   patient: PropTypes.object.isRequired,
