@@ -3,8 +3,7 @@ import moment from 'moment';
 import Timeline from 'react-calendar-timeline/lib';
 import Legend from './TimelineLegend';
 import 'react-calendar-timeline/lib/lib/Timeline.css';
-import 'font-awesome/css/font-awesome.min.css';
-import './PatientTimeline.css'
+
 
 export default class PatientTimeline extends Component {
 
@@ -20,8 +19,18 @@ export default class PatientTimeline extends Component {
     let items = [];
     for(i = 0; i < props.patientEvents.length; i++)
     {
-      let descriptionTerm = props.patientEvents[i]['Description']
-      items.push({id: i + 1, group: groupHash[props.patientEvents[i]['Type']][1], title: descriptionTerm, start_time: moment(props.patientEvents[i]["Date"]), end_time: moment(props.patientEvents[i]["Date"]).add(1, 'day'), className: groupHash[props.patientEvents[i]['Type']][0], itemProps: {onClick: () => {alert(descriptionTerm) }}})
+      let descriptionTerm = props.patientEvents[i]['description'];
+      let endTime = props.patientEvents[i]['enddate'];
+
+      if(endTime === "present")
+      {
+        endTime = moment().clone();
+      }
+      else
+      {
+        endTime = moment(endTime);
+      }
+      items.push({id: i + 1, group: groupHash[props.patientEvents[i]['type']][1], title: descriptionTerm, start_time: moment(props.patientEvents[i]["startdate"]), end_time: endTime, className: groupHash[props.patientEvents[i]['type']][0], style: {backgroundColor: 'yellow'}, itemProps: {onClick: () => {alert(descriptionTerm) }}})
     }
 
     // Define the bounds of the timeline

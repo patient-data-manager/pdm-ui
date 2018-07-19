@@ -13,6 +13,7 @@ import 'react-day-picker/lib/style.css';
 import 'font-awesome/css/font-awesome.css';
 import 'bootstrap/dist/css/bootstrap.css';
 import 'bootstrap/dist/js/bootstrap.js';
+import 'react-calendar-timeline/lib/lib/Timeline.css';
 import './styles/App.css';
 
 const { store, persistor } = configureStore();
