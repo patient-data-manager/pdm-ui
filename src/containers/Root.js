@@ -13,7 +13,7 @@ import Profiles from './dashboard/Profiles';
 import HealthRecord from './dashboard/HealthRecord';
 import Alerts from './dashboard/Alerts';
 import Providers from './dashboard/Providers';
-import NoMatch from '../components/pages/Page404';
+import NoMatch from '../components/Pages/Page404';
 import OAuth from './OAuth/OAuth';
 
 // material ui theme
