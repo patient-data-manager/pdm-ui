@@ -28,24 +28,24 @@ function groupData(bundle) {
 
 function healthRecord(state = defaultState, action) {
   switch (action.type) {
-    case types.HEALTH_RECORD_REQUEST:
-      return {
-        ...state,
-        loadHealthRecord: { isLoading: true, loadStatus: null }
-      };
-    case types.HEALTH_RECORD_SUCCESS:
-      return {
-        ...state,
-        healthRecord: groupData(action.healthRecord),
-        loadHealthRecord: { isLoading: false, loadStatus: 'success' }
-      };
-    case types.HEALTH_RECORD_FAILURE:
-      return {
-        ...state,
-        loadHealthRecord: { isLoading: false, loadStatus: 'failure' }
-      };
-    default:
-      return state;
+  case types.HEALTH_RECORD_REQUEST:
+    return {
+      ...state,
+      loadHealthRecord: { isLoading: true, loadStatus: null }
+    };
+  case types.LOAD_HEALTH_RECORD_SUCCESS:
+    return {
+      ...state,
+      healthRecord: groupData(action.healthRecord),
+      loadHealthRecord: { isLoading: false, loadStatus: 'success' }
+    };
+  case types.LOAD_HEALTH_RECORD_FAILURE:
+    return {
+      ...state,
+      loadHealthRecord: { isLoading: false, loadStatus: 'failure' }
+    };
+  default:
+    return state;
   }
 }
 

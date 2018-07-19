@@ -63,7 +63,7 @@ export class HealthRecord extends Component {
     if (!healthRecord || (!healthRecord.Observation)) return null;
 
     return this.props.healthRecord.Observation.filter((o) => {
-        return o.category.filter(c => c.coding.filter(coding => coding.code === cat).length > 0).length > 0;
+      return o.category.filter(c => c.coding.filter(coding => coding.code === cat).length > 0).length > 0;
     });
   }
 
@@ -88,32 +88,28 @@ export class HealthRecord extends Component {
     );
   }
 
-  renderItems = (entries) => {
+  renderItems = entries => {
     return entries.map((entry) => {
-      return this.renderDefault(entry)
+      return this.renderDefault(entry);
     });
   }
 
-  renderDefault = (entry) => {
-    return (
-      <li>
-        {JSON.stringify(entry)}
-      </li>
-    );
+  renderDefault = entry => {
+    return <li>{JSON.stringify(entry)}</li>;
   }
 
   renderGroups = () => {
-    if(!this.props.healthRecord) return "";
+    if (!this.props.healthRecord) return "";
 
     let sections = [];
-    for(var x in this.props.healthRecord) {
-      sections.push(this.renderGroup(x,this.props.healthRecord[x]));
+    for (var x in this.props.healthRecord) {
+      sections.push(this.renderGroup(x, this.props.healthRecord[x]));
     }
 
     return sections;
   }
 
-  renderGroups() {
+  renderGroups = () => {
     if (!this.props.healthRecord) return "";
 
     let sections = [];
@@ -128,16 +124,13 @@ export class HealthRecord extends Component {
     return (
       <div>
         <h2>{name}</h2>
-
         <ul>{this.renderItems(entries)}</ul>
       </div>
     );
   }
 
-  renderItems = (entries) => {
-    return entries.map((e) => {
-      return this.renderDefault(e);
-    });
+  renderItems = entries => {
+    return entries.map(e => this.renderDefault(e));
   }
 
   renderDefault = (entry) => {
@@ -155,17 +148,11 @@ export class HealthRecord extends Component {
           {this.renderHeader("summary")}
           <Summary />
 
-          {this.renderHeader('procedures')}
-          <Procedures procedures={this.procedures()} />
-
           {this.renderHeader('conditions')}
           <Conditions conditions={this.conditions()} />
 
-          {this.renderHeader('labs')}
-          <Labs labs={this.labs()} />
-
-          {this.renderHeader('vitals')}
-          <Labs labs={this.vitals()} />
+          {this.renderHeader('allergies')}
+          <Allergies allergies={this.allergies()} />
 
           {this.renderHeader('medications')}
           <Medications medications={this.medications()} />
@@ -173,8 +160,14 @@ export class HealthRecord extends Component {
           {this.renderHeader('immunizations')}
           <Immunizations immunizations={this.immunizations()} />
 
-          {this.renderHeader('allergies')}
-          <Allergies allergies={this.allergies()} />
+          {this.renderHeader('procedures')}
+          <Procedures procedures={this.procedures()} />
+
+          {this.renderHeader('labs')}
+          <Labs labs={this.labs()} />
+
+          {this.renderHeader('vitals')}
+          <Labs labs={this.vitals()} />
         </div>
       </div>
     );

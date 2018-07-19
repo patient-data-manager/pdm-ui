@@ -59,7 +59,7 @@ const profileMockC = {
   relationship: "daughter",
   telephone: "(555) 934-2938",
   telephone_use: "home"
-}
+};
 
 export {
   profileMockA,

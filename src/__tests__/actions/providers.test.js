@@ -21,13 +21,13 @@ describe('providers actions', () => {
     it('should create LOAD_PROVIDERS_SUCCESS after successfully loading providers', () => {
       moxios.wait(() => {
         const request = moxios.requests.mostRecent();
-        request.respondWith({ status: 200, response: [ mockProviderA, mockProviderB ] });
+        request.respondWith({ status: 200, response: [mockProviderA, mockProviderB] });
       });
 
       const store = mockStore({ providers: [], auth: { accessToken: 'abc' } });
       const expectedActions = [
         { type: types.PROVIDERS_REQUEST },
-        { type: types.LOAD_PROVIDERS_SUCCESS, providers: [ mockProviderA, mockProviderB ] }
+        { type: types.LOAD_PROVIDERS_SUCCESS, providers: [mockProviderA, mockProviderB] }
       ];
 
       return store.dispatch(actions.loadProviders()).then(() => {
@@ -48,8 +48,8 @@ describe('providers actions', () => {
       });
 
       const store = mockStore({
-        profiles: [ mockProfile ],
-        providers: [ mockProviderA ],
+        profiles: [mockProfile],
+        providers: [mockProviderA],
         auth: { accessToken: 'abc' }
       });
       const expectedActions = [
@@ -58,6 +58,33 @@ describe('providers actions', () => {
       ];
 
       return store.dispatch(actions.linkProvider(mockProviderA.id, mockProfile.id)).then(() => {
+        expect(store.getActions()).toEqual(expectedActions);
+      });
+    });
+  });
+
+  // ----------------------- OAUTH CALLBACK --------------------------------- //
+  describe('should handle an oauth callback', () => {
+    beforeEach(() => { moxios.install(); });
+    afterEach(() => { moxios.uninstall(); });
+
+    it('should create OAUTH_CALLBACK_SUCCESS after successfully handling an oauth callback', () => {
+      moxios.wait(() => {
+        const request = moxios.requests.mostRecent();
+        request.respondWith({ status: 200 });
+      });
+
+      const store = mockStore({
+        profiles: [mockProfile],
+        providers: [mockProviderA],
+        auth: { accessToken: 'abc' }
+      });
+      const expectedActions = [
+        { type: types.OAUTH_CALLBACK_REQUEST },
+        { type: types.OAUTH_CALLBACK_SUCCESS }
+      ];
+
+      return store.dispatch(actions.oauthCallback('abc', '123')).then(() => {
         expect(store.getActions()).toEqual(expectedActions);
       });
     });

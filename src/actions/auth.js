@@ -88,8 +88,8 @@ export function loginUser(username, password) {
           dispatch(loginFailure(error));
           reject();
         });
-      });
-      // .then(data => dispatch(getCurrentUser(data.accessToken))); // TODO: add when backend works
+    });
+    // .then(data => dispatch(getCurrentUser(data.accessToken))); // TODO: add when backend works
   };
 }
 
@@ -142,7 +142,7 @@ function sendRegisterRequest(registrationInfo) {
     axios.post(
       '/users',
       { user: registrationInfo },
-      { headers: {'X-Key-Inflection': 'camel', 'Accept': 'application/json'} })
+      { headers: { 'X-Key-Inflection': 'camel', 'Accept': 'application/json' } })
       .then(result => resolve(result.data))
       .catch(error => reject(error));
   });
@@ -155,7 +155,7 @@ export function registerUser(registrationInfo) {
     return new Promise((resolve, reject) => {
       sendRegisterRequest(registrationInfo)
         .then(data => {
-          dispatch(registerSuccess())
+          dispatch(registerSuccess());
           resolve();
         })
         .catch(({ response }) => {

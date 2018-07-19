@@ -12,9 +12,6 @@ export class Providers extends Component {
 
   renderProvider = (provider) => {
     if (!provider || !this.props.profile) return;
-
-    console.debug('rendering provider...', provider);
-
     const profileId = this.props.profile.id;
 
     return (

@@ -6,7 +6,7 @@ import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
 import FlipMove from 'react-flip-move';
 import Button from '@material-ui/core/Button';
 
-import { loadProfiles, addProfile, updateProfile, deleteProfile, setActiveProfile} from '../../actions/profiles';
+import { loadProfiles, addProfile, updateProfile, deleteProfile, setActiveProfile } from '../../actions/profiles';
 import { loadHealthRecord } from '../../actions/healthRecords';
 import ProfileCard from '../../components/dashboard/profiles/ProfileCard';
 import ProfileForm from '../../components/dashboard/profiles/ProfileForm';
@@ -61,13 +61,13 @@ export class Profiles extends Component {
   renderNewForm = (showNewForm) => {
     if (showNewForm) {
       return (
-        <div className='profiles__new-form'>
-          <div className='profiles__new-form-title'>
-            <div className='profiles__new-form-icon'>
-              <FontAwesomeIcon icon='user-circle' />
+        <div className="profiles__new-form">
+          <div className="profiles__new-form-title">
+            <div className="profiles__new-form-icon">
+              <FontAwesomeIcon icon="user-circle" />
             </div>
 
-            <div className='profiles__new-form-label'>
+            <div className="profiles__new-form-label">
               Create new profile:
             </div>
           </div>
@@ -82,9 +82,9 @@ export class Profiles extends Component {
     }
 
     return (
-      <div className='profiles__new-button'>
-        <Button color='primary' onClick={this.loadNewForm}>
-          <FontAwesomeIcon icon='plus-circle' />NEW
+      <div className="profiles__new-button">
+        <Button color="primary" onClick={this.loadNewForm}>
+          <FontAwesomeIcon icon="plus-circle" />NEW
         </Button>
       </div>
     );
@@ -94,12 +94,12 @@ export class Profiles extends Component {
     const { showNewForm } = this.state;
 
     return (
-      <div className='profiles'>
-        <FlipMove className='profiles__flip-list'>
+      <div className="profiles">
+        <FlipMove className="profiles__flip-list">
           {this.renderProfilesList()}
         </FlipMove>
 
-        <div className='profiles__new'>
+        <div className="profiles__new">
           {this.renderNewForm(showNewForm)}
         </div>
       </div>

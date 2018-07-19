@@ -4,7 +4,7 @@ import { connect } from 'react-redux';
 export class Alerts extends Component {
   render() {
     return (
-      <div className='alerts'></div>
+      <div className="alerts"></div>
     );
   }
 }

@@ -70,22 +70,16 @@ function linkProviderFailure(error) {
 }
 
 function sendLinkProviderRequest(providerId, profileId, accessToken) {
-  console.debug('calling with providerId: ', providerId);
-  console.debug('calling with profileId: ', profileId);
-
   return new Promise((resolve, reject) => {
     const redirectUri = `${window.location.protocol}//${window.location.host}/oauth`;
     const data = { provider_id: providerId, redirect_uri: redirectUri };
 
-    axios.get(
+    axios.post(
       `/api/v1/profiles/${profileId}/providers`,
-      {
-        data,
-        headers: { 'X-Key-Inflection': 'camel', Accept: 'application/json', Authorization: `Bearer ${accessToken}` }
-      }
+      data,
+      { headers: { 'X-Key-Inflection': 'camel', Accept: 'application/json', Authorization: `Bearer ${accessToken}` } }
     )
-      // .then(result => window.location = result.data.redirect_uri)
-      .then(result => console.debug('response: %O', result.data))
+      .then(result => window.location = result.data.redirect_uri)
       .catch(error => reject(error));
   });
 }
@@ -102,34 +96,57 @@ export function linkProvider(providerId, profileId) {
   };
 }
 
-// ---------------
+// ------------------------- OAUTH CALLBACK -------------------------------- //
 
-// export function linkProvider(provider_id, profile_id) {
-//   return (dispatch, getState) => {
-//     const accessToken = getState().auth.accessToken;
-//     const redirect_uri = `${window.location.protocol}//${window.location.host}/oauth`;
-//     const data = { provider_id, redirect_uri };
+function requestOauthCallback() {
+  return {
+    type: types.OAUTH_CALLBACK_REQUEST
+  };
+}
 
-//     axios.post(
-//       `/api/v1/profiles/${profile_id}/providers`,
-//       data,
-//       { headers: { 'X-Key-Inflection': 'camel', Accept: 'application/json', Authorization:
-//`Bearer ${accessToken}` } }
-//     )
-//       .then((response) => {
-//         // window.location = response.data.redirect_uri;
-//       });
-//   }
-// }
+function oauthCallbackSuccess() {
+  return {
+    type: types.OAUTH_CALLBACK_SUCCESS
+  };
+}
+
+function oauthCallbackFailure(error) {
+  return {
+    type: types.OAUTH_CALLBACK_FAILURE,
+    status: error.response.status,
+    statusText: error.response.statusText
+  };
+}
+
+function sendOauthCallbackRequest(state, code) {
+  return new Promise((resolve, reject) => {
+    axios.get(
+      `/oauth/callback?state=${state}&code=${code}`,
+      { headers: { 'X-Key-Inflection': 'camel', Accept: 'application/json' } }
+    )
+      .then(result => window.location = result.data.redirect_uri)
+      .catch(error => reject(error));
+  });
+}
 
 export function oauthCallback(state, code) {
-  return (dispatch, getState) => {
-    return {
-      type: types.PROVIDE_OAUTH_TOKEN,
-      payload: axios.get(
-        `/oauth/callback?state=${state}&code=${code}`,
-        { headers: { 'X-Key-Inflection': 'camel', Accept: 'application/json' } }
-      )
-    };
-  }
+  return (dispatch) => {
+    dispatch(requestOauthCallback());
+
+    return sendOauthCallbackRequest(state, code)
+      .then(data => dispatch(oauthCallbackSuccess()))
+      .catch(error => dispatch(oauthCallbackFailure(error)));
+  };
 }
+
+// export function oauthCallback(state, code) {
+//   return (dispatch, getState) => {
+//     return {
+//       type: types.PROVIDE_OAUTH_TOKEN,
+//       payload: axios.get(
+//         `/oauth/callback?state=${state}&code=${code}`,
+//         { headers: { 'X-Key-Inflection': 'camel', Accept: 'application/json' } }
+//       )
+//     };
+//   }
+// }

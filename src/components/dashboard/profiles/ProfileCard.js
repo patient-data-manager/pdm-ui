@@ -75,7 +75,7 @@ export default class ProfileCard extends Component {
 
   renderIcon = () => {
     const { profile, activeProfile } = this.props;
-    const iconClassnames = classNames('user-icon', {'active': activeProfile && profile.id === activeProfile.id });
+    const iconClassnames = classNames('user-icon', { 'active': activeProfile && profile.id === activeProfile.id });
 
     if (profile.relationship === 'self') {
       return <UserStarIcon height="43" className={iconClassnames} />;

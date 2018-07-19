@@ -11,14 +11,14 @@ function requestHealthRecord() {
 
 function loadHealthRecordSuccess(healthRecord) {
   return {
-    type: types.HEALTH_RECORD_SUCCESS,
+    type: types.LOAD_HEALTH_RECORD_SUCCESS,
     healthRecord
   };
 }
 
 function loadHealthRecordFailure(error) {
   return {
-    type: types.HEALTH_RECORD_FAILURE,
+    type: types.LOAD_HEALTH_RECORD_FAILURE,
     error
   };
 }
