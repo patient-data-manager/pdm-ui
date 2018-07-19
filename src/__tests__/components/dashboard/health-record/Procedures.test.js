@@ -2,12 +2,12 @@ import { fullRenderComponent } from '../../../../utils/testHelpers';
 import Procedures from '../../../../components/dashboard/health-record/Procedures';
 
 function setup() {
-    return fullRenderComponent(Procedures);
+  return fullRenderComponent(Procedures);
 }
 
 it('renders self and self components', () => {
-    const component = setup();
+  const component = setup();
 
-    expect(component).toBeDefined();
-    expect(component.find('div.health-record__procedures')).toExist();
+  expect(component).toBeDefined();
+  expect(component.find('div.health-record__procedures')).toExist();
 });
