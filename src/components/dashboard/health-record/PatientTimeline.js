@@ -5,6 +5,7 @@ import Legend from './TimelineLegend';
 import ReactTooltip from 'react-tooltip'
 import 'react-calendar-timeline/lib/lib/Timeline.css';
 import 'font-awesome/css/font-awesome.min.css';
+import './PatientTimeline.css'
 
 export default class PatientTimeline extends Component {
 
@@ -25,15 +26,14 @@ export default class PatientTimeline extends Component {
     }
 
     // Define the bounds of the timeline
-    let visibleTimeStart = moment().clone().add(-2, 'years');
-    let visibleTimeEnd = moment().clone().add(3, 'months');
+    let visibleTimeStart = moment().clone().add(-1, 'years');
+    let visibleTimeEnd = moment().clone()
     this.state = {
     items: items,
     groups: groups,
     visibleTimeStart: visibleTimeStart,
     visibleTimeEnd: visibleTimeEnd,
     timeSteps: {
-        second: 1,
         minute: 1,
         hour: 1,
         day: 1,
@@ -45,7 +45,12 @@ export default class PatientTimeline extends Component {
         {icon: 'heartbeat', description: 'condition'},
         {icon: 'flask', description: 'lab'},
         {icon: 'stethoscope', description: 'medication'}
-    ]
+    ],
+    hoverItem: {
+    title: '',
+    details: '',
+    style: {top: 0, left: 0, display: 'none'}
+}
   };
   this.oneMonth = this.oneMonth.bind(this)
   this.threeMonth = this.threeMonth.bind(this)
@@ -92,7 +97,7 @@ oneYear() {
 }
 
 fiveYear() {
-  let visibleTimeStart = moment().clone().add(-5, 'year');
+  let visibleTimeStart = moment().clone().add(-5, 'year')
   let visibleTimeEnd = moment().clone()
   this.setState({
   visibleTimeStart: visibleTimeStart,
@@ -151,7 +156,6 @@ getMaxGroup = (items) => {
 }
   render() {
     return (
-
       <div>
       <div align="right">
       <button onClick={this.oneMonth}>
