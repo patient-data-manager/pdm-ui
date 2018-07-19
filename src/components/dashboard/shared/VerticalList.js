@@ -1,5 +1,4 @@
 import React, { Component } from 'react';
-import FontAwesome from 'react-fontawesome';
 import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
 import Badge from '@material-ui/core/Badge';
 import moment from 'moment';
@@ -29,21 +28,20 @@ export default class VerticalList extends Component {
   }
 
   renderViewMoreIcon = () => {
-    return <FontAwesome name="ellipsis-h" />;
+    return <FontAwesomeIcon icon="ellipsis-h" />;
   }
 
   renderListIcon = () => {
     let icon = '';
 
-    if (this.props.listType === "procedures") {
+    if (this.props.listType === 'procedures') {
       icon = <FontAwesomeIcon icon="hospital" />;
-    } else if (this.props.listType === "conditions") {
-      icon = <FontAwesome name="heartbeat" />;
-    } else if (this.props.listType === "labs") {
-      icon = <FontAwesome name="flask" />;
-    // TO-DO: find pill icon
-    // } else if (this.props.listType === 'medications') {
-    //     icon = <FontAwesomeIcon icon={'pills'} />;
+    } else if (this.props.listType === 'conditions') {
+      icon = <FontAwesomeIcon icon="heartbeat" />;
+    } else if (this.props.listType === 'labs') {
+      icon = <FontAwesomeIcon icon="flask" />;
+    } else if (this.props.listType === 'medications') {
+      icon = <FontAwesomeIcon icon="pills" />;
     }
 
     return (icon);

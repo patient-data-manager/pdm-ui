@@ -1,7 +1,7 @@
 import React, { Component } from 'react';
 import VerticalList from '../shared/VerticalList';
 
-export class Procedures extends Component {
+export default class Procedures extends Component {
   render() {
     return (
       <div className="health-record__procedures">
@@ -18,5 +18,3 @@ export class Procedures extends Component {
     return this.props.procedures.map((p) => ({ date: p.performedDateTime, text: p.code.text }));
   }
 }
-
-export default Procedures;

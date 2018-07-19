@@ -4,7 +4,7 @@ import { Link } from 'react-router-dom';
 import Button from '@material-ui/core/Button';
 import Menu from '@material-ui/core/Menu';
 import MenuItem from '@material-ui/core/MenuItem';
-import FontAwesome from 'react-fontawesome';
+import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
 
 export default class Header extends Component {
   constructor(props) {
@@ -41,7 +41,7 @@ export default class Header extends Component {
             aria-haspopup="true"
             onClick={this.handleClick}
           >
-            {authUser} <FontAwesome name="chevron-down" className="menu-arrow" />
+            {authUser} <FontAwesomeIcon icon="chevron-down" className="menu-arrow" />
           </Button>
 
           <Menu
@@ -53,7 +53,7 @@ export default class Header extends Component {
           >
             <MenuItem onClick={this.handleClose} className="header__menu-item">
               <div onClick={this.handleLogout} onKeyPress={this.handleLogout} role="menuitem" tabIndex={0}>
-                <FontAwesome name="sign-out" /> Logout
+                <FontAwesomeIcon icon="sign-out-alt" /> Logout
               </div>
             </MenuItem>
           </Menu>

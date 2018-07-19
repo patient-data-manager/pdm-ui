@@ -5,7 +5,7 @@ import { bindActionCreators } from 'redux';
 import { Redirect, Link } from 'react-router-dom';
 import Button from '@material-ui/core/Button';
 import { ValidatorForm, TextValidator } from 'react-material-ui-form-validator';
-import FontAwesome from 'react-fontawesome';
+import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
 
 import { loginUser, resetLoginStatus } from '../../actions/auth';
 
@@ -98,14 +98,14 @@ export class Login extends Component {
 
               {registrationStatusText &&
                 <div className="auth-message auth-success">
-                  <FontAwesome name="check" />
+                  <FontAwesomeIcon icon="check" />
                   {registrationStatusText}
                 </div>
               }
 
               {authStatusText &&
                 <div className="auth-message auth-error">
-                  <FontAwesome name="exclamation-circle" />
+                  <FontAwesomeIcon icon="exclamation-circle" />
                   {authStatusText}
                 </div>
               }
