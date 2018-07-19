@@ -1,4 +1,5 @@
 import React, { Component } from 'react';
+import PropTypes from 'prop-types';
 import VerticalList from '../shared/VerticalList';
 
 export default class Medications extends Component {
@@ -20,3 +21,11 @@ export default class Medications extends Component {
     });
   }
 }
+
+Medications.propTypes = {
+  medications: PropTypes.array
+};
+
+Medications.defaultProps = {
+  medications: []
+};

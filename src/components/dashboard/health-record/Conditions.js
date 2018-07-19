@@ -1,4 +1,5 @@
 import React, { Component } from 'react';
+import PropTypes from 'prop-types';
 import VerticalList from '../shared/VerticalList';
 
 export default class Conditions extends Component {
@@ -20,3 +21,11 @@ export default class Conditions extends Component {
     });
   }
 }
+
+Conditions.propTypes = {
+  conditions: PropTypes.array
+};
+
+Conditions.defaultProps = {
+  conditions: []
+};

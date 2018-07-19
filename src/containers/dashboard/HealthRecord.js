@@ -29,32 +29,12 @@ export class HealthRecord extends Component {
     tocbot.destroy();
   }
 
-  conditions() {
-    return this.props.healthRecord.Condition || [];
-  }
-
-  procedures() {
-    return this.props.healthRecord.Procedure || [];
-  }
-
-  medications() {
-    return this.props.healthRecord.MedicationStatement || [];
-  }
-
-  immunizations() {
-    return this.props.healthRecord.Immunization || [];
-  }
-
   labs() {
     return this.filterObservationsByCategory('laboratory') || [];
   }
 
   vitals() {
     return this.filterObservationsByCategory('vital-signs') || [];
-  }
-
-  allergies() {
-    return [];
   }
 
   filterObservationsByCategory(cat) {
@@ -140,28 +120,36 @@ export class HealthRecord extends Component {
   }
 
   render() {
+    const { healthRecord } = this.props;
+
+    if (this.props.loading) {
+      return (
+        <div className="loading">Loading...</div>
+      );
+    }
+
     return (
       <div className="health-record">
         <div className="health-record__toc"></div>
 
         <div className="health-record__content">
           {this.renderHeader("summary")}
-          <Summary />
+          <Summary patient={healthRecord.Patient[0]} profile={this.props.profile} />
 
           {this.renderHeader('conditions')}
-          <Conditions conditions={this.conditions()} />
+          <Conditions conditions={healthRecord.Condition} />
 
           {this.renderHeader('allergies')}
-          <Allergies allergies={this.allergies()} />
+          <Allergies allergies={[]} /> {/* TODO: Add allergies */}
 
           {this.renderHeader('medications')}
-          <Medications medications={this.medications()} />
+          <Medications medications={healthRecord.MedicationStatement} />
 
           {this.renderHeader('immunizations')}
-          <Immunizations immunizations={this.immunizations()} />
+          <Immunizations immunizations={healthRecord.Immunization} />
 
           {this.renderHeader('procedures')}
-          <Procedures procedures={this.procedures()} />
+          <Procedures procedures={healthRecord.Procedure} />
 
           {this.renderHeader('labs')}
           <Labs labs={this.labs()} />
@@ -176,7 +164,12 @@ export class HealthRecord extends Component {
 
 HealthRecord.propTypes = {
   profile: PropTypes.object,
-  healthRecord: PropTypes.object
+  healthRecord: PropTypes.object,
+  loading: PropTypes.bool
+};
+
+HealthRecord.defaultProps = {
+  healthRecord: {}
 };
 
 function mapDispatchToProps(dispatch) {
@@ -188,7 +181,8 @@ function mapDispatchToProps(dispatch) {
 function mapStateToProps(state) {
   return {
     profile: state.profiles.activeProfile,
-    healthRecord: state.healthRecords.healthRecord
+    healthRecord: state.healthRecords.healthRecord,
+    loading: state.profiles.loadProfiles.isLoading
   };
 }
 

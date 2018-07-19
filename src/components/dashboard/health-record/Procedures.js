@@ -1,4 +1,5 @@
 import React, { Component } from 'react';
+import PropTypes from 'prop-types';
 import VerticalList from '../shared/VerticalList';
 
 export default class Procedures extends Component {
@@ -9,7 +10,7 @@ export default class Procedures extends Component {
           list={this.procedures()}
           listType="procedures"
           dateProperty="date"
-          descriptionProperty="text"/>
+          descriptionProperty="text" />
       </div>
     );
   }
@@ -18,3 +19,11 @@ export default class Procedures extends Component {
     return this.props.procedures.map((p) => ({ date: p.performedDateTime, text: p.code.text }));
   }
 }
+
+Procedures.propTypes = {
+  procedures: PropTypes.array
+};
+
+Procedures.defaultProps = {
+  procedures: []
+};
