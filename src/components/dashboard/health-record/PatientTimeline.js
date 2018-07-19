@@ -5,6 +5,7 @@ import Legend from './TimelineLegend';
 import ReactTooltip from 'react-tooltip'
 import 'react-calendar-timeline/lib/lib/Timeline.css';
 import 'font-awesome/css/font-awesome.min.css';
+import './PatientTimeline.css'
 
 export default class PatientTimeline extends Component {
 
