@@ -1,22 +1,20 @@
 import React, { Component } from 'react';
 import PropTypes from 'prop-types';
-import VerticalList from '../shared/VerticalList';
+import VerticalTimeline from '../shared/VerticalTimeline';
 
 export default class Procedures extends Component {
+  procedures() {
+    return this.props.procedures.map((p) => ({ date: p.performedDateTime, text: p.code.text }));
+  }
+
   render() {
     return (
       <div className="health-record__procedures">
-        <VerticalList
-          list={this.procedures()}
-          listType="procedures"
-          dateProperty="date"
-          descriptionProperty="text" />
+        <VerticalTimeline
+          items={this.procedures()}
+          icon="hospital" />
       </div>
     );
-  }
-
-  procedures() {
-    return this.props.procedures.map((p) => ({ date: p.performedDateTime, text: p.code.text }));
   }
 }
 

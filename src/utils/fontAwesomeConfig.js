@@ -1,21 +1,34 @@
 import { library } from '@fortawesome/fontawesome-svg-core';
 import {
-  faUserCircle, faFileMedicalAlt, faExclamationCircle, faHospital, faEdit, faPlusCircle,
-  faEllipsisH, faHeartbeat, faFlask, faChevronDown, faSignOutAlt, faCheck, faPills
+  faCheck,
+  faChevronDown,
+  faCircle,
+  faEdit,
+  faEllipsisH,
+  faExclamationCircle,
+  faFileMedicalAlt,
+  faFlask,
+  faHeartbeat,
+  faHospital,
+  faPills,
+  faPlusCircle,
+  faSignOutAlt,
+  faUserCircle
 } from '@fortawesome/free-solid-svg-icons';
 
 library.add(
-  faUserCircle,
-  faFileMedicalAlt,
-  faExclamationCircle,
-  faHospital,
-  faEdit,
-  faPlusCircle,
-  faEllipsisH,
-  faHeartbeat,
-  faFlask,
-  faChevronDown,
-  faSignOutAlt,
   faCheck,
-  faPills
+  faChevronDown,
+  faCircle,
+  faEdit,
+  faEllipsisH,
+  faExclamationCircle,
+  faFileMedicalAlt,
+  faFlask,
+  faHeartbeat,
+  faHospital,
+  faPills,
+  faPlusCircle,
+  faSignOutAlt,
+  faUserCircle
 );

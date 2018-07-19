@@ -1,7 +1,6 @@
 import React, { Component } from 'react';
 import PropTypes from 'prop-types';
 import { connect } from 'react-redux';
-import { bindActionCreators } from 'redux';
 import tocbot from 'tocbot';
 
 import Summary from '../../components/dashboard/health-record/Summary';
@@ -13,7 +12,25 @@ import Allergies from '../../components/dashboard/health-record/Allergies';
 import Immunizations from '../../components/dashboard/health-record/Immunizations';
 
 export class HealthRecord extends Component {
+  tocbotInitialized = false;
+
   componentDidMount() {
+    if (!this.tocbotInitialized && !this.props.loading) {
+      this.initializeTocbot();
+    }
+  }
+
+  componentDidUpdate() {
+    if (!this.tocbotInitialized && !this.props.loading) {
+      this.initializeTocbot();
+    }
+  }
+
+  componentWillUnmount() {
+    tocbot.destroy();
+  }
+
+  initializeTocbot() {
     tocbot.init({
       tocSelector: '.health-record__toc',           // where to render the table of contents
       contentSelector: '.health-record__content',   // where to grab the headings to build the table of contents
@@ -23,109 +40,49 @@ export class HealthRecord extends Component {
       includeHtml: true,                            // include the HTML markup from the heading node
       fixedSidebarOffset: 160                       // offset from top
     });
+    this.tocbotInitialized = true;
   }
 
-  componentWillUnmount() {
-    tocbot.destroy();
-  }
-
-  labs() {
-    return this.filterObservationsByCategory('laboratory') || [];
-  }
-
-  vitals() {
-    return this.filterObservationsByCategory('vital-signs') || [];
-  }
-
-  filterObservationsByCategory(cat) {
+  filterObservationsByCategory(category) {
     const { healthRecord } = this.props;
 
-    if (!healthRecord || (!healthRecord.Observation)) return null;
+    if (!healthRecord.Observation) return null;
 
-    return this.props.healthRecord.Observation.filter((o) => {
-      return o.category.filter(c => c.coding.filter(coding => coding.code === cat).length > 0).length > 0;
+    return this.props.healthRecord.Observation.filter((observation) => {
+      return observation.category.filter((cat) => {
+        return cat.coding.filter(coding => coding.code === category).length > 0;
+      }).length > 0;
     });
   }
 
-  renderHeader = (header) => {
+  renderSection = (header, SectionComponent, props) => {
     return (
-      <div className="health-record__header">
-        <div className="header-title" id={header}>{header}</div>
-        <div className="header-divider"></div>
+      <div className="health-record__section" key={header}>
+        <div className="health-record__header">
+          <div className="header-title" id={header}>{header}</div>
+          <div className="header-divider"></div>
+        </div>
+
+        <SectionComponent {...props} />
       </div>
-    );
-  }
-
-  renderGroup = (name, entries) => {
-    return (
-      <div>
-        <h2>{name}</h2>
-
-        <ul>
-          {this.renderItems(entries)}
-        </ul>
-      </div>
-    );
-  }
-
-  renderItems = entries => {
-    return entries.map((entry) => {
-      return this.renderDefault(entry);
-    });
-  }
-
-  renderDefault = entry => {
-    return <li>{JSON.stringify(entry)}</li>;
-  }
-
-  renderGroups = () => {
-    if (!this.props.healthRecord) return "";
-
-    let sections = [];
-    for (var x in this.props.healthRecord) {
-      sections.push(this.renderGroup(x, this.props.healthRecord[x]));
-    }
-
-    return sections;
-  }
-
-  renderGroups = () => {
-    if (!this.props.healthRecord) return "";
-
-    let sections = [];
-    for (let x in this.props.healthRecord) {
-      sections.push(this.renderGroup(x, this.props.healthRecord[x]));
-    }
-
-    return sections;
-  }
-
-  renderGroup = (name, entries) => {
-    return (
-      <div>
-        <h2>{name}</h2>
-        <ul>{this.renderItems(entries)}</ul>
-      </div>
-    );
-  }
-
-  renderItems = entries => {
-    return entries.map(e => this.renderDefault(e));
-  }
-
-  renderDefault = (entry) => {
-    return (
-      <li>{JSON.stringify(entry)}</li>
     );
   }
 
   render() {
-    const { healthRecord } = this.props;
+    const { healthRecord, profile, loading } = this.props;
+    const sections = [
+      { header: 'summary', component: Summary, props: { patient: healthRecord.Patient[0], profile } },
+      { header: 'conditions', component: Conditions, props: { conditions: healthRecord.Condition } },
+      { header: 'allergies', component: Allergies, props: { allergies: [] } },
+      { header: 'medications', component: Medications, props: { medications: healthRecord.MedicationStatement } },
+      { header: 'immunizations', component: Immunizations, props: { immunizations: healthRecord.Immunization } },
+      { header: 'procedures', component: Procedures, props: { procedures: healthRecord.Procedure } },
+      { header: 'labs', component: Labs, props: { labs: this.filterObservationsByCategory('laboratory') } },
+      { header: 'vitals', component: Labs, props: { labs: this.filterObservationsByCategory('vital-signs') } }
+    ];
 
-    if (this.props.loading) {
-      return (
-        <div className="loading">Loading...</div>
-      );
+    if (loading) {
+      return <div className="loading">Loading...</div>;
     }
 
     return (
@@ -133,29 +90,9 @@ export class HealthRecord extends Component {
         <div className="health-record__toc"></div>
 
         <div className="health-record__content">
-          {this.renderHeader("summary")}
-          <Summary patient={healthRecord.Patient[0]} profile={this.props.profile} />
-
-          {this.renderHeader('conditions')}
-          <Conditions conditions={healthRecord.Condition} />
-
-          {this.renderHeader('allergies')}
-          <Allergies allergies={[]} /> {/* TODO: Add allergies */}
-
-          {this.renderHeader('medications')}
-          <Medications medications={healthRecord.MedicationStatement} />
-
-          {this.renderHeader('immunizations')}
-          <Immunizations immunizations={healthRecord.Immunization} />
-
-          {this.renderHeader('procedures')}
-          <Procedures procedures={healthRecord.Procedure} />
-
-          {this.renderHeader('labs')}
-          <Labs labs={this.labs()} />
-
-          {this.renderHeader('vitals')}
-          <Labs labs={this.vitals()} />
+          {sections.map((section) => {
+            return this.renderSection(section.header, section.component, section.props);
+          })}
         </div>
       </div>
     );
@@ -172,12 +109,6 @@ HealthRecord.defaultProps = {
   healthRecord: {}
 };
 
-function mapDispatchToProps(dispatch) {
-  return bindActionCreators({
-
-  }, dispatch);
-}
-
 function mapStateToProps(state) {
   return {
     profile: state.profiles.activeProfile,
@@ -186,4 +117,4 @@ function mapStateToProps(state) {
   };
 }
 
-export default connect(mapStateToProps, mapDispatchToProps)(HealthRecord);
+export default connect(mapStateToProps)(HealthRecord);

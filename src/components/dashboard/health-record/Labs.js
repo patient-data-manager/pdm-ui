@@ -1,19 +1,8 @@
 import React, { Component } from 'react';
-import VerticalList from '../shared/VerticalList';
+import PropTypes from 'prop-types';
+import VerticalTimeline from '../shared/VerticalTimeline';
 
 export default class Labs extends Component {
-  render() {
-    return (
-      <div className="health-record__labs">
-        <VerticalList
-          list={this.labs()}
-          listType="labs"
-          dateProperty="date"
-          descriptionProperty="text" />
-      </div>
-    );
-  }
-
   labs() {
     let self = this;
     return this.props.labs.map((lab) => {
@@ -30,4 +19,22 @@ export default class Labs extends Component {
 
     return text;
   }
+
+  render() {
+    return (
+      <div className="health-record__labs">
+        <VerticalTimeline
+          items={this.labs()}
+          icon="flask" />
+      </div>
+    );
+  }
 }
+
+Labs.propTypes = {
+  labs: PropTypes.array
+};
+
+Labs.defaultProps = {
+  labs: []
+};

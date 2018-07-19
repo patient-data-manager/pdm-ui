@@ -1,19 +1,7 @@
 import React, { Component } from 'react';
-import VerticalList from '../shared/VerticalList';
+import VerticalTimeline from '../shared/VerticalTimeline';
 
 export default class VitalSigns extends Component {
-  render() {
-    return (
-      <div className="health-record__labs">
-        <VerticalList
-          list={this.vitals()}
-          listType="labs"
-          dateProperty="date"
-          descriptionProperty="text"/>
-      </div>
-    );
-  }
-
   vitals() {
     let self = this;
     return this.props.labs.map((lab) => {
@@ -29,5 +17,15 @@ export default class VitalSigns extends Component {
     }
 
     return text;
+  }
+
+  render() {
+    return (
+      <div className="health-record__labs">
+        <VerticalTimeline
+          items={this.vitals()}
+          listType="labs" />
+      </div>
+    );
   }
 }

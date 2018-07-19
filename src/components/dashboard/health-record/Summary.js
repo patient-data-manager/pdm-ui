@@ -26,7 +26,7 @@ export default class Summary extends Component {
 
           <div className="summary__table-row">
             <div className="summary__table-key">Gender</div>
-            <div className="summary__table-value">{patient.gender}</div>
+            <div className="summary__table-value">{profile.gender}</div>
           </div>
 
           <div className="summary__table-row">
