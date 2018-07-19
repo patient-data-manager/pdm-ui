@@ -22,6 +22,7 @@ export default class ProfileCard extends Component {
   setActiveProfile = () => {
     if (this.props.activeProfile && this.props.activeProfile.id !== this.props.profile.id) {
       this.props.setActiveProfile(this.props.profile.id);
+      this.props.loadHealthRecord(this.props.profile.id);
     }
   }
 
@@ -140,7 +141,8 @@ ProfileCard.propTypes = {
   alertsCount: PropTypes.number,
   updateProfile: PropTypes.func,
   deleteProfile: PropTypes.func,
-  setActiveProfile: PropTypes.func
+  setActiveProfile: PropTypes.func,
+  loadHealthRecord: PropTypes.func
 };
 
 ProfileCard.defaultProps = {

@@ -52,13 +52,17 @@ export class Conditions extends Component {
     render() {
         return(
             <div className='health-record__conditions'>
-                <VerticalList 
-                    list={mockList} 
+                <VerticalList
+                    list={this.conditions()}
                     listType='conditions'
                     dateProperty='date'
                     descriptionProperty='description'/>
             </div>
         );
+    }
+
+    conditions(){
+      return this.props.conditions.map( function(c){ return {date: c.onsetDateTime , text: c.code.text}});
     }
 }
 

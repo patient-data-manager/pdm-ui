@@ -6,8 +6,8 @@ import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
 import FlipMove from 'react-flip-move';
 import Button from '@material-ui/core/Button';
 
-import { loadProfiles, addProfile, updateProfile, deleteProfile, setActiveProfile } from '../../actions/profiles';
-
+import { loadProfiles, addProfile, updateProfile, deleteProfile, setActiveProfile} from '../../actions/profiles';
+import {loadHealthRecord} from '../../actions/health_record'
 import ProfileCard from '../../components/dashboard/profiles/ProfileCard';
 import ProfileForm from '../../components/dashboard/profiles/ProfileForm';
 
@@ -52,6 +52,7 @@ export class Profiles extends Component {
           profile={profile}
           activeProfile={this.props.activeProfile}
           setActiveProfile={this.props.setActiveProfile}
+          loadHealthRecord={this.props.loadHealthRecord}
           showEditBtn={true} />
       );
     });
@@ -123,7 +124,8 @@ function mapDispatchToProps(dispatch) {
     addProfile,
     updateProfile,
     deleteProfile,
-    setActiveProfile
+    setActiveProfile,
+    loadHealthRecord
   }, dispatch);
 }
 
