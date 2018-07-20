@@ -2,7 +2,6 @@ import React, { Component } from 'react';
 import moment from 'moment';
 import Timeline from 'react-calendar-timeline/lib';
 import Legend from './TimelineLegend';
-import 'react-calendar-timeline/lib/lib/Timeline.css';
 
 
 export default class PatientTimeline extends Component {
