@@ -17,6 +17,8 @@ export default class Labs extends Component {
   }
 
   render() {
+    if (this.props.labs.length === 0) return <div className="labs no-entries">No entries.</div>;
+
     return (
       <div className="labs">
         <VerticalTimeline items={this.labs()} icon="flask" />

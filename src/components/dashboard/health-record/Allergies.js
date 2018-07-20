@@ -5,7 +5,7 @@ export default class Allergies extends Component {
   render() {
     return (
       <div className="allergies">
-        <p>Insert allergy content here.</p>
+        <div className="no-entries">No entries.</div>
       </div>
     );
   }

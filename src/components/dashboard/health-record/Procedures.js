@@ -11,6 +11,8 @@ export default class Procedures extends Component {
   }
 
   render() {
+    if (this.props.procedures.length === 0) return <div className="procedures no-entries">No entries.</div>;
+
     return (
       <div className="procedures">
         <VerticalTimeline items={this.procedures()} icon="hospital" />

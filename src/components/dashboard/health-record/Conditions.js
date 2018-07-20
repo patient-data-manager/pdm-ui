@@ -11,6 +11,8 @@ export default class Conditions extends Component {
   }
 
   render() {
+    if (this.props.conditions.length === 0) return <div className="conditions no-entries">No entries.</div>;
+
     return (
       <div className="conditions">
         <VerticalTimeline items={this.conditions()} icon="heartbeat" />

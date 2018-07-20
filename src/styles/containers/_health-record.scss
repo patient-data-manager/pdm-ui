@@ -61,5 +61,10 @@
 
   &__section {
     padding: $global-padding;
+
+    .no-entries {
+      font-style: italic;
+      color: $color-blue-gray-dark;
+    }
   }
 }

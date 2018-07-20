@@ -11,6 +11,8 @@ export default class Immunizations extends Component {
   }
 
   render() {
+    if (this.props.immunizations.length === 0) return <div className="immunizations no-entries">No entries.</div>;
+
     return (
       <div className="immunizations">
         <VerticalTimeline items={this.immunizations()} icon="syringe" />

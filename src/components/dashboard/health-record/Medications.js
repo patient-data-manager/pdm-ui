@@ -11,6 +11,8 @@ export default class Medications extends Component {
   }
 
   render() {
+    if (this.props.medications.length === 0) return <div className="medications no-entries">No entries.</div>;
+
     return (
       <div className="medications">
         <VerticalTimeline items={this.medications()} icon="pills" />
