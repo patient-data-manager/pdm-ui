@@ -3,13 +3,13 @@ import PropTypes from 'prop-types';
 import { connect } from 'react-redux';
 import tocbot from 'tocbot';
 
-import Summary from '../../components/dashboard/health-record/Summary';
-import Procedures from '../../components/dashboard/health-record/Procedures';
+import Allergies from '../../components/dashboard/health-record/Allergies';
 import Conditions from '../../components/dashboard/health-record/Conditions';
+import Immunizations from '../../components/dashboard/health-record/Immunizations';
 import Labs from '../../components/dashboard/health-record/Labs';
 import Medications from '../../components/dashboard/health-record/Medications';
-import Allergies from '../../components/dashboard/health-record/Allergies';
-import Immunizations from '../../components/dashboard/health-record/Immunizations';
+import Procedures from '../../components/dashboard/health-record/Procedures';
+import Summary from '../../components/dashboard/health-record/Summary';
 
 export class HealthRecord extends Component {
   tocbotInitialized = false;
@@ -40,6 +40,7 @@ export class HealthRecord extends Component {
       includeHtml: true,                            // include the HTML markup from the heading node
       fixedSidebarOffset: 160                       // offset from top
     });
+
     this.tocbotInitialized = true;
   }
 

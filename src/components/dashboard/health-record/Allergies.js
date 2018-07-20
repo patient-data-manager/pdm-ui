@@ -4,7 +4,7 @@ import PropTypes from 'prop-types';
 export default class Allergies extends Component {
   render() {
     return (
-      <div className="health-record__allergies">
+      <div className="allergies">
         <p>Insert allergy content here.</p>
       </div>
     );

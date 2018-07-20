@@ -1,0 +1,49 @@
+.vertical-timeline {
+  display: flex;
+  flex-direction: column;
+  margin-left: 20px;
+
+  &__item {
+    display: flex;
+
+    &-info {
+      padding: 0 20px 15px 20px;
+      border-left: 1px solid $color-blue;
+      margin-left: -10px;
+    }
+
+    &:last-of-type {
+      .vertical-timeline__item-info {
+        border-left-style: dashed;
+      }
+    }
+
+    .info-date,
+    .info-description {
+      color: $color-blue-gray-dark;
+      font-size: 1.1em;
+    }
+
+    .info-date {
+      font-weight: 600;
+    }
+  }
+
+  &__view-more {
+    display: flex;
+    margin-left: -7px;
+    border: 0;
+    background-color: transparent;
+    cursor: pointer;
+
+    &-text {
+      color: $color-blue-gray-dark;
+      font-size: 1.1em;
+      margin-left: 12px;
+
+      &:hover {
+        color: $color-text;
+      }
+    }
+  }
+}

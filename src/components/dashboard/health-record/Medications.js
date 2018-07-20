@@ -1,5 +1,6 @@
 import React, { Component } from 'react';
 import PropTypes from 'prop-types';
+
 import VerticalTimeline from '../shared/VerticalTimeline';
 
 export default class Medications extends Component {
@@ -11,10 +12,8 @@ export default class Medications extends Component {
 
   render() {
     return (
-      <div className="health-record__medications">
-        <VerticalTimeline
-          items={this.medications()}
-          icon="pills" />
+      <div className="medications">
+        <VerticalTimeline items={this.medications()} icon="pills" />
       </div>
     );
   }

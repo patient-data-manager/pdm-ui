@@ -1,7 +1,6 @@
 import React, { Component } from 'react';
 import PropTypes from 'prop-types';
 import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
-import Badge from '@material-ui/core/Badge';
 import moment from 'moment';
 import memoize from 'memoize-one';
 
@@ -12,6 +11,7 @@ export default class VerticalTimeline extends Component {
     this.state = { displayCount: this.props.initialDisplayCount };
   }
 
+  // memoize will only call the function if items has changed, otherwise it will return the last value
   sortItems = memoize((items) => items.sort(((a, b) => moment(b.date) - moment(a.date))));
 
   handleViewMore = () => {
@@ -25,14 +25,10 @@ export default class VerticalTimeline extends Component {
 
   renderViewMore = () => {
     return (
-      <button className="vertical-list__view-more" onClick={this.handleViewMore}>
-        <div className="vertical-list__item-icon">
-          <Badge badgeContent={<FontAwesomeIcon icon="ellipsis-h" />} color="primary">
-            <span></span>
-          </Badge>
-        </div>
+      <button className="vertical-timeline__view-more" onClick={this.handleViewMore}>
+        <FontAwesomeIcon icon="ellipsis-h" className="icon-health-record" />
 
-        <div className="vertical-list__view-more-text">View More</div>
+        <div className="vertical-timeline__view-more-text">View More</div>
       </button>
     );
   }
@@ -45,25 +41,14 @@ export default class VerticalTimeline extends Component {
     return (
       <div className="vertical-timeline">
         {sortedItems.slice(0, displayCount).map((item, index) =>
-          <li key={index} className="vertical-list__item">
-            <div className="vertical-list__item-icon" >
-              <Badge badgeContent={<FontAwesomeIcon icon={icon} />} color="primary">
-                <span></span>
-              </Badge>
+          <div key={index} className="vertical-timeline__item">
+            <FontAwesomeIcon icon={icon} className="icon-health-record" />
+
+            <div className="vertical-timeline__item-info">
+              <div className="info-date">{moment(item.date).format('MMM D, YYYY')}</div>
+              <div className="info-description">{item.text}</div>
             </div>
-
-            <div className="vertical-list__item-info">
-              <div className="vertical-list__item-date">
-                {item['date']}
-              </div>
-
-              <div className="vertical-list__item-description">
-                {item['text']}
-              </div>
-            </div>
-
-            <div className="vertical-list__item-btn"></div>
-          </li>
+          </div>
         )}
 
         {(sortedItems.length > displayCount) && this.renderViewMore()}

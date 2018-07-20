@@ -9,5 +9,5 @@ it('renders self and self components', () => {
   const component = setup();
 
   expect(component).toBeDefined();
-  expect(component.find('div.health-record__conditions')).toExist();
+  expect(component.find('div.conditions')).toExist();
 });
