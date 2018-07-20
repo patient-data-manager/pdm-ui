@@ -12,7 +12,7 @@ export default class Allergies extends Component {
       <div className="allergies">
         <div className="allergies__table-label">Current allergy list</div>
         <div className="allergies__table">
-          <div className="allergies__table-row allergies__table-header">
+          <div className="allergies__table-header">
             <div className="allergies__table-allergy"><span> allergy</span></div>
             <div className="allergies__table-severity"><span> severity</span></div>
             <div className="allergies__table-status"><span> current status</span></div>

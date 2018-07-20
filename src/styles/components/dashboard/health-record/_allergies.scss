@@ -14,9 +14,15 @@
       padding-bottom: 5px;
     }
 
-    &-header span {
-      font-weight: bold;
-      border-bottom: 1.5px solid $color-blue;
+    &-header {
+      display: flex;
+      flex-direction: row;
+      padding: 5px 0px;
+
+      span {
+        font-weight: bold;
+        border-bottom: 1.5px solid $color-blue;
+      }
     }
 
     &-row {

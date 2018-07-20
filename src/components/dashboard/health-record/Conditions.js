@@ -21,7 +21,7 @@ export default class Conditions extends Component {
       <div className="conditions">
         <div className="conditions__table-label">Current conditions list</div>
         <div className="conditions__table">
-          <div className="conditions__table-row conditions__table-header">
+          <div className="conditions__table-header">
             <div className="conditions__table-condition"><span> condition</span></div>
             <div className="conditions__table-diagnosed-date"><span> diagnosed date</span></div>
             <div className="conditions__table-diagnosed-by"><span> diagnosed by</span></div>

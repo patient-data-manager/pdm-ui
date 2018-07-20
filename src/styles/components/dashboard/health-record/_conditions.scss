@@ -15,15 +15,26 @@
       padding-bottom: 5px;
     }
 
-    &-header span {
-      font-weight: bold;
-      border-bottom: 1.5px solid $color-blue;
+    &-header {
+      display: flex;
+      flex-direction: row;
+      padding: 5px 0px;
+
+      span {
+        font-weight: bold;
+        border-bottom: 1.5px solid $color-blue;
+      }
     }
 
     &-row {
       display: flex;
       flex-direction: row;
       padding: 5px 0px;
+
+      .conditions__table-diagnosed-by {
+        color: $color-blue;
+        font-weight: bold;
+      }
     }
 
     &-condition {
