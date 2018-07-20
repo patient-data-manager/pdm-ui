@@ -3,7 +3,8 @@ import PropTypes from 'prop-types';
 
 export default class Allergies extends Component {
   render() {
-    const allergies = this.props.allergies.sort(((a, b) => b.clinicalStatus < a.clinicalStatus));
+    const allergies = this.props.allergies.sort(((a, b) => b.code.text < a.code.text))
+      .sort(((a, b) => b.clinicalStatus < a.clinicalStatus));
 
     return (
       <div className="allergies">
