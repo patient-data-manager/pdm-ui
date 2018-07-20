@@ -14,8 +14,9 @@ export default class Conditions extends Component {
   render() {
     if (this.props.conditions.length === 0) return <div className="conditions no-entries">No entries.</div>;
 
-    const currentConditions = this.props.conditions.filter((condition) => 'active' === condition.clinicalStatus);
-	 added and populated conditions table
+    const currentConditions = this.props.conditions.filter((condition) => 'active' === condition.clinicalStatus)
+      .sort(((a, b) => moment(b.onsetDateTime) - moment(a.onsetDateTime)));
+
     return (
       <div className="conditions">
         <div className="conditions__table-label">Current conditions list</div>
