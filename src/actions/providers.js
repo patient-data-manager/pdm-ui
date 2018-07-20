@@ -140,15 +140,3 @@ export function oauthCallback(state, code) {
       .catch(error => dispatch(oauthCallbackFailure(error)));
   };
 }
-
-// export function oauthCallback(state, code) {
-//   return (dispatch, getState) => {
-//     return {
-//       type: types.PROVIDE_OAUTH_TOKEN,
-//       payload: axios.get(
-//         `/oauth/callback?state=${state}&code=${code}`,
-//         { headers: { 'X-Key-Inflection': 'camel', Accept: 'application/json' } }
-//       )
-//     };
-//   }
-// }

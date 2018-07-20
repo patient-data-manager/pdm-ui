@@ -5,11 +5,7 @@ import moxios from 'moxios';
 import * as actions from '../../actions/healthRecords';
 import * as types from '../../actions/types';
 
-// const mockProfileA = { id: 1, name: "Jane Doe" };
-// const mockProfileB = { id: 2, name: "John Doe" };
-// const mockProfileC = { id: 1, name: "Janey Doe" };
 const mockHealthRecord = { id: 1 };
-
 const middlewares = [thunk];
 const mockStore = configureMockStore(middlewares);
 
