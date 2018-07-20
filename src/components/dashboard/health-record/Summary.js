@@ -5,10 +5,14 @@ import moment from 'moment';
 export default class Summary extends Component {
   render() {
     const { patient, profile } = this.props;
-    const patientName = `${patient.name[0].given[0]} ${patient.name[0].family}`;
-    const patientAge = moment().diff(profile.dob, 'years');
-    const patientDOB = `${moment(profile.dob).format('MMM D, YYYY')} (age ${patientAge})`;
-    const patientAddress = `${profile.street}, ${profile.city}, ${profile.state} ${profile.zip}`;
+    let patientName, patientAge, patientDOB, patientAddress;
+
+    if (Object.keys(patient).length > 0) {
+      patientName = `${patient.name[0].given[0]} ${patient.name[0].family}`;
+      patientAge = moment().diff(profile.dob, 'years');
+      patientDOB = `${moment(profile.dob).format('MMM D, YYYY')} (age ${patientAge})`;
+      patientAddress = `${profile.street}, ${profile.city}, ${profile.state} ${profile.zip}`;
+    }
 
     return (
       <div className="summary">
