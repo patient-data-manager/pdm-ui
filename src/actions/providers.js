@@ -55,9 +55,10 @@ function requestLinkProviders() {
   };
 }
 
-function linkProviderSuccess() {
+function linkProviderSuccess(redirectUri) {
   return {
-    type: types.LINK_PROVIDER_SUCCESS
+    type: types.LINK_PROVIDER_SUCCESS,
+    redirectUri
   };
 }
 
@@ -79,7 +80,7 @@ function sendLinkProviderRequest(providerId, profileId, accessToken) {
       data,
       { headers: { 'X-Key-Inflection': 'camel', Accept: 'application/json', Authorization: `Bearer ${accessToken}` } }
     )
-      .then(result => window.location = result.data.redirect_uri)
+      .then(result => resolve(result.data.redirect_uri))
       .catch(error => reject(error));
   });
 }
@@ -91,7 +92,7 @@ export function linkProvider(providerId, profileId) {
     dispatch(requestLinkProviders());
 
     return sendLinkProviderRequest(providerId, profileId, accessToken)
-      .then(data => dispatch(linkProviderSuccess()))
+      .then(uri => dispatch(linkProviderSuccess(uri)))
       .catch(error => dispatch(linkProviderFailure(error)));
   };
 }
@@ -104,9 +105,10 @@ function requestOauthCallback() {
   };
 }
 
-function oauthCallbackSuccess() {
+function oauthCallbackSuccess(redirectUri) {
   return {
-    type: types.OAUTH_CALLBACK_SUCCESS
+    type: types.OAUTH_CALLBACK_SUCCESS,
+    redirectUri
   };
 }
 
@@ -124,7 +126,7 @@ function sendOauthCallbackRequest(state, code) {
       `/oauth/callback?state=${state}&code=${code}`,
       { headers: { 'X-Key-Inflection': 'camel', Accept: 'application/json' } }
     )
-      .then(result => window.location = result.data.redirect_uri)
+      .then(result => resolve(result.data.redirect_uri))
       .catch(error => reject(error));
   });
 }
@@ -134,7 +136,7 @@ export function oauthCallback(state, code) {
     dispatch(requestOauthCallback());
 
     return sendOauthCallbackRequest(state, code)
-      .then(data => dispatch(oauthCallbackSuccess()))
+      .then(uri => dispatch(oauthCallbackSuccess(uri)))
       .catch(error => dispatch(oauthCallbackFailure(error)));
   };
 }

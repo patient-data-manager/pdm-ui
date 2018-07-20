@@ -2,6 +2,11 @@ import * as types from '../../actions/types';
 import reducer from '../../reducers/providers';
 
 describe('providers reducer', () => {
+  const origWindowAssign = window.location.assign;
+
+  beforeEach(() => { window.location.assign = jest.fn(); });
+  afterEach(() => { window.location.assign = origWindowAssign; });
+
   it('should return the initial state', () => {
     expect(reducer(undefined, {})).toEqual({
       providers: [],
@@ -38,11 +43,12 @@ describe('providers reducer', () => {
     let newState = { linkProvider: { isLinking: true, linkStatus: null } };
     expect(reducer([], action)).toEqual(newState);
 
-    action = { type: types.LINK_PROVIDER_SUCCESS };
+    action = { type: types.LINK_PROVIDER_SUCCESS, redirectUri: 'http://localhost:8000/oauth' };
     newState = {
       linkProvider: { isLinking: false, linkStatus: 'success' }
     };
     expect(reducer(previousState, action)).toEqual(newState);
+    expect(window.location.assign).toBeCalledWith('http://localhost:8000/oauth');
 
     action = { type: types.LINK_PROVIDER_FAILURE, status: 'Test status', statusText: 'Test status message' };
     newState = { linkProvider: { isLinking: false, linkStatus: 'failure' } };

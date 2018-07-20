@@ -44,7 +44,7 @@ describe('providers actions', () => {
     it('should create LINK_PROVIDER_SUCCESS after successfully linking a provider', () => {
       moxios.wait(() => {
         const request = moxios.requests.mostRecent();
-        request.respondWith({ status: 200 });
+        request.respondWith({ status: 200, response: { redirect_uri: 'http://localhost:8000/oauth' } });
       });
 
       const store = mockStore({
@@ -52,9 +52,10 @@ describe('providers actions', () => {
         providers: [mockProviderA],
         auth: { accessToken: 'abc' }
       });
+
       const expectedActions = [
         { type: types.LINK_PROVIDER_REQUEST },
-        { type: types.LINK_PROVIDER_SUCCESS }
+        { type: types.LINK_PROVIDER_SUCCESS, redirectUri: 'http://localhost:8000/oauth' }
       ];
 
       return store.dispatch(actions.linkProvider(mockProviderA.id, mockProfile.id)).then(() => {
@@ -71,7 +72,7 @@ describe('providers actions', () => {
     it('should create OAUTH_CALLBACK_SUCCESS after successfully handling an oauth callback', () => {
       moxios.wait(() => {
         const request = moxios.requests.mostRecent();
-        request.respondWith({ status: 200 });
+        request.respondWith({ status: 200, response: { redirect_uri: 'http://localhost:8000/oauth' } });
       });
 
       const store = mockStore({
@@ -79,9 +80,10 @@ describe('providers actions', () => {
         providers: [mockProviderA],
         auth: { accessToken: 'abc' }
       });
+
       const expectedActions = [
         { type: types.OAUTH_CALLBACK_REQUEST },
-        { type: types.OAUTH_CALLBACK_SUCCESS }
+        { type: types.OAUTH_CALLBACK_SUCCESS, redirectUri: 'http://localhost:8000/oauth' }
       ];
 
       return store.dispatch(actions.oauthCallback('abc', '123')).then(() => {

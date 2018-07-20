@@ -1,19 +1,16 @@
-import { fullRenderComponent } from '../../../utils/testHelpers';
+import { fullRenderContainer } from '../../../utils/testHelpers';
 import Alerts from '../../../containers/dashboard/Alerts';
 
 function setup() {
-  const store = {
-    auth: {
-      accessToken: 'abcd'
-    }
-  };
+  const store = {};
   const props = {};
 
-  return fullRenderComponent(Alerts, props, store);
+  return fullRenderContainer(Alerts, props, store);
 }
 
 it('renders self and self components', () => {
   const component = setup();
 
   expect(component).toBeDefined();
+  expect(component.find('div.alerts')).toExist();
 });

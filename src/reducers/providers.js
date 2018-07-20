@@ -30,10 +30,16 @@ function providers(state = defaultState, action) {
       linkProvider: { isLinking: true, linkStatus: null }
     };
   case types.LINK_PROVIDER_SUCCESS:
+    window.location.assign(action.redirectUri);
+
     return {
       ...state,
       linkProvider: { isLinking: false, linkStatus: 'success' }
     };
+  case types.OAUTH_CALLBACK_SUCCESS:
+    window.location.assign(action.redirectUri);
+
+    return state;
   case types.LINK_PROVIDER_FAILURE:
     return {
       ...state,
