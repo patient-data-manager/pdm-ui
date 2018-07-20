@@ -77,7 +77,7 @@ export class HealthRecord extends Component {
     const sections = [
       { header: 'summary', component: Summary, props: { patient, profile } },
       { header: 'conditions', component: Conditions, props: { conditions: healthRecord.Condition || [] } },
-      { header: 'allergies', component: Allergies, props: { allergies: [] } },
+      { header: 'allergies', component: Allergies, props: { allergies: healthRecord.AllergyIntolerance || [] } },
       { header: 'medications', component: Medications, props: { medications: healthRecord.MedicationStatement || [] } },
       { header: 'immunizations', component: Immunizations, props: { immunizations: healthRecord.Immunization || [] } },
       { header: 'procedures', component: Procedures, props: { procedures: healthRecord.Procedure || [] } },
