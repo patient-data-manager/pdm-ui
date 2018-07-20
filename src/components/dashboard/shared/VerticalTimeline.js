@@ -3,6 +3,7 @@ import PropTypes from 'prop-types';
 import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
 import moment from 'moment';
 import memoize from 'memoize-one';
+import classNames from 'classnames';
 
 export default class VerticalTimeline extends Component {
   constructor(props) {
@@ -33,24 +34,30 @@ export default class VerticalTimeline extends Component {
     );
   }
 
-  render() {
+  renderItem = (item, index) => {
     const { items, icon } = this.props;
+    const itemClassname = classNames('vertical-timeline__item', { 'last-item': index + 1 === items.length });
+
+    return (
+      <div key={index} className={itemClassname}>
+        <FontAwesomeIcon icon={icon} className="icon-health-record" />
+
+        <div className="vertical-timeline__item-info">
+          <div className="info-date">{moment(item.date).format('MMM D, YYYY')}</div>
+          <div className="info-description">{item.text}</div>
+        </div>
+      </div>
+    );
+  }
+
+  render() {
+    const { items } = this.props;
     const { displayCount } = this.state;
     const sortedItems = this.sortItems(items);
 
     return (
       <div className="vertical-timeline">
-        {sortedItems.slice(0, displayCount).map((item, index) =>
-          <div key={index} className="vertical-timeline__item">
-            <FontAwesomeIcon icon={icon} className="icon-health-record" />
-
-            <div className="vertical-timeline__item-info">
-              <div className="info-date">{moment(item.date).format('MMM D, YYYY')}</div>
-              <div className="info-description">{item.text}</div>
-            </div>
-          </div>
-        )}
-
+        {sortedItems.slice(0, displayCount).map((item, index) => this.renderItem(item, index))}
         {(sortedItems.length > displayCount) && this.renderViewMore()}
       </div>
     );

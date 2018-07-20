@@ -27,6 +27,12 @@
     .info-date {
       font-weight: 600;
     }
+
+    &.last-item {
+      .vertical-timeline__item-info {
+        border: 0;
+      }
+    }
   }
 
   &__view-more {
