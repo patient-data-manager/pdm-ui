@@ -10,6 +10,7 @@ import Labs from '../../components/dashboard/health-record/Labs';
 import Medications from '../../components/dashboard/health-record/Medications';
 import Procedures from '../../components/dashboard/health-record/Procedures';
 import Summary from '../../components/dashboard/health-record/Summary';
+import Vitals from '../../components/dashboard/health-record/Vitals';
 
 export class HealthRecord extends Component {
   tocbotInitialized = false;
@@ -90,7 +91,7 @@ export class HealthRecord extends Component {
       { header: 'immunizations', component: Immunizations, props: { immunizations: healthRecord.Immunization || [] } },
       { header: 'procedures', component: Procedures, props: { procedures: healthRecord.Procedure || [] } },
       { header: 'labs', component: Labs, props: { labs: this.filterObservationsByCategory('laboratory') || [] } },
-      { header: 'vitals', component: Labs, props: { labs: this.filterObservationsByCategory('vital-signs') || [] } }
+      { header: 'vitals', component: Vitals, props: { vitals: this.filterObservationsByCategory('vital-signs') || [] } }
     ];
 
     if (loading) {
