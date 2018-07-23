@@ -16,20 +16,23 @@ export default class PatientTimeline extends Component {
     groupHash['Medication'] = ['fa fa-stethoscope', 4]
     var i = 0;
     let items = [];
-    for(i = 0; i < props.patientEvents.length; i++)
+    if(props.patientEvents)
     {
-      let descriptionTerm = props.patientEvents[i]['description'];
-      let endTime = props.patientEvents[i]['enddate'];
+      for(i = 0; i < props.patientEvents.length; i++)
+      {
+        let descriptionTerm = props.patientEvents[i]['description'];
+        let endTime = props.patientEvents[i]['enddate'];
 
-      if(endTime === "present")
-      {
-        endTime = moment().clone();
+        if(endTime === "present")
+        {
+          endTime = moment().clone();
+        }
+        else
+        {
+          endTime = moment(endTime);
+        }
+        items.push({id: i + 1, group: groupHash[props.patientEvents[i]['type']][1], title: descriptionTerm, start_time: moment(props.patientEvents[i]["startdate"]), end_time: endTime, className: groupHash[props.patientEvents[i]['type']][0], style: {backgroundColor: 'fuschia'}, itemProps: {onClick: () => {alert(descriptionTerm) }}})
       }
-      else
-      {
-        endTime = moment(endTime);
-      }
-      items.push({id: i + 1, group: groupHash[props.patientEvents[i]['type']][1], title: descriptionTerm, start_time: moment(props.patientEvents[i]["startdate"]), end_time: endTime, className: groupHash[props.patientEvents[i]['type']][0], style: {backgroundColor: 'fuschia'}, itemProps: {onClick: () => {alert(descriptionTerm) }}})
     }
 
     // Define the bounds of the timeline
@@ -69,7 +72,7 @@ export default class PatientTimeline extends Component {
 
 oneMonth(num) {
   let visibleTimeStart = moment().clone().add(-1, 'months');
-  let visibleTimeEnd = moment().clone()
+  let visibleTimeEnd = moment().clone();
   this.setState({
   visibleTimeStart: visibleTimeStart,
   visibleTimeEnd: visibleTimeEnd
@@ -78,7 +81,7 @@ oneMonth(num) {
 
 threeMonth() {
   let visibleTimeStart = moment().clone().add(-3, 'months');
-  let visibleTimeEnd = moment().clone()
+  let visibleTimeEnd = moment().clone();
   this.setState({
   visibleTimeStart: visibleTimeStart,
   visibleTimeEnd: visibleTimeEnd
@@ -87,7 +90,7 @@ threeMonth() {
 
 sixMonth() {
   let visibleTimeStart = moment().clone().add(-6, 'months');
-  let visibleTimeEnd = moment().clone()
+  let visibleTimeEnd = moment().clone();
   this.setState({
   visibleTimeStart: visibleTimeStart,
   visibleTimeEnd: visibleTimeEnd
@@ -96,7 +99,7 @@ sixMonth() {
 
 oneYear() {
   let visibleTimeStart = moment().clone().add(-1, 'year');
-  let visibleTimeEnd = moment().clone()
+  let visibleTimeEnd = moment().clone();
   this.setState({
   visibleTimeStart: visibleTimeStart,
   visibleTimeEnd: visibleTimeEnd
@@ -104,8 +107,8 @@ oneYear() {
 }
 
 fiveYear() {
-  let visibleTimeStart = moment().clone().add(-5, 'year')
-  let visibleTimeEnd = moment().clone()
+  let visibleTimeStart = moment().clone().add(-5, 'year');
+  let visibleTimeEnd = moment().clone();
   this.setState({
   visibleTimeStart: visibleTimeStart,
   visibleTimeEnd: visibleTimeEnd
