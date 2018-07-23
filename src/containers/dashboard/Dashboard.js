@@ -144,17 +144,17 @@ export class Dashboard extends Component {
     const { authUser, classes, theme, children, activeProfile } = this.props;
 
     return (
-      <div className='dashboard'>
+      <div className="dashboard">
         <Header authUser={authUser} logoutUser={this.props.logoutUser} />
 
         <div className={classes.root}>
           <AppBar
-            position='absolute'
+            position="absolute"
             className={classNames(classes.appBar, this.state.open && classes.appBarShift)}>
-            <Toolbar disableGutters={!this.state.open} className='app-toolbar'>
+            <Toolbar disableGutters={!this.state.open} className="app-toolbar">
               <IconButton
-                color='inherit'
-                aria-label='open drawer'
+                color="inherit"
+                aria-label="open drawer"
                 onClick={this.handleDrawerOpen}
                 className={classNames(classes.menuButton, this.state.open && classes.hide)}>
                 <MenuIcon />
@@ -165,7 +165,7 @@ export class Dashboard extends Component {
           </AppBar>
 
           <Drawer
-            variant='permanent'
+            variant="permanent"
             classes={{
               paper: classNames(classes.drawerPaper, !this.state.open && classes.drawerPaperClose),
             }}
@@ -179,7 +179,7 @@ export class Dashboard extends Component {
             <Divider />
 
             <List>
-              <div className='nav-list-items'>
+              <div className="nav-list-items">
                 {this.renderNavListItems()}
               </div>
             </List>
@@ -188,7 +188,7 @@ export class Dashboard extends Component {
           <main className={classes.content}>
             <div className={classes.toolbar} />
 
-            <div className='dashboard__body'>
+            <div className="dashboard__body">
               {children}
             </div>
           </main>

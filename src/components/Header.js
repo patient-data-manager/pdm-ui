@@ -4,7 +4,7 @@ import { Link } from 'react-router-dom';
 import Button from '@material-ui/core/Button';
 import Menu from '@material-ui/core/Menu';
 import MenuItem from '@material-ui/core/MenuItem';
-import FontAwesome from 'react-fontawesome';
+import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
 
 export default class Header extends Component {
   constructor(props) {
@@ -30,30 +30,30 @@ export default class Header extends Component {
     const { authUser } = this.props;
 
     return (
-      <header className='header'>
-        <Link to='/' className='header__logo'>
-          <img src='/assets/images/rosie-logo-white.png' alt='logo' />
+      <header className="header">
+        <Link to="/" className="header__logo">
+          <img src="/assets/images/rosie-logo-white.png" alt="logo" />
         </Link>
 
-        <div className='header__menu'>
+        <div className="header__menu">
           <Button
             aria-owns={anchorEl ? 'simple-menu' : null}
-            aria-haspopup='true'
+            aria-haspopup="true"
             onClick={this.handleClick}
           >
-            {authUser} <FontAwesome name='chevron-down' className='menu-arrow' />
+            {authUser} <FontAwesomeIcon icon="chevron-down" className="menu-arrow" />
           </Button>
 
           <Menu
-            id='simple-menu'
+            id="simple-menu"
             anchorEl={anchorEl}
             open={Boolean(anchorEl)}
             onClose={this.handleClose}
-            className='header__menu-items'
+            className="header__menu-items"
           >
-            <MenuItem onClick={this.handleClose} className='header__menu-item'>
-              <div onClick={this.handleLogout} onKeyPress={this.handleLogout} role='menuitem' tabIndex={0}>
-                <FontAwesome name='sign-out' /> Logout
+            <MenuItem onClick={this.handleClose} className="header__menu-item">
+              <div onClick={this.handleLogout} onKeyPress={this.handleLogout} role="menuitem" tabIndex={0}>
+                <FontAwesomeIcon icon="sign-out-alt" /> Logout
               </div>
             </MenuItem>
           </Menu>
@@ -66,4 +66,4 @@ export default class Header extends Component {
 Header.propTypes = {
   authUser: PropTypes.string,
   logoutUser: PropTypes.func.isRequired
-}
+};

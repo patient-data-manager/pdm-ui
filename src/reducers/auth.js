@@ -37,107 +37,109 @@ const persistConfig = {
 function auth(state = defaultState, action) {
   const isAuthenticated = action.username != null;
 
+  let authStatusText, registrationStatusText;
+
   switch (action.type) {
-    case types.USER_REQUEST:
-      return {
-        ...state,
-        isAuthenticating: true
-      };
-    case types.USER_RECEIVED:
-      return {
-        ...state,
-        isAuthenticating: false,
-        isAuthenticated,
-        username: action.username
-      };
-    case types.LOGIN_REQUEST:
-      return {
-        ...state,
-        isAuthenticating: true,
-        authStatus: null
-      };
-    case types.LOGIN_SUCCESS:
-      return {
-        ...state,
-        isAuthenticating: false,
-        isAuthenticated: true,
-        username: action.username,
-        accessToken: action.accessToken,
-        authStatus: 'loginSuccess',
-        authStatusText: 'You have been successfully logged in.',
-        expiresAt: (action.createdAt + action.expiresIn) * 1000
-      };
-    case types.LOGIN_FAILURE:
-      let authStatusText = `Authentication Error: ${action.status} ${action.statusText}`;
-      if (action.status === 401) {
-        authStatusText = 'Invalid credentials, please try again.';
-      }
+  case types.USER_REQUEST:
+    return {
+      ...state,
+      isAuthenticating: true
+    };
+  case types.USER_RECEIVED:
+    return {
+      ...state,
+      isAuthenticating: false,
+      isAuthenticated,
+      username: action.username
+    };
+  case types.LOGIN_REQUEST:
+    return {
+      ...state,
+      isAuthenticating: true,
+      authStatus: null
+    };
+  case types.LOGIN_SUCCESS:
+    return {
+      ...state,
+      isAuthenticating: false,
+      isAuthenticated: true,
+      username: action.username,
+      accessToken: action.accessToken,
+      authStatus: 'loginSuccess',
+      authStatusText: 'You have been successfully logged in.',
+      expiresAt: (action.createdAt + action.expiresIn) * 1000
+    };
+  case types.LOGIN_FAILURE:
+    authStatusText = `Authentication Error: ${action.status} ${action.statusText}`;
+    if (action.status === 401) {
+      authStatusText = 'Invalid credentials, please try again.';
+    }
 
-      return {
-        ...state,
-        isAuthenticating: false,
-        isAuthenticated: false,
-        authStatus: 'loginFailure',
-        authStatusText
-      };
-    case types.SET_LOGIN_STATUS:
-      return {
-        ...state,
-        authStatusText: action.authStatusText
-      };
-    case types.RESET_LOGIN_STATUS:
-      return {
-        ...state,
-        isAuthenticating: false,
-        authStatus: null,
-        authStatusText: ''
-      };
-    case types.LOGOUT_USER:
-      return {
-        ...state,
-        isAuthenticating: false,
-        isAuthenticated: false,
-        username: null,
-        accessToken: null,
-        authStatus: 'logoutSuccess',
-        authStatusText: 'You have been successfully logged out.',
-        expiresAt: null
-      };
-    case types.REGISTER_REQUEST:
-      return {
-        ...state,
-        isRegistering: true,
-        registrationStatus: null,
-        registrationStatusText: ''
-      };
-    case types.REGISTER_SUCCESS:
-      return {
-        ...state,
-        isRegistering: false,
-        registrationStatus: 'registrationSuccess',
-        registrationStatusText: 'You have successfully registered. Please log in.'
-      };
-    case types.REGISTER_FAILURE:
-      let registrationStatusText = `Registration Error: ${action.status} ${action.statusText}, please try again.`;
-      if (action.status === 422) {
-        registrationStatusText = formatServerErrors(action.dataErrors);
-      }
+    return {
+      ...state,
+      isAuthenticating: false,
+      isAuthenticated: false,
+      authStatus: 'loginFailure',
+      authStatusText
+    };
+  case types.SET_LOGIN_STATUS:
+    return {
+      ...state,
+      authStatusText: action.authStatusText
+    };
+  case types.RESET_LOGIN_STATUS:
+    return {
+      ...state,
+      isAuthenticating: false,
+      authStatus: null,
+      authStatusText: ''
+    };
+  case types.LOGOUT_USER:
+    return {
+      ...state,
+      isAuthenticating: false,
+      isAuthenticated: false,
+      username: null,
+      accessToken: null,
+      authStatus: 'logoutSuccess',
+      authStatusText: 'You have been successfully logged out.',
+      expiresAt: null
+    };
+  case types.REGISTER_REQUEST:
+    return {
+      ...state,
+      isRegistering: true,
+      registrationStatus: null,
+      registrationStatusText: ''
+    };
+  case types.REGISTER_SUCCESS:
+    return {
+      ...state,
+      isRegistering: false,
+      registrationStatus: 'registrationSuccess',
+      registrationStatusText: 'You have successfully registered. Please log in.'
+    };
+  case types.REGISTER_FAILURE:
+    registrationStatusText = `Registration Error: ${action.status} ${action.statusText}, please try again.`;
+    if (action.status === 422) {
+      registrationStatusText = formatServerErrors(action.dataErrors);
+    }
 
-      return {
-        ...state,
-        isRegistering: false,
-        registrationStatus: 'registrationFailure',
-        registrationStatusText
-      };
-    case types.RESET_REGISTRATION_STATUS:
-      return {
-        ...state,
-        isRegistering: false,
-        registrationStatus: null,
-        registrationStatusText: ''
-      };
-    default:
-      return state;
+    return {
+      ...state,
+      isRegistering: false,
+      registrationStatus: 'registrationFailure',
+      registrationStatusText
+    };
+  case types.RESET_REGISTRATION_STATUS:
+    return {
+      ...state,
+      isRegistering: false,
+      registrationStatus: null,
+      registrationStatusText: ''
+    };
+  default:
+    return state;
   }
 }
 

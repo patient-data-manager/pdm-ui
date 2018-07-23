@@ -1,45 +1,64 @@
 import React, { Component } from 'react';
+import PropTypes from 'prop-types';
+import moment from 'moment';
 
-// TO-DO: populate with actual patient data
-// TO-DO: hyperlink PCP to something?
+export default class Summary extends Component {
+  render() {
+    const { patient, profile } = this.props;
+    let patientName, patientAge, patientDOB, patientAddress;
 
-export class Summary extends Component {
-    render() {
-        return(
-            <div className='health-record__summary'>
-                <div className='summary__image'>
-                    <img src='/assets/images/patient-image.png' alt='' />
-                </div>
-                <div className='summary__divider' />
-                <div className='summary__table'>
-                    <div className='summary__row'>
-                        <div className='summary__key'> Name</div>
-                        <div className='summary__value'> Sarah Ober</div>
-                    </div>
-                    <div className='summary__row'>
-                        <div className='summary__key'> Gender</div>
-                        <div className='summary__value'> Female</div>
-                    </div>
-                    <div className='summary__row'>
-                        <div className='summary__key'> DOB</div>
-                        <div className='summary__value'> Apr 18, 1993 (age 25)</div>
-                    </div>
-                    <div className='summary__row'>
-                        <div className='summary__key'> Address</div>
-                        <div className='summary__value'> 31 Pond Street #10, Waltham MA, 02451</div>
-                    </div>
-                    <div className='summary__row'>
-                        <div className='summary__key'> Phone</div>
-                        <div className='summary__value'> 617 653-9688</div>
-                    </div>
-                    <div className='summary__row'>
-                        <div className='summary__key'> PCP</div>
-                        <div className='summary__value summary__pcp'> Dr. Parul Desai</div>
-                    </div>
-                </div>
-            </div>
-        );
+    if (Object.keys(patient).length > 0) {
+      patientName = `${patient.name[0].given[0]} ${patient.name[0].family}`;
+      patientAge = moment().diff(profile.dob, 'years');
+      patientDOB = `${moment(profile.dob).format('MMM D, YYYY')} (age ${patientAge})`;
+      patientAddress = `${profile.street}, ${profile.city}, ${profile.state} ${profile.zip}`;
     }
+
+    return (
+      <div className="summary">
+        <div className="summary__image">
+          <img src="/assets/images/patient-image.png" alt="patient" />
+        </div>
+
+        <div className="summary__divider" />
+
+        <div className="summary__table">
+          <div className="summary__table-row">
+            <div className="summary__table-key">Name</div>
+            <div className="summary__table-value">{patientName}</div>
+          </div>
+
+          <div className="summary__table-row">
+            <div className="summary__table-key">Gender</div>
+            <div className="summary__table-value">{profile.gender}</div>
+          </div>
+
+          <div className="summary__table-row">
+            <div className="summary__table-key">DOB</div>
+            <div className="summary__table-value">{patientDOB}</div>
+          </div>
+
+          <div className="summary__table-row">
+            <div className="summary__table-key">Address</div>
+            <div className="summary__table-value">{patientAddress}</div>
+          </div>
+
+          <div className="summary__table-row">
+            <div className="summary__table-key">Phone</div>
+            <div className="summary__table-value">{profile.telephone}</div>
+          </div>
+
+          <div className="summary__table-row">
+            <div className="summary__table-key">PCP</div>
+            <div className="summary__table-value summary__table-pcp">Dr. Parul Desai</div> {/* TODO: hook up */}
+          </div>
+        </div>
+      </div>
+    );
+  }
 }
 
-export default Summary;
+Summary.propTypes = {
+  patient: PropTypes.object.isRequired,
+  profile: PropTypes.object.isRequired
+};

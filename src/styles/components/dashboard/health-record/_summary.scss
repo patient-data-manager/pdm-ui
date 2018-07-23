@@ -1,32 +1,32 @@
-.health-record__summary {
-    display: flex;
-    flex-direction: row;
-    margin-bottom: 20px;
-}
+.summary {
+  display: flex;
+  flex-direction: row;
+  margin-bottom: 20px;
 
-.summary__divider {
-    border-left: 2px solid #e7eaee;
+  &__divider {
+    border-left: 2px solid $color-gray-lightest;
     margin: 0px 30px;
-}
+  }
 
-.summary__table {
+  &__table {
     display: flex;
     flex-direction: column;
     justify-content: space-between;
-    font-size: 16px;
-}
+    font-size: 1.1em;
 
-.summary__row {
-    display: flex;
-    flex-direction: row;
-}
+    &-row {
+      display: flex;
+      flex-direction: row;
+    }
 
-.summary__key {
-    width: 85px;
-    font-weight: bold;
-}
+    &-key {
+      width: 85px;
+      font-weight: bold;
+    }
 
-.summary__pcp {
-    color: #6b8eb6;
-    font-weight: bold;
+    &-pcp {
+      color: $color-blue;
+      font-weight: bold;
+    }
+  }
 }

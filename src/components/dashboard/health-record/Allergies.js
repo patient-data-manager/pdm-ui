@@ -1,13 +1,20 @@
 import React, { Component } from 'react';
+import PropTypes from 'prop-types';
 
-export class Allergies extends Component {
-    render() {
-        return(
-            <div className='health-record__allergies'>
-                <p> Insert allergy content here.</p>
-            </div>
-        );
-    }
+export default class Allergies extends Component {
+  render() {
+    return (
+      <div className="allergies">
+        <div className="no-entries">No entries.</div>
+      </div>
+    );
+  }
 }
 
-export default Allergies;
+Allergies.propTypes = {
+  allergies: PropTypes.array
+};
+
+Allergies.defaultProps = {
+  allergies: []
+};

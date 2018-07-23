@@ -2,7 +2,7 @@ import configureMockStore from 'redux-mock-store';
 import thunk from 'redux-thunk';
 import moxios from 'moxios';
 
-import * as actions from '../../actions/PROFILES';
+import * as actions from '../../actions/profiles';
 import * as types from '../../actions/types';
 
 const mockProfileA = { id: 1, name: "Jane Doe" };
@@ -21,13 +21,13 @@ describe('profiles actions', () => {
     it('should create LOAD_PROFILES_SUCCESS after successfully loading profiles', () => {
       moxios.wait(() => {
         const request = moxios.requests.mostRecent();
-        request.respondWith({ status: 200, response: [ mockProfileA, mockProfileB ] });
+        request.respondWith({ status: 200, response: [mockProfileA, mockProfileB] });
       });
 
       const store = mockStore({ profiles: [], auth: { accessToken: 'abc' } });
       const expectedActions = [
         { type: types.PROFILES_REQUEST },
-        { type: types.LOAD_PROFILES_SUCCESS, profiles: [ mockProfileA, mockProfileB ] }
+        { type: types.LOAD_PROFILES_SUCCESS, profiles: [mockProfileA, mockProfileB] }
       ];
 
       return store.dispatch(actions.loadProfiles()).then(() => {
@@ -59,7 +59,7 @@ describe('profiles actions', () => {
         request.respondWith({ status: 200, response: mockProfileB });
       });
 
-      const store = mockStore({ profiles: [ mockProfileA ], auth: { accessToken: 'abc' } });
+      const store = mockStore({ profiles: [mockProfileA], auth: { accessToken: 'abc' } });
       const expectedActions = [
         { type: types.ADD_PROFILE_REQUEST },
         { type: types.ADD_PROFILE_SUCCESS, profile: mockProfileB }
@@ -82,7 +82,7 @@ describe('profiles actions', () => {
         request.respondWith({ status: 200, response: mockProfileC });
       });
 
-      const store = mockStore({ profiles: [ mockProfileA ], auth: { accessToken: 'abc' } });
+      const store = mockStore({ profiles: [mockProfileA], auth: { accessToken: 'abc' } });
       const expectedActions = [
         { type: types.UPDATE_PROFILE_REQUEST },
         { type: types.UPDATE_PROFILE_SUCCESS, profile: mockProfileC }
@@ -105,7 +105,7 @@ describe('profiles actions', () => {
         request.respondWith({ status: 200, response: mockProfileA });
       });
 
-      const store = mockStore({ profiles: [ mockProfileA, mockProfileB ], auth: { accessToken: 'abc' } });
+      const store = mockStore({ profiles: [mockProfileA, mockProfileB], auth: { accessToken: 'abc' } });
       const expectedActions = [
         { type: types.DELETE_PROFILE_REQUEST },
         { type: types.DELETE_PROFILE_SUCCESS, profileId: 1 }

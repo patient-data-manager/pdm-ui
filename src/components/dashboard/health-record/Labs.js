@@ -1,31 +1,36 @@
 import React, { Component } from 'react';
-import VerticalList from '../shared/VerticalList';
+import PropTypes from 'prop-types';
 
-export class Labs extends Component {
-    render() {
-        return(
-            <div className='health-record__labs'>
-                <VerticalList
-                    list={this.labs()}
-                    listType='labs'
-                    dateProperty='date'
-                    descriptionProperty='text'/>
-            </div>
-        );
-    }
+import VerticalTimeline from '../shared/VerticalTimeline';
 
-    labs(){
-      let self = this;
-      return this.props.labs.map(function(l){return {date: l.effectiveDateTime , text: self.labDescription(l)}})
-    }
+export default class Labs extends Component {
+  labs = () => {
+    return this.props.labs.map((lab) => {
+      return { date: lab.effectiveDateTime, text: this.labDescription(lab) };
+    });
+  }
 
-    labDescription(lab){
-      let text = lab.code.text;
-      if(lab.valueQuantity){
-        text += " " + lab.valueQuantity.value + " " +lab.valueQuantity.unit
-      }
-      return text;
-    }
+  labDescription = (lab) => {
+    let text = lab.code.text;
+    if (lab.valueQuantity) text = `${text} ${lab.valueQuantity.value} ${lab.valueQuantity.unit}`;
+    return text;
+  }
+
+  render() {
+    if (this.props.labs.length === 0) return <div className="labs no-entries">No entries.</div>;
+
+    return (
+      <div className="labs">
+        <VerticalTimeline items={this.labs()} icon="flask" />
+      </div>
+    );
+  }
 }
 
-export default Labs;
+Labs.propTypes = {
+  labs: PropTypes.array
+};
+
+Labs.defaultProps = {
+  labs: []
+};

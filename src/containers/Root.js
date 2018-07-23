@@ -13,7 +13,7 @@ import Profiles from './dashboard/Profiles';
 import HealthRecord from './dashboard/HealthRecord';
 import Alerts from './dashboard/Alerts';
 import Providers from './dashboard/Providers';
-import NoMatch from '../components/pages/Page404';
+import NoMatch from '../components/error-pages/Page404';
 import OAuth from './OAuth/OAuth';
 
 // material ui theme
@@ -41,17 +41,17 @@ const Root = ({ store }) => {
         <Router>
           <Switch>
             <Route exact path="/" component={Landing} />
-            <Route path='/login' component={Login} />
-            <Route path='/register' component={Register} />
+            <Route path="/login" component={Login} />
+            <Route path="/register" component={Register} />
 
-            <PrivateRoute path='/oauth' component={OAuth} />
-            <PrivateRoute path='/dashboard'>
+            <PrivateRoute path="/oauth" component={OAuth} />
+            <PrivateRoute path="/dashboard">
               <Dashboard>
                 <Switch>
-                  <PrivateRoute path='/dashboard/profiles' component={Profiles} />
-                  <PrivateRoute path='/dashboard/health-record' component={HealthRecord}/>
-                  <PrivateRoute path='/dashboard/alerts' component={Alerts} />
-                  <PrivateRoute path='/dashboard/providers' component={Providers} />
+                  <PrivateRoute path="/dashboard/profiles" component={Profiles} />
+                  <PrivateRoute path="/dashboard/health-record" component={HealthRecord}/>
+                  <PrivateRoute path="/dashboard/alerts" component={Alerts} />
+                  <PrivateRoute path="/dashboard/providers" component={Providers} />
                   <Route component={NoMatch} />
                 </Switch>
               </Dashboard>

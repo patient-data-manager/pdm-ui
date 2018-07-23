@@ -1,5 +1,5 @@
 import React, { Component } from 'react';
-import { Redirect } from 'react-router'
+import { Redirect } from 'react-router';
 import { connect } from 'react-redux';
 import { bindActionCreators } from 'redux';
 import { oauthCallback } from '../../actions/providers';
@@ -11,7 +11,7 @@ export class OAuth extends Component {
     this.state = { oauth_params: queryString.parse(this.props.location.search) };
   }
 
-  componentDidMount(){
+  componentDidMount() {
     const params = this.state.oauth_params;
     this.props.oauthCallback(params.state, params.code);
   }
@@ -22,17 +22,17 @@ export class OAuth extends Component {
       // assume either the record to show new stuff popping in
       // or
       // the list of providers that are registered
-      <Redirect to='/dashboard/providers' />
+      <Redirect to="/dashboard/providers" />
     );
   }
 }
 
 function mapStateToProps(state) {
-    return {};
+  return {};
 }
 
 function mapDispatchToProps(dispatch) {
-    return bindActionCreators({ oauthCallback }, dispatch);
+  return bindActionCreators({ oauthCallback }, dispatch);
 }
 
-export default connect(mapStateToProps, mapDispatchToProps)(OAuth)
+export default connect(mapStateToProps, mapDispatchToProps)(OAuth);
