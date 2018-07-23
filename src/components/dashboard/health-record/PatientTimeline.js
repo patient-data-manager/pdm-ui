@@ -10,7 +10,7 @@ export default class PatientTimeline extends Component {
     super(props);
     const groups = [{ id: 1, title: 'procedure' }, {id: 2, title: 'condition'}, {id: 3, title: 'lab'}, {id: 4, title: 'medication'}];
     let groupHash = {}
-    groupHash['Procedure'] = ['fa fa-hospital-o', 1]
+    groupHash['Procedure'] = ['fa fa-hospital-o', 1, ]
     groupHash['Condition'] = ['fa fa-heartbeat', 2]
     groupHash['Lab'] = ['fa fa-flask', 3]
     groupHash['Medication'] = ['fa fa-stethoscope', 4]
@@ -29,7 +29,7 @@ export default class PatientTimeline extends Component {
       {
         endTime = moment(endTime);
       }
-      items.push({id: i + 1, group: groupHash[props.patientEvents[i]['type']][1], title: descriptionTerm, start_time: moment(props.patientEvents[i]["startdate"]), end_time: endTime, className: groupHash[props.patientEvents[i]['type']][0], style: {backgroundColor: 'yellow'}, itemProps: {onClick: () => {alert(descriptionTerm) }}})
+      items.push({id: i + 1, group: groupHash[props.patientEvents[i]['type']][1], title: descriptionTerm, start_time: moment(props.patientEvents[i]["startdate"]), end_time: endTime, className: groupHash[props.patientEvents[i]['type']][0], style: {backgroundColor: 'fuschia'}, itemProps: {onClick: () => {alert(descriptionTerm) }}})
     }
 
     // Define the bounds of the timeline
