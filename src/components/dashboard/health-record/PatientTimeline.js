@@ -10,7 +10,7 @@ export default class PatientTimeline extends Component {
     super(props);
     const groups = [{ id: 1, title: 'procedure' }, {id: 2, title: 'condition'}, {id: 3, title: 'lab'}, {id: 4, title: 'medication'}];
     let groupHash = {}
-    groupHash['Procedure'] = ['fa fa-hospital-o', 1, ]
+    groupHash['Procedure'] = ['fa fa-hospital-o', 1]
     groupHash['Condition'] = ['fa fa-heartbeat', 2]
     groupHash['Lab'] = ['fa fa-flask', 3]
     groupHash['Medication'] = ['fa fa-stethoscope', 4]
@@ -199,6 +199,7 @@ getMaxGroup = (items) => {
           sidebarContent={null}
           timeSteps={this.state.timeSteps}
           lineHeight={40}
+          lineWidth={40}
           itemHeightRatio={0.7}
           canMove={false}
           canResize={false}
