@@ -1,0 +1,60 @@
+.medications {
+  color: $color-text;
+
+  &__table {
+    display: flex;
+    flex-direction: column;
+    padding: 8px 15px;
+    margin-bottom: 15px;
+    background-color: $color-gray-lightest;
+
+    &-label {
+      font-size: 1.1em;
+      font-weight: bold;
+      font-style: italic;
+      padding-bottom: 5px;
+    }
+
+    &-header {
+      display: flex;
+      flex-direction: row;
+      padding: 5px 0px;
+
+      span {
+        font-weight: bold;
+        border-bottom: 1.5px solid $color-blue;
+      }
+    }
+
+    &-row {
+      display: flex;
+      flex-direction: row;
+      padding: 5px 0px;
+
+      .medications__table-perscribed-by {
+        color: $color-blue;
+        font-weight: bold;
+      }
+    }
+
+    &-medication {
+      flex-basis: 40%;
+    }
+
+    &-perscribed-date {
+      flex-basis: 20%;
+    }
+
+    &-status{
+      flex-basis: 10%;
+    }
+
+    &-perscribed-by {
+      flex-basis: 20%;
+    }
+
+    &-perscribed-refills {
+      flex-basis: 10%;
+    }
+  }
+}

@@ -78,7 +78,15 @@ export class HealthRecord extends Component {
       { header: 'summary', component: Summary, props: { patient, profile } },
       { header: 'conditions', component: Conditions, props: { conditions: healthRecord.Condition || [] } },
       { header: 'allergies', component: Allergies, props: { allergies: healthRecord.AllergyIntolerance || [] } },
-      { header: 'medications', component: Medications, props: { medications: healthRecord.MedicationStatement || [] } },
+      { header: 'medications', 
+        component: Medications, 
+        props: { 
+          medications: {
+            statements: healthRecord.MedicationStatement || [], 
+            requests: healthRecord.MedicationRequest || [] 
+          }
+        }
+      },
       { header: 'immunizations', component: Immunizations, props: { immunizations: healthRecord.Immunization || [] } },
       { header: 'procedures', component: Procedures, props: { procedures: healthRecord.Procedure || [] } },
       { header: 'labs', component: Labs, props: { labs: this.filterObservationsByCategory('laboratory') || [] } },
