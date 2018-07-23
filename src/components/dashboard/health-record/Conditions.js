@@ -29,7 +29,9 @@ export default class Conditions extends Component {
           {currentConditions.map((condition) => 
             <div key={condition.id} className="conditions__table-row">
               <div className="conditions__table-condition"> {condition.code.text}</div>
-              <div className="conditions__table-diagnosed-date"> {moment(condition.onsetDateTime).format('MMM D, YYYY')}</div>
+              <div className="conditions__table-diagnosed-date"> 
+                {moment(condition.onsetDateTime).format('MMM D, YYYY')}
+              </div>
               <div className="conditions__table-diagnosed-by"></div>
             </div>
           )}
