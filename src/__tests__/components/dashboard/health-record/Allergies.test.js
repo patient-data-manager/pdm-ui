@@ -1,8 +1,13 @@
 import { fullRenderComponent } from '../../../../utils/testHelpers';
 import Allergies from '../../../../components/dashboard/health-record/Allergies';
+import * as mocks from '../../../../__mocks__/allergyMocks';
 
 function setup() {
-  return fullRenderComponent(Allergies);
+  const props = {
+    allergies: [mocks.allergyMockA, mocks.allergyMockB, mocks.allergyMockC],
+  };
+
+  return fullRenderComponent(Allergies, props);
 }
 
 it('renders self and self components', () => {
@@ -11,7 +16,18 @@ it('renders self and self components', () => {
   expect(component).toBeDefined();
   expect(component.find('div.allergies__table-label')).toExist();
   expect(component.find('div.allergies__table')).toExist();
+});
 
-  // to-do: populates table with correct amount of allergies
-  // to-do: create allergy mock
+it('it renders allergy table', () => {
+  const component = setup();
+
+  expect(component.find('div.allergies__table-row')).toHaveLength(3);
+});
+
+it('sorts allergy table correctly correctly', () => {
+  const component = setup();
+
+  expect(component.find('div.allergies__table-allergy').at(1).text() === 'Allergy to grass pollen');
+  expect(component.find('div.allergies__table-allergy').at(1).text() === 'Dander (animal) allergy');
+  expect(component.find('div.allergies__table-allergy').at(2).text() === 'Allergy to mould');
 });

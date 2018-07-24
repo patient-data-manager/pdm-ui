@@ -32,10 +32,6 @@ const verticalListMock = [
     'description': '6'
   },
   {
-    'date': '2015-07-13T02:27:04.196Z',
-    'description': '4'
-  },
-  {
     'date': '2012-07-13T02:27:04.196Z',
     'description': '7'
   },   
