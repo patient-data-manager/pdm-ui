@@ -34,7 +34,7 @@ it('sorts allergy table correctly correctly', () => {
 });
 
 it('displays no entries message if no allergies', () => {
-  const component = fullRenderComponent(Allergies, {allergies: []});
+  const component = fullRenderComponent(Allergies, { allergies: [] });
 
   expect(component.find('div.no-entries')).toExist();
   expect(component.find('div.allergies__table-label')).toHaveLength(0);

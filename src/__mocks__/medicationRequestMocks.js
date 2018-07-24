@@ -10,7 +10,7 @@ const medicationRequestMockA = {
     text: '0.3 ML EPINEPHrine 0.5 MG/ML Auto-Injector'
   },
   status: 'active'
-}
+};
 
 const medicationRequestMockB = {
   authoredOn: '2015-05-17T18:19:22-04:00',
@@ -24,7 +24,7 @@ const medicationRequestMockB = {
     text: 'Amoxicillin 250 MG / Clavulanate 125 MG [Augmentin]'
   },
   status: 'stopped'
-}
+};
 
 const medicationRequestMockC = {
   authoredOn: '2017-05-29T15:40:51-04:00',
@@ -38,7 +38,7 @@ const medicationRequestMockC = {
     text: 'Mirena 52 MG Intrauterine System'
   },
   status: 'intended'
-}
+};
 
 const medicationRequestMockD = {
   authoredOn: '2016-06-03T15:40:51-04:00',
@@ -52,7 +52,7 @@ const medicationRequestMockD = {
     text: 'Camila 28 Day Pack'
   },
   status: 'active'
-}
+};
 
 const medicationRequestMockE = {
   authoredOn: '1996-10-16T14:40:51-05:00',
@@ -66,7 +66,7 @@ const medicationRequestMockE = {
     text: 'Loratadine 5 MG Chewable Tablet'
   },
   status: 'active'
-}
+};
 
 export {
   medicationRequestMockA,

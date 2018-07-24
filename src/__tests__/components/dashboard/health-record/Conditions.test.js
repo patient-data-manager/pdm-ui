@@ -5,8 +5,13 @@ import * as mocks from '../../../../__mocks__/conditionMocks';
 
 function setup() {
   const props = {
-    conditions: [mocks.conditionMockA, mocks.conditionMockB, mocks.conditionMockC, mocks.conditionMockD, mocks.conditionMockE],
-    conditionStatements: []
+    conditions: [
+      mocks.conditionMockA, 
+      mocks.conditionMockB, 
+      mocks.conditionMockC, 
+      mocks.conditionMockD, 
+      mocks.conditionMockE
+    ]
   };
   return fullRenderComponent(Conditions, props);
 }
@@ -36,7 +41,7 @@ it('sorts condition table correctly correctly', () => {
 });
 
 it('displays no entries message if no conditions', () => {
-  const component = fullRenderComponent(Conditions, {conditions: []});
+  const component = fullRenderComponent(Conditions, { conditions: [] });
 
   expect(component.find('div.no-entries')).toExist();
   expect(component.find('div.conditions__table-label')).toHaveLength(0);
@@ -45,7 +50,7 @@ it('displays no entries message if no conditions', () => {
 });
 
 it('table is not displayed if no current conditions', () => {
-  const component = fullRenderComponent(Conditions, {conditions: [mocks.conditionMockA]});
+  const component = fullRenderComponent(Conditions, { conditions: [mocks.conditionMockA] });
 
   expect(component.find('div.conditions__table-container')).toHaveLength(0);
   expect(component.find('div.conditions__table-label').text() === 'No current conditions');

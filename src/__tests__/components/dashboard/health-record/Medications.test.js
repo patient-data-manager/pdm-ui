@@ -5,7 +5,12 @@ import * as mocks from '../../../../__mocks__/medicationRequestMocks';
 
 function setup() {
   const props = {
-    medicationRequests: [mocks.medicationRequestMockA, mocks.medicationRequestMockB, mocks.medicationRequestMockC, mocks.medicationRequestMockD, mocks.medicationRequestMockE],
+    medicationRequests: [
+      mocks.medicationRequestMockA,
+      mocks.medicationRequestMockB,
+      mocks.medicationRequestMockC,
+      mocks.medicationRequestMockD,
+      mocks.medicationRequestMockE],
     medicationStatements: []
   };
 
@@ -32,13 +37,14 @@ it('sorts medication table correctly correctly', () => {
   const component = setup();
 
   expect(component.find('div.medications__table-medication').at(1).text() === 'Camila 28 Day Pack');
-  expect(component.find('div.medications__table-medication').at(2).text() === '0.3 ML EPINEPHrine 0.5 MG/ML Auto-Injector');
+  expect(component.find('div.medications__table-medication').at(2)
+    .text() === '0.3 ML EPINEPHrine 0.5 MG/ML Auto-Injector');
   expect(component.find('div.medications__table-medication').at(3).text() === 'Loratadine 5 MG Chewable Tablet');
   expect(component.find('div.medications__table-medication').at(4).text() === 'Mirena 52 MG Intrauterine System');
 });
 
 it('displays no entries message if no medications', () => {
-  const component = fullRenderComponent(Medications, {medicationRequests: [], medicationStatements: []});
+  const component = fullRenderComponent(Medications, { medicationRequests: [], medicationStatements: [] });
 
   expect(component.find('div.no-entries')).toExist();
   expect(component.find('div.medications__table-label')).toHaveLength(0);
@@ -47,7 +53,8 @@ it('displays no entries message if no medications', () => {
 });
 
 it('table is not displayed if no current medications', () => {
-  const component = fullRenderComponent(Medications, {medicationRequests: [mocks.medicationRequestMockB], medicationStatements:[]});
+  const component = fullRenderComponent(Medications, 
+    { medicationRequests: [mocks.medicationRequestMockB], medicationStatements: [] });
 
   expect(component.find('div.medications__table-container')).toHaveLength(0);
   expect(component.find('div.medications__table-label').text() === 'No current medications');

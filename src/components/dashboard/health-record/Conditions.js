@@ -15,7 +15,7 @@ export default class Conditions extends Component {
     if (conditions.length === 0) {
       return <div className="conditions__table-label">No current conditions.</div>;
     } else {
-      return(
+      return (
         <div className="conditions__table-container">
           <div className="conditions__table-label">Current conditions list</div>
           <div className="conditions__table">

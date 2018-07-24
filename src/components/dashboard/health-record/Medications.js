@@ -10,7 +10,7 @@ export default class Medications extends Component {
       return { 
         date: medication.authoredOn,
         text: (medication.medicationCodeableConcept !== undefined ?  medication.medicationCodeableConcept.text : '')
-      }
+      };
     });
   }
 
@@ -18,7 +18,7 @@ export default class Medications extends Component {
     if (medications.length === 0) {
       return <div className="medications__table-label">No current medications.</div>;
     } else {
-      return(
+      return (
         <div className="medications__table-container">   
           <div className="medications__table-label">Current medications list</div>
           <div className="medications__table">
@@ -32,9 +32,13 @@ export default class Medications extends Component {
 
             {medications.map((medication) => 
               <div key={medication.id} className="medications__table-row">
-                <div className="medications__table-medication"> {medication.medicationCodeableConcept !== undefined ?  medication.medicationCodeableConcept.text : ''}</div>
+                <div className="medications__table-medication"> 
+                  {medication.medicationCodeableConcept !== undefined ?  medication.medicationCodeableConcept.text : ''}
+                </div>
                 <div className="medications__table-status"> {medication.status}</div>
-                <div className="medications__table-perscribed-date"> {moment(medication.authoredOn).format('MMM D, YYYY')}</div>
+                <div className="medications__table-perscribed-date">
+                  {moment(medication.authoredOn).format('MMM D, YYYY')}
+                </div>
                 <div className="medications__table-perscribed-by"></div>
                 <div className="medications__table-refills"></div>
               </div>
@@ -48,8 +52,9 @@ export default class Medications extends Component {
   render() {
     if (this.props.medicationRequests.length === 0) return <div className="medications no-entries">No entries.</div>;
 
-    const currentMedications = this.props.medicationRequests.filter((medication) => ('active' === medication.status || 'intended' === medication.status || 'on-hold' === medication.status));
-    currentMedications.sort((a, b) => moment(b.authoredOn) - moment(a.authoredOn)).sort(((a, b) => b.status < a.status));
+    const currentMedications = this.props.medicationRequests.filter((medication) => 
+      ('active' === medication.status || 'intended' === medication.status || 'on-hold' === medication.status))
+      .sort((a, b) => moment(b.authoredOn) - moment(a.authoredOn)).sort(((a, b) => b.status < a.status));
 
     return (
       <div className="medications">

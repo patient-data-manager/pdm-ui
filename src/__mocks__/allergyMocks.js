@@ -3,7 +3,7 @@ const allergyMockA = {
   category: ["food"],
   clinicalStatus: "active",
   code: {
-    coding: [{system: "http://snomed.info/sct", code: "418689008", display: "Allergy to grass pollen"}],
+    coding: [{ system: "http://snomed.info/sct", code: "418689008", display: "Allergy to grass pollen" }],
     text: "Allergy to grass pollen"
   },
   criticality: "low",
@@ -16,7 +16,7 @@ const allergyMockA = {
   },
   resourceType: "AllergyIntolerance",
   type: "allergy",
-  verificationStatus:"confirmed",
+  verificationStatus: "confirmed",
 };
 
 const allergyMockB = {
@@ -24,7 +24,7 @@ const allergyMockB = {
   category: ["food"],
   clinicalStatus: "inactive",
   code: {
-    coding: [{system: "http://snomed.info/sct", code: "419474003", display: "Allergy to mould"}],
+    coding: [{ system: "http://snomed.info/sct", code: "419474003", display: "Allergy to mould" }],
     text: "Allergy to mould"
   },
   criticality: "low",
@@ -37,7 +37,7 @@ const allergyMockB = {
   },
   resourceType: "AllergyIntolerance",
   type: "allergy",
-  verificationStatus:"confirmed",
+  verificationStatus: "confirmed",
 };
 
 const allergyMockC = {
@@ -45,7 +45,7 @@ const allergyMockC = {
   category: ["food"],
   clinicalStatus: "active",
   code: {
-    coding: [{system: "http://snomed.info/sct", code: "232347008", display: "Dander (animal) allergy"}],
+    coding: [{ system: "http://snomed.info/sct", code: "232347008", display: "Dander (animal) allergy" }],
     text: "Dander (animal) allergy"
   },
   criticality: "low",
@@ -58,7 +58,7 @@ const allergyMockC = {
   },
   resourceType: "AllergyIntolerance",
   type: "allergy",
-  verificationStatus:"confirmed",
+  verificationStatus: "confirmed",
 };
 
 export {
