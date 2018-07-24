@@ -4,7 +4,7 @@ import * as mocks from '../../../../__mocks__/allergyMocks';
 
 function setup() {
   const props = {
-    allergies: [mocks.allergyMockA, mocks.allergyMockB, mocks.allergyMockC],
+    allergies: [mocks.allergyMockA, mocks.allergyMockB, mocks.allergyMockC]
   };
 
   return fullRenderComponent(Allergies, props);
@@ -16,6 +16,7 @@ it('renders self and self components', () => {
   expect(component).toBeDefined();
   expect(component.find('div.allergies__table-label')).toExist();
   expect(component.find('div.allergies__table')).toExist();
+  expect(component.find('div.no-entries')).toHaveLength(0);
 });
 
 it('it renders allergy table', () => {
@@ -30,4 +31,12 @@ it('sorts allergy table correctly correctly', () => {
   expect(component.find('div.allergies__table-allergy').at(1).text() === 'Allergy to grass pollen');
   expect(component.find('div.allergies__table-allergy').at(1).text() === 'Dander (animal) allergy');
   expect(component.find('div.allergies__table-allergy').at(2).text() === 'Allergy to mould');
+});
+
+it('displays no entries message if no allergies', () => {
+  const component = fullRenderComponent(Allergies, {allergies: []});
+
+  expect(component.find('div.no-entries')).toExist();
+  expect(component.find('div.allergies__table-label')).toHaveLength(0);
+  expect(component.find('div.allergies__table')).toHaveLength(0);
 });
