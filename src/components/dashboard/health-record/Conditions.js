@@ -11,6 +11,34 @@ export default class Conditions extends Component {
     });
   }
 
+  renderTable(conditions) {
+    if (conditions.length === 0) {
+      return <div className="conditions__table-label">No current conditions.</div>;
+    } else {
+      return(
+        <div className="conditions__table-container">
+          <div className="conditions__table-label">Current conditions list</div>
+          <div className="conditions__table">
+            <div className="conditions__table-header">
+              <div className="conditions__table-condition"><span> condition</span></div>
+              <div className="conditions__table-diagnosed-date"><span> diagnosed date</span></div>
+              <div className="conditions__table-diagnosed-by"><span> diagnosed by</span></div>
+            </div>
+            {conditions.map((condition) => 
+              <div key={condition.id} className="conditions__table-row">
+                <div className="conditions__table-condition"> {condition.code.text}</div>
+                <div className="conditions__table-diagnosed-date"> 
+                  {moment(condition.onsetDateTime).format('MMM D, YYYY')}
+                </div>
+                <div className="conditions__table-diagnosed-by"></div>
+              </div>
+            )}
+          </div>
+        </div>
+      );
+    }
+  }
+
   render() {
     if (this.props.conditions.length === 0) return <div className="conditions no-entries">No entries.</div>;
 
@@ -19,24 +47,7 @@ export default class Conditions extends Component {
 
     return (
       <div className="conditions">
-        <div className="conditions__table-label">Current conditions list</div>
-        <div className="conditions__table">
-          <div className="conditions__table-header">
-            <div className="conditions__table-condition"><span> condition</span></div>
-            <div className="conditions__table-diagnosed-date"><span> diagnosed date</span></div>
-            <div className="conditions__table-diagnosed-by"><span> diagnosed by</span></div>
-          </div>
-          {currentConditions.map((condition) => 
-            <div key={condition.id} className="conditions__table-row">
-              <div className="conditions__table-condition"> {condition.code.text}</div>
-              <div className="conditions__table-diagnosed-date"> 
-                {moment(condition.onsetDateTime).format('MMM D, YYYY')}
-              </div>
-              <div className="conditions__table-diagnosed-by"></div>
-            </div>
-          )}
-        </div>
-
+        {this.renderTable(currentConditions)}
         <VerticalTimeline items={this.conditions()} icon="heartbeat" />
       </div>
     );

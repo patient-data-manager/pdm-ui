@@ -38,7 +38,7 @@ it('sorts medication table correctly correctly', () => {
 });
 
 it('displays no entries message if no medications', () => {
-  const component = fullRenderComponent(Medications, {medicationRequests: [], medicationStatements:[]});
+  const component = fullRenderComponent(Medications, {medicationRequests: [], medicationStatements: []});
 
   expect(component.find('div.no-entries')).toExist();
   expect(component.find('div.medications__table-label')).toHaveLength(0);

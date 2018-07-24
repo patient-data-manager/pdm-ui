@@ -14,9 +14,9 @@ export default class Medications extends Component {
     });
   }
 
-  renderMedicationTable(currentMedications) {
-    if (currentMedications.length === 0) {
-      return <div className="medications__table-label">No current medications</div>
+  renderTable(medications) {
+    if (medications.length === 0) {
+      return <div className="medications__table-label">No current medications.</div>;
     } else {
       return(
         <div className="medications__table-container">   
@@ -30,7 +30,7 @@ export default class Medications extends Component {
               <div className="medications__table-refills"><span> refills</span></div>
             </div>
 
-            {currentMedications.map((medication) => 
+            {medications.map((medication) => 
               <div key={medication.id} className="medications__table-row">
                 <div className="medications__table-medication"> {medication.medicationCodeableConcept !== undefined ?  medication.medicationCodeableConcept.text : ''}</div>
                 <div className="medications__table-status"> {medication.status}</div>
@@ -53,8 +53,7 @@ export default class Medications extends Component {
 
     return (
       <div className="medications">
-        {this.renderMedicationTable(currentMedications)}
-
+        {this.renderTable(currentMedications)}
         <VerticalTimeline items={this.medications()} icon="pills" />
       </div>
     );
