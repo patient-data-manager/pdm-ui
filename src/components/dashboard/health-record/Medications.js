@@ -48,10 +48,8 @@ export default class Medications extends Component {
   render() {
     if (this.props.medicationRequests.length === 0) return <div className="medications no-entries">No entries.</div>;
 
-    console.log(this.props.medicationRequests)
-
-    const currentMedications = this.props.medicationRequests.filter((medication) => ('active' || 'intended' || 'on-hold') === medication.status)
-      .sort((a, b) => moment(b.authoredOn) - moment(a.authoredOn)).sort(((a, b) => b.status < a.status));
+    const currentMedications = this.props.medicationRequests.filter((medication) => ('active' === medication.status || 'intended' === medication.status || 'on-hold' === medication.status));
+    currentMedications.sort((a, b) => moment(b.authoredOn) - moment(a.authoredOn)).sort(((a, b) => b.status < a.status));
 
     return (
       <div className="medications">
