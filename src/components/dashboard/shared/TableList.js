@@ -32,8 +32,8 @@ export default class TableList extends Component {
     const { order } = this.state;
 
     return order === 'desc'
-    ? (a, b) => (b[key] < a[key] ? -1 : 1)
-    : (a, b) => (a[key] < b[key] ? -1 : 1);
+      ? (a, b) => (b[key] < a[key] ? -1 : 1)
+      : (a, b) => (a[key] < b[key] ? -1 : 1);
   }
 
   renderTableHeaders = () => {
@@ -78,9 +78,9 @@ export default class TableList extends Component {
         <div className="table-list__title">{title}</div>
 
         <div className="table-list__table-wrapper">
-          {!data ?
+          {data.length === 0 ?
             <div className="no-entries">No entries</div>
-          :
+            :
             <Table className="table-list__table">
               <TableHead>
                 <TableRow>
@@ -108,4 +108,4 @@ TableList.propTypes = {
 
 TableList.defaultProps = {
   formatters: {}
-}
+};
