@@ -11,6 +11,7 @@ import Medications from '../../components/dashboard/health-record/Medications';
 import Procedures from '../../components/dashboard/health-record/Procedures';
 import Summary from '../../components/dashboard/health-record/Summary';
 import Vitals from '../../components/dashboard/health-record/Vitals';
+import PatientTimeline from '../../components/dashboard/health-record/PatientTimeline'
 
 export class HealthRecord extends Component {
   tocbotInitialized = false;
@@ -77,15 +78,10 @@ export class HealthRecord extends Component {
 
     const sections = [
       { header: 'summary', component: Summary, props: { patient, profile } },
+      { header: 'timeline', component: PatientTimeline, props: {type: 'general', patientEvents: [{type: 'Lab', description: 'Got trial medicine', startdate: '2015/05/03 08:00', enddate: '2015/05/06 08:00'}]}},
       { header: 'conditions', component: Conditions, props: { conditions: healthRecord.Condition || [] } },
-      { header: 'allergies', component: Allergies, props: { allergies: healthRecord.AllergyIntolerance || [] } },
-      { header: 'medications',
-        component: Medications,
-        props: {
-          medicationRequests: healthRecord.MedicationRequest || [],
-          medicationStatements: healthRecord.MedicationStatement || []
-        }
-      },
+      { header: 'allergies', component: Allergies, props: { allergies: [] } },
+      { header: 'medications', component: Medications, props: {medications: healthRecord.MedicationStatement || [] } },
       { header: 'immunizations', component: Immunizations, props: { immunizations: healthRecord.Immunization || [] } },
       { header: 'procedures', component: Procedures, props: { procedures: healthRecord.Procedure || [] } },
       { header: 'labs', component: Labs, props: { labs: this.filterObservationsByCategory('laboratory') || [] } },
