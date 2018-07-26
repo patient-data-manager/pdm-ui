@@ -32,7 +32,7 @@ it('it renders and filters the condition table correctly', () => {
   expect(component.find('.table-list tbody tr')).toHaveLength(3);
 });
 
-it('sorts condition table correctly correctly', () => {
+it('sorts condition table correctly', () => {
   const component = setup();
 
   expect(component.find('.table-list tbody tr').at(0).text() === 'Hypertension');
@@ -44,15 +44,26 @@ it('displays no entries message if no conditions', () => {
   const component = fullRenderComponent(Conditions, { conditions: [] });
 
   expect(component.find('div.no-entries')).toExist();
-  expect(component.find('div.conditions__table-label')).toHaveLength(0);
-  expect(component.find('div.conditions__table')).toHaveLength(0);
+  expect(component.find(TableList)).toHaveLength(0);
   expect(component.find(VerticalTimeline)).toHaveLength(0);
 });
 
 it('table is not displayed if no current conditions', () => {
   const component = fullRenderComponent(Conditions, { conditions: [mocks.conditionMockA] });
 
+  expect(component.find(TableList)).toExist();
   expect(component.find('.table-list tbody tr')).toHaveLength(0);
   expect(component.find('.table-list div.no-entries')).toExist();
   expect(component.find(VerticalTimeline)).toExist();
+});
+
+it('it renders the vertical timeline correctly correctly', () => {
+  const component = setup();
+
+  expect(component.find(VerticalTimeline)).toExist();
+  expect(component.find('div.vertical-timeline__item')).toHaveLength(3);
+  expect(component.find('button.vertical-timeline__view-more')).toExist();
+  expect(component.find('div.vertical-timeline__item-info').at(0).text() === 'Viral sinusitis (disorder)');
+  expect(component.find('div.vertical-timeline__item-info').at(1).text() === 'Hypertension');
+  expect(component.find('div.vertical-timeline__item-info').at(2).text() === 'Viral sinusitis (disorder)');
 });

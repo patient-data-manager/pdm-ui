@@ -17,7 +17,6 @@ export default class TableList extends Component {
     };
 
     if (this.props.sort !== undefined) {
-      console.log('HEREEEEEE')
       state = {
         order: this.props.sort.order,
         orderBy: this.props.sort.orderBy
@@ -82,7 +81,6 @@ export default class TableList extends Component {
 
   render() {
     const { data, title } = this.props;
-    console.log(this.props.sort)
 
     return (
       <div className="table-list">
