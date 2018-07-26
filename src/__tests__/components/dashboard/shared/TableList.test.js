@@ -14,7 +14,7 @@ function setup() {
       mocks.tableListMockE],
     headers: ['name', 'birthday', 'gender', 'species'],
     formatters: { 'birthday': (value) => moment(value).format('MMM D, YYYY') },
-    sort: {order: 'asc', orderBy: 3}
+    sort: { order: 'asc', orderBy: 3 }
   };
 
   return fullRenderComponent(TableList, props);
@@ -42,7 +42,7 @@ it('renders title and headers correctly', () => {
 
 it('table is not displayed if data array is empty', () => {
   const component = fullRenderComponent(TableList, 
-    { title: 'table', headers: ['1', '2', '3'], data: []});
+    { title: 'table', headers: ['1', '2', '3'], data: [] });
 
   expect(component.find('div.table-list')).toExist();
   expect(component.find('div.no-entries')).toExist();

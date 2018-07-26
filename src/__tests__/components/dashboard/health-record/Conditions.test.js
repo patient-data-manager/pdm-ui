@@ -63,7 +63,10 @@ it('it renders the vertical timeline correctly correctly', () => {
   expect(component.find(VerticalTimeline)).toExist();
   expect(component.find('div.vertical-timeline__item')).toHaveLength(3);
   expect(component.find('button.vertical-timeline__view-more')).toExist();
-  expect(component.find('div.vertical-timeline__item-info').at(0).find('.info-description').text()).toEqual('Viral sinusitis (disorder)');
-  expect(component.find('div.vertical-timeline__item-info').at(1).find('.info-description').text()).toEqual('Hypertension');
-  expect(component.find('div.vertical-timeline__item-info').at(2).find('.info-description').text()).toEqual('Viral sinusitis (disorder)');
+  expect(component.find('div.vertical-timeline__item-info').at(0)
+    .find('.info-description').text()).toEqual('Viral sinusitis (disorder)');
+  expect(component.find('div.vertical-timeline__item-info').at(1)
+    .find('.info-description').text()).toEqual('Hypertension');
+  expect(component.find('div.vertical-timeline__item-info').at(2)
+    .find('.info-description').text()).toEqual('Viral sinusitis (disorder)');
 });

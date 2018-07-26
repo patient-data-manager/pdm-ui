@@ -20,7 +20,7 @@ export default class TableList extends Component {
       state = {
         order: this.props.sort.order,
         orderBy: this.props.sort.orderBy
-      }
+      };
     }
 
     this.state = state;

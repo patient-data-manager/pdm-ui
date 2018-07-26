@@ -36,7 +36,7 @@ export default class Conditions extends Component {
           headers={['condition', 'diagnosed date']}
           data={this.getCurrentConditions()}
           formatters={{ 'diagnosed date': (value) => moment(value).format('MMM D, YYYY') }}
-          sort={{ order: 'desc' , orderBy: 1 }} />
+          sort={{ order: 'desc', orderBy: 1 }} />
         <VerticalTimeline items={this.getConditions()} icon="heartbeat" />
       </div>
     );
