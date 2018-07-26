@@ -8,7 +8,7 @@ import TableList from '../shared/TableList';
 export default class Medications extends Component {
   getMedications() {
     return this.props.medicationRequests.map((medication) => {
-      return { 
+      return {
         date: medication.authoredOn,
         text: (medication.medicationCodeableConcept !== undefined ?  medication.medicationCodeableConcept.text : '')
       };
@@ -16,13 +16,13 @@ export default class Medications extends Component {
   }
 
   getCurrentMedications() {
-    const currentMedications = this.props.medicationRequests.filter((medication) => 
+    const currentMedications = this.props.medicationRequests.filter((medication) =>
       (medication.status === 'active' || medication.status === 'intended' || medication.status === 'on-hold'));
 
     let filteredCurrentMedications = [];
     currentMedications.forEach((medication, index) => {
       filteredCurrentMedications[index] = {
-        medication: 
+        medication:
           medication.medicationCodeableConcept !== undefined ?  medication.medicationCodeableConcept.text : '',
         status: medication.status,
         'perscribed date': medication.authoredOn

@@ -1,5 +1,6 @@
 import React, { Component } from 'react';
 import PropTypes from 'prop-types';
+
 import TableList from '../shared/TableList';
 
 export default class Allergies extends Component {
@@ -24,8 +25,7 @@ export default class Allergies extends Component {
         <TableList
           title="Current allergies list"
           headers={['allergy', 'criticality', 'current status']}
-          data={this.getCurrentAllergies()}
-          sort={{ order: 'asc', orderBy: 0 }} />
+          data={this.getCurrentAllergies()} />
       </div>
     );
   }

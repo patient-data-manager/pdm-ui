@@ -11,19 +11,10 @@ export default class TableList extends Component {
   constructor(props) {
     super(props);
 
-    let state = {
-      order: 'asc',
-      orderBy: 0
+    this.state = {
+      order: this.props.sort.order,
+      orderBy: this.props.sort.orderBy
     };
-
-    if (this.props.sort !== undefined) {
-      state = {
-        order: this.props.sort.order,
-        orderBy: this.props.sort.orderBy
-      };
-    }
-
-    this.state = state;
   }
 
   handleSort = (index) => {
@@ -113,9 +104,13 @@ TableList.propTypes = {
   data: PropTypes.array.isRequired,
   headers: PropTypes.array.isRequired,
   formatters: PropTypes.object,
-  sort: PropTypes.object
+  sort: PropTypes.shape({
+    order: PropTypes.string,
+    orderBy: PropTypes.number
+  })
 };
 
 TableList.defaultProps = {
-  formatters: {}
+  formatters: {},
+  sort: { order: 'asc', orderBy: 0 }
 };
