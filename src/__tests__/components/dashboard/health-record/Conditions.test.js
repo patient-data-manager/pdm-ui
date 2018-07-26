@@ -35,9 +35,9 @@ it('it renders and filters the condition table correctly', () => {
 it('sorts condition table correctly', () => {
   const component = setup();
 
-  expect(component.find('.table-list tbody tr').at(0).text() === 'Hypertension');
-  expect(component.find('.table-list tbody tr').at(1).text() === 'Perennial allergic rhinitis');
-  expect(component.find('.table-list tbody tr').at(2).text() === 'Osteoporosis (disorder)');
+  expect(component.find('.table-list tbody tr').at(0).find('td').at(0).text()).toEqual('Hypertension');
+  expect(component.find('.table-list tbody tr').at(1).find('td').at(0).text()).toEqual('Perennial allergic rhinitis');
+  expect(component.find('.table-list tbody tr').at(2).find('td').at(0).text()).toEqual('Osteoporosis (disorder)');
 });
 
 it('displays no entries message if no conditions', () => {
@@ -63,7 +63,7 @@ it('it renders the vertical timeline correctly correctly', () => {
   expect(component.find(VerticalTimeline)).toExist();
   expect(component.find('div.vertical-timeline__item')).toHaveLength(3);
   expect(component.find('button.vertical-timeline__view-more')).toExist();
-  expect(component.find('div.vertical-timeline__item-info').at(0).text() === 'Viral sinusitis (disorder)');
-  expect(component.find('div.vertical-timeline__item-info').at(1).text() === 'Hypertension');
-  expect(component.find('div.vertical-timeline__item-info').at(2).text() === 'Viral sinusitis (disorder)');
+  expect(component.find('div.vertical-timeline__item-info').at(0).find('.info-description').text()).toEqual('Viral sinusitis (disorder)');
+  expect(component.find('div.vertical-timeline__item-info').at(1).find('.info-description').text()).toEqual('Hypertension');
+  expect(component.find('div.vertical-timeline__item-info').at(2).find('.info-description').text()).toEqual('Viral sinusitis (disorder)');
 });

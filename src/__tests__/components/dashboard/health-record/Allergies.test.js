@@ -28,9 +28,9 @@ it('it renders allergy table', () => {
 it('sorts allergy table correctly', () => {
   const component = setup();
 
-  expect(component.find('.table-list tbody tr').at(0).text() === 'Allergy to grass pollen');
-  expect(component.find('.table-list tbody tr').at(1).text() === 'Allergy to mould');
-  expect(component.find('.table-list tbody tr').at(2).text() === 'Dander (animal) allergy');
+  expect(component.find('.table-list tbody tr').at(0).find('td').at(0).text()).toEqual('Allergy to grass pollen');
+  expect(component.find('.table-list tbody tr').at(1).find('td').at(0).text()).toEqual('Allergy to mould');
+  expect(component.find('.table-list tbody tr').at(2).find('td').at(0).text()).toEqual('Dander (animal) allergy');
 });
 
 it('displays no entries message if no allergies', () => {

@@ -36,10 +36,10 @@ it('it renders and filters the medication table correctly', () => {
 it('sorts medication table correctly', () => {
   const component = setup();
 
-  expect(component.find('.table-list tbody tr').at(0).text() === 'Mirena 52 MG Intrauterine System');
-  expect(component.find('.table-list tbody tr').at(1).text() === 'Camila 28 Day Pack');
-  expect(component.find('.table-list tbody tr').at(2).text() === '0.3 ML EPINEPHrine 0.5 MG/ML Auto-Injector');
-  expect(component.find('.table-list tbody tr').at(3).text() === 'Loratadine 5 MG Chewable Tablet');
+  expect(component.find('.table-list tbody tr').at(0).find('td').at(0).text()).toEqual('Mirena 52 MG Intrauterine System');
+  expect(component.find('.table-list tbody tr').at(1).find('td').at(0).text()).toEqual('Camila 28 Day Pack');
+  expect(component.find('.table-list tbody tr').at(2).find('td').at(0).text()).toEqual('0.3 ML EPINEPHrine 0.5 MG/ML Auto-Injector');
+  expect(component.find('.table-list tbody tr').at(3).find('td').at(0).text()).toEqual('Loratadine 5 MG Chewable Tablet');
 });
 
 it('displays no entries message if no medications', () => {
@@ -66,8 +66,8 @@ it('it renders the vertical timeline correctly correctly', () => {
   expect(component.find(VerticalTimeline)).toExist();
   expect(component.find('div.vertical-timeline__item')).toHaveLength(3);
   expect(component.find('button.vertical-timeline__view-more')).toExist();
-  expect(component.find('div.vertical-timeline__item-info').at(0).text() === 'Mirena 52 MG Intrauterine System');
-  expect(component.find('div.vertical-timeline__item-info').at(1).text() === 'Camila 28 Day Pack');
-  expect(component.find('div.vertical-timeline__item-info').at(2).text() === 'Amoxicillin 250 MG / Clavulanate 125 MG [Augmentin]');
+  expect(component.find('div.vertical-timeline__item-info').at(0).find('.info-description').text()).toEqual('Mirena 52 MG Intrauterine System');
+  expect(component.find('div.vertical-timeline__item-info').at(1).find('.info-description').text()).toEqual('Camila 28 Day Pack');
+  expect(component.find('div.vertical-timeline__item-info').at(2).find('.info-description').text()).toEqual('Amoxicillin 250 MG / Clavulanate 125 MG [Augmentin]');
 });
 
