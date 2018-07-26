@@ -3,9 +3,11 @@ import PropTypes from 'prop-types';
 import moment from 'moment';
 
 import VerticalTimeline from '../shared/VerticalTimeline';
+import TableList from '../shared/TableList';
 
 export default class Medications extends Component {
-  medications() {
+
+  getMedications() {
     return this.props.medicationRequests.map((medication) => {
       return { 
         date: medication.authoredOn,
@@ -14,52 +16,34 @@ export default class Medications extends Component {
     });
   }
 
-  renderTable(medications) {
-    if (medications.length === 0) {
-      return <div className="medications__table-label">No current medications.</div>;
-    } else {
-      return (
-        <div className="medications__table-container">   
-          <div className="medications__table-label">Current medications list</div>
-          <div className="medications__table">
-            <div className="medications__table-header">
-              <div className="medications__table-medication"><span> medication</span></div>
-              <div className="medications__table-status"><span> status</span></div>
-              <div className="medications__table-perscribed-date"><span> perscribed date</span></div>
-              <div className="medications__table-perscribed-by"><span> perscribed by</span></div>
-              <div className="medications__table-refills"><span> refills</span></div>
-            </div>
+  getCurrentMedications() {
+    const currentMedications = this.props.medicationRequests
+      .filter((medication) => (medication.status === 'active' || medication.status === 'intended' || medication.status === 'on-hold'));
 
-            {medications.map((medication) => 
-              <div key={medication.id} className="medications__table-row">
-                <div className="medications__table-medication"> 
-                  {medication.medicationCodeableConcept !== undefined ?  medication.medicationCodeableConcept.text : ''}
-                </div>
-                <div className="medications__table-status"> {medication.status}</div>
-                <div className="medications__table-perscribed-date">
-                  {moment(medication.authoredOn).format('MMM D, YYYY')}
-                </div>
-                <div className="medications__table-perscribed-by"></div>
-                <div className="medications__table-refills"></div>
-              </div>
-            )}
-          </div>
-        </div>
-      );
-    }
+    let filteredCurrentMedications = [];
+    currentMedications.forEach((medication, index) => {
+      filteredCurrentMedications[index] = {
+        medication: (medication.medicationCodeableConcept !== undefined ?  medication.medicationCodeableConcept.text : ''),
+        status: medication.status,
+        'perscribed date': medication.authoredOn
+      };
+    });
+
+    return filteredCurrentMedications;
   }
 
   render() {
     if (this.props.medicationRequests.length === 0) return <div className="medications no-entries">No entries.</div>;
 
-    const currentMedications = this.props.medicationRequests.filter((medication) => 
-      ('active' === medication.status || 'intended' === medication.status || 'on-hold' === medication.status))
-      .sort((a, b) => moment(b.authoredOn) - moment(a.authoredOn)).sort(((a, b) => b.status < a.status));
-
     return (
       <div className="medications">
-        {this.renderTable(currentMedications)}
-        <VerticalTimeline items={this.medications()} icon="pills" />
+        <TableList
+          title="Current medications list"
+          headers={['medication', 'status', 'perscribed date']}
+          data={this.getCurrentMedications()}
+          formatters={{ 'perscribed date': (value) => moment(value).format('MMM D, YYYY') }}
+          sort={{ order: 'desc' , orderBy: 2 }} />
+        <VerticalTimeline items={this.getMedications()} icon="heartbeat" />
       </div>
     );
   }

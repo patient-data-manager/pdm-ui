@@ -13,9 +13,7 @@ export default class Conditions extends Component {
   }
 
   getCurrentConditions() {
-    const currentConditions = this.props.conditions
-      .filter((condition) => condition.clinicalStatus === 'active')
-      .sort(((a, b) => moment(b.onsetDateTime) - moment(a.onsetDateTime)));
+    const currentConditions = this.props.conditions.filter((condition) => condition.clinicalStatus === 'active');
 
     let filteredCurrentConditions = [];
     currentConditions.forEach((condition, index) => {
@@ -37,7 +35,8 @@ export default class Conditions extends Component {
           title="Current conditions list"
           headers={['condition', 'diagnosed date']}
           data={this.getCurrentConditions()}
-          formatters={{ 'diagnosed date': (value) => moment(value).format('MMM D, YYYY') }} />
+          formatters={{ 'diagnosed date': (value) => moment(value).format('MMM D, YYYY') }}
+          sort={{ order: 'desc' , orderBy: 1 }} />
         <VerticalTimeline items={this.getConditions()} icon="heartbeat" />
       </div>
     );

@@ -11,10 +11,20 @@ export default class TableList extends Component {
   constructor(props) {
     super(props);
 
-    this.state = {
+    let state = {
       order: 'asc',
       orderBy: 0
     };
+
+    if (this.props.sort !== undefined) {
+      console.log('HEREEEEEE')
+      state = {
+        order: this.props.sort.order,
+        orderBy: this.props.sort.orderBy
+      }
+    }
+
+    this.state = state;
   }
 
   handleSort = (index) => {
@@ -72,6 +82,7 @@ export default class TableList extends Component {
 
   render() {
     const { data, title } = this.props;
+    console.log(this.props.sort)
 
     return (
       <div className="table-list">
@@ -103,7 +114,8 @@ TableList.propTypes = {
   title: PropTypes.string.isRequired,
   data: PropTypes.array.isRequired,
   headers: PropTypes.array.isRequired,
-  formatters: PropTypes.object
+  formatters: PropTypes.object,
+  sort: PropTypes.object
 };
 
 TableList.defaultProps = {
