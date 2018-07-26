@@ -43,7 +43,7 @@ export default class Medications extends Component {
           data={this.getCurrentMedications()}
           formatters={{ 'perscribed date': (value) => moment(value).format('MMM D, YYYY') }}
           sort={{ order: 'desc', orderBy: 2 }} />
-        <VerticalTimeline items={this.getMedications()} icon="heartbeat" />
+        <VerticalTimeline items={this.getMedications()} icon="pills" />
       </div>
     );
   }
