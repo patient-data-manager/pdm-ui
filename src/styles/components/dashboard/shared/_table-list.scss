@@ -1,0 +1,53 @@
+.table-list {
+  margin: 20px 0;
+
+  &__title {
+    font-size: 1.2em;
+    font-style: italic;
+    font-weight: 600;
+    color: $color-gray-darker;
+  }
+
+  &__table-wrapper {
+    margin: 5px 0;
+    padding: 15px 0;
+    background-color: $color-gray-lightest;
+  }
+
+  &__table {
+    thead {
+      tr {
+        height: 40px;
+      }
+
+      th {
+        font-size: 1.1em;
+        border: 0;
+        font-weight: 600;
+
+        span {
+          border-bottom: 2px solid $color-blue;
+        }
+      }
+    }
+
+    tbody {
+      tr {
+        height: 30px;
+
+        &:hover {
+          background-color: darken($color-gray-lightest, 5%);
+        }
+      }
+
+      td {
+        font-size: 1.1em;
+        border: 0;
+      }
+    }
+  }
+
+  .no-entries {
+    margin-left: 20px;
+  }
+}
