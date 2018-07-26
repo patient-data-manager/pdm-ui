@@ -2,6 +2,7 @@ import React, { Component } from 'react';
 import PropTypes from 'prop-types';
 import { connect } from 'react-redux';
 import tocbot from 'tocbot';
+import moment from 'moment'
 
 import Allergies from '../../components/dashboard/health-record/Allergies';
 import Conditions from '../../components/dashboard/health-record/Conditions';
@@ -58,6 +59,61 @@ export class HealthRecord extends Component {
     });
   }
 
+  getPatientTimelineComponents() {
+    const { healthRecord, profile, loading } = this.props;
+    let all_items = [];
+    let props_contents = {};
+    props_contents['groups'] =  [{ 'id': 1, 'title': 'procedure' }, {'id': 2, 'title': 'condition'}, {'id': 3, 'title': 'lab'}, {'id': 4, 'title': 'medication'}];
+    props_contents['legendItems'] = [{'icon': 'hospital-o', 'description': 'procedure'},{'icon': 'heartbeat', 'description': 'condition'},{'icon': 'flask', 'description': 'lab'},{'icon': 'stethoscope', 'description': 'medication'}];
+    let a = 0;
+    if(healthRecord.Procedure)
+    {
+      for(a = 0; a < healthRecord.Procedure.length; a++)
+      {
+        let info_hash = {};
+        info_hash['id'] = 1;
+        info_hash['groups'] = 1;
+        info_hash['title'] = healthRecord.Procedure[a].code.text;
+        info_hash['start_time'] = moment(healthRecord.Procedure[a].performedDateTime);
+        info_hash['end_time'] = moment(healthRecord.Procedure[a].performedDateTime).add(1,'days')
+        info_hash['class'] = 'fa fa-hospital-o';
+        all_items.push(info_hash);
+      }
+    }
+
+    if(healthRecord.Condition)
+    {
+      for(a = 0; a < healthRecord.Condition.length; a++)
+      {
+        let info_hash = {};
+        info_hash['id'] = 1;
+        info_hash['groups'] = 2;
+        info_hash['title'] = healthRecord.Condition[a].code.text;
+        info_hash['start_time'] = moment(healthRecord.Condition[a].onsetDateTime);
+        info_hash['end_time'] = moment(healthRecord.Condition[a].onsetDateTime).add(1,'days')
+        info_hash['class'] = 'fa fa-heartbeat';
+        all_items.push(info_hash);
+      }  
+    }
+
+    if(healthRecord.MedicationStatement)
+    {
+      for(a = 0; a < healthRecord.MedicationStatement.length; a++)
+      {
+        let info_hash = {};
+        info_hash['id'] = 1;
+        info_hash['groups'] = 3;
+        info_hash['title'] = healthRecord.MedicationStatement[a].medicationCodeableConcept.text;
+        info_hash['start_time'] = moment(healthRecord.MedicationStatement[a].effectivePeriod.start);
+        info_hash['end_time'] = moment().clone()
+        info_hash['class'] = 'fa fa-heartbeat';
+        all_items.push(info_hash);
+      }
+    }
+    props_contents['items'] = all_items;
+    return props_contents;
+  }
+
   renderSection = (header, SectionComponent, props) => {
     return (
       <div className="health-record__section" key={header}>
@@ -74,11 +130,17 @@ export class HealthRecord extends Component {
   render() {
     const { healthRecord, profile, loading } = this.props;
     let patient = {};
+    let a = this.getPatientTimelineComponents();
+    //alert(a)
+
     if (healthRecord.Patient) patient = healthRecord.Patient[0];
+    console.log(healthRecord.Condition[0].code.text)
 
     const sections = [
       { header: 'summary', component: Summary, props: { patient, profile } },
-      { header: 'timeline', component: PatientTimeline, props: {type: 'general', patientEvents: [{type: 'Lab', description: 'Got trial medicine', startdate: '2015/05/03 08:00', enddate: '2015/05/06 08:00'}]}},
+      //{ header: 'timeline', component: PatientTimeline, props: {items: [{id: 1, groups: 2, title: 'got trial medicine', class: 'fa fa-flask', start_time: moment('2015/05/03 08:00'), end_time: moment('2016/05/03 08:00')}], groups: [{ id: 1, title: 'procedure' }, {id: 2, title: 'condition'}, {id: 3, title: 'lab'}, {id: 4, title: 'medication'}] ,
+      //legendItems: [{icon: 'hospital-o', description: 'procedure'},{icon: 'heartbeat', description: 'condition'},{icon: 'flask', description: 'lab'},{icon: 'stethoscope', description: 'medication'}]}},
+      { header: 'timeline', component: PatientTimeline, props: a },
       { header: 'conditions', component: Conditions, props: { conditions: healthRecord.Condition || [] } },
       { header: 'allergies', component: Allergies, props: { allergies: [] } },
       { header: 'medications', component: Medications, props: {medications: healthRecord.MedicationStatement || [] } },

@@ -8,57 +8,18 @@ export default class PatientTimeline extends Component {
 
   constructor(props){
     super(props);
-    let groups = []
-    let items = [];
-    let legendItems = []
-    if(props.type)
-    {
-      if(props.type == 'general') {
-        groups = [{ id: 1, title: 'procedure' }, {id: 2, title: 'condition'}, {id: 3, title: 'lab'}, {id: 4, title: 'medication'}];
-        let groupHash = {}
-        groupHash['Procedure'] = ['fa fa-hospital-o', 1];
-        groupHash['Condition'] = ['fa fa-heartbeat', 2];
-        groupHash['Lab'] = ['fa fa-flask', 3];
-        groupHash['Medication'] = ['fa fa-stethoscope', 4];
-        var i = 0;
-        legendItems = [{icon: 'hospital-o', description: 'procedure'},{icon: 'heartbeat', description: 'condition'},{icon: 'flask', description: 'lab'},{icon: 'stethoscope', description: 'medication'}];
-        if(props.patientEvents) {
-          for(i = 0; i < props.patientEvents.length; i++) {
-            let descriptionTerm = props.patientEvents[i]['description'];
-            let endTime = props.patientEvents[i]['enddate'];
-
-            if(endTime === "present") {
-              endTime = moment().clone();
-            }
-            else {
-              endTime = moment(endTime);
-            }
-            items.push({id: i + 1, group: groupHash[props.patientEvents[i]['type']][1], title: descriptionTerm, start_time: moment(props.patientEvents[i]["startdate"]), end_time: endTime, className: groupHash[props.patientEvents[i]['type']][0], style: {backgroundColor: 'fuschia'}, itemProps: {onClick: () => {alert(descriptionTerm) }}})
-          }
-        }
-      }
-      else if(props.type == 'medical') {
-        groups = [{ id: 1, title: 'daily' }, {id: 2, title: 'asneeded'}, {id: 3, title: 'discontinued'}];
-        let groupHash = {};
-        groupHash['daily'] = 1;
-        groupHash['asneeded'] = 2;
-        groupHash['discontinued'] = 3;
-        var i = 0;
-        if(props.subscriptions) {
-          for(i = 0; i < props.subscriptions.length; i++) {
-            let descriptionTerm = props.subscriptions[i]['description'];
-            let endTime = props.subscriptions[i]['enddate'];
-            if(endTime === "present") {
-              endTime = moment().clone();
-            }
-            else {
-              endTime = moment(endTime);
-            }
-            items.push({id: i + 1, group: groupHash[props.subscriptions[i]['type']], title: descriptionTerm, style: {color: "white"}, start_time: moment(props.subscriptions[i]["startdate"]), end_time: endTime, itemProps: {onClick: () => {alert(descriptionTerm) }}})
-          }
-        }
-      }
-    }
+    let groupHash = {}
+    groupHash['Procedure'] = ['fa fa-hospital-o', 1]
+    groupHash['Condition'] = ['fa fa-heartbeat', 2]
+    groupHash['Lab'] = ['fa fa-flask', 3]
+    groupHash['Medication'] = ['fa fa-stethoscope', 4]
+    var i = 0;
+    let items = props.items;
+    let legendItems = props.legendItems;
+    let groups = props.groups;
+    console.log(items);
+    console.log(legendItems);
+    console.log(groups);
 
     // Define the bounds of the timeline
     let visibleTimeStart = moment().clone().add(-1, 'years');
@@ -66,8 +27,8 @@ export default class PatientTimeline extends Component {
     this.state = {
     items: items,
     groups: groups,
-    visibleTimeStart: visibleTimeStart,
-    visibleTimeEnd: visibleTimeEnd,
+    visibleTimeStart: visibleTimeStart.valueOf(),
+    visibleTimeEnd: visibleTimeEnd.valueOf(),
     timeSteps: {
         minute: 1,
         hour: 1,
@@ -94,8 +55,8 @@ oneMonth(num) {
   let visibleTimeStart = moment().clone().add(-1, 'months');
   let visibleTimeEnd = moment().clone();
   this.setState({
-  visibleTimeStart: visibleTimeStart,
-  visibleTimeEnd: visibleTimeEnd
+  visibleTimeStart: visibleTimeStart.valueOf(),
+  visibleTimeEnd: visibleTimeEnd.valueOf()
 })
 }
 
@@ -103,8 +64,8 @@ threeMonth() {
   let visibleTimeStart = moment().clone().add(-3, 'months');
   let visibleTimeEnd = moment().clone();
   this.setState({
-  visibleTimeStart: visibleTimeStart,
-  visibleTimeEnd: visibleTimeEnd
+  visibleTimeStart: visibleTimeStart.valueOf(),
+  visibleTimeEnd: visibleTimeEnd.valueOf()
 })
 }
 
@@ -112,8 +73,8 @@ sixMonth() {
   let visibleTimeStart = moment().clone().add(-6, 'months');
   let visibleTimeEnd = moment().clone();
   this.setState({
-  visibleTimeStart: visibleTimeStart,
-  visibleTimeEnd: visibleTimeEnd
+  visibleTimeStart: visibleTimeStart.valueOf(),
+  visibleTimeEnd: visibleTimeEnd.valueOf()
 })
 }
 
@@ -121,8 +82,8 @@ oneYear() {
   let visibleTimeStart = moment().clone().add(-1, 'year');
   let visibleTimeEnd = moment().clone();
   this.setState({
-  visibleTimeStart: visibleTimeStart,
-  visibleTimeEnd: visibleTimeEnd
+  visibleTimeStart: visibleTimeStart.valueOf(),
+  visibleTimeEnd: visibleTimeEnd.valueOf()
 })
 }
 
@@ -130,8 +91,8 @@ fiveYear() {
   let visibleTimeStart = moment().clone().add(-5, 'year');
   let visibleTimeEnd = moment().clone();
   this.setState({
-  visibleTimeStart: visibleTimeStart,
-  visibleTimeEnd: visibleTimeEnd
+  visibleTimeStart: visibleTimeStart.valueOf(),
+  visibleTimeEnd: visibleTimeEnd.valueOf()
 })
 }
 
@@ -140,17 +101,17 @@ beginning() {
   if(items.length === 0)
   {
     this.setState({
-      visibleTimeStart: moment().clone().add(-1, 'week'),
-      visibleTimeEnd: moment().clone()
+      visibleTimeStart: moment().clone().add(-1, 'week').valueOf(),
+      visibleTimeEnd: moment().clone().valueOf()
     })
   }
   else
   {
     var k = 0
     let all_times = []
-    for(k = 0; k < items.length; k++)
+    for(k = 0; k < this.state.items.length; k++)
     {
-      all_times.push(items[k]["start_time"])
+      all_times.push(this.state.items[k]["start_time"])
     }
     let visibleTimeStart = moment.min(all_times)
     let visibleTimeEnd = moment().clone()
