@@ -13,20 +13,16 @@ export default class PatientTimeline extends Component {
     groupHash['Condition'] = ['fa fa-heartbeat', 2]
     groupHash['Lab'] = ['fa fa-flask', 3]
     groupHash['Medication'] = ['fa fa-stethoscope', 4]
-    var i = 0;
-    let items = props.items;
-    let legendItems = props.legendItems;
-    let groups = props.groups;
-    console.log(items);
-    console.log(legendItems);
-    console.log(groups);
+    console.log(props.items);
+    console.log(props.legendItems);
+    console.log(props.groups);
 
     // Define the bounds of the timeline
     let visibleTimeStart = moment().clone().add(-1, 'years');
     let visibleTimeEnd = moment().clone()
     this.state = {
-    items: items,
-    groups: groups,
+    items: props.items,
+    groups: props.groups,
     visibleTimeStart: visibleTimeStart.valueOf(),
     visibleTimeEnd: visibleTimeEnd.valueOf(),
     timeSteps: {
@@ -36,7 +32,7 @@ export default class PatientTimeline extends Component {
         month: 1,
         year: 1
     },
-    legendItems: legendItems,
+    legendItems: props.legendItems,
     hoverItem: {
     title: '',
     details: '',
