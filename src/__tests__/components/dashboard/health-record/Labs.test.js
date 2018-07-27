@@ -18,7 +18,7 @@ it('renders self and self components', () => {
   expect(component.find('div.labs')).toExist();
 });
 
-it('it renders and filters the lab results as a vertical timeline correctly and displays top 3 results initially', () => {
+it('it renders and filters the lab results as a vertical timeline correctly', () => {
   const component = setup();
   expect(component.find('div.vertical-timeline__item')).toHaveLength(3);
   expect(component.find('div.vertical-timeline__item-info').at(0)

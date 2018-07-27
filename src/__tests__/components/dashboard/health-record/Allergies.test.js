@@ -31,7 +31,7 @@ it('sorts allergy table correctly', () => {
   expect(component.find('.table-list tbody tr').at(1).find('td').at(0).text()).toEqual('Allergy to mould');
   expect(component.find('.table-list tbody tr').at(2).find('td').at(0).text()).toEqual('Allergy to peanuts');
   expect(component.find('.table-list tbody tr').at(3).find('td').at(0).text())
-  .toEqual('Allergy to substance (disorder)');
+    .toEqual('Allergy to substance (disorder)');
   expect(component.find('.table-list tbody tr').at(4).find('td').at(0).text()).toEqual('Dander (animal) allergy');
 });
 
