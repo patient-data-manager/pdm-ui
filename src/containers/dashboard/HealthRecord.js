@@ -66,12 +66,14 @@ export class HealthRecord extends Component {
     props_contents['groups'] =  [{ 'id': 1, 'title': 'procedure' }, {'id': 2, 'title': 'condition'}, {'id': 3, 'title': 'lab'}, {'id': 4, 'title': 'medication'}];
     props_contents['legendItems'] = [{'icon': 'hospital-o', 'description': 'procedure'},{'icon': 'heartbeat', 'description': 'condition'},{'icon': 'flask', 'description': 'lab'},{'icon': 'stethoscope', 'description': 'medication'}];
     let a = 0;
+    let id_c = 0;
     if(healthRecord.Procedure)
     {
       for(a = 0; a < healthRecord.Procedure.length; a++)
       {
+        id_c += 1;
         let info_hash = {};
-        info_hash['id'] = 1;
+        info_hash['id'] = id_c;
         info_hash['groups'] = 1;
         info_hash['title'] = healthRecord.Procedure[a].code.text;
         info_hash['start_time'] = moment(healthRecord.Procedure[a].performedDateTime);
@@ -85,23 +87,25 @@ export class HealthRecord extends Component {
     {
       for(a = 0; a < healthRecord.Condition.length; a++)
       {
+        id_c += 1;
         let info_hash = {};
-        info_hash['id'] = 1;
+        info_hash['id'] = id_c;
         info_hash['groups'] = 2;
         info_hash['title'] = healthRecord.Condition[a].code.text;
         info_hash['start_time'] = moment(healthRecord.Condition[a].onsetDateTime);
         info_hash['end_time'] = moment(healthRecord.Condition[a].onsetDateTime).add(1,'days')
         info_hash['class'] = 'fa fa-heartbeat';
         all_items.push(info_hash);
-      }  
+      }
     }
 
     if(healthRecord.MedicationStatement)
     {
       for(a = 0; a < healthRecord.MedicationStatement.length; a++)
       {
+        id_c += 1;
         let info_hash = {};
-        info_hash['id'] = 1;
+        info_hash['id'] = id_c;
         info_hash['groups'] = 3;
         info_hash['title'] = healthRecord.MedicationStatement[a].medicationCodeableConcept.text;
         info_hash['start_time'] = moment(healthRecord.MedicationStatement[a].effectivePeriod.start);
@@ -131,10 +135,8 @@ export class HealthRecord extends Component {
     const { healthRecord, profile, loading } = this.props;
     let patient = {};
     let a = this.getPatientTimelineComponents();
-    //alert(a)
 
     if (healthRecord.Patient) patient = healthRecord.Patient[0];
-    console.log(healthRecord.Condition[0].code.text)
 
     const sections = [
       { header: 'summary', component: Summary, props: { patient, profile } },

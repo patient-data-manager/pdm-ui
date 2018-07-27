@@ -111,9 +111,10 @@ beginning() {
     }
     let visibleTimeStart = moment.min(all_times)
     let visibleTimeEnd = moment().clone()
+    alert(visibleTimeStart)
     this.setState({
-    visibleTimeStart: visibleTimeStart,
-    visibleTimeEnd: visibleTimeEnd
+    visibleTimeStart: visibleTimeStart.valueOf(),
+    visibleTimeEnd: visibleTimeEnd.valueOf()
   })
 }
 }
