@@ -66,7 +66,7 @@ const allergyMockD = {
   category: ["food"],
   clinicalStatus: "inactive",
   code: {
-    coding: [{ system: "http://snomed.info/sct", code: 	"419199007", display: "Allergy to substance (disorder)" }],
+    coding: [{ system: "http://snomed.info/sct", code: "419199007", display: "Allergy to substance (disorder)" }],
     text: "Allergy to substance (disorder)"
   },
   criticality: "high",

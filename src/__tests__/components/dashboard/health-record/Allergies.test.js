@@ -30,7 +30,8 @@ it('sorts allergy table correctly', () => {
   expect(component.find('.table-list tbody tr').at(0).find('td').at(0).text()).toEqual('Allergy to grass pollen');
   expect(component.find('.table-list tbody tr').at(1).find('td').at(0).text()).toEqual('Allergy to mould');
   expect(component.find('.table-list tbody tr').at(2).find('td').at(0).text()).toEqual('Allergy to peanuts');
-  expect(component.find('.table-list tbody tr').at(3).find('td').at(0).text()).toEqual('Allergy to substance (disorder)');
+  expect(component.find('.table-list tbody tr').at(3).find('td').at(0).text())
+  .toEqual('Allergy to substance (disorder)');
   expect(component.find('.table-list tbody tr').at(4).find('td').at(0).text()).toEqual('Dander (animal) allergy');
 });
 
@@ -48,5 +49,4 @@ it('properly retrieves the clinical statuses', () => {
   expect(component.find('.table-list tbody tr').at(2).find('td').at(2).text()).toEqual('active');
   expect(component.find('.table-list tbody tr').at(3).find('td').at(2).text()).toEqual('inactive');
   expect(component.find('.table-list tbody tr').at(4).find('td').at(2).text()).toEqual('active');
-
 });

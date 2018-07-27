@@ -1,7 +1,7 @@
 import { fullRenderComponent } from '../../../../utils/testHelpers';
 import Labs from '../../../../components/dashboard/health-record/Labs';
-import * as mocks from '../../../../__mocks__/labMocks';
 import VerticalTimeline from '../../../../components/dashboard/shared/VerticalTimeline';
+import * as mocks from '../../../../__mocks__/labMocks';
 
 
 function setup() {

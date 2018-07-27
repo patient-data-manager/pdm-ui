@@ -2,56 +2,56 @@ const labMockA = {
   effectiveDateTime: '2017-04-05T18:19:22-04:00',
   code: {
     coding: [{
-      code: 	'396550006',
+      code: '396550006',
       display: 'Blood Test (procedure)',
       system: 'http://snomed.info/sct'
     }],
     text: 'Blood Test (procedure)'
   },
   id: '7b3c17a0-6e53-0136-7848-4a00016726c0',
-  valueQuantity: {value: '15', unit: 'L' }
+  valueQuantity: { value: '15', unit: 'L' }
 };
 
 const labMockB = {
   effectiveDateTime: '2011-04-05T18:19:22-04:00',
   code: {
     coding: [{
-      code: 	'252275004',
+      code: '252275004',
       display: 'Hematology test (procedure)',
       system: 'http://snomed.info/sct'
     }],
     text: 'Hematology test (procedure)'
   },
   id: '7b3c17a0-6e53-0136-7848-4a00016726c0',
-  valueQuantity: {value: '2', unit: 'mL' }
+  valueQuantity: { value: '2', unit: 'mL' }
 };
 
 const labMockC = {
   effectiveDateTime: '2009-09-05T18:19:22-04:00',
   code: {
     coding: [{
-      code: 	'767002',
+      code: '767002',
       display: 'White blood cell count (procedure)',
       system: 'http://snomed.info/sct'
     }],
     text: 'White blood cell count (procedure)'
   },
   id: '7b3c17a0-6e53-0136-7848-4a00016726c0',
-  valueQuantity: {value: '5', unit: 'mL' }
+  valueQuantity: { value: '5', unit: 'mL' }
 };
 
 const labMockD = {
   effectiveDateTime: '2009-09-05T18:19:22-04:00',
   code: {
     coding: [{
-      code: 	'767002',
+      code: '767002',
       display: 'White blood cell count (procedure)',
       system: 'http://snomed.info/sct'
     }],
     text: 'White blood cell count (procedure)'
   },
   id: '7b3c17a0-6e53-0136-7848-4a00016726c0',
-  valueQuantity: {value: '5', unit: 'mL' }
+  valueQuantity: { value: '5', unit: 'mL' }
 };
 
 export {

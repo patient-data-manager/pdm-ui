@@ -1,8 +1,7 @@
 import { fullRenderComponent } from '../../../../utils/testHelpers';
 import Immunizations from '../../../../components/dashboard/health-record/Immunizations';
-import * as mocks from '../../../../__mocks__/immunizationMocks';
 import VerticalTimeline from '../../../../components/dashboard/shared/VerticalTimeline';
-
+import * as mocks from '../../../../__mocks__/immunizationMocks';
 function setup() {
   const props = {
   immunizations: [mocks.immunizationMockA, mocks.immunizationMockB, mocks.immunizationMockC, mocks.immunizationMockD]

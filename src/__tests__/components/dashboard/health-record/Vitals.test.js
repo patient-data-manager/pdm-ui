@@ -1,8 +1,7 @@
 import { fullRenderComponent } from '../../../../utils/testHelpers';
 import Vitals from '../../../../components/dashboard/health-record/Vitals';
-import * as mocks from '../../../../__mocks__/vitalMocks';
 import VerticalTimeline from '../../../../components/dashboard/shared/VerticalTimeline';
-
+import * as mocks from '../../../../__mocks__/vitalMocks';
 function setup() {
   const props = {
     vitals: [mocks.vitalMockA, mocks.vitalMockB, mocks.vitalMockC, mocks.vitalMockD]
