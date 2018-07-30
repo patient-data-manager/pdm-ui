@@ -8,13 +8,21 @@ export default class Allergies extends Component {
     let filteredCurrentAllergies = [];
     this.props.allergies.forEach((allergy, index) => {
       filteredCurrentAllergies[index] = {
-        allergy: allergy.code ? allergy.code.coding[0].display : '',
+        allergy: this.allergyText(allergy),
         criticality: allergy.criticality,
         'current status': allergy.clinicalStatus
       };
     });
 
     return filteredCurrentAllergies;
+  }
+
+  allergyText = (allergy) => {
+    if (allergy.code !== undefined) {
+      if (allergy.code.text) return allergy.code.text;
+      if (allergy.code.coding[0].display) return allergy.code.coding[0].display;
+    }
+    return '';
   }
 
   render() {

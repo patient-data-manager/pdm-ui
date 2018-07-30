@@ -10,7 +10,7 @@ export default class Medications extends Component {
     return this.props.medicationRequests.map((medication) => {
       return {
         date: medication.authoredOn,
-        text: medication.medicationCodeableConcept ? medication.medicationCodeableConcept.coding[0].display : ''
+        text: this.medicationText(medication)
       };
     });
   }
@@ -22,14 +22,23 @@ export default class Medications extends Component {
     let filteredCurrentMedications = [];
     currentMedications.forEach((medication, index) => {
       filteredCurrentMedications[index] = {
-        medication:
-          medication.medicationCodeableConcept ? medication.medicationCodeableConcept.coding[0].display : '',
+        medication: this.medicationText(medication),
         status: medication.status,
         'perscribed date': medication.authoredOn
       };
     });
 
     return filteredCurrentMedications;
+  }
+
+  medicationText = (medication) => {
+    if (medication.medicationCodeableConcept !== undefined) {
+      if (medication.medicationCodeableConcept.text) return medication.medicationCodeableConcept.text;
+      if (medication.medicationCodeableConcept.coding[0].display) {
+        return medication.medicationCodeableConcept.coding[0].display;
+      }
+    }
+    return '';
   }
 
   render() {

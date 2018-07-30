@@ -6,8 +6,16 @@ import VerticalTimeline from '../shared/VerticalTimeline';
 export default class Immunizations extends Component {
   immunizations() {
     return this.props.immunizations.map((immunization) => {
-      return { date: immunization.date, text: immunization.vaccineCode.coding[0].display };
+      return { date: immunization.date, text: this.immunizationText(immunization) };
     });
+  }
+  
+  immunizationText = (immunization) => {
+    if (immunization.vaccineCode !== undefined) {
+      if (immunization.vaccineCode.text) return immunization.vaccineCode.text;
+      if (immunization.vaccineCode.coding[0].display) return immunization.vaccineCode.coding[0].display;
+    }
+    return '';
   }
 
   render() {

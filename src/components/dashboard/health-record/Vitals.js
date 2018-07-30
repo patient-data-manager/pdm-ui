@@ -10,8 +10,16 @@ export default class Vitals extends Component {
     });
   }
 
+  vitalText = (vital) => {
+    if (vital.code !== undefined) {
+      if (vital.code.text) return vital.code.text;
+      if (vital.code.coding[0].display) return vital.code.coding[0].display;
+    }
+    return '';
+  }
+
   vitalDescription = (vital) => {
-    let text = vital.code.coding[0].display;
+    let text = this.vitalText(vital);
     if (vital.valueQuantity) text = `${text} ${vital.valueQuantity.value} ${vital.valueQuantity.unit}`;
     return text;
   }

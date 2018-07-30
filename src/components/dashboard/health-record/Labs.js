@@ -10,8 +10,16 @@ export default class Labs extends Component {
     });
   }
 
+  labText = (lab) => {
+    if (lab.code !== undefined) {
+      if (lab.code.text) return lab.code.text;
+      if (lab.code.coding[0].display) return lab.code.coding[0].display;
+    }
+    return '';
+  }
+
   labDescription = (lab) => {
-    let text = lab.code.coding[0].display;
+    let text = this.labText(lab);
     if (lab.valueQuantity) text = `${text} ${lab.valueQuantity.value} ${lab.valueQuantity.unit}`;
     return text;
   }
