@@ -1,5 +1,6 @@
 import React, { Component } from 'react';
 import PropTypes from 'prop-types';
+import getDisplayString from '../../../utils/getDisplayString';
 
 import TableList from '../shared/TableList';
 
@@ -8,21 +9,13 @@ export default class Allergies extends Component {
     let filteredCurrentAllergies = [];
     this.props.allergies.forEach((allergy, index) => {
       filteredCurrentAllergies[index] = {
-        allergy: this.allergyText(allergy),
+        allergy: getDisplayString(allergy, 'code'),
         criticality: allergy.criticality,
         'current status': allergy.clinicalStatus
       };
     });
 
     return filteredCurrentAllergies;
-  }
-
-  allergyText = (allergy) => {
-    if (allergy.code !== undefined) {
-      if (allergy.code.text) return allergy.code.text;
-      if (allergy.code.coding[0].display) return allergy.code.coding[0].display;
-    }
-    return '';
   }
 
   render() {

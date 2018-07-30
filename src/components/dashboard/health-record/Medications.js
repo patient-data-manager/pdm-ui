@@ -1,5 +1,6 @@
 import React, { Component } from 'react';
 import PropTypes from 'prop-types';
+import getDisplayString from '../../../utils/getDisplayString';
 import moment from 'moment';
 
 import VerticalTimeline from '../shared/VerticalTimeline';
@@ -10,7 +11,7 @@ export default class Medications extends Component {
     return this.props.medicationRequests.map((medication) => {
       return {
         date: medication.authoredOn,
-        text: this.medicationText(medication)
+        text: getDisplayString(medication, 'medicationCodeableConcept')
       };
     });
   }
@@ -22,23 +23,13 @@ export default class Medications extends Component {
     let filteredCurrentMedications = [];
     currentMedications.forEach((medication, index) => {
       filteredCurrentMedications[index] = {
-        medication: this.medicationText(medication),
+        medication: getDisplayString(medication, 'medicationCodeableConcept'),
         status: medication.status,
         'perscribed date': medication.authoredOn
       };
     });
 
     return filteredCurrentMedications;
-  }
-
-  medicationText = (medication) => {
-    if (medication.medicationCodeableConcept !== undefined) {
-      if (medication.medicationCodeableConcept.text) return medication.medicationCodeableConcept.text;
-      if (medication.medicationCodeableConcept.coding[0].display) {
-        return medication.medicationCodeableConcept.coding[0].display;
-      }
-    }
-    return '';
   }
 
   render() {

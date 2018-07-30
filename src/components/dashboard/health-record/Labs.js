@@ -1,5 +1,6 @@
 import React, { Component } from 'react';
 import PropTypes from 'prop-types';
+import getDisplayString from '../../../utils/getDisplayString';
 
 import VerticalTimeline from '../shared/VerticalTimeline';
 
@@ -10,16 +11,8 @@ export default class Labs extends Component {
     });
   }
 
-  labText = (lab) => {
-    if (lab.code !== undefined) {
-      if (lab.code.text) return lab.code.text;
-      if (lab.code.coding[0].display) return lab.code.coding[0].display;
-    }
-    return '';
-  }
-
   labDescription = (lab) => {
-    let text = this.labText(lab);
+    let text = getDisplayString(lab, 'code');
     if (lab.valueQuantity) text = `${text} ${lab.valueQuantity.value} ${lab.valueQuantity.unit}`;
     return text;
   }
