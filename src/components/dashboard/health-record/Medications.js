@@ -10,7 +10,7 @@ export default class Medications extends Component {
     return this.props.medicationRequests.map((medication) => {
       return {
         date: medication.authoredOn,
-        text: (medication.medicationCodeableConcept !== undefined ?  medication.medicationCodeableConcept.text : '')
+        text: medication.medicationCodeableConcept ? medication.medicationCodeableConcept.coding[0].display : ''
       };
     });
   }
@@ -23,7 +23,7 @@ export default class Medications extends Component {
     currentMedications.forEach((medication, index) => {
       filteredCurrentMedications[index] = {
         medication:
-          medication.medicationCodeableConcept !== undefined ?  medication.medicationCodeableConcept.text : '',
+          medication.medicationCodeableConcept ? medication.medicationCodeableConcept.coding[0].display : '',
         status: medication.status,
         'perscribed date': medication.authoredOn
       };

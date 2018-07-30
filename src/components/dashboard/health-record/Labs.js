@@ -11,7 +11,7 @@ export default class Labs extends Component {
   }
 
   labDescription = (lab) => {
-    let text = lab.code.text;
+    let text = lab.code.coding[0].display;
     if (lab.valueQuantity) text = `${text} ${lab.valueQuantity.value} ${lab.valueQuantity.unit}`;
     return text;
   }

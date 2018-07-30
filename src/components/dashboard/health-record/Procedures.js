@@ -6,7 +6,7 @@ import VerticalTimeline from '../shared/VerticalTimeline';
 export default class Procedures extends Component {
   procedures() {
     return this.props.procedures.map((procedure) => {
-      return { date: procedure.performedDateTime, text: procedure.code.text };
+      return { date: procedure.performedDateTime, text: procedure.code.coding[0].display };
     });
   }
 

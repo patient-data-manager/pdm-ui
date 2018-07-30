@@ -8,7 +8,7 @@ export default class Allergies extends Component {
     let filteredCurrentAllergies = [];
     this.props.allergies.forEach((allergy, index) => {
       filteredCurrentAllergies[index] = {
-        allergy: allergy.code.text,
+        allergy: allergy.code ? allergy.code.coding[0].display : '',
         criticality: allergy.criticality,
         'current status': allergy.clinicalStatus
       };

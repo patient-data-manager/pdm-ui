@@ -11,7 +11,7 @@ export default class Vitals extends Component {
   }
 
   vitalDescription = (vital) => {
-    let text = vital.code.text;
+    let text = vital.code.coding[0].display;
     if (vital.valueQuantity) text = `${text} ${vital.valueQuantity.value} ${vital.valueQuantity.unit}`;
     return text;
   }

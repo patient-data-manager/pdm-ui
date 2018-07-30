@@ -8,7 +8,7 @@ import TableList from '../shared/TableList';
 export default class Conditions extends Component {
   getConditions() {
     return this.props.conditions.map((condition) => {
-      return { date: condition.onsetDateTime, text: condition.code.text };
+      return { date: condition.onsetDateTime, text: condition.code.coding[0].display };
     });
   }
 
@@ -18,7 +18,7 @@ export default class Conditions extends Component {
     let filteredCurrentConditions = [];
     currentConditions.forEach((condition, index) => {
       filteredCurrentConditions[index] = {
-        condition: condition.code.text,
+        condition: condition.code.coding[0].display,
         'diagnosed date': condition.onsetDateTime
       };
     });
