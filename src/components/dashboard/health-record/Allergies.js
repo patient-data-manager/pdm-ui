@@ -4,7 +4,7 @@ import PropTypes from 'prop-types';
 import TableList from '../shared/TableList';
 
 export default class Allergies extends Component {
-  getCurrentAllergies() {
+  currentAllergies() {
     let filteredCurrentAllergies = [];
     this.props.allergies.forEach((allergy, index) => {
       filteredCurrentAllergies[index] = {
@@ -25,7 +25,7 @@ export default class Allergies extends Component {
         <TableList
           title="Current allergies list"
           headers={['allergy', 'criticality', 'current status']}
-          data={this.getCurrentAllergies()} />
+          data={this.currentAllergies()} />
       </div>
     );
   }

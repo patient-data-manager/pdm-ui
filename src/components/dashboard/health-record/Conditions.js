@@ -6,13 +6,13 @@ import VerticalTimeline from '../shared/VerticalTimeline';
 import TableList from '../shared/TableList';
 
 export default class Conditions extends Component {
-  getConditions() {
+  conditions() {
     return this.props.conditions.map((condition) => {
       return { date: condition.onsetDateTime, text: condition.code.coding[0].display };
     });
   }
 
-  getCurrentConditions() {
+  currentConditions() {
     const currentConditions = this.props.conditions.filter((condition) => condition.clinicalStatus === 'active');
 
     let filteredCurrentConditions = [];
@@ -34,10 +34,10 @@ export default class Conditions extends Component {
         <TableList
           title="Current conditions list"
           headers={['condition', 'diagnosed date']}
-          data={this.getCurrentConditions()}
+          data={this.currentConditions()}
           formatters={{ 'diagnosed date': (value) => moment(value).format('MMM D, YYYY') }}
           sort={{ order: 'desc', orderBy: 1 }} />
-        <VerticalTimeline items={this.getConditions()} icon="heartbeat" />
+        <VerticalTimeline items={this.conditions()} icon="heartbeat" />
       </div>
     );
   }

@@ -3,7 +3,6 @@ import Labs from '../../../../components/dashboard/health-record/Labs';
 import VerticalTimeline from '../../../../components/dashboard/shared/VerticalTimeline';
 import * as mocks from '../../../../__mocks__/labMocks';
 
-
 function setup() {
   const props = {
     labs: [mocks.labMockA, mocks.labMockB, mocks.labMockC, mocks.labMockD]

@@ -4,7 +4,7 @@ import PropTypes from 'prop-types';
 import VerticalTimeline from '../shared/VerticalTimeline';
 
 export default class Immunizations extends Component {
-  getImmunizations() {
+  immunizations() {
     return this.props.immunizations.map((immunization) => {
       return { date: immunization.date, text: immunization.vaccineCode.coding[0].display };
     });
@@ -15,7 +15,7 @@ export default class Immunizations extends Component {
 
     return (
       <div className="immunizations">
-        <VerticalTimeline items={this.getImmunizations()} icon="syringe" />
+        <VerticalTimeline items={this.immunizations()} icon="syringe" />
       </div>
     );
   }
