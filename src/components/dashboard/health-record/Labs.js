@@ -2,6 +2,7 @@ import React, { Component } from 'react';
 import PropTypes from 'prop-types';
 import getDisplayString from '../../../utils/getDisplayString';
 
+import LineGraph from '../shared/LineGraph';
 import VerticalTimeline from '../shared/VerticalTimeline';
 
 export default class Labs extends Component {
@@ -22,6 +23,7 @@ export default class Labs extends Component {
 
     return (
       <div className="labs">
+        <LineGraph />
         <VerticalTimeline items={this.labs()} icon="flask" />
       </div>
     );
