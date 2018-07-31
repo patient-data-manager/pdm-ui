@@ -14,7 +14,7 @@ function setup() {
   };
 
   const props = {
-    authUser: "abcd",
+    authUser: 'abcd',
     activeProfile: profileMockA,
     classes: {},
     theme: {},
@@ -44,8 +44,16 @@ it('shows a menu with the four labels', () => {
   expect(component.find('MenuItem').at(3).find('ListItemText').text()).toEqual('Providers');
 });
 
-it('shows the two icon buttons', () => {
+it('creates the icon buttons', () => {
   const component = setup();
   expect(component.find('IconButton')).toExist();
   expect(component.find('IconButton')).toHaveLength(2);
+});
+
+it('properly expand and close the menu when clicking icon button', () => {
+  const component = setup();
+  expect(component.find('Drawer').find('IconButton')).toExist();
+  expect(component.find('.app-toolbar button')).toExist();
+  component.find('.app-toolbar button').simulate('click');
+  expect(component.find('Drawer.drawing-class')).toExist();
 });

@@ -1,16 +1,16 @@
 const providerMockA = {
   id: 1,
-  name: "Fitbit",
+  name: 'Fitbit',
 };
 
 const providerMockB = {
   id: 2,
-  name: "Massachusetts General Hospital",
+  name: 'Massachusetts General Hospital',
 };
 
 const providerMockC = {
   id: 3,
-  name: "Partners Health Care",
+  name: 'Partners Health Care',
 };
 
 export {
