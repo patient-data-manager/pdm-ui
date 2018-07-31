@@ -13,9 +13,6 @@ export default class PatientTimeline extends Component {
     groupHash['Condition'] = ['fa fa-heartbeat', 2]
     groupHash['Lab'] = ['fa fa-flask', 3]
     groupHash['Medication'] = ['fa fa-stethoscope', 4]
-    console.log(props.items);
-    console.log(props.legendItems);
-    console.log(props.groups);
 
     // Define the bounds of the timeline
     let visibleTimeStart = moment().clone().add(-1, 'years');

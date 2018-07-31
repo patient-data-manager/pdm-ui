@@ -12,7 +12,7 @@ import Medications from '../../components/dashboard/health-record/Medications';
 import Procedures from '../../components/dashboard/health-record/Procedures';
 import Summary from '../../components/dashboard/health-record/Summary';
 import Vitals from '../../components/dashboard/health-record/Vitals';
-import PatientTimeline from '../../components/dashboard/health-record/PatientTimeline'
+import PatientTimeline from '../../components/dashboard/health-record/PatientTimeline';
 
 export class HealthRecord extends Component {
   tocbotInitialized = false;
@@ -139,7 +139,7 @@ export class HealthRecord extends Component {
     if (healthRecord.Patient) patient = healthRecord.Patient[0];
 
     const sections = [
-      { header: 'summary', component: Summary, props: { patient, profile } },
+      { header: 'summary', component: Summary, props: { patient, profile, healthRecord } },
       //{ header: 'timeline', component: PatientTimeline, props: {items: [{id: 1, groups: 2, title: 'got trial medicine', class: 'fa fa-flask', start_time: moment('2015/05/03 08:00'), end_time: moment('2016/05/03 08:00')}], groups: [{ id: 1, title: 'procedure' }, {id: 2, title: 'condition'}, {id: 3, title: 'lab'}, {id: 4, title: 'medication'}] ,
       //legendItems: [{icon: 'hospital-o', description: 'procedure'},{icon: 'heartbeat', description: 'condition'},{icon: 'flask', description: 'lab'},{icon: 'stethoscope', description: 'medication'}]}},
       { header: 'timeline', component: PatientTimeline, props: a },
