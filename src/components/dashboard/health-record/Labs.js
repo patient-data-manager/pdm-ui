@@ -23,16 +23,16 @@ export default class Labs extends Component {
 
     let data = [
       {
-        'xVar': 200,
-        'yVar': 100
+        'value': 200,
+        'date': '1996-12-16T14:40:51-05:00'
       },
       {
-        'xVar': 300,
-        'yVar': 50
+        'value': 300,
+        'date': '2009-12-16T14:40:51-05:00'
       },
       {
-        'xVar': 600,
-        'yVar': 600
+        'value': 600,
+        'date': '2001-12-16T14:40:51-05:00'
       },
     ];
 
@@ -56,7 +56,7 @@ export default class Labs extends Component {
 
     return (
       <div className="labs">
-        <LineGraph data={data} referenceRanges={referenceRanges}/>
+        <LineGraph title={"Hemoglobin (%)"} data={data} referenceRanges={referenceRanges}/>
         <VerticalTimeline items={this.labs()} icon="flask" />
       </div>
     );

@@ -1,8 +1,18 @@
 import React, { Component } from 'react';
 import PropTypes from 'prop-types';
+import moment from 'moment';
+import memoize from 'memoize-one';
 import { LineChart, Line, XAxis, YAxis, Tooltip, ReferenceArea } from 'recharts';
 
 export default class LineGraph extends Component {
+  // memoize will only call the function if items has changed, otherwise it will return the last value
+  sortItemsByDate = memoize((items) => items.sort(((a, b) => moment(a.date) - moment(b.date))));
+
+  getMostRecentValue = (orderedData) => {
+    const lastIndex = orderedData.length - 1;
+    return orderedData[lastIndex].value;
+  }
+  
   renderReferenceRange(y1, y2, yMax, color, key) {
     // TO-DO: figure out this logic
 
@@ -71,21 +81,33 @@ export default class LineGraph extends Component {
   }
 
   render() {
+    if (this.props.data.length < this.props.minPoints) return;
+
+    // figure out y max stuff
     // to-do how to compute these
     let chartWidth = 900;
     let chartHeight = 300;
 
-    // figure out y max stuff
-
-    if (this.props.data.length < 2) return;
+    const sortedData = this.sortItemsByDate(this.props.data);
+    const processedData = this.processForGraphing(sortedData);
+    console.log(processedData)
 
     return (
-      <div className="graph">
+      <div className="line-graph">
+
         {/* TO-DO: add in tooltip */}
         {/* TO-DO: figure out dates */}
-        <LineChart width={chartWidth} height={chartHeight} data={this.props.data}>
-          <Line type="monotone" dataKey="yVar" stroke="#8884d8" />
-          <XAxis dataKey="xVar" />
+
+        <div className="line-graph__header">
+          <div className="line-graph__header-title"> {this.props.title} </div>
+          <div className="line-graph__header-most-recent"> 
+            <span className="line-graph__field"> most recent: </span>
+            <span className="line-graph__value"> {this.getMostRecentValue(sortedData)}</span>
+          </div>
+        </div>
+        <LineChart width={chartWidth} height={chartHeight} data={sortedData}>
+          <Line type="monotone" dataKey="value" stroke="#4a4a4a" />
+          <XAxis dataKey="date" />
           <YAxis />
           {this.renderReferenceRanges()}
         </LineChart>
@@ -95,10 +117,13 @@ export default class LineGraph extends Component {
 }
 
 LineGraph.propTypes = {
+  title: PropTypes.string.isRequired,
   data: PropTypes.array.isRequired,
-  referenceRanges: PropTypes.array
+  referenceRanges: PropTypes.array,
+  minPoints: PropTypes.number
 };
 
 LineGraph.defaultProps = {
-  referenceRanges: []
+  referenceRanges: [],
+  minPoints: 2
 };
