@@ -2,6 +2,7 @@ import { fullRenderComponent } from '../../../../utils/testHelpers';
 import Immunizations from '../../../../components/dashboard/health-record/Immunizations';
 import VerticalTimeline from '../../../../components/dashboard/shared/VerticalTimeline';
 import * as mocks from '../../../../__mocks__/immunizationMocks';
+
 function setup() {
   const props = {
     immunizations: [mocks.immunizationMockA, mocks.immunizationMockB, mocks.immunizationMockC, mocks.immunizationMockD]
@@ -20,7 +21,7 @@ it('it renders and filters the lab results as a vertical timeline correctly', ()
   const component = setup();
   expect(component.find('div.vertical-timeline__item')).toHaveLength(3);
   expect(component.find('div.vertical-timeline__item-info').at(0)
-    .find('.info-description').text()).toEqual("Flu Shot");
+    .find('.info-description').text()).toEqual('Flu Shot');
   expect(component.find('div.vertical-timeline__item-info').at(1)
     .find('.info-description').text()).toEqual('Rabies Vaccine');
   expect(component.find('div.vertical-timeline__item-info').at(2)

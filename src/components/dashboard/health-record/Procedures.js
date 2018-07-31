@@ -1,12 +1,13 @@
 import React, { Component } from 'react';
 import PropTypes from 'prop-types';
+import getDisplayString from '../../../utils/getDisplayString';
 
 import VerticalTimeline from '../shared/VerticalTimeline';
 
 export default class Procedures extends Component {
   procedures() {
     return this.props.procedures.map((procedure) => {
-      return { date: procedure.performedDateTime, text: procedure.code.text };
+      return { date: procedure.performedDateTime, text: getDisplayString(procedure, 'code') };
     });
   }
 

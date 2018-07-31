@@ -1,5 +1,6 @@
 import React, { Component } from 'react';
 import PropTypes from 'prop-types';
+import getDisplayString from '../../../utils/getDisplayString';
 
 import VerticalTimeline from '../shared/VerticalTimeline';
 
@@ -11,7 +12,7 @@ export default class Labs extends Component {
   }
 
   labDescription = (lab) => {
-    let text = lab.code.text;
+    let text = getDisplayString(lab, 'code');
     if (lab.valueQuantity) text = `${text} ${lab.valueQuantity.value} ${lab.valueQuantity.unit}`;
     return text;
   }

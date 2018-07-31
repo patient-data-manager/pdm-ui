@@ -1,13 +1,22 @@
 import React, { Component } from 'react';
 import PropTypes from 'prop-types';
+import getDisplayString from '../../../utils/getDisplayString';
 
 import VerticalTimeline from '../shared/VerticalTimeline';
 
 export default class Immunizations extends Component {
   immunizations() {
     return this.props.immunizations.map((immunization) => {
-      return { date: immunization.date, text: immunization.vaccineCode.text };
+      return { date: immunization.date, text: getDisplayString(immunization, 'vaccineCode') };
     });
+  }
+  
+  immunizationText = (immunization) => {
+    if (immunization.vaccineCode !== undefined) {
+      if (immunization.vaccineCode.text) return immunization.vaccineCode.text;
+      if (immunization.vaccineCode.coding[0].display) return immunization.vaccineCode.coding[0].display;
+    }
+    return '';
   }
 
   render() {

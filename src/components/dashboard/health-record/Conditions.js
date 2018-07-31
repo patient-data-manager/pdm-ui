@@ -1,24 +1,25 @@
 import React, { Component } from 'react';
 import PropTypes from 'prop-types';
+import getDisplayString from '../../../utils/getDisplayString';
 import moment from 'moment';
 
 import VerticalTimeline from '../shared/VerticalTimeline';
 import TableList from '../shared/TableList';
 
 export default class Conditions extends Component {
-  getConditions() {
+  conditions() {
     return this.props.conditions.map((condition) => {
-      return { date: condition.onsetDateTime, text: condition.code.text };
+      return { date: condition.onsetDateTime, text: getDisplayString(condition, 'code') };
     });
   }
 
-  getCurrentConditions() {
+  currentConditions() {
     const currentConditions = this.props.conditions.filter((condition) => condition.clinicalStatus === 'active');
 
     let filteredCurrentConditions = [];
     currentConditions.forEach((condition, index) => {
       filteredCurrentConditions[index] = {
-        condition: condition.code.text,
+        condition: getDisplayString(condition, 'code'),
         'diagnosed date': condition.onsetDateTime
       };
     });
@@ -34,10 +35,10 @@ export default class Conditions extends Component {
         <TableList
           title="Current conditions list"
           headers={['condition', 'diagnosed date']}
-          data={this.getCurrentConditions()}
+          data={this.currentConditions()}
           formatters={{ 'diagnosed date': (value) => moment(value).format('MMM D, YYYY') }}
           sort={{ order: 'desc', orderBy: 1 }} />
-        <VerticalTimeline items={this.getConditions()} icon="heartbeat" />
+        <VerticalTimeline items={this.conditions()} icon="heartbeat" />
       </div>
     );
   }
