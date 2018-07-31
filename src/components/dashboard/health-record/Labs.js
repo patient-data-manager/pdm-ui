@@ -21,9 +21,42 @@ export default class Labs extends Component {
   render() {
     if (this.props.labs.length === 0) return <div className="labs no-entries">No entries.</div>;
 
+    let data = [
+      {
+        'xVar': 200,
+        'yVar': 100
+      },
+      {
+        'xVar': 300,
+        'yVar': 50
+      },
+      {
+        'xVar': 600,
+        'yVar': 600
+      },
+    ];
+
+    let referenceRanges = [
+      {
+        low: 450,
+        high: 'max',
+        assessment: 'high'
+      },
+      {
+        low: 100,
+        high: 450,
+        assessment: 'average'
+      },
+      {
+        low: 0,
+        high: 100,
+        assessment: 'low'
+      }
+    ];
+
     return (
       <div className="labs">
-        <LineGraph />
+        <LineGraph data={data} referenceRanges={referenceRanges}/>
         <VerticalTimeline items={this.labs()} icon="flask" />
       </div>
     );
