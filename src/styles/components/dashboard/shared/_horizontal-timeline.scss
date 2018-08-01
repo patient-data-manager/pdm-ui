@@ -1,4 +1,12 @@
 .horizontal-timeline {
+  &__title {
+    margin-bottom: 5px;
+    font-size: 1.2em;
+    font-style: italic;
+    font-weight: 600;
+    color: $color-gray-darker;
+  }
+
   .timeline-item.rct-item {
     margin-left: -12px; // centers icon
     min-width: 24px;
@@ -20,11 +28,10 @@
 
   .rct-vertical-lines {
     .rct-vl {
-      margin-left: -1px; // centers divider
-      border-left: 6px solid $color-blue-gray-light;
+      border-left: 4px solid $color-blue-gray-light;
 
       &.rct-vl-first {
-        border-left-width: 6px;
+        border-left-width: 4px;
       }
     }
   }
@@ -54,11 +61,47 @@
     .rct-label {
       border: 0;
       background-color: $color-white;
+      color: $color-text;
     }
 
     .rct-label-group {
       background: $color-blue;
       border: 1px solid $color-white;
+      font-size: 1.1em;
+      font-weight: 600;
+    }
+  }
+
+  &__legend {
+    display: flex;
+    flex-wrap: wrap;
+    flex-direction: column;
+    margin-top: 5px;
+
+    .legend-item {
+      display: flex;
+      margin-top: 2px;
+      color: $color-blue;
+      font-size: 0.9em;
+      font-weight: 600;
+      width: 140px;
+
+      &-row {
+        display: flex;
+        // flex-direction: column;
+      }
+
+      &__icon {
+        display: flex;
+        align-items: center;
+        justify-content: center;
+        background-color: $color-blue;
+        color: $color-white;
+        border-radius: 50%;
+        height: 20px;
+        width: 20px;
+        margin-right: 5px;
+      }
     }
   }
 }

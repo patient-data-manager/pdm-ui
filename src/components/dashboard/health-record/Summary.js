@@ -26,19 +26,41 @@ export default class Summary extends Component {
     return '';
   }
 
+  getLegendItems = () => {
+    return [
+      { icon: 'hospital', text: 'procedure' },
+      { icon: 'heartbeat', text: 'condition' },
+      { icon: 'flask', text: 'lab' },
+      { icon: 'pills', text: 'medication' }
+    ];
+  }
+
+  getHoverElement = (date, text) => {
+    return (
+      `<div className="hover-element" data-html={true}>
+        <div className="hover-element__date">Date: ${moment(date).format('YYYY-MM-DD')}</div>
+        <div className="hover-element__text">${text}</div>
+      </div>`
+    );
+  }
+
   getResourceItems = (resources, resourceType, group, displayField, dateField) => {
     if (!resources) return [];
 
     let items = [];
     resources.forEach((resource) => {
+      const title = getDisplayString(resource, displayField);
+      const startDate = moment(resource[dateField]).valueOf();
+
       items.push({
         id: _.uniqueId(resourceType),
         group,
-        title: getDisplayString(resource, displayField),
-        start_time: moment(resource[dateField]).valueOf(),
+        title,
+        start_time: startDate,
         end_time: moment(resource[dateField]).add(1, 'day').valueOf(),
         className: 'timeline-item',
-        icon: this.getTimelineIcon(resourceType)
+        icon: this.getTimelineIcon(resourceType),
+        itemProps: { 'data-tip': this.getHoverElement(startDate, title) }
       });
     });
 
@@ -116,7 +138,8 @@ export default class Summary extends Component {
           <HorizontalTimeline
             title="Timeline"
             groups={this.getSummaryGroups()}
-            items={this.getSummaryItems()} />
+            items={this.getSummaryItems()}
+            legendItems={this.getLegendItems()} />
         </div>
       </div>
     );

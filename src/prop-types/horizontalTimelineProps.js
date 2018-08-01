@@ -16,8 +16,10 @@ const itemProps = PropTypes.shape({
   canChangeGroup: PropTypes.bool,
   className: PropTypes.string,
   style: PropTypes.object,
-  itemProps: PropTypes.object,
-  icon: PropTypes.string
+  icon: PropTypes.string,
+  itemProps: PropTypes.shape({
+    'data-tip': PropTypes.string
+  })
 });
 
 export {
