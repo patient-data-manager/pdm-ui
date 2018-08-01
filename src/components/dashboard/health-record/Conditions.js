@@ -1,7 +1,8 @@
 import React, { Component } from 'react';
 import PropTypes from 'prop-types';
-import getDisplayString from '../../../utils/getDisplayString';
 import moment from 'moment';
+
+import getDisplayString from '../../../utils/getDisplayString';
 
 import VerticalTimeline from '../shared/VerticalTimeline';
 import TableList from '../shared/TableList';

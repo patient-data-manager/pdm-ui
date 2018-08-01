@@ -6,17 +6,18 @@ const groupProps = PropTypes.shape({
 });
 
 const itemProps = PropTypes.shape({
-  id: PropTypes.number.isRequired,
+  id: PropTypes.string.isRequired,
   group: PropTypes.number.isRequired,
   title: PropTypes.string.isRequired,
-  start_time: PropTypes.object.isRequired,
-  end_time: PropTypes.object.isRequired,
+  start_time: PropTypes.number.isRequired,
+  end_time: PropTypes.number.isRequired,
   canMove: PropTypes.bool,
   canResize: PropTypes.bool,
   canChangeGroup: PropTypes.bool,
   className: PropTypes.string,
   style: PropTypes.object,
-  itemProps: PropTypes.object
+  itemProps: PropTypes.object,
+  icon: PropTypes.string
 });
 
 export {

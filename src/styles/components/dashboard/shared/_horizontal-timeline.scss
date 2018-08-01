@@ -1,3 +1,64 @@
 .horizontal-timeline {
+  .timeline-item.rct-item {
+    margin-left: -12px; // centers icon
+    min-width: 24px;
+    max-width: 24px;
+    min-height: 24px;
+    max-height: 24px;
+    border-radius: 50%;
+    border: 0;
+    background-color: $color-blue;
+    font-size: 1em;
 
+    .rct-item-overflow .rct-item-content {
+      padding: 0;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+    }
+  }
+
+  .rct-vertical-lines {
+    .rct-vl {
+      margin-left: -1px; // centers divider
+      border-left: 6px solid $color-blue-gray-light;
+
+      &.rct-vl-first {
+        border-left-width: 6px;
+      }
+    }
+  }
+
+  .rct-today {
+    background: repeating-linear-gradient(
+      45deg,
+      $color-red,
+      $color-red 10px,
+      darken($color-red, 10%) 10px,
+      darken($color-red, 10%) 20px
+    );
+    width: 4px;
+
+  }
+
+  .rct-horizontal-lines {
+    .rct-hl-even,
+    .rct-hl-odd {
+      border: 1px solid lighten($color-blue-gray, 20%);
+      background: $color-blue-gray;
+      opacity: 0.2;
+    }
+  }
+
+  .rct-header {
+    .rct-label {
+      border: 0;
+      background-color: $color-white;
+    }
+
+    .rct-label-group {
+      background: $color-blue;
+      border: 1px solid $color-white;
+    }
+  }
 }

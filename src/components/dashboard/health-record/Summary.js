@@ -3,9 +3,10 @@ import PropTypes from 'prop-types';
 import moment from 'moment';
 import _ from 'lodash';
 
-import HorizontalTimeline from '../shared/HorizontalTimeline';
-
 import getLabs from '../../../utils/healthRecordResources';
+import getDisplayString from '../../../utils/getDisplayString';
+
+import HorizontalTimeline from '../shared/HorizontalTimeline';
 
 export default class Summary extends Component {
   getSummaryGroups = () => {
@@ -17,48 +18,45 @@ export default class Summary extends Component {
     ];
   }
 
-  getSummaryItems = () => {
-    const { healthRecord } = this.props;
-    const procedures = healthRecord.Procedure;
-    const conditions = healthRecord.Condition;
-    const labs = getLabs(healthRecord.Observation);
-    const medications = healthRecord.MedicationRequest;
+  getTimelineIcon = (resourceType) => {
+    if (resourceType === 'procedure') return 'hospital';
+    if (resourceType === 'condition') return 'heartbeat';
+    if (resourceType === 'lab') return 'flask';
+    if (resourceType === 'medication') return 'pills';
+    return '';
+  }
+
+  getResourceItems = (resources, resourceType, group, displayField, dateField) => {
+    if (!resources) return [];
+
     let items = [];
-
-    // procedures
-    procedures.forEach((procedure, index) => {
-      console.debug('procedure', procedure);
-
+    resources.forEach((resource) => {
       items.push({
-        id: 1,
-
+        id: _.uniqueId(resourceType),
+        group,
+        title: getDisplayString(resource, displayField),
+        start_time: moment(resource[dateField]).valueOf(),
+        end_time: moment(resource[dateField]).add(1, 'day').valueOf(),
+        className: 'timeline-item',
+        icon: this.getTimelineIcon(resourceType)
       });
     });
 
+    return items;
+  }
 
-    return [
-      {
-        id: 1,
-        group: 1,
-        title: 'item 1',
-        start_time: moment(),
-        end_time: moment().add(1, 'hour')
-      },
-      {
-        id: 2,
-        group: 2,
-        title: 'item 2',
-        start_time: moment().add(-0.5, 'hour'),
-        end_time: moment().add(0.5, 'hour')
-      },
-      {
-        id: 3,
-        group: 1,
-        title: 'item 3',
-        start_time: moment().add(2, 'hour'),
-        end_time: moment().add(3, 'hour')
-      }
-    ];
+  getSummaryItems = () => {
+    const { healthRecord } = this.props;
+    if (!healthRecord) return [];
+
+    const procedureItems = this.getResourceItems(healthRecord.Procedure, 'procedure', 1, 'code', 'performedDateTime');
+    const conditionItems = this.getResourceItems(healthRecord.Condition, 'condition', 2, 'code', 'onsetDateTime');
+    const labItems = this.getResourceItems(getLabs(healthRecord.Observation), 'lab', 3, 'code', 'effectiveDateTime');
+    const medicationItems = this.getResourceItems(
+      healthRecord.MedicationRequest, 'medication', 4, 'medicationCodeableConcept'
+    );
+
+    return procedureItems.concat(conditionItems).concat(labItems).concat(medicationItems);
   }
 
   render() {
@@ -124,14 +122,9 @@ export default class Summary extends Component {
     );
   }
 }
-function mapStateToProps(state) {
-  return {
-    profile: state.profiles.activeProfile
-  };
-}
 
 Summary.propTypes = {
   patient: PropTypes.object.isRequired,
   profile: PropTypes.object.isRequired,
-  healthRecord: PropTypes.object.isRequired
+  healthRecord: PropTypes.object
 };

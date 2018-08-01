@@ -2,7 +2,6 @@ import React, { Component } from 'react';
 import PropTypes from 'prop-types';
 import { connect } from 'react-redux';
 import tocbot from 'tocbot';
-import moment from 'moment'
 
 import Allergies from '../../components/dashboard/health-record/Allergies';
 import Conditions from '../../components/dashboard/health-record/Conditions';
@@ -12,7 +11,6 @@ import Medications from '../../components/dashboard/health-record/Medications';
 import Procedures from '../../components/dashboard/health-record/Procedures';
 import Summary from '../../components/dashboard/health-record/Summary';
 import Vitals from '../../components/dashboard/health-record/Vitals';
-import PatientTimeline from '../../components/dashboard/health-record/PatientTimeline';
 
 export class HealthRecord extends Component {
   tocbotInitialized = false;
@@ -59,64 +57,74 @@ export class HealthRecord extends Component {
     });
   }
 
-  getPatientTimelineComponents() {
-    const { healthRecord, profile, loading } = this.props;
-    let all_items = [];
-    let props_contents = {};
-    props_contents['groups'] =  [{ 'id': 1, 'title': 'procedure' }, {'id': 2, 'title': 'condition'}, {'id': 3, 'title': 'lab'}, {'id': 4, 'title': 'medication'}];
-    props_contents['legendItems'] = [{'icon': 'hospital-o', 'description': 'procedure'},{'icon': 'heartbeat', 'description': 'condition'},{'icon': 'flask', 'description': 'lab'},{'icon': 'stethoscope', 'description': 'medication'}];
-    let a = 0;
-    let id_c = 0;
-    if(healthRecord.Procedure)
-    {
-      for(a = 0; a < healthRecord.Procedure.length; a++)
-      {
-        id_c += 1;
-        let info_hash = {};
-        info_hash['id'] = id_c;
-        info_hash['groups'] = 1;
-        info_hash['title'] = healthRecord.Procedure[a].code.text;
-        info_hash['start_time'] = moment(healthRecord.Procedure[a].performedDateTime);
-        info_hash['end_time'] = moment(healthRecord.Procedure[a].performedDateTime).add(1,'days')
-        info_hash['class'] = 'fa fa-hospital-o';
-        all_items.push(info_hash);
-      }
-    }
+  // getPatientTimelineComponents() {
+  //   const { healthRecord } = this.props;
+  //   let all_items = [];
+  //   let props_contents = {};
+  //   props_contents['groups'] =  [
+  //     { 'id': 1, 'title': 'procedure' },
+  //     { 'id': 2, 'title': 'condition' },
+  //     { 'id': 3, 'title': 'lab' },
+  //     { 'id': 4, 'title': 'medication' }
+  //   ];
+  //   props_contents['legendItems'] = [
+  //     { 'icon': 'hospital-o', 'description': 'procedure' },
+  //     { 'icon': 'heartbeat', 'description': 'condition' },
+  //     { 'icon': 'flask', 'description': 'lab' },
+  //     { 'icon': 'stethoscope', 'description': 'medication' }
+  //   ];
+  //   let a = 0;
+  //   let id_c = 0;
+  //   if (healthRecord.Procedure)
+  //   {
+  //     for (a = 0; a < healthRecord.Procedure.length; a++)
+  //     {
+  //       id_c += 1;
+  //       let info_hash = {};
+  //       info_hash['id'] = id_c;
+  //       info_hash['groups'] = 1;
+  //       info_hash['title'] = healthRecord.Procedure[a].code.text;
+  //       info_hash['start_time'] = moment(healthRecord.Procedure[a].performedDateTime);
+  //       info_hash['end_time'] = moment(healthRecord.Procedure[a].performedDateTime).add(1, 'days');
+  //       info_hash['class'] = 'fa fa-hospital-o';
+  //       all_items.push(info_hash);
+  //     }
+  //   }
 
-    if(healthRecord.Condition)
-    {
-      for(a = 0; a < healthRecord.Condition.length; a++)
-      {
-        id_c += 1;
-        let info_hash = {};
-        info_hash['id'] = id_c;
-        info_hash['groups'] = 2;
-        info_hash['title'] = healthRecord.Condition[a].code.text;
-        info_hash['start_time'] = moment(healthRecord.Condition[a].onsetDateTime);
-        info_hash['end_time'] = moment(healthRecord.Condition[a].onsetDateTime).add(1,'days')
-        info_hash['class'] = 'fa fa-heartbeat';
-        all_items.push(info_hash);
-      }
-    }
+  //   if (healthRecord.Condition)
+  //   {
+  //     for (a = 0; a < healthRecord.Condition.length; a++)
+  //     {
+  //       id_c += 1;
+  //       let info_hash = {};
+  //       info_hash['id'] = id_c;
+  //       info_hash['groups'] = 2;
+  //       info_hash['title'] = healthRecord.Condition[a].code.text;
+  //       info_hash['start_time'] = moment(healthRecord.Condition[a].onsetDateTime);
+  //       info_hash['end_time'] = moment(healthRecord.Condition[a].onsetDateTime).add(1, 'days');
+  //       info_hash['class'] = 'fa fa-heartbeat';
+  //       all_items.push(info_hash);
+  //     }
+  //   }
 
-    if(healthRecord.MedicationStatement)
-    {
-      for(a = 0; a < healthRecord.MedicationStatement.length; a++)
-      {
-        id_c += 1;
-        let info_hash = {};
-        info_hash['id'] = id_c;
-        info_hash['groups'] = 3;
-        info_hash['title'] = healthRecord.MedicationStatement[a].medicationCodeableConcept.text;
-        info_hash['start_time'] = moment(healthRecord.MedicationStatement[a].effectivePeriod.start);
-        info_hash['end_time'] = moment().clone()
-        info_hash['class'] = 'fa fa-heartbeat';
-        all_items.push(info_hash);
-      }
-    }
-    props_contents['items'] = all_items;
-    return props_contents;
-  }
+  //   if (healthRecord.MedicationStatement)
+  //   {
+  //     for (a = 0; a < healthRecord.MedicationStatement.length; a++)
+  //     {
+  //       id_c += 1;
+  //       let info_hash = {};
+  //       info_hash['id'] = id_c;
+  //       info_hash['groups'] = 3;
+  //       info_hash['title'] = healthRecord.MedicationStatement[a].medicationCodeableConcept.text;
+  //       info_hash['start_time'] = moment(healthRecord.MedicationStatement[a].effectivePeriod.start);
+  //       info_hash['end_time'] = moment().clone();
+  //       info_hash['class'] = 'fa fa-heartbeat';
+  //       all_items.push(info_hash);
+  //     }
+  //   }
+  //   props_contents['items'] = all_items;
+  //   return props_contents;
+  // }
 
   renderSection = (header, SectionComponent, props) => {
     return (
@@ -134,18 +142,14 @@ export class HealthRecord extends Component {
   render() {
     const { healthRecord, profile, loading } = this.props;
     let patient = {};
-    let a = this.getPatientTimelineComponents();
 
     if (healthRecord.Patient) patient = healthRecord.Patient[0];
 
     const sections = [
       { header: 'summary', component: Summary, props: { patient, profile, healthRecord } },
-      //{ header: 'timeline', component: PatientTimeline, props: {items: [{id: 1, groups: 2, title: 'got trial medicine', class: 'fa fa-flask', start_time: moment('2015/05/03 08:00'), end_time: moment('2016/05/03 08:00')}], groups: [{ id: 1, title: 'procedure' }, {id: 2, title: 'condition'}, {id: 3, title: 'lab'}, {id: 4, title: 'medication'}] ,
-      //legendItems: [{icon: 'hospital-o', description: 'procedure'},{icon: 'heartbeat', description: 'condition'},{icon: 'flask', description: 'lab'},{icon: 'stethoscope', description: 'medication'}]}},
-      { header: 'timeline', component: PatientTimeline, props: a },
       { header: 'conditions', component: Conditions, props: { conditions: healthRecord.Condition || [] } },
       { header: 'allergies', component: Allergies, props: { allergies: [] } },
-      { header: 'medications', component: Medications, props: {medications: healthRecord.MedicationStatement || [] } },
+      { header: 'medications', component: Medications, props: { medications: healthRecord.MedicationStatement || [] } },
       { header: 'immunizations', component: Immunizations, props: { immunizations: healthRecord.Immunization || [] } },
       { header: 'procedures', component: Procedures, props: { procedures: healthRecord.Procedure || [] } },
       { header: 'labs', component: Labs, props: { labs: this.filterObservationsByCategory('laboratory') || [] } },
