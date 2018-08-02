@@ -1,4 +1,5 @@
 import React, { Component } from 'react';
+import ReactDOMServer from 'react-dom/server';
 import PropTypes from 'prop-types';
 import Timeline from 'react-calendar-timeline/lib';
 import containerResizeDetector from 'react-calendar-timeline/lib/resize-detector/container';
@@ -61,9 +62,31 @@ export default class HorizontalTimeline extends Component {
     });
   }
 
+  getHoverElement = (date, group, text) => {
+    const dateIcon = ReactDOMServer.renderToString(<FontAwesomeIcon icon="calendar" fixedWidth />);
+    const typeIcon = ReactDOMServer.renderToString(<FontAwesomeIcon icon="notes-medical" fixedWidth />);
+
+    return (
+      `<div class="hover-element" data-html=true>
+        <div class="hover-element__date">
+          <span class="hover-element__label">${dateIcon}</span>${moment(date).format('MMM Do YYYY, h:mm a')}
+        </div>
+
+        <div class="hover-element__group"><span class="hover-element__label">${typeIcon}</span>${group}</div>
+        <div class="hover-element__text">${text}</div>
+      </div>`
+    );
+  }
+
   renderItem = ({ item }) => {
-    ReactTooltip.rebuild();
-    return <FontAwesomeIcon icon={item.icon} fixedWidth />;
+    const itemGroup = this.props.groups.find((group) => group.id === item.group).title;
+
+    return (
+      <div data-for={`item-${item.id}`} data-tip={this.getHoverElement(item.start_time, itemGroup, item.title)}>
+        <FontAwesomeIcon icon={item.icon} fixedWidth />
+        <ReactTooltip html={true} id={`item-${item.id}`} className="horizontal-timeline__tooltip" type="light" />
+      </div>
+    );
   }
 
   renderLegendRow = (legendItems, indexCheck) => {
@@ -137,10 +160,8 @@ export default class HorizontalTimeline extends Component {
 
         <div className="horizontal-timeline__footer">
           {legendItems && this.renderLegend(legendItems)}
-          <div className="footer-text">zoom in or out or choose a button above</div>
+          <div className="footer-text">zoom in/out, click and drag, or choose a button above</div>
         </div>
-
-        <ReactTooltip html={true} />
       </div>
     );
   }

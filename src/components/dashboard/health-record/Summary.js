@@ -47,15 +47,6 @@ export default class Summary extends Component {
     ];
   }
 
-  getHoverElement = (date, text) => {
-    return (
-      `<div class="hover-element" data-html=true>
-        <div class="hover-element__date">Date: ${moment(date).format('YYYY-MM-DD')}</div>
-        <div class="hover-element__text">${text}</div>
-      </div>`
-    );
-  }
-
   getResourceItems = (resources, resourceType, group, displayField, dateField) => {
     if (!resources) return [];
 
@@ -72,8 +63,7 @@ export default class Summary extends Component {
         start_time: startDate,
         end_time: moment(date).add(1, 'day').valueOf(),
         className: 'timeline-item',
-        icon: this.getTimelineIcon(resourceType),
-        itemProps: { 'data-tip': this.getHoverElement(startDate, title) }
+        icon: this.getTimelineIcon(resourceType)
       });
     });
 

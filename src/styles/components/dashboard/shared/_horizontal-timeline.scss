@@ -30,6 +30,7 @@
   }
 
   .timeline-item.rct-item {
+    overflow: visible;
     margin-left: -12px; // centers icon
     min-width: 24px;
     max-width: 24px;
@@ -39,6 +40,7 @@
     border: 0;
     background-color: $color-blue;
     font-size: 1em;
+    cursor: default;
 
     .rct-item-overflow .rct-item-content {
       padding: 0;
@@ -100,6 +102,33 @@
       font-weight: 600;
     }
   }
+
+  .rct-item-overflow {
+    overflow: visible !important;
+  }
+
+  &__tooltip {
+    &.type-light {
+      border: 1px solid $color-gray;
+      text-align: left;
+      color: $color-text;
+
+      div {
+        margin: -5px 0;
+      }
+
+      .hover-element {
+        &__label {
+          margin-right: 5px;
+        }
+
+        &__text {
+          font-style: italic;
+        }
+      }
+    }
+  }
+
 
   &__legend {
     display: flex;

@@ -1,5 +1,6 @@
 import { library } from '@fortawesome/fontawesome-svg-core';
 import {
+  faCalendar,
   faCheck,
   faChevronDown,
   faCircle,
@@ -10,6 +11,7 @@ import {
   faFlask,
   faHeartbeat,
   faHospital,
+  faNotesMedical,
   faPills,
   faPlusCircle,
   faSignOutAlt,
@@ -18,6 +20,7 @@ import {
 } from '@fortawesome/free-solid-svg-icons';
 
 library.add(
+  faCalendar,
   faCheck,
   faChevronDown,
   faCircle,
@@ -28,6 +31,7 @@ library.add(
   faFlask,
   faHeartbeat,
   faHospital,
+  faNotesMedical,
   faPills,
   faPlusCircle,
   faSignOutAlt,

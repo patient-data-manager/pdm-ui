@@ -16,10 +16,7 @@ const itemProps = PropTypes.shape({
   canChangeGroup: PropTypes.bool,
   className: PropTypes.string,
   style: PropTypes.object,
-  icon: PropTypes.string,
-  itemProps: PropTypes.shape({
-    'data-tip': PropTypes.string
-  })
+  icon: PropTypes.string
 });
 
 const legendProps = PropTypes.shape({
