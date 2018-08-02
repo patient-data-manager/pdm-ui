@@ -62,6 +62,7 @@ export default class HorizontalTimeline extends Component {
   }
 
   renderItem = ({ item }) => {
+    ReactTooltip.rebuild();
     return <FontAwesomeIcon icon={item.icon} fixedWidth />;
   }
 

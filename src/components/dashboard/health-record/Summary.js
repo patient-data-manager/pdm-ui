@@ -5,6 +5,7 @@ import _ from 'lodash';
 
 import getLabs from '../../../utils/healthRecordResources';
 import getDisplayString from '../../../utils/getDisplayString';
+import getProperty from '../../../utils/getProperty';
 
 import HorizontalTimeline from '../shared/HorizontalTimeline';
 
@@ -48,9 +49,9 @@ export default class Summary extends Component {
 
   getHoverElement = (date, text) => {
     return (
-      `<div className="hover-element" data-html={true}>
-        <div className="hover-element__date">Date: ${moment(date).format('YYYY-MM-DD')}</div>
-        <div className="hover-element__text">${text}</div>
+      `<div class="hover-element" data-html=true>
+        <div class="hover-element__date">Date: ${moment(date).format('YYYY-MM-DD')}</div>
+        <div class="hover-element__text">${text}</div>
       </div>`
     );
   }
@@ -61,14 +62,15 @@ export default class Summary extends Component {
     let items = [];
     resources.forEach((resource) => {
       const title = getDisplayString(resource, displayField);
-      const startDate = moment(resource[dateField]).valueOf();
+      const date = getProperty(resource, dateField);
+      const startDate = moment(date).valueOf();
 
       items.push({
         id: _.uniqueId(resourceType),
         group,
         title,
         start_time: startDate,
-        end_time: moment(resource[dateField]).add(1, 'day').valueOf(),
+        end_time: moment(date).add(1, 'day').valueOf(),
         className: 'timeline-item',
         icon: this.getTimelineIcon(resourceType),
         itemProps: { 'data-tip': this.getHoverElement(startDate, title) }
@@ -82,11 +84,13 @@ export default class Summary extends Component {
     const { healthRecord } = this.props;
     if (!healthRecord) return [];
 
-    const procedureItems = this.getResourceItems(healthRecord.Procedure, 'procedure', 1, 'code', 'performedDateTime');
+    const procedureItems = this.getResourceItems(
+      healthRecord.Procedure, 'procedure', 1, 'code', 'performedPeriod.start'
+    );
     const conditionItems = this.getResourceItems(healthRecord.Condition, 'condition', 2, 'code', 'onsetDateTime');
     const labItems = this.getResourceItems(getLabs(healthRecord.Observation), 'lab', 3, 'code', 'effectiveDateTime');
     const medicationItems = this.getResourceItems(
-      healthRecord.MedicationRequest, 'medication', 4, 'medicationCodeableConcept'
+      healthRecord.MedicationRequest, 'medication', 4, 'medicationCodeableConcept', 'authoredOn'
     );
 
     return procedureItems.concat(conditionItems).concat(labItems).concat(medicationItems);
