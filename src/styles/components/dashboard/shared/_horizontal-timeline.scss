@@ -1,10 +1,32 @@
 .horizontal-timeline {
-  &__title {
+  &__header {
+    display: flex;
     margin-bottom: 5px;
-    font-size: 1.2em;
-    font-style: italic;
-    font-weight: 600;
-    color: $color-gray-darker;
+    justify-content: space-between;
+
+    .header-title {
+      font-size: 1.2em;
+      font-style: italic;
+      font-weight: 600;
+      color: $color-gray-darker;
+    }
+
+    .header-buttons {
+      button.timeline-button {
+        margin-left: 20px;
+        border: 0;
+        background-color: transparent;
+        cursor: pointer;
+        font-size: 1.2em;
+        font-weight: bold;
+        color: $color-blue-gray-light;
+
+        &:hover,
+        &.active {
+          color: $color-gray-darker;
+        }
+      }
+    }
   }
 
   .timeline-item.rct-item {
@@ -28,10 +50,16 @@
 
   .rct-vertical-lines {
     .rct-vl {
-      border-left: 4px solid $color-blue-gray-light;
+      border-left: 2px solid $color-blue-gray-light;
 
       &.rct-vl-first {
-        border-left-width: 4px;
+        border-left-width: 2px;
+        margin-left: 1px;
+      }
+
+      &.rct-day-0,
+      &.rct-day-6 {
+        background: $color-white;
       }
     }
   }
@@ -39,8 +67,8 @@
   .rct-today {
     background: repeating-linear-gradient(
       45deg,
-      $color-red,
-      $color-red 10px,
+      lighten($color-red, 5%),
+      lighten($color-red, 5%) 10px,
       darken($color-red, 10%) 10px,
       darken($color-red, 10%) 20px
     );
@@ -64,9 +92,10 @@
       color: $color-text;
     }
 
-    .rct-label-group {
+    .rct-label-group,
+    .rct-label.rct-label-only {
       background: $color-blue;
-      border: 1px solid $color-white;
+      border: 1px solid lighten($color-blue, 10%);
       font-size: 1.1em;
       font-weight: 600;
     }
@@ -88,7 +117,6 @@
 
       &-row {
         display: flex;
-        // flex-direction: column;
       }
 
       &__icon {
@@ -102,6 +130,16 @@
         width: 20px;
         margin-right: 5px;
       }
+    }
+  }
+
+  &__footer {
+    display: flex;
+    justify-content: space-between;
+
+    .footer-text {
+      font-style: italic;
+      color: $color-blue-gray;
     }
   }
 }

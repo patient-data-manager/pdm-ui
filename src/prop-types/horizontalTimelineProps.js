@@ -22,7 +22,21 @@ const itemProps = PropTypes.shape({
   })
 });
 
+const legendProps = PropTypes.shape({
+  icon: PropTypes.string,
+  text: PropTypes.string
+});
+
+const rangeProps = PropTypes.shape({
+  rangeText: PropTypes.string,
+  rangeNum: PropTypes.number,
+  rangeType: PropTypes.string,
+  rangeFutureType: PropTypes.string
+});
+
 export {
   groupProps,
-  itemProps
+  itemProps,
+  legendProps,
+  rangeProps
 };

@@ -35,6 +35,17 @@ export default class Summary extends Component {
     ];
   }
 
+  getRangeItems = () => {
+    return [
+      { rangeText: '1mo', rangeNum: 1, rangeType: 'months', rangeFutureType: 'days' },
+      { rangeText: '3mo', rangeNum: 3, rangeType: 'months', rangeFutureType: 'days' },
+      { rangeText: '6mo', rangeNum: 6, rangeType: 'months', rangeFutureType: 'months' },
+      { rangeText: '1yr', rangeNum: 1, rangeType: 'year', rangeFutureType: 'months' },
+      { rangeText: '5yr', rangeNum: 5, rangeType: 'year', rangeFutureType: 'months' },
+      { rangeText: 'all' }
+    ];
+  }
+
   getHoverElement = (date, text) => {
     return (
       `<div className="hover-element" data-html={true}>
@@ -81,6 +92,15 @@ export default class Summary extends Component {
     return procedureItems.concat(conditionItems).concat(labItems).concat(medicationItems);
   }
 
+  renderSummaryRow = (key, value) => {
+    return (
+      <div className="summary__table-row">
+        <div className="summary__table-key">{key}</div>
+        <div className="summary__table-value">{value}</div>
+      </div>
+    );
+  }
+
   render() {
     const { patient, profile } = this.props;
     let patientName, patientAge, patientDOB, patientAddress;
@@ -102,35 +122,12 @@ export default class Summary extends Component {
           <div className="summary__divider" />
 
           <div className="summary__table">
-            <div className="summary__table-row">
-              <div className="summary__table-key">Name</div>
-              <div className="summary__table-value">{patientName}</div>
-            </div>
-
-            <div className="summary__table-row">
-              <div className="summary__table-key">Gender</div>
-              <div className="summary__table-value">{profile.gender}</div>
-            </div>
-
-            <div className="summary__table-row">
-              <div className="summary__table-key">DOB</div>
-              <div className="summary__table-value">{patientDOB}</div>
-            </div>
-
-            <div className="summary__table-row">
-              <div className="summary__table-key">Address</div>
-              <div className="summary__table-value">{patientAddress}</div>
-            </div>
-
-            <div className="summary__table-row">
-              <div className="summary__table-key">Phone</div>
-              <div className="summary__table-value">{profile.telephone}</div>
-            </div>
-
-            <div className="summary__table-row">
-              <div className="summary__table-key">PCP</div>
-              <div className="summary__table-value summary__table-pcp">Dr. Parul Desai</div> {/* TODO: hook up */}
-            </div>
+            {this.renderSummaryRow('Name', patientName)}
+            {this.renderSummaryRow('Gender', profile.gender)}
+            {this.renderSummaryRow('DOB', patientDOB)}
+            {this.renderSummaryRow('Address', patientAddress)}
+            {this.renderSummaryRow('Phone', profile.telephone)}
+            {this.renderSummaryRow('PCP', 'Dr. Parul Desai')} {/* TODO: hook up */}
           </div>
         </div>
 
@@ -139,7 +136,9 @@ export default class Summary extends Component {
             title="Timeline"
             groups={this.getSummaryGroups()}
             items={this.getSummaryItems()}
-            legendItems={this.getLegendItems()} />
+            legendItems={this.getLegendItems()}
+            rangeItems={this.getRangeItems()}
+            defaultRange={'1yr'} />
         </div>
       </div>
     );
