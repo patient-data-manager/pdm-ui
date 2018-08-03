@@ -27,11 +27,15 @@ export default class Labs extends Component {
         'date': '1996-12-16T14:40:51-05:00'
       },
       {
+        'value': 100,
+        'date': '2017-12-16T14:40:51-05:00'
+      },
+      {
         'value': 300,
         'date': '2009-12-16T14:40:51-05:00'
       },
       {
-        'value': 600,
+        'value': 500,
         'date': '2001-12-16T14:40:51-05:00'
       },
     ];

@@ -5,12 +5,67 @@ import memoize from 'memoize-one';
 import { LineChart, Line, XAxis, YAxis, Tooltip, ReferenceArea } from 'recharts';
 
 export default class LineGraph extends Component {
+  constructor(props) {
+    super(props);
+
+    this.updateState = true;
+    this.state = {
+      chartWidth: 600,
+      chartHeight: 300
+    };
+  }
+
+  componentDidUpdate = () => {
+    if (this.updateState) {
+      this.updateState = false;
+    } else {
+      this.updateState = true;
+      setTimeout(this.resize, 450);
+    }
+  }
+
+  componentDidMount = () => {
+    setTimeout(this.resize, 450);
+  }
+
   // memoize will only call the function if items has changed, otherwise it will return the last value
   sortItemsByDate = memoize((items) => items.sort(((a, b) => moment(a.date) - moment(b.date))));
 
   getMostRecentValue = (orderedData) => {
     const lastIndex = orderedData.length - 1;
     return orderedData[lastIndex].value;
+  }
+
+  getMinMax = (data) => {
+    let rangeValues = [data[0].value, data[0].value];
+    data.forEach((dataObj) => {
+      if (dataObj.value < rangeValues[0]) {
+        rangeValues[0] = dataObj.value;
+      } else if (dataObj.value > rangeValues[1]) {
+        rangeValues[1] = dataObj.value;
+      }
+    });
+    return rangeValues;
+  }
+
+  // processForGraphing = (data, xVar, xVarNumber) => {
+  //   // const dataCopy = Lang.clone(data);
+  //   const dataCopy = data;
+  //   console.log(dataCopy);
+
+  //   // Collection.map(dataCopy, (d) => {
+  //   //     d[xVarNumber] = Number(new Date(d[xVar]))
+  //   // });
+  //   return dataCopy;
+  // }
+
+  resize = () => {
+    if (!this.graphParentDiv) return;
+    const graphParentDivWidth = this.graphParentDiv.offsetWidth;
+
+    this.setState({
+      chartWidth: graphParentDivWidth,
+    });
   }
   
   renderReferenceRange(y1, y2, yMax, color, key) {
@@ -35,14 +90,10 @@ export default class LineGraph extends Component {
     }
   }
 
-  renderReferenceRanges() {
+  renderReferenceRanges(yMax) {
     let renderedRanges = null;
-
-    // Check if the subsection contains "bands" attribute. If it does, draw them, if not don't draw them
     if (this.props.referenceRanges) {
       let ranges = [];
-
-      // Grab the values from the summary metadata and set the bands low and high values
       this.props.referenceRanges.forEach((range) => {
         // TO-DO: get the right colors/values
         let color = null;
@@ -72,7 +123,7 @@ export default class LineGraph extends Component {
       });
 
       renderedRanges = ranges.map((range, i) => {
-        return this.renderReferenceRange(range.y1, range.y2, 600, range.color, i);
+        return this.renderReferenceRange(range.y1, range.y2, yMax, range.color, i);
       });
     } else {
       renderedRanges = null;
@@ -83,20 +134,19 @@ export default class LineGraph extends Component {
   render() {
     if (this.props.data.length < this.props.minPoints) return;
 
-    // figure out y max stuff
-    // to-do how to compute these
-    let chartWidth = 900;
-    let chartHeight = 300;
-
     const sortedData = this.sortItemsByDate(this.props.data);
-    const processedData = this.processForGraphing(sortedData);
-    console.log(processedData)
+    // const processedData = this.processForGraphing(sortedData);
+    // console.log(processedData);
+
+    const [yMin, yMax] = this.getMinMax(sortedData);
 
     return (
-      <div className="line-graph">
+      <div className="line-graph" 
+        ref={(graphParentDiv) => { this.graphParentDiv = graphParentDiv; }}>
 
         {/* TO-DO: add in tooltip */}
         {/* TO-DO: figure out dates */}
+        {/* TO-DO: add in tick marks */}
 
         <div className="line-graph__header">
           <div className="line-graph__header-title"> {this.props.title} </div>
@@ -105,11 +155,11 @@ export default class LineGraph extends Component {
             <span className="line-graph__value"> {this.getMostRecentValue(sortedData)}</span>
           </div>
         </div>
-        <LineChart width={chartWidth} height={chartHeight} data={sortedData}>
+        <LineChart width={this.state.chartWidth} height={this.state.chartHeight} data={sortedData}>
           <Line type="monotone" dataKey="value" stroke="#4a4a4a" />
           <XAxis dataKey="date" />
-          <YAxis />
-          {this.renderReferenceRanges()}
+          <YAxis domain={[0, 'yMax']}/>
+          {this.renderReferenceRanges(yMax)}
         </LineChart>
       </div>
     );
