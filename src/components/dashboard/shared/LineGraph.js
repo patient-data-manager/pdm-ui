@@ -4,6 +4,8 @@ import moment from 'moment';
 import memoize from 'memoize-one';
 import { LineChart, Line, XAxis, YAxis, Tooltip, ReferenceArea } from 'recharts';
 
+import CustomTooltip from './CustomTooltip';
+
 export default class LineGraph extends Component {
   constructor(props) {
     super(props);
@@ -48,6 +50,16 @@ export default class LineGraph extends Component {
     return rangeValues;
   }
 
+  xVarFormatFunction = (xVarNumber) => {
+    return 'Date: ' + xVarNumber;
+  }
+
+  createYVarFormatFunctionWithUnit = (unit) => {
+    return (value) => {
+      return `${value} ${unit}`;
+    };
+  }
+
   // processForGraphing = (data, xVar, xVarNumber) => {
   //   // const dataCopy = Lang.clone(data);
   //   const dataCopy = data;
@@ -69,8 +81,6 @@ export default class LineGraph extends Component {
   }
   
   renderReferenceRange(y1, y2, yMax, color, key) {
-    // TO-DO: figure out this logic
-
     if (y2 === 'max') {
       // If reference area has no upper limit, draw it only if patient data would be captured by it
       if (yMax > y1) { 
@@ -139,12 +149,12 @@ export default class LineGraph extends Component {
     // console.log(processedData);
 
     const [yMin, yMax] = this.getMinMax(sortedData);
+    const yUnit = '10^9/L'; // to-do add in unit
 
     return (
       <div className="line-graph" 
         ref={(graphParentDiv) => { this.graphParentDiv = graphParentDiv; }}>
-
-        {/* TO-DO: add in tooltip */}
+        
         {/* TO-DO: figure out dates */}
         {/* TO-DO: add in tick marks */}
 
@@ -157,8 +167,9 @@ export default class LineGraph extends Component {
         </div>
         <LineChart width={this.state.chartWidth} height={this.state.chartHeight} data={sortedData}>
           <Line type="monotone" dataKey="value" stroke="#4a4a4a" />
+          <Tooltip content={<CustomTooltip title={this.props.title} unit={yUnit} />} />
           <XAxis dataKey="date" />
-          <YAxis domain={[0, 'yMax']}/>
+          <YAxis dataKey="value" type="number" domain={[0, 'yMax']}/>
           {this.renderReferenceRanges(yMax)}
         </LineChart>
       </div>
