@@ -1,10 +1,12 @@
 import React, { Component } from 'react';
+import ReactDOMServer from 'react-dom/server';
 import PropTypes from 'prop-types';
+import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
 import moment from 'moment';
 import _ from 'lodash';
 
-import getLabs from '../../../utils/healthRecordResources';
 import getDisplayString from '../../../utils/getDisplayString';
+import getLabs from '../../../utils/healthRecordResources';
 import getProperty from '../../../utils/getProperty';
 
 import HorizontalTimeline from '../shared/HorizontalTimeline';
@@ -62,8 +64,9 @@ export default class Summary extends Component {
         title,
         start_time: startDate,
         end_time: moment(date).add(1, 'day').valueOf(),
-        className: 'timeline-item',
-        icon: this.getTimelineIcon(resourceType)
+        className: 'timeline-item theme-dark',
+        icon: this.getTimelineIcon(resourceType),
+        hoverElement: this.getHoverElement(startDate, resourceType, title)
       });
     });
 
@@ -92,6 +95,22 @@ export default class Summary extends Component {
         <div className="summary__table-key">{key}</div>
         <div className="summary__table-value">{value}</div>
       </div>
+    );
+  }
+
+  getHoverElement = (date, group, text) => {
+    const dateIcon = ReactDOMServer.renderToString(<FontAwesomeIcon icon="calendar" fixedWidth />);
+    const typeIcon = ReactDOMServer.renderToString(<FontAwesomeIcon icon="notes-medical" fixedWidth />);
+
+    return (
+      `<div class="hover-element" data-html=true>
+        <div class="hover-element__date">
+          <span class="hover-element__label">${dateIcon}</span>${moment(date).format('MMM Do YYYY, h:mm a')}
+        </div>
+
+        <div class="hover-element__group"><span class="hover-element__label">${typeIcon}</span>${group}</div>
+        <div class="hover-element__text">${text}</div>
+      </div>`
     );
   }
 

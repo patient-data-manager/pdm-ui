@@ -1,4 +1,6 @@
 .horizontal-timeline {
+  margin-bottom: 40px;
+
   &__header {
     display: flex;
     margin-bottom: 5px;
@@ -33,20 +35,36 @@
     overflow: visible;
     margin-left: -12px; // centers icon
     min-width: 24px;
-    max-width: 24px;
     min-height: 24px;
     max-height: 24px;
-    border-radius: 50%;
-    border: 0;
-    background-color: $color-blue;
+    border-radius: 20px;
     font-size: 1em;
     cursor: default;
+    border-color: $color-blue;
 
     .rct-item-overflow .rct-item-content {
       padding: 0;
       display: flex;
       align-items: center;
-      justify-content: center;
+      justify-content: left;
+      padding-left: 3px;
+      overflow: hidden;
+    }
+
+    &.theme-dark {
+      background: $color-blue;
+      color: $color-white;
+    }
+
+    &.theme-light {
+      background: $color-white;
+      color: $color-blue;
+    }
+
+    &.full-width {
+      .rct-item-overflow .rct-item-content {
+        padding-left: 20px;
+      }
     }
   }
 

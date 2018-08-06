@@ -1,5 +1,4 @@
 import React, { Component } from 'react';
-import ReactDOMServer from 'react-dom/server';
 import PropTypes from 'prop-types';
 import Timeline from 'react-calendar-timeline/lib';
 import containerResizeDetector from 'react-calendar-timeline/lib/resize-detector/container';
@@ -62,28 +61,10 @@ export default class HorizontalTimeline extends Component {
     });
   }
 
-  getHoverElement = (date, group, text) => {
-    const dateIcon = ReactDOMServer.renderToString(<FontAwesomeIcon icon="calendar" fixedWidth />);
-    const typeIcon = ReactDOMServer.renderToString(<FontAwesomeIcon icon="notes-medical" fixedWidth />);
-
-    return (
-      `<div class="hover-element" data-html=true>
-        <div class="hover-element__date">
-          <span class="hover-element__label">${dateIcon}</span>${moment(date).format('MMM Do YYYY, h:mm a')}
-        </div>
-
-        <div class="hover-element__group"><span class="hover-element__label">${typeIcon}</span>${group}</div>
-        <div class="hover-element__text">${text}</div>
-      </div>`
-    );
-  }
-
   renderItem = ({ item }) => {
-    const itemGroup = this.props.groups.find((group) => group.id === item.group).title;
-
     return (
-      <div data-for={`item-${item.id}`} data-tip={this.getHoverElement(item.start_time, itemGroup, item.title)}>
-        <FontAwesomeIcon icon={item.icon} fixedWidth />
+      <div data-for={`item-${item.id}`} data-tip={item.hoverElement}>
+        <FontAwesomeIcon icon={item.icon} fixedWidth /> {item.title}
         <ReactTooltip html={true} id={`item-${item.id}`} className="horizontal-timeline__tooltip" type="light" />
       </div>
     );
@@ -118,7 +99,7 @@ export default class HorizontalTimeline extends Component {
   }
 
   render() {
-    const { groups, items, title, legendItems, rangeItems } = this.props;
+    const { groups, items, title, legendItems, rangeItems, stackItems } = this.props;
     const { visibleTimeStart, visibleTimeEnd, activeRange } = this.state;
 
     return (
@@ -150,6 +131,7 @@ export default class HorizontalTimeline extends Component {
           canResize={false}
           canSelect={false}
           canChangeGroup={false}
+          stackItems={stackItems}
           stickyHeader={false} // TODO: not working
           sidebarWidth={0}
           lineHeight={40}
@@ -173,9 +155,11 @@ HorizontalTimeline.propTypes = {
   items: PropTypes.arrayOf(itemProps).isRequired,
   legendItems: PropTypes.arrayOf(legendProps),
   rangeItems: PropTypes.arrayOf(rangeProps),
-  defaultRange: PropTypes.string // a rangeText from rangeItems
+  defaultRange: PropTypes.string, // a rangeText from rangeItems
+  stackItems: PropTypes.bool
 };
 
 HorizontalTimeline.defaultProps = {
-  defaultRange: '1yr'
+  defaultRange: '1yr',
+  stackItems: false
 };
