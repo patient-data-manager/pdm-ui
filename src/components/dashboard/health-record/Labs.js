@@ -24,7 +24,7 @@ export default class Labs extends Component {
     let data = [
       {
         'value': 200,
-        'date': '1996-12-16T14:40:51-05:00'
+        'date': '1984-12-16T14:40:51-05:00'
       },
       {
         'value': 100,

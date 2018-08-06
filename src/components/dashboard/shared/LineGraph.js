@@ -50,14 +50,8 @@ export default class LineGraph extends Component {
     return rangeValues;
   }
 
-  xVarFormatFunction = (xVarNumber) => {
-    return 'Date: ' + xVarNumber;
-  }
-
-  createYVarFormatFunctionWithUnit = (unit) => {
-    return (value) => {
-      return `${value} ${unit}`;
-    };
+  formatDate(dateString) {
+    return moment(dateString).format(`MMM 'YY`);
   }
 
   // processForGraphing = (data, xVar, xVarNumber) => {
@@ -168,7 +162,7 @@ export default class LineGraph extends Component {
         <LineChart width={this.state.chartWidth} height={this.state.chartHeight} data={sortedData}>
           <Line type="monotone" dataKey="value" stroke="#4a4a4a" />
           <Tooltip content={<CustomGraphTooltip title={this.props.title} unit={yUnit} />} />
-          <XAxis dataKey="date" />
+          <XAxis dataKey="date" tickFormatter={this.formatDate}/>
           <YAxis dataKey="value" type="number" domain={[0, 'yMax']}/>
           {this.renderReferenceRanges(yMax)}
         </LineChart>
