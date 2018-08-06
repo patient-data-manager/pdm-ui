@@ -4,7 +4,7 @@ import moment from 'moment';
 import memoize from 'memoize-one';
 import { LineChart, Line, XAxis, YAxis, Tooltip, ReferenceArea } from 'recharts';
 
-import CustomTooltip from './CustomTooltip';
+import CustomGraphTooltip from './CustomGraphTooltip';
 
 export default class LineGraph extends Component {
   constructor(props) {
@@ -13,7 +13,7 @@ export default class LineGraph extends Component {
     this.updateState = true;
     this.state = {
       chartWidth: 600,
-      chartHeight: 300
+      chartHeight: 200
     };
   }
 
@@ -154,7 +154,7 @@ export default class LineGraph extends Component {
     return (
       <div className="line-graph" 
         ref={(graphParentDiv) => { this.graphParentDiv = graphParentDiv; }}>
-        
+
         {/* TO-DO: figure out dates */}
         {/* TO-DO: add in tick marks */}
 
@@ -167,7 +167,7 @@ export default class LineGraph extends Component {
         </div>
         <LineChart width={this.state.chartWidth} height={this.state.chartHeight} data={sortedData}>
           <Line type="monotone" dataKey="value" stroke="#4a4a4a" />
-          <Tooltip content={<CustomTooltip title={this.props.title} unit={yUnit} />} />
+          <Tooltip content={<CustomGraphTooltip title={this.props.title} unit={yUnit} />} />
           <XAxis dataKey="date" />
           <YAxis dataKey="value" type="number" domain={[0, 'yMax']}/>
           {this.renderReferenceRanges(yMax)}

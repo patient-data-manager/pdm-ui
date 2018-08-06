@@ -1,7 +1,7 @@
 import React, { Component } from 'react';
 import PropTypes from 'prop-types';
 
-export default class CustomTooltip extends Component {
+export default class CustomGraphTooltip extends Component {
   render() {
     const { active, payload } = this.props;
     const details = payload.length > 0 ? payload[0].payload : null;
@@ -21,7 +21,7 @@ export default class CustomTooltip extends Component {
   }
 }
 
-CustomTooltip.propTypes = {
+CustomGraphTooltip.propTypes = {
   title: PropTypes.string,
   payload: PropTypes.array,
 };
