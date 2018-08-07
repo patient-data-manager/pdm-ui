@@ -25,5 +25,5 @@ export default class CustomGraphTooltip extends Component {
 
 CustomGraphTooltip.propTypes = {
   title: PropTypes.string,
-  payload: PropTypes.array,
+  payload: PropTypes.array
 };
