@@ -11,10 +11,10 @@ export default class CustomGraphTooltip extends Component {
       return (
         <div className="line-graph__tooltip">
           <div className="line-graph__tooltip-field"> 
-            <b>Date: </b> {displayDate}
+            <b>Date:</b> {displayDate}
           </div>
           <div className="line-graph__tooltip-field"> 
-            <b>{this.props.title}: </b> {details.value} {this.props.unit}
+            <b>{this.props.title}:</b> {details.value} {this.props.unit}
           </div>
         </div>
       );
