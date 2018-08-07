@@ -50,10 +50,10 @@ it('creates the icon buttons', () => {
   expect(component.find('IconButton')).toHaveLength(2);
 });
 
-it('properly expand and close the menu when clicking icon button', () => {
+it('properly expands and closes the menu when clicking icon button', () => {
   const component = setup();
-  expect(component.find('Drawer').find('IconButton')).toExist();
   expect(component.find('.app-toolbar button')).toExist();
+  expect(component.find('Drawer')).toExist();
   component.find('.app-toolbar button').simulate('click');
-  expect(component.find('Drawer.drawing-class')).toExist();
+  expect(component.find('div.dashboard')).toExist();
 });

@@ -165,7 +165,6 @@ export class Dashboard extends Component {
           </AppBar>
 
           <Drawer
-            className="drawing-class"
             variant="permanent"
             classes={{
               paper: classNames(classes.drawerPaper, !this.state.open && classes.drawerPaperClose),
