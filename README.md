@@ -8,7 +8,7 @@ This project is the frontend for the Health Data Manager.
 
 ### System Requirements
  - Yarn, v1.7.0 or higher
- - Instance of the backend server up and running **(TODO: add link to other project once we're up on github)**
+ - Instance of the [hdm-backend](https://github.com/health-data-manager/hdm-backend) server up and running
 
 ### Installation
 ```
