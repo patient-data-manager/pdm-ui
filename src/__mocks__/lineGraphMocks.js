@@ -1,3 +1,56 @@
+const graphDataMockA = {
+  'value': 200,
+  'date': '1977-12-16T14:40:51-05:00'
+};
+
+const graphDataMockB = {
+  'value': 100,
+  'date': '2017-12-16T14:40:51-05:00'
+};
+
+const graphDataMockC = {
+  'value': 300,
+  'date': '2009-12-16T14:40:51-05:00'
+};
+
+const graphDataMockD = {
+  'value': 500,
+  'date': '2001-12-16T14:40:51-05:00'
+};
+
+const graphDataMockE = {
+  'value': 50,
+  'date': '1998-12-16T14:40:51-05:00'
+};
+
+const graphDataMockF = {
+  'value': 250,
+  'date': '2004-06-16T14:40:51-05:00'
+};
+
+const graphDataMockG = {
+  'value': 400,
+  'date': '1982-12-16T14:40:51-05:00'
+};
+
+const referenceRangesMock = [
+  {
+    low: 450,
+    high: 'max',
+    assessment: 'high'
+  },
+  {
+    low: 100,
+    high: 450,
+    assessment: 'average'
+  },
+  {
+    low: 0,
+    high: 100,
+    assessment: 'low'
+  }
+];
+
 const tooltipPayloadMockA = [
   {
     color: '#4a4a4a',
@@ -31,6 +84,14 @@ const tooltipPayloadMockB = [
 ];
 
 export {
+  graphDataMockA,
+  graphDataMockB,
+  graphDataMockC,
+  graphDataMockD,
+  graphDataMockE,
+  graphDataMockF,
+  graphDataMockG,
+  referenceRangesMock,
   tooltipPayloadMockA,
   tooltipPayloadMockB
 };
