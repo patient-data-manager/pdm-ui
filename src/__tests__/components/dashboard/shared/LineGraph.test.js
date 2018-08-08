@@ -40,11 +40,16 @@ it('displays title and most recent values correctly', () => {
   expect(component.find('div.line-graph__header-most-recent').text()).toEqual('most recent: 100');
 });
 
-it('displays the graph correctly', () => {
-  // TO DO:
-  // points/line in the graph are there
-  // test resize function
 
+it('uses the resize function correctly', () => {
+  const component = setup();
+  const instance = component.instance();
+  expect(component.state('chartWidth')).toEqual(600);
+  instance.resize();
+  expect(component.state('chartWidth')).toEqual(0);
+});
+
+it('displays the graph correctly', () => {
   const component = setup();
   expect(component.find(LineChart)).toExist();
   expect(component.find(LineChart).prop('data')).toHaveLength(7);
