@@ -1,19 +1,20 @@
 import { fullRenderComponent } from '../../../../utils/testHelpers';
 import LineGraph from '../../../../components/dashboard/shared/LineGraph';
 import { LineChart } from 'recharts';
+import moment from 'moment';
 import * as mocks from '../../../../__mocks__/lineGraphMocks';
 
 function setup() {
   const props = {
     title: 'title goes here',
-    data: [ 
+    data: [
       mocks.graphDataMockA,
       mocks.graphDataMockB,
       mocks.graphDataMockC,
       mocks.graphDataMockD,
       mocks.graphDataMockE,
       mocks.graphDataMockF,
-      mocks.graphDataMockG 
+      mocks.graphDataMockG
     ],
     referenceRanges: mocks.referenceRangesMock,
     minPoints: 3
@@ -41,11 +42,21 @@ it('displays title and most recent values correctly', () => {
 });
 
 it('displays the graph correctly', () => {
-  // TO DO: 
+  // TO DO:
   // points/line in the graph are there
   // test resize function
 
   const component = setup();
+  expect(component.find(LineChart)).toExist();
+  expect(component.find(LineChart).prop('data')).toHaveLength(7);
+  expect(component.find(LineChart).prop('data')[0]).toEqual({ value: 200, date: 251149251000 })
+  expect(component.find(LineChart).prop('data')[1]).toEqual({ value: 400, date: 408915651000 })
+  expect(component.find(LineChart).prop('data')[2]).toEqual({ value: 50, date: 913837251000 })
+  expect(component.find(LineChart).prop('data')[3]).toEqual({ value: 500, date: 1008531651000 })
+  expect(component.find(LineChart).prop('data')[4]).toEqual({ value: 250, date: 1087414851000 })
+  expect(component.find(LineChart).prop('data')[5]).toEqual({ value: 300, date: 1260992451000 })
+  expect(component.find(LineChart).prop('data')[6]).toEqual({ value: 100, date: 1513453251000 })
+  expect(component.find('Line')).toExist();
 
   expect(component.find('svg.recharts-surface').prop('height')).toEqual(200);
   expect(component.find('svg.recharts-surface').prop('width')).toEqual(600);
@@ -86,7 +97,7 @@ it('displays reference ranges correctly', () => {
 
 
 it('graph is not displayed if data.length is less than minPoints', () => {
-  const component = fullRenderComponent(LineGraph, 
+  const component = fullRenderComponent(LineGraph,
     { title: 'title', minPoints: 4, data: [mocks.graphDataMockA, mocks.graphDataMockB] });
 
   expect(component).toBeDefined();
