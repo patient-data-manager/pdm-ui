@@ -1,7 +1,6 @@
 import { fullRenderComponent } from '../../../../utils/testHelpers';
 import LineGraph from '../../../../components/dashboard/shared/LineGraph';
 import { LineChart } from 'recharts';
-import moment from 'moment';
 import * as mocks from '../../../../__mocks__/lineGraphMocks';
 
 function setup() {
@@ -49,13 +48,13 @@ it('displays the graph correctly', () => {
   const component = setup();
   expect(component.find(LineChart)).toExist();
   expect(component.find(LineChart).prop('data')).toHaveLength(7);
-  expect(component.find(LineChart).prop('data')[0]).toEqual({ value: 200, date: 251149251000 })
-  expect(component.find(LineChart).prop('data')[1]).toEqual({ value: 400, date: 408915651000 })
-  expect(component.find(LineChart).prop('data')[2]).toEqual({ value: 50, date: 913837251000 })
-  expect(component.find(LineChart).prop('data')[3]).toEqual({ value: 500, date: 1008531651000 })
-  expect(component.find(LineChart).prop('data')[4]).toEqual({ value: 250, date: 1087414851000 })
-  expect(component.find(LineChart).prop('data')[5]).toEqual({ value: 300, date: 1260992451000 })
-  expect(component.find(LineChart).prop('data')[6]).toEqual({ value: 100, date: 1513453251000 })
+  expect(component.find(LineChart).prop('data')[0]).toEqual({ value: 200, date: 251149251000 });
+  expect(component.find(LineChart).prop('data')[1]).toEqual({ value: 400, date: 408915651000 });
+  expect(component.find(LineChart).prop('data')[2]).toEqual({ value: 50, date: 913837251000 });
+  expect(component.find(LineChart).prop('data')[3]).toEqual({ value: 500, date: 1008531651000 });
+  expect(component.find(LineChart).prop('data')[4]).toEqual({ value: 250, date: 1087414851000 });
+  expect(component.find(LineChart).prop('data')[5]).toEqual({ value: 300, date: 1260992451000 });
+  expect(component.find(LineChart).prop('data')[6]).toEqual({ value: 100, date: 1513453251000 });
   expect(component.find('Line')).toExist();
 
   expect(component.find('svg.recharts-surface').prop('height')).toEqual(200);
