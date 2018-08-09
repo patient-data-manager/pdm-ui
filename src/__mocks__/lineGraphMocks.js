@@ -59,7 +59,7 @@ const tooltipPayloadMockA = [
     formatter: undefined,
     name: 'value',
     payload: {
-      value: 200, 
+      value: 200,
       date: 251149251000
     },
     stroke: '#4a4a4a',

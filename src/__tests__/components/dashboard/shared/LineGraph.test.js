@@ -16,7 +16,8 @@ function setup() {
       mocks.graphDataMockG
     ],
     referenceRanges: mocks.referenceRangesMock,
-    minPoints: 3
+    minPoints: 3,
+    unit: '10^9/L'
   };
 
   return fullRenderComponent(LineGraph, props);
@@ -40,17 +41,10 @@ it('displays title and most recent values correctly', () => {
   expect(component.find('div.line-graph__header-most-recent').text()).toEqual('most recent: 100');
 });
 
-
-it('uses the resize function correctly', () => {
-  const component = setup();
-  const instance = component.instance();
-  expect(component.state('chartWidth')).toEqual(600);
-  instance.resize();
-  expect(component.state('chartWidth')).toEqual(0);
-});
-
 it('displays the graph correctly', () => {
   const component = setup();
+  console.log('COMPONENT: ', component.html());
+
   expect(component.find(LineChart)).toExist();
   expect(component.find(LineChart).prop('data')).toHaveLength(7);
   expect(component.find(LineChart).prop('data')[0]).toEqual({ value: 200, date: 251149251000 });
@@ -99,10 +93,9 @@ it('displays reference ranges correctly', () => {
   expect(component.find('g.recharts-reference-area').at(2).find('path').prop('height')).toEqual(32);
 });
 
-
 it('graph is not displayed if data.length is less than minPoints', () => {
   const component = fullRenderComponent(LineGraph,
-    { title: 'title', minPoints: 4, data: [mocks.graphDataMockA, mocks.graphDataMockB] });
+    { title: 'title', minPoints: 4, data: [mocks.graphDataMockA, mocks.graphDataMockB], unit: '10^9/L' });
 
   expect(component).toBeDefined();
   expect(component.find('div.line-graph__header')).toHaveLength(0);
