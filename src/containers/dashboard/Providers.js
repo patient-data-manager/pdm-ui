@@ -54,7 +54,7 @@ function mapDispatchToProps(dispatch) {
 
 function mapStateToProps(state) {
   return {
-    providers: state.providers.providers,
+    providers: state.providers,
     profile: state.profiles.activeProfile
   };
 }

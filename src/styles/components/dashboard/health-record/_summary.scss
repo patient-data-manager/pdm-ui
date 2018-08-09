@@ -1,7 +1,10 @@
 .summary {
-  display: flex;
-  flex-direction: row;
   margin-bottom: 20px;
+
+  &__image-table {
+    display: flex;
+    flex-direction: row;
+  }
 
   &__divider {
     border-left: 2px solid $color-gray-lightest;
@@ -28,5 +31,9 @@
       color: $color-blue;
       font-weight: bold;
     }
+  }
+
+  &__timeline {
+    margin-top: 20px;
   }
 }

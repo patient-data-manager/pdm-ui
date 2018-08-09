@@ -73,19 +73,17 @@ export class HealthRecord extends Component {
   render() {
     const { healthRecord, profile, loading } = this.props;
     let patient = {};
+
     if (healthRecord.Patient) patient = healthRecord.Patient[0];
 
     const sections = [
-      { header: 'summary', component: Summary, props: { patient, profile } },
+      { header: 'summary', component: Summary, props: { patient, profile, healthRecord } },
       { header: 'conditions', component: Conditions, props: { conditions: healthRecord.Condition || [] } },
-      { header: 'allergies', component: Allergies, props: { allergies: healthRecord.AllergyIntolerance || [] } },
-      { header: 'medications', 
-        component: Medications, 
-        props: {
-          medicationRequests: healthRecord.MedicationRequest || [], 
-          medicationStatements: healthRecord.MedicationStatement || []
-        }
-      },
+      { header: 'allergies', component: Allergies, props: { allergies: [] } },
+      { header: 'medications', component: Medications, props: {
+        medicationRequests: healthRecord.MedicationRequest || [],
+        medicationStatements: healthRecord.MedicationStatement || []
+      } },
       { header: 'immunizations', component: Immunizations, props: { immunizations: healthRecord.Immunization || [] } },
       { header: 'procedures', component: Procedures, props: { procedures: healthRecord.Procedure || [] } },
       { header: 'labs', component: Labs, props: { labs: this.filterObservationsByCategory('laboratory') || [] } },
