@@ -1,5 +1,6 @@
-.line-graph__tooltip {
+.custom-graph-tooltip {
   background-color: white;
   border: 1px solid $color-gray-lightest;
+  color: $color-text;
   padding: 10px;
 }

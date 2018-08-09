@@ -4,26 +4,31 @@ import moment from 'moment';
 
 export default class CustomGraphTooltip extends Component {
   render() {
-    const { active, payload } = this.props;
+    const { title, unit, active, payload } = this.props;
     const details = payload.length > 0 ? payload[0].payload : null;
+
     if (active && details) {
       const displayDate = moment(details.date).format('MMM D, YYYY');
       return (
-        <div className="line-graph__tooltip">
-          <div className="line-graph__tooltip-field"> 
+        <div className="custom-graph-tooltip">
+          <div className="custom-graph-tooltip__field">
             <b>Date: </b> {displayDate}
           </div>
-          <div className="line-graph__tooltip-field"> 
-            <b>{this.props.title}: </b> {details.value} {this.props.unit}
+
+          <div className="custom-graph-tooltip__field">
+            <b>{title}: </b> {details.value} {unit}
           </div>
         </div>
       );
     }
+
     return null;
   }
 }
 
 CustomGraphTooltip.propTypes = {
   title: PropTypes.string,
+  unit: PropTypes.string,
   payload: PropTypes.array,
+  active: PropTypes.bool
 };

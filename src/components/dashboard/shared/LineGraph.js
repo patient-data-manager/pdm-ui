@@ -2,39 +2,16 @@ import React, { Component } from 'react';
 import PropTypes from 'prop-types';
 import moment from 'moment';
 import memoize from 'memoize-one';
-import { LineChart, Line, XAxis, YAxis, Tooltip, ReferenceArea } from 'recharts';
+import { LineChart, Line, XAxis, YAxis, Tooltip, ReferenceArea, ResponsiveContainer } from 'recharts';
 import { scaleTime } from 'd3-scale';
 
 import CustomGraphTooltip from './CustomGraphTooltip';
 
 export default class LineGraph extends Component {
-  constructor(props) {
-    super(props);
-
-    this.updateState = true;
-    this.state = {
-      chartWidth: 600,
-      chartHeight: 200
-    };
-  }
-
-  componentDidUpdate = () => {
-    if (this.updateState) {
-      this.updateState = false;
-    } else {
-      this.updateState = true;
-      setTimeout(this.resize, 450);
-    }
-  }
-
-  componentDidMount = () => {
-    setTimeout(this.resize, 450);
-  }
-
   // memoize will only call the function if items has changed, otherwise it will return the last value
   sortDataByDate = memoize((items) => items.sort(((a, b) => moment(a.date) - moment(b.date))));
 
-  processData = (data, xVar, xVarNumber) => {
+  processData = (data) => {
     let processedData = data;
     data.forEach((entry, index) => {
       processedData[index].date = moment(entry.date).valueOf();
@@ -68,28 +45,19 @@ export default class LineGraph extends Component {
     return moment(dateString).format(`MMM 'YY`);
   }
 
-  resize = () => {
-    if (!this.graphParentDiv) return;
-    const graphParentDivWidth = this.graphParentDiv.offsetWidth;
-
-    this.setState({
-      chartWidth: graphParentDivWidth,
-    });
-  }
-  
   renderReferenceRange(y1, y2, yMax, color, key) {
     if (y2 === 'max') {
       // If reference area has no upper limit, draw it only if patient data would be captured by it
-      if (yMax > y1) { 
-        // Draw refence area large enough to capture max data element if it's greater than the y1 
+      if (yMax > y1) {
+        // Draw refence area large enough to capture max data element if it's greater than the y1
         // (bottom of reference area)
         return (
           <ReferenceArea key={key} y1={y1} y2={yMax} fill={color} fillOpacity="0.1" alwaysShow/>
         );
-      } else { 
+      } else {
         // Else  draw nothing -- no relevant values would be captured by that rectangle
       }
-    } else { 
+    } else {
       // Otherwise, draw as usual
       return (
         <ReferenceArea key={key} y1={y1} y2={y2} fill={color} fillOpacity="0.1" alwaysShow/>
@@ -98,77 +66,62 @@ export default class LineGraph extends Component {
   }
 
   renderReferenceRanges(yMax) {
+    const { referenceRanges } = this.props;
+    const colors = { low: '#eddadf', average: '#e7eaee', high: '#d08c9f' };
+
     let renderedRanges = null;
-    if (this.props.referenceRanges) {
+    if (referenceRanges) {
       let ranges = [];
-      this.props.referenceRanges.forEach((range) => {
-        // TO-DO: get the right colors/values
-        let color = null;
-        switch (range.assessment) {
-        case 'low':
-          color = 'red';
-          break;
-
-        case 'high':
-          color = 'red';
-          break;
-
-        case 'average':
-          color = 'grey';
-          break;
-
-        default:
-          color = 'white';
-          break;
-        }
-
+      referenceRanges.forEach((range) => {
         ranges.push({
           y1: range.low,
           y2: range.high,
-          color: color
+          color: colors[range.assessment] || '#fff'
         });
       });
 
       renderedRanges = ranges.map((range, i) => {
         return this.renderReferenceRange(range.y1, range.y2, yMax, range.color, i);
       });
-    } else {
-      renderedRanges = null;
     }
+
     return renderedRanges;
   }
 
   render() {
-    if (this.props.data.length < this.props.minPoints) return;
+    const { title, data, unit, minPoints } = this.props;
+    if (data.length < minPoints) return;
 
-    const sortedData = this.sortDataByDate(this.props.data);
-    const processedData = this.processData(this.props.data);
+    const sortedData = this.sortDataByDate(data);
+    const processedData = this.processData(sortedData);
     const [xMin, xMax] = this.getMinMax(sortedData, 'date');
     const [, yMax] = this.getMinMax(sortedData, 'value');
-    const yUnit = '10^9/L'; // to-do add in unit
 
     return (
-      <div className="line-graph" 
+      <div className="line-graph"
         ref={(graphParentDiv) => { this.graphParentDiv = graphParentDiv; }}>
         <div className="line-graph__header">
-          <div className="line-graph__header-title"> {this.props.title} </div>
-          <div className="line-graph__header-most-recent"> 
+          <div className="line-graph__header-title"> {title} </div>
+          <div className="line-graph__header-most-recent">
             <span className="line-graph__field"> most recent: </span>
             <span className="line-graph__value"> {this.getMostRecentValue(processedData)}</span>
           </div>
         </div>
-        <LineChart width={this.state.chartWidth} height={this.state.chartHeight} data={processedData}>
-          <Line type="monotone" dataKey="value" stroke="#4a4a4a" />
-          <Tooltip content={<CustomGraphTooltip title={this.props.title} unit={yUnit} />} />
-          <XAxis 
-            dataKey="date" 
-            type="number"
-            domain={[xMin, xMax]}
-            ticks={this.getTicks([xMin, xMax], 4)}
-            tickFormatter={this.formatDate} />
-          <YAxis dataKey="value" type="number" domain={[0, 'yMax']}/>
-          {this.renderReferenceRanges(yMax)}
-        </LineChart>
+
+        <ResponsiveContainer width="100%" height={200}>
+          <LineChart data={processedData}>
+            {this.renderReferenceRanges(yMax)}
+            <XAxis
+              dataKey="date"
+              type="number"
+              domain={[xMin, xMax]}
+              ticks={this.getTicks([xMin, xMax], 4)}
+              tickFormatter={this.formatDate} />
+            <YAxis dataKey="value" type="number" domain={[0, 'yMax']} />
+            <Line type="monotone" dataKey="value" stroke="#4a4a4a" />
+            <Tooltip content={<CustomGraphTooltip title={title} unit={unit} />} />
+          </LineChart>
+        </ResponsiveContainer>
       </div>
     );
   }
@@ -177,6 +130,7 @@ export default class LineGraph extends Component {
 LineGraph.propTypes = {
   title: PropTypes.string.isRequired,
   data: PropTypes.array.isRequired,
+  unit: PropTypes.string.isRequired,
   referenceRanges: PropTypes.array,
   minPoints: PropTypes.number
 };
