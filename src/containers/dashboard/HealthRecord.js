@@ -2,7 +2,7 @@ import React, { Component } from 'react';
 import PropTypes from 'prop-types';
 import { connect } from 'react-redux';
 import tocbot from 'tocbot';
-
+import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
 import Allergies from '../../components/dashboard/health-record/Allergies';
 import Conditions from '../../components/dashboard/health-record/Conditions';
 import Immunizations from '../../components/dashboard/health-record/Immunizations';
@@ -71,7 +71,7 @@ export class HealthRecord extends Component {
   }
 
   render() {
-    const { healthRecord, profile, loading } = this.props;
+    const { healthRecord, profile, loadingProfile, loadingHealthRecord } = this.props;
     let patient = {};
 
     if (healthRecord.Patient) patient = healthRecord.Patient[0];
@@ -89,9 +89,8 @@ export class HealthRecord extends Component {
       { header: 'labs', component: Labs, props: { labs: this.filterObservationsByCategory('laboratory') || [] } },
       { header: 'vitals', component: Vitals, props: { vitals: this.filterObservationsByCategory('vital-signs') || [] } }
     ];
-
-    if (loading) {
-      return <div className="loading">Loading...</div>;
+    if (loadingProfile || loadingHealthRecord) {
+      return <div className="loading fa-spin"><FontAwesomeIcon icon="spinner" /></div>;
     }
 
     return (
@@ -111,7 +110,8 @@ export class HealthRecord extends Component {
 HealthRecord.propTypes = {
   profile: PropTypes.object,
   healthRecord: PropTypes.object,
-  loading: PropTypes.bool
+  loadingProfile: PropTypes.bool,
+  loadingHealthRecord: PropTypes.bool
 };
 
 HealthRecord.defaultProps = {
@@ -122,7 +122,8 @@ function mapStateToProps(state) {
   return {
     profile: state.profiles.activeProfile,
     healthRecord: state.healthRecords.healthRecord,
-    loading: state.profiles.loadProfiles.isLoading
+    loadingProfile: state.profiles.loadProfiles.isLoading,
+    loadingHealthRecord: state.healthRecords.loadHealthRecord.isLoading
   };
 }
 
