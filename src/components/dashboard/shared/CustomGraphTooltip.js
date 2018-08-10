@@ -9,11 +9,11 @@ export default class CustomGraphTooltip extends Component {
     if (active && details) {
       const displayDate = moment(details.date).format('MMM D, YYYY');
       return (
-        <div className="line-graph__tooltip">
-          <div className="line-graph__tooltip-field"> 
+        <div className="custom-graph-tooltip">
+          <div className="custom-graph-tooltip-field">
             <b>Date:</b> {displayDate}
           </div>
-          <div className="line-graph__tooltip-field"> 
+          <div className="custom-graph-tooltip-field">
             <b>{this.props.title}:</b> {details.value} {this.props.unit}
           </div>
         </div>
