@@ -37,7 +37,7 @@ function providers(state = defaultState, action) {
       linkProvider: { isLinking: false, linkStatus: 'success' }
     };
   case types.OAUTH_CALLBACK_SUCCESS:
-    window.location.assign(action.redirectUri);
+    //window.location.assign(`/dashboard/profiles/${action.profileId}`);
 
     return state;
   case types.LINK_PROVIDER_FAILURE:

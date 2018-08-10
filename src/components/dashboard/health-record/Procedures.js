@@ -5,9 +5,17 @@ import getDisplayString from '../../../utils/getDisplayString';
 import VerticalTimeline from '../shared/VerticalTimeline';
 
 export default class Procedures extends Component {
+
+  procedureDate(procedure){
+    let date = procedure.performedDateTime;
+    if(!date && procedure.performedPeriod) {
+      date = procedure.performedPeriod.start
+    }
+    return date;
+  }
   procedures() {
     return this.props.procedures.map((procedure) => {
-      const date = procedure.performedDateTime ? procedure.performedDateTime : procedure.performedPeriod.start;
+      const date = this.procedureDate(procedure)
       return { date, text: getDisplayString(procedure, 'code') };
     });
   }
