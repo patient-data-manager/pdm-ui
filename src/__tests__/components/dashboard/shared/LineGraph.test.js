@@ -41,9 +41,17 @@ it('displays title and most recent values correctly', () => {
   expect(component.find('div.line-graph__header-most-recent').text()).toEqual('most recent: 100');
 });
 
-it('displays the graph correctly', () => {
+it('sets up graph display correctly', () => {
   const component = setup();
-  console.log('COMPONENT: ', component.html());
+
+  expect(component.find('svg.recharts-surface').prop('height')).toEqual(200);
+  expect(component.find('svg.recharts-surface').prop('width')).toEqual(600);
+  expect(component.find('g.recharts-layer')).toExist();
+  expect(component.find('div.recharts-tooltip-wrapper')).toExist();
+});
+
+it('displays the graph points correctly', () => {
+  const component = setup();
 
   expect(component.find(LineChart)).toExist();
   expect(component.find(LineChart).prop('data')).toHaveLength(7);
@@ -54,12 +62,10 @@ it('displays the graph correctly', () => {
   expect(component.find(LineChart).prop('data')[4]).toEqual({ value: 250, date: 1087414851000 });
   expect(component.find(LineChart).prop('data')[5]).toEqual({ value: 300, date: 1260992451000 });
   expect(component.find(LineChart).prop('data')[6]).toEqual({ value: 100, date: 1513453251000 });
-  expect(component.find('Line')).toExist();
+});
 
-  expect(component.find('svg.recharts-surface').prop('height')).toEqual(200);
-  expect(component.find('svg.recharts-surface').prop('width')).toEqual(600);
-  expect(component.find('g.recharts-layer')).toExist();
-  expect(component.find('div.recharts-tooltip-wrapper')).toExist();
+it('displays the graph axis correctly', () => {
+  const component = setup();
 
   expect(component.find('g.recharts-xAxis').find('text.recharts-cartesian-axis-tick-value')).toHaveLength(4);
   expect(component.find('g.recharts-yAxis').find('text.recharts-cartesian-axis-tick-value')).toHaveLength(4);
@@ -101,3 +107,5 @@ it('graph is not displayed if data.length is less than minPoints', () => {
   expect(component.find('div.line-graph__header')).toHaveLength(0);
   expect(component.find(LineChart)).toHaveLength(0);
 });
+
+// to do resize method

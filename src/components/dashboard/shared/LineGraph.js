@@ -92,7 +92,7 @@ export default class LineGraph extends Component {
 
   render() {
     const { title, data, unit, minPoints } = this.props;
-    if (data.length < minPoints) return;
+    if (data.length < minPoints) return null;
 
     const sortedData = this.sortDataByDate(data);
     const processedData = this.processData(sortedData);
@@ -103,9 +103,9 @@ export default class LineGraph extends Component {
       <div className="line-graph"
         ref={(graphParentDiv) => { this.graphParentDiv = graphParentDiv; }}>
         <div className="line-graph__header">
-          <div className="line-graph__header-title"> {title} </div>
+          <div className="line-graph__header-title">{title}</div>
           <div className="line-graph__header-most-recent">
-            <span className="line-graph__field"> most recent: </span>
+            <span className="line-graph__field">most recent:</span>
             <span className="line-graph__value"> {this.getMostRecentValue(processedData)}</span>
           </div>
         </div>
