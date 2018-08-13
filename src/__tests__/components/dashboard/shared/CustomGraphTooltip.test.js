@@ -18,15 +18,15 @@ it('renders self and self components', () => {
 
   expect(component).toBeDefined();
   expect(component.find(CustomGraphTooltip)).toExist();
-  expect(component.find('div.line-graph__tooltip')).toHaveLength(1);
+  expect(component.find('div.custom-graph-tooltip')).toHaveLength(1);
 });
 
 it('it populates the tooltip correctly', () => {
   const component = setup(mocks.tooltipPayloadMockA, true);
 
-  expect(component.find('div.line-graph__tooltip-field')).toHaveLength(2);
-  expect(component.find('div.line-graph__tooltip-field').at(0).text()).toEqual('Date: Dec 16, 1977');
-  expect(component.find('div.line-graph__tooltip-field').at(1).text()).toEqual('title goes here: 200 mL');
+  expect(component.find('div.custom-graph-tooltip__field')).toHaveLength(2);
+  expect(component.find('div.custom-graph-tooltip__field').at(0).text()).toEqual('Date:  Dec 16, 1977');
+  expect(component.find('div.custom-graph-tooltip__field').at(1).text()).toEqual('title goes here:  200 mL');
 });
 
 it('tooltip does not exist if there is no payload', () => {
@@ -34,7 +34,7 @@ it('tooltip does not exist if there is no payload', () => {
 
   expect(component).toBeDefined();
   expect(component.find(CustomGraphTooltip)).toExist();
-  expect(component.find('div.line-graph__tooltip')).toHaveLength(0);
+  expect(component.find('div.custom-graph-tooltip')).toHaveLength(0);
 });
 
 it('tooltip does not exist if there are no details in payload', () => {
@@ -42,7 +42,7 @@ it('tooltip does not exist if there are no details in payload', () => {
 
   expect(component).toBeDefined();
   expect(component.find(CustomGraphTooltip)).toExist();
-  expect(component.find('div.line-graph__tooltip')).toHaveLength(0);
+  expect(component.find('div.custom-graph-tooltip')).toHaveLength(0);
 });
 
 it('tooltip does not exist if active is false', () => {
@@ -50,5 +50,5 @@ it('tooltip does not exist if active is false', () => {
 
   expect(component).toBeDefined();
   expect(component.find(CustomGraphTooltip)).toExist();
-  expect(component.find('div.line-graph__tooltip')).toHaveLength(0);
+  expect(component.find('div.custom-graph-tooltip')).toHaveLength(0);
 });
