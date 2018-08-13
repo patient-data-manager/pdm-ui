@@ -159,5 +159,5 @@ LineGraph.propTypes = {
 
 LineGraph.defaultProps = {
   referenceRanges: [],
-  minPoints: 2
+  minPoints: 3
 };
