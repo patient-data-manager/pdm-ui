@@ -70,7 +70,7 @@ export default class LineGraph extends Component {
     const colors = { low: '#eddadf', average: '#e7eaee', high: '#d08c9f' };
 
     let renderedRanges = null;
-    if (referenceRanges) {
+    if (referenceRanges.length > 0) {
       let ranges = [];
       referenceRanges.forEach((range) => {
         ranges.push({
@@ -83,6 +83,8 @@ export default class LineGraph extends Component {
       renderedRanges = ranges.map((range, i) => {
         return this.renderReferenceRange(range.y1, range.y2, yMax, range.color, i);
       });
+    } else {
+      renderedRanges = [this.renderReferenceRange(0, yMax, yMax, '#e7eaee', '0')];
     }
 
     return renderedRanges;
