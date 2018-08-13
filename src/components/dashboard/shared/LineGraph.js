@@ -7,8 +7,6 @@ import { scaleTime } from 'd3-scale';
 
 import CustomGraphTooltip from './CustomGraphTooltip';
 
-import CustomGraphTooltip from './CustomGraphTooltip';
-
 export default class LineGraph extends Component {
   // memoize will only call the function if items has changed, otherwise it will return the last value
   sortDataByDate = memoize((items) => items.sort(((a, b) => moment(a.date) - moment(b.date))));
