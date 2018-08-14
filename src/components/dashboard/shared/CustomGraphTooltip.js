@@ -12,11 +12,11 @@ export default class CustomGraphTooltip extends Component {
       return (
         <div className="custom-graph-tooltip">
           <div className="custom-graph-tooltip__field">
-            <b>Date: </b> {displayDate}
+            <b>Date:</b> {displayDate}
           </div>
 
           <div className="custom-graph-tooltip__field">
-            <b>{title}: </b> {details.value} {unit}
+            <b>{title}:</b> {details.value} {unit}
           </div>
         </div>
       );

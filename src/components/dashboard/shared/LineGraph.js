@@ -2,12 +2,31 @@ import React, { Component } from 'react';
 import PropTypes from 'prop-types';
 import moment from 'moment';
 import memoize from 'memoize-one';
-import { LineChart, Line, XAxis, YAxis, Tooltip, ReferenceArea, ResponsiveContainer } from 'recharts';
+import { LineChart, Line, XAxis, YAxis, Tooltip, ReferenceArea } from 'recharts';
 import { scaleTime } from 'd3-scale';
 
 import CustomGraphTooltip from './CustomGraphTooltip';
 
 export default class LineGraph extends Component {
+  constructor(props) {
+    super(props);
+
+    this.state = { width: 600 };
+  }
+
+  componentDidMount() {
+    this.resize();
+    window.addEventListener('resize', this.resize);
+  }
+
+  componentWillUnmount() {
+    window.removeEventListener('resize', this.resize);
+  }
+
+  resize = () => {
+    this.setState({ width: window.innerWidth });
+  }
+
   // memoize will only call the function if items has changed, otherwise it will return the last value
   sortDataByDate = memoize((items) => items.sort(((a, b) => moment(a.date) - moment(b.date))));
 
@@ -70,7 +89,7 @@ export default class LineGraph extends Component {
     const colors = { low: '#eddadf', average: '#e7eaee', high: '#d08c9f' };
 
     let renderedRanges = null;
-    if (referenceRanges) {
+    if (referenceRanges.length > 0) {
       let ranges = [];
       referenceRanges.forEach((range) => {
         ranges.push({
@@ -83,6 +102,8 @@ export default class LineGraph extends Component {
       renderedRanges = ranges.map((range, i) => {
         return this.renderReferenceRange(range.y1, range.y2, yMax, range.color, i);
       });
+    } else {
+      renderedRanges = [this.renderReferenceRange(0, yMax, yMax, '#e7eaee', '0')];
     }
 
     return renderedRanges;
@@ -90,38 +111,38 @@ export default class LineGraph extends Component {
 
   render() {
     const { title, data, unit, minPoints } = this.props;
-    if (data.length < minPoints) return;
+    if (data.length < minPoints) return null;
 
     const sortedData = this.sortDataByDate(data);
     const processedData = this.processData(sortedData);
     const [xMin, xMax] = this.getMinMax(sortedData, 'date');
     const [, yMax] = this.getMinMax(sortedData, 'value');
+    const chartWidth = this.state.width - 350;
+    const graphWidthStyle = { width: `${chartWidth}px` };
 
     return (
       <div className="line-graph"
         ref={(graphParentDiv) => { this.graphParentDiv = graphParentDiv; }}>
-        <div className="line-graph__header">
-          <div className="line-graph__header-title"> {title} </div>
+        <div className="line-graph__header" style={graphWidthStyle}>
+          <div className="line-graph__header-title">{title}</div>
           <div className="line-graph__header-most-recent">
-            <span className="line-graph__field"> most recent: </span>
+            <span className="line-graph__field">most recent:</span>
             <span className="line-graph__value"> {this.getMostRecentValue(processedData)}</span>
           </div>
         </div>
 
-        <ResponsiveContainer width="100%" height={200}>
-          <LineChart data={processedData}>
-            {this.renderReferenceRanges(yMax)}
-            <XAxis
-              dataKey="date"
-              type="number"
-              domain={[xMin, xMax]}
-              ticks={this.getTicks([xMin, xMax], 4)}
-              tickFormatter={this.formatDate} />
-            <YAxis dataKey="value" type="number" domain={[0, 'yMax']} />
-            <Line type="monotone" dataKey="value" stroke="#4a4a4a" />
-            <Tooltip content={<CustomGraphTooltip title={title} unit={unit} />} />
-          </LineChart>
-        </ResponsiveContainer>
+        <LineChart data={processedData} height={200} width={chartWidth}>
+          {this.renderReferenceRanges(yMax)}
+          <XAxis
+            dataKey="date"
+            type="number"
+            domain={[xMin, xMax]}
+            ticks={this.getTicks([xMin, xMax], 4)}
+            tickFormatter={this.formatDate} />
+          <YAxis dataKey="value" type="number" domain={[0, 'yMax']} />
+          <Line type="monotone" dataKey="value" stroke="#4a4a4a" />
+          <Tooltip content={<CustomGraphTooltip title={title} unit={unit} />} />
+        </LineChart>
       </div>
     );
   }

@@ -16,12 +16,26 @@ export default class HorizontalTimeline extends Component {
     this.state = {
       visibleTimeStart: null,
       visibleTimeEnd: null,
-      activeRange: null
+      activeRange: null,
+      width: 600
     };
   }
 
   componentWillMount() {
     this.initializeRange();
+  }
+
+  componentDidMount() {
+    this.resize();
+    window.addEventListener('resize', this.resize);
+  }
+
+  componentWillUnmount() {
+    window.removeEventListener('resize', this.resize);
+  }
+
+  resize = () => {
+    this.setState({ width: window.innerWidth });
   }
 
   initializeRange() {
@@ -100,10 +114,12 @@ export default class HorizontalTimeline extends Component {
 
   render() {
     const { groups, items, title, legendItems, rangeItems, stackItems } = this.props;
-    const { visibleTimeStart, visibleTimeEnd, activeRange } = this.state;
+    const { visibleTimeStart, visibleTimeEnd, activeRange, width } = this.state;
+    const chartWidth = width - 350;
+    const graphWidthStyle = { width: `${chartWidth}px` };
 
     return (
-      <div className="horizontal-timeline">
+      <div className="horizontal-timeline" style={graphWidthStyle}>
         <div className="horizontal-timeline__header">
           <div className="header-title">{title}</div>
 
