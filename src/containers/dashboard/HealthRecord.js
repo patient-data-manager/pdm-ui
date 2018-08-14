@@ -89,6 +89,7 @@ export class HealthRecord extends Component {
       { header: 'labs', component: Labs, props: { labs: this.filterObservationsByCategory('laboratory') || [] } },
       { header: 'vitals', component: Vitals, props: { vitals: this.filterObservationsByCategory('vital-signs') || [] } }
     ];
+
     if (loadingProfile || loadingHealthRecord) {
       return <div className="loading fa-spin"><FontAwesomeIcon icon="spinner" /></div>;
     }
@@ -110,8 +111,8 @@ export class HealthRecord extends Component {
 HealthRecord.propTypes = {
   profile: PropTypes.object,
   healthRecord: PropTypes.object,
-  loadingProfile: PropTypes.bool,
-  loadingHealthRecord: PropTypes.bool
+  loadingProfile: PropTypes.bool.isRequired,
+  loadingHealthRecord: PropTypes.bool.isRequired
 };
 
 HealthRecord.defaultProps = {

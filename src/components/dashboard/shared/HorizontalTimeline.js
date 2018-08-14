@@ -22,12 +22,10 @@ export default class HorizontalTimeline extends Component {
   }
 
   componentWillMount() {
-    this.initializeRange();
-  }
-
-  componentDidMount() {
     this.resize();
     window.addEventListener('resize', this.resize);
+
+    this.initializeRange();
   }
 
   componentWillUnmount() {
