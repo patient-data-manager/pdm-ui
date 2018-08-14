@@ -15,6 +15,7 @@ import {
   faPills,
   faPlusCircle,
   faSignOutAlt,
+  faSpinner,
   faSyringe,
   faUserCircle
 } from '@fortawesome/free-solid-svg-icons';
@@ -35,6 +36,7 @@ library.add(
   faPills,
   faPlusCircle,
   faSignOutAlt,
+  faSpinner,
   faSyringe,
   faUserCircle
 );

@@ -6,7 +6,10 @@ import { healthRecordMock } from '../../../__mocks__/healthRecordMocks';
 function setup() {
   const store = {
     healthRecords: {
-      healthRecord: healthRecordMock
+      healthRecord: healthRecordMock,
+      loadHealthRecord: {
+        isLoading: false
+      }
     },
     profiles: {
       activeProfile: profileMockA,
