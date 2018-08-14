@@ -25,7 +25,13 @@ function setup() {
 
 it('renders self and self components', () => {
   const component = setup();
+
   expect(component).toBeDefined();
-  expect(component.find('div.provider')).toExist();
   expect(component.find('div.providers')).toExist();
+});
+
+it('renders all providers', () => {
+  const component = setup();
+
+  expect(component.find('div.provider')).toHaveLength(3);
 });
