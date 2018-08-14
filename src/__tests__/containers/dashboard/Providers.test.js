@@ -34,4 +34,7 @@ it('renders all providers', () => {
   const component = setup();
 
   expect(component.find('div.provider')).toHaveLength(3);
+  expect(component.find('div.provider > button').at(0).text()).toEqual('Fitbit');
+  expect(component.find('div.provider > button').at(1).text()).toEqual('Massachusetts General Hospital');
+  expect(component.find('div.provider > button').at(2).text()).toEqual('Partners Health Care');
 });
