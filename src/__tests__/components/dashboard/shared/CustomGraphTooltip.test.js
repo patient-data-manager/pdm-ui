@@ -25,8 +25,8 @@ it('it populates the tooltip correctly', () => {
   const component = setup(mocks.tooltipPayloadMockA, true);
 
   expect(component.find('div.custom-graph-tooltip__field')).toHaveLength(2);
-  expect(component.find('div.custom-graph-tooltip__field').at(0).text()).toEqual('Date:  Dec 16, 1977');
-  expect(component.find('div.custom-graph-tooltip__field').at(1).text()).toEqual('title goes here:  200 mL');
+  expect(component.find('div.custom-graph-tooltip__field').at(0).text()).toEqual('Date: Dec 16, 1977');
+  expect(component.find('div.custom-graph-tooltip__field').at(1).text()).toEqual('title goes here: 200 mL');
 });
 
 it('tooltip does not exist if there is no payload', () => {
