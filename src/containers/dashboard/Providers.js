@@ -26,13 +26,9 @@ export class Providers extends Component {
   }
 
   render() {
-    const { providers } = this.props;
-    if (!providers) return;
-    const providersList = (providers || []).map(provider => this.renderProvider(provider));
-
     return (
       <div className="providers">
-        {providersList}
+        {this.props.providers.map(provider => this.renderProvider(provider))}
       </div>
     );
   }
@@ -45,6 +41,10 @@ Providers.propTypes = {
   loadProviders: PropTypes.func.isRequired
 };
 
+Providers.defaultTypes = {
+  providers: []
+};
+
 function mapDispatchToProps(dispatch) {
   return bindActionCreators({
     linkProvider,
@@ -54,7 +54,7 @@ function mapDispatchToProps(dispatch) {
 
 function mapStateToProps(state) {
   return {
-    providers: state.providers,
+    providers: state.providers.providers,
     profile: state.profiles.activeProfile
   };
 }
