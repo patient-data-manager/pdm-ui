@@ -71,7 +71,9 @@ export default class Medications extends Component {
     let items = [];
     medications.forEach((medication) => {
       const title = getDisplayString(medication, 'medicationCodeableConcept');
-      const date = getProperty(medication, 'authoredOn');
+      const date = getProperty(medication, 'authoredOn') ||
+                   getProperty(medication, 'effectiveDateTime') || 
+                   getProperty(medication, 'effectivePeriod.start');
       const startDate = moment(date).valueOf();
       const isActive = medication.status === 'active';
       const endDate = isActive ? moment().valueOf() : moment(date).add(1, 'day').valueOf();

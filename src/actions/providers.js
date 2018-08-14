@@ -105,10 +105,9 @@ function requestOauthCallback() {
   };
 }
 
-function oauthCallbackSuccess(redirectUri) {
+function oauthCallbackSuccess(profileId) {
   return {
     type: types.OAUTH_CALLBACK_SUCCESS,
-    redirectUri
   };
 }
 
@@ -121,12 +120,13 @@ function oauthCallbackFailure(error) {
 }
 
 function sendOauthCallbackRequest(state, code) {
+  const redirectUri = `${window.location.protocol}/${window.location.host}/oauth`;
   return new Promise((resolve, reject) => {
     axios.get(
-      `/oauth/callback?state=${state}&code=${code}`,
+      `/oauth/callback?state=${state}&code=${code}&redirect_uri=${redirectUri}`,
       { headers: { 'X-Key-Inflection': 'camel', Accept: 'application/json' } }
     )
-      .then(result => resolve(result.data.redirect_uri))
+      .then(result => resolve(result.data.id))
       .catch(error => reject(error));
   });
 }
@@ -136,7 +136,7 @@ export function oauthCallback(state, code) {
     dispatch(requestOauthCallback());
 
     return sendOauthCallbackRequest(state, code)
-      .then(uri => dispatch(oauthCallbackSuccess(uri)))
+      .then(id => dispatch(oauthCallbackSuccess(id)))
       .catch(error => dispatch(oauthCallbackFailure(error)));
   };
 }

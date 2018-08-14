@@ -83,7 +83,7 @@ describe('providers actions', () => {
 
       const expectedActions = [
         { type: types.OAUTH_CALLBACK_REQUEST },
-        { type: types.OAUTH_CALLBACK_SUCCESS, redirectUri: 'http://localhost:8000/oauth' }
+        { type: types.OAUTH_CALLBACK_SUCCESS, profileId: undefined }
       ];
 
       return store.dispatch(actions.oauthCallback('abc', '123')).then(() => {
