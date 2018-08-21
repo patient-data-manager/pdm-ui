@@ -117,6 +117,8 @@ export default class HorizontalTimeline extends Component {
     const chartWidth = width - 350;
     const graphWidthStyle = { width: `${chartWidth}px` };
 
+    if (items.length < 1) return null;
+
     return (
       <div className="horizontal-timeline" style={graphWidthStyle}>
         <div className="horizontal-timeline__header">
