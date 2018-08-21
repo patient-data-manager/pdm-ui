@@ -10,10 +10,6 @@
     text-transform: uppercase;
     margin: 40px 0 20px 0;
 
-    .header-title {
-      margin-right: 5px;
-    }
-
     .header-divider {
       width: 100%;
       border-bottom: 1px solid $color-blue-gray;
@@ -28,7 +24,6 @@
     background-color: $color-gray-lightest;
 
     .toc-list {
-      padding: 0;
       list-style-type: none;
 
       &-item {
@@ -46,6 +41,13 @@
               margin-top: -4px;
             }
           }
+        }
+
+        .node-name--H5 {
+          font-style: italic;
+          text-transform: inherit;
+          font-weight: 600;
+          font-size: 0.9em;
         }
       }
     }

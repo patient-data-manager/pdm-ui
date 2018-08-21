@@ -4,6 +4,7 @@ import moment from 'moment';
 import memoize from 'memoize-one';
 import { LineChart, Line, XAxis, YAxis, Tooltip, ReferenceArea } from 'recharts';
 import { scaleTime } from 'd3-scale';
+import _ from 'lodash';
 
 import CustomGraphTooltip from './CustomGraphTooltip';
 
@@ -124,7 +125,7 @@ export default class LineGraph extends Component {
       <div className="line-graph"
         ref={(graphParentDiv) => { this.graphParentDiv = graphParentDiv; }}>
         <div className="line-graph__header" style={graphWidthStyle}>
-          <div className="line-graph__header-title">{title}</div>
+          <h5 id={_.lowerCase(title)}>{title}</h5>
           <div className="line-graph__header-most-recent">
             <span className="line-graph__field">most recent:</span>
             <span className="line-graph__value"> {this.getMostRecentValue(processedData)}</span>

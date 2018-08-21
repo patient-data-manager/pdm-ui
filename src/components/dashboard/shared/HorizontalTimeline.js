@@ -6,6 +6,7 @@ import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
 import moment from 'moment';
 import ReactTooltip from 'react-tooltip';
 import classNames from 'classnames';
+import _ from 'lodash';
 
 import { groupProps, itemProps, legendProps, rangeProps } from '../../../prop-types/horizontalTimelineProps';
 
@@ -119,7 +120,7 @@ export default class HorizontalTimeline extends Component {
     return (
       <div className="horizontal-timeline" style={graphWidthStyle}>
         <div className="horizontal-timeline__header">
-          <div className="header-title">{title}</div>
+          <h5 id={_.lowerCase(title)}>{title}</h5>
 
           <div className="header-buttons">
             {rangeItems && rangeItems.map((item, index) => {

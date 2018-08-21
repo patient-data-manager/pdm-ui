@@ -53,6 +53,24 @@ h3 {
   letter-spacing: 1px;
 }
 
+h4 {
+  margin-right: 5px;
+  letter-spacing: normal;
+  margin-bottom: 0;
+  font-size: 1em;
+  line-height: 1.5;
+  font-weight: 700;
+}
+
+h5 {
+  font-size: 1.2em;
+  font-style: italic;
+  font-weight: 600;
+  letter-spacing: normal;
+  color: $color-gray-darker;
+  text-transform: inherit;
+}
+
 button:active,
 button:focus {
   outline: none !important;

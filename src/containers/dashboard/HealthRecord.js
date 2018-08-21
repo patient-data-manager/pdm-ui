@@ -24,6 +24,8 @@ export class HealthRecord extends Component {
   componentDidUpdate() {
     if (!this.tocbotInitialized && !this.props.loading) {
       this.initializeTocbot();
+    } else if (!this.props.loading) {
+      tocbot.refresh();
     }
   }
 
@@ -33,13 +35,13 @@ export class HealthRecord extends Component {
 
   initializeTocbot() {
     tocbot.init({
-      tocSelector: '.health-record__toc',           // where to render the table of contents
-      contentSelector: '.health-record__content',   // where to grab the headings to build the table of contents
-      headingSelector: '.header-title',             // which headings to grab inside of the contentSelector element
-      positionFixedSelector: '.health-record__toc', // element to add the positionFixedClass to
-      collapseDepth: 0,                             // how many heading levels should not be collpased
-      includeHtml: true,                            // include the HTML markup from the heading node
-      fixedSidebarOffset: 160                       // offset from top
+      tocSelector: '.health-record__toc',             // where to render the table of contents
+      contentSelector: '.health-record__content',     // where to grab the headings to build the table of contents
+      headingSelector: 'h4, h5',                      // which headings to grab in the contentSelector element
+      positionFixedSelector: '.health-record__toc',   // element to add the positionFixedClass to
+      collapseDepth: 0,                               // how many heading levels should not be collpased
+      includeHtml: true,                              // include the HTML markup from the heading node
+      fixedSidebarOffset: 160                         // offset from top
     });
 
     this.tocbotInitialized = true;
@@ -61,7 +63,7 @@ export class HealthRecord extends Component {
     return (
       <div className="health-record__section" key={header}>
         <div className="health-record__header">
-          <div className="header-title" id={header}>{header}</div>
+          <h4 id={header}>{header}</h4>
           <div className="header-divider"></div>
         </div>
 

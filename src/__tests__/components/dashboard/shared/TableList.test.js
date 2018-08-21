@@ -32,7 +32,7 @@ it('renders self and self components', () => {
 it('renders title and headers correctly', () => {
   const component = setup();
 
-  expect(component.find('div.table-list__title').text(`Animals on Old McDonald's Farm`));
+  expect(component.find('h5').text(`Animals on Old McDonald's Farm`));
   expect(component.find('.table-list thead tr th')).toHaveLength(4);
   expect(component.find('.table-list thead tr th').at(0).text()).toEqual('name');
   expect(component.find('.table-list thead tr th').at(1).text()).toEqual('birthday');
@@ -41,7 +41,7 @@ it('renders title and headers correctly', () => {
 });
 
 it('table is not displayed if data array is empty', () => {
-  const component = fullRenderComponent(TableList, 
+  const component = fullRenderComponent(TableList,
     { title: 'table', headers: ['1', '2', '3'], data: [] });
 
   expect(component.find('div.table-list')).toExist();
