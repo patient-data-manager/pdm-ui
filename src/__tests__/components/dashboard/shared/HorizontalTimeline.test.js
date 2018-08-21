@@ -10,7 +10,9 @@ function setup() {
     items: mocks.itemsMock,
     legendItems: mocks.legendItemsMock,
     rangeItems: mocks.rangeItemsMock,
-    // defaultRange: PropTypes.string, // a rangeText from rangeItems
+    defaultRange: '3mo',
+
+    // TO-DO: add these and how to test it
     // stackItems: PropTypes.bool
   };
 
@@ -64,7 +66,6 @@ it('displays no legend if there are no legend items', () => {
     title: 'this is a title',
     groups: mocks.groupsMock,
     items: mocks.itemsMock,
-    legendItems: [],
     rangeItems: mocks.rangeItemsMock,
   };
   const component = fullRenderComponent(HorizontalTimeline, props);
@@ -73,8 +74,55 @@ it('displays no legend if there are no legend items', () => {
   expect(component.find('div.horizontal-timeline__legend')).toHaveLength(0);
 });
 
+it('renders range option buttons correctly', () => {
+  const component = setup();
+
+  expect(component.find('button.timeline-button')).toHaveLength(7);
+  expect(component.find('button.timeline-button').at(0).text()).toEqual('1mo');
+  expect(component.find('button.timeline-button').at(0).hasClass('active')).toBeFalsy();
+  expect(component.find('button.timeline-button').at(1).text()).toEqual('3mo');
+  expect(component.find('button.timeline-button').at(1).hasClass('active')).toBeTruthy();
+  expect(component.find('button.timeline-button').at(2).text()).toEqual('6mo');
+  expect(component.find('button.timeline-button').at(2).hasClass('active')).toBeFalsy();
+  expect(component.find('button.timeline-button').at(3).text()).toEqual('1yr');
+  expect(component.find('button.timeline-button').at(3).hasClass('active')).toBeFalsy();
+  expect(component.find('button.timeline-button').at(4).text()).toEqual('3yr');
+  expect(component.find('button.timeline-button').at(4).hasClass('active')).toBeFalsy();
+  expect(component.find('button.timeline-button').at(5).text()).toEqual('10yr');
+  expect(component.find('button.timeline-button').at(5).hasClass('active')).toBeFalsy();
+  expect(component.find('button.timeline-button').at(6).text()).toEqual('all');
+  expect(component.find('button.timeline-button').at(6).hasClass('active')).toBeFalsy();
+});
+
+it('displays default range options if not defined', () => {
+  const props = {
+    title: 'this is a title',
+    groups: mocks.groupsMock,
+    items: mocks.itemsMock,
+    legendItems: mocks.legendItemsMock,
+  };
+  const component = fullRenderComponent(HorizontalTimeline, props);
+
+  expect(component.find('button.timeline-button')).toHaveLength(6);
+  expect(component.find('button.timeline-button').at(0).text()).toEqual('1mo');
+  expect(component.find('button.timeline-button').at(0).hasClass('active')).toBeFalsy();
+  expect(component.find('button.timeline-button').at(1).text()).toEqual('3mo');
+  expect(component.find('button.timeline-button').at(1).hasClass('active')).toBeFalsy();
+  expect(component.find('button.timeline-button').at(2).text()).toEqual('6mo');
+  expect(component.find('button.timeline-button').at(2).hasClass('active')).toBeFalsy();
+  expect(component.find('button.timeline-button').at(3).text()).toEqual('1yr');
+  expect(component.find('button.timeline-button').at(3).hasClass('active')).toBeTruthy();
+  expect(component.find('button.timeline-button').at(4).text()).toEqual('5yr');
+  expect(component.find('button.timeline-button').at(4).hasClass('active')).toBeFalsy();
+  expect(component.find('button.timeline-button').at(5).text()).toEqual('all');
+  expect(component.find('button.timeline-button').at(5).hasClass('active')).toBeFalsy();
+});
+
+// it('clicking on the range button adjusts the viewable portion of the graph', () => {
+//   const component = setup();
+// });
+
 // all icon dots exist
-// range is displayed correctly and defaults to 1 yr
 // clicking on range buttons works - right amount of icons
 // scrolling works?
 // test tooltips

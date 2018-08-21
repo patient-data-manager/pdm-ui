@@ -90,7 +90,8 @@ const rangeItemsMock = [
   { rangeText: '3mo', rangeNum: 3, rangeType: 'months', rangeFutureType: 'days' },
   { rangeText: '6mo', rangeNum: 6, rangeType: 'months', rangeFutureType: 'months' },
   { rangeText: '1yr', rangeNum: 1, rangeType: 'year', rangeFutureType: 'months' },
-  { rangeText: '5yr', rangeNum: 5, rangeType: 'year', rangeFutureType: 'months' },
+  { rangeText: '3yr', rangeNum: 3, rangeType: 'year', rangeFutureType: 'months' },
+  { rangeText: '10yr', rangeNum: 10, rangeType: 'year', rangeFutureType: 'months' },
   { rangeText: 'all' }
 ];
 
