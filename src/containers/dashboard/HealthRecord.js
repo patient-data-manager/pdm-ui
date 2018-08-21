@@ -64,7 +64,7 @@ export class HealthRecord extends Component {
   }
 
   handleReceivedData = (data) => {
-    this.props.receiveHealthRecord(data.bundle);
+    this.props.receiveHealthRecord(data);
   }
 
   renderSection = (header, SectionComponent, props) => {
@@ -74,7 +74,6 @@ export class HealthRecord extends Component {
           <h4 id={header}>{header}</h4>
           <div className="header-divider"></div>
         </div>
-
         <SectionComponent {...props} />
       </div>
     );
