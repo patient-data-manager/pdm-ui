@@ -91,7 +91,7 @@ export default class HorizontalTimeline extends Component {
             return (
               <div className="legend-item" key={index}>
                 <div className="legend-item__icon"><FontAwesomeIcon icon={item.icon} fixedWidth /></div>
-                <div className="lengend-item__text">: {item.text}</div>
+                <div className="legend-item__text">: {item.text}</div>
               </div>
             );
           }
@@ -103,6 +103,8 @@ export default class HorizontalTimeline extends Component {
   }
 
   renderLegend = (legendItems) => {
+    if (legendItems.length === 0) return null;
+    
     return (
       <div className="horizontal-timeline__legend">
         {legendItems.length > 0 && this.renderLegendRow(legendItems, 0)}
