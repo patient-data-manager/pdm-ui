@@ -169,7 +169,7 @@ export default class HorizontalTimeline extends Component {
 }
 
 HorizontalTimeline.propTypes = {
-  title: PropTypes.string,
+  title: PropTypes.string.isRequired,
   groups: PropTypes.arrayOf(groupProps).isRequired,
   items: PropTypes.arrayOf(itemProps).isRequired,
   legendItems: PropTypes.arrayOf(legendProps),
@@ -179,6 +179,15 @@ HorizontalTimeline.propTypes = {
 };
 
 HorizontalTimeline.defaultProps = {
+  legendItems: [],
+  rangeItems: [
+    { rangeText: '1mo', rangeNum: 1, rangeType: 'months', rangeFutureType: 'days' },
+    { rangeText: '3mo', rangeNum: 3, rangeType: 'months', rangeFutureType: 'days' },
+    { rangeText: '6mo', rangeNum: 6, rangeType: 'months', rangeFutureType: 'months' },
+    { rangeText: '1yr', rangeNum: 1, rangeType: 'year', rangeFutureType: 'months' },
+    { rangeText: '5yr', rangeNum: 5, rangeType: 'year', rangeFutureType: 'months' },
+    { rangeText: 'all' }
+  ],
   defaultRange: '1yr',
   stackItems: false
 };
