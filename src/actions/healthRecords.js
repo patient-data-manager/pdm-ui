@@ -45,3 +45,11 @@ export function loadHealthRecord(id) {
       .catch(error => dispatch(loadHealthRecordFailure(error)));
   };
 }
+
+// ------------------------- RECEIEVE HEALTH RECORD VIA PUSH ---------------------------- //
+
+export function receiveHealthRecord(data) {
+  return (dispatch, getState) => {
+    dispatch(loadHealthRecordSuccess(data));
+  };
+}

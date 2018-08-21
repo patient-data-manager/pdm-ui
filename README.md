@@ -53,7 +53,8 @@ PORT=8000
 
 
 #### Available Options:
- - `REACT_APP_BACKEND_URL` -- Set this to the base URL (hostname and port) for the backend server. If not specified, the server is assumed to be running at `http://127.0.0.1:3000`
+ - `REACT_APP_BACKEND_URL` -- Set this to the base URL (protocol, hostname, and port) for the backend server. If not specified, the server is assumed to be running at `http://127.0.0.1:3000`
+ - `REACT_APP_WEBSOCKET_URL` -- Set this to be the base URL (protocol, hostname, and port) for the backend websocket enpoint. If not specified, the endpoint is assumed to be running at `ws://127.0.0.1:3000/cable`
  - `PORT` -- The port the UI server runs on. If not specified the server runs on port 3000.
 
 
