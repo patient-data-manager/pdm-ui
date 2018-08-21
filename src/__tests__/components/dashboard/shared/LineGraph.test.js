@@ -35,8 +35,8 @@ it('displays title and most recent values correctly', () => {
   const component = setup();
 
   expect(component).toBeDefined();
-  expect(component.find('div.line-graph__header-title')).toExist();
-  expect(component.find('div.line-graph__header-title').text()).toEqual('title goes here');
+  expect(component.find('h5')).toExist();
+  expect(component.find('h5').text()).toEqual('title goes here');
   expect(component.find('div.line-graph__header-most-recent')).toExist();
   expect(component.find('div.line-graph__header-most-recent').text()).toEqual('most recent: 100');
 });

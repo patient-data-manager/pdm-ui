@@ -6,6 +6,7 @@ import TableCell from '@material-ui/core/TableCell';
 import TableHead from '@material-ui/core/TableHead';
 import TableRow from '@material-ui/core/TableRow';
 import TableSortLabel from '@material-ui/core/TableSortLabel';
+import _ from 'lodash';
 
 export default class TableList extends Component {
   constructor(props) {
@@ -75,8 +76,7 @@ export default class TableList extends Component {
 
     return (
       <div className="table-list">
-        <div className="table-list__title">{title}</div>
-
+      <h5 id={_.lowerCase(title)}>{title}</h5>
         <div className="table-list__table-wrapper">
           {data.length === 0 ?
             <div className="no-entries">No entries</div>
