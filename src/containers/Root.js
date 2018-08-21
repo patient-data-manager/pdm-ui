@@ -3,10 +3,11 @@ import PropTypes from 'prop-types';
 import { Provider } from 'react-redux';
 import { BrowserRouter as Router, Route, Switch } from 'react-router-dom';
 import { MuiThemeProvider, createMuiTheme } from 'material-ui/styles';
-import { ActionCableProvider } from 'react-actioncable-provider';
+
 
 import PrivateRoute from './PrivateRoute';
 import Landing from './Landing';
+import TokenActionCableProvider from './TokenActionCableProvider';
 import Login from './auth/Login';
 import Register from './auth/Register';
 import Dashboard from './dashboard/Dashboard';
@@ -49,7 +50,7 @@ const Root = ({ store }) => {
 
             <PrivateRoute path="/oauth" component={OAuth} />
             <PrivateRoute path="/dashboard">
-              <ActionCableProvider url={`${websocketURL}?token=${store.getState().auth.accessToken}`}>
+              <TokenActionCableProvider url={websocketURL}>
                 <Dashboard>
                   <Switch>
                     <PrivateRoute path="/dashboard/profiles" component={Profiles} />
@@ -59,7 +60,7 @@ const Root = ({ store }) => {
                     <Route component={NoMatch} />
                   </Switch>
                 </Dashboard>
-              </ActionCableProvider>
+              </TokenActionCableProvider>
             </PrivateRoute>
 
             <Route component={NoMatch} />
