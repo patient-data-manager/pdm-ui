@@ -76,7 +76,7 @@ export default class TableList extends Component {
 
     return (
       <div className="table-list">
-      <h5 id={_.lowerCase(title)}>{title}</h5>
+        <h5 id={_.lowerCase(title)}>{title}</h5>
         <div className="table-list__table-wrapper">
           {data.length === 0 ?
             <div className="no-entries">No entries</div>
