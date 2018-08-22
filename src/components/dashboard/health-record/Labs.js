@@ -64,7 +64,7 @@ export default class Labs extends Component {
       let code = getProperty(lab, "code.coding.firstObject.code");
       let rr = getProperty(lab, "referenceRange");
       let value = getProperty(lab, "valueQuantity");
-      if (code && code != "" && value) {
+      if (code && code !== "" && value) {
         let group = grouped[code];
         if (!group) {
           group = { values: [],

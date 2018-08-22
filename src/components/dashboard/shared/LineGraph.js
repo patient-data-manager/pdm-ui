@@ -41,7 +41,8 @@ export default class LineGraph extends Component {
 
   getMostRecentValue = (orderedData) => {
     const lastIndex = orderedData.length - 1;
-    return orderedData[lastIndex].value;
+    return Number.isInteger(orderedData[lastIndex].value) ?
+      orderedData[lastIndex].value : orderedData[lastIndex].value.toFixed(2);
   }
 
   getMinMax = (data, key) => {
@@ -110,6 +111,8 @@ export default class LineGraph extends Component {
     return renderedRanges;
   }
 
+
+
   render() {
     const { title, data, unit, minPoints } = this.props;
     if (data.length < minPoints) return null;
@@ -117,10 +120,10 @@ export default class LineGraph extends Component {
     const sortedData = this.sortDataByDate(data);
     const processedData = this.processData(sortedData);
     const [xMin, xMax] = this.getMinMax(sortedData, 'date');
-    const [, yMax] = this.getMinMax(sortedData, 'value');
+    const [, maxValue] = this.getMinMax(sortedData, 'value');
     const chartWidth = this.state.width - 350;
     const graphWidthStyle = { width: `${chartWidth}px` };
-
+    const yMax = Math.ceil(maxValue+(maxValue*.2));
     return (
       <div className="line-graph"
         ref={(graphParentDiv) => { this.graphParentDiv = graphParentDiv; }}>
@@ -140,7 +143,7 @@ export default class LineGraph extends Component {
             domain={[xMin, xMax]}
             ticks={this.getTicks([xMin, xMax], 4)}
             tickFormatter={this.formatDate} />
-          <YAxis dataKey="value" type="number" domain={[0, 'yMax']} />
+          <YAxis dataKey="value" type="number" domain={[0, yMax]} />
           <Line type="monotone" dataKey="value" stroke="#4a4a4a" />
           <Tooltip content={<CustomGraphTooltip title={title} unit={unit} />} />
         </LineChart>

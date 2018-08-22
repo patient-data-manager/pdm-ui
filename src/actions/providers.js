@@ -120,7 +120,7 @@ function oauthCallbackFailure(error) {
 }
 
 function sendOauthCallbackRequest(state, code) {
-  const redirectUri = `${window.location.protocol}/${window.location.host}/oauth`;
+  const redirectUri = `${window.location.protocol}//${window.location.host}/oauth`;
   return new Promise((resolve, reject) => {
     axios.get(
       `/oauth/callback?state=${state}&code=${code}&redirect_uri=${redirectUri}`,
