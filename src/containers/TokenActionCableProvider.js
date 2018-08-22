@@ -10,9 +10,9 @@ class TokenActionCableProvider extends Component {
   render() {
     const { url, token, children } = this.props;
     return (
-       <ActionCableProvider url={`${url}?token=${token}`}>
-         {children}
-       </ActionCableProvider>
+      <ActionCableProvider url={`${url}?token=${token}`}>
+        {children}
+      </ActionCableProvider>
     );
   }
 }

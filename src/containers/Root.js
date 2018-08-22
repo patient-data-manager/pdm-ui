@@ -36,7 +36,7 @@ const THEME = createMuiTheme({
   shape: {}
 });
 
-const websocketURL = process.env.REACT_APP_WEBSOCKET_URL || 'ws://127.0.0.1:3000/cable'
+const websocketURL = process.env.REACT_APP_WEBSOCKET_URL || 'ws://127.0.0.1:3000/cable';
 
 const Root = ({ store }) => {
   return (

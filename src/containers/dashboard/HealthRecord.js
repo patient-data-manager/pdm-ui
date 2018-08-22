@@ -109,9 +109,9 @@ export class HealthRecord extends Component {
         { this.context.cable &&
           // only render if this component is wrapped in an ActionCableProvider
           <ActionCable
-          channel={{ channel: 'UpdateChannel', profile_id: profile.id }}
-          onReceived={this.handleReceivedData}
-        /> }
+            channel={{ channel: 'UpdateChannel', profile_id: profile.id }}
+            onReceived={this.handleReceivedData}
+          /> }
         <div className="health-record__content">
           {sections.map((section) => {
             return this.renderSection(section.header, section.component, section.props);
