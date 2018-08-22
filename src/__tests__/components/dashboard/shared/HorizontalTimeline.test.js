@@ -1,4 +1,3 @@
-import moment from 'moment';
 import Timeline from 'react-calendar-timeline/lib';
 import { fullRenderComponent } from '../../../../utils/testHelpers';
 import HorizontalTimeline from '../../../../components/dashboard/shared/HorizontalTimeline';
@@ -119,7 +118,7 @@ it('displays default range options if not defined', () => {
   expect(component.find('button.timeline-button').at(5).hasClass('active')).toBeFalsy();
 });
 
-it('renders the graph correctly', () => {
+it('renders the graph and tooltips correctly', () => {
   const props = {
     title: 'this is a title',
     groups: mocks.groupsMock,
@@ -133,6 +132,7 @@ it('renders the graph correctly', () => {
   expect(component.find('div.rct-header')).toExist();
   expect(component.find('div.rct-today')).toExist();
   expect(component.find('div.timeline-item')).toHaveLength(7);
+  expect(component.find('.horizontal-timeline__tooltip')).toHaveLength(7);
 });
 
 it('clicking on the range button adjusts the viewable portion of the graph', () => {
@@ -173,7 +173,3 @@ it('clicking on the range button adjusts the viewable portion of the graph', () 
   expect(component.find('div.timeline-item').at(5).prop('title')).toEqual('Low Density Lipoprotein Cholesterol');
   expect(component.find('div.timeline-item').at(6).prop('title')).toEqual('Camila 28 Day Pack');
 });
-
-// scrolling works?
-// test tooltips
-
