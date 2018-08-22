@@ -23,8 +23,8 @@ it('renders self and self components', () => {
   const component = setup();
 
   expect(component).toBeDefined();
-  expect(component.find('div.header-title')).toExist();
-  expect(component.find('div.header-title').text()).toEqual('this is a title');
+  expect(component.find('div.horizontal-timeline__header').find('h5')).toExist();
+  expect(component.find('div.horizontal-timeline__header').find('h5').text()).toEqual('this is a title');
   expect(component.find('div.header-buttons')).toExist();
   expect(component.find(Timeline)).toExist();
   expect(component.find('div.horizontal-timeline__legend')).toExist();
