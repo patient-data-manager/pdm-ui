@@ -1,3 +1,4 @@
+import moment from 'moment';
 import Timeline from 'react-calendar-timeline/lib';
 import { fullRenderComponent } from '../../../../utils/testHelpers';
 import HorizontalTimeline from '../../../../components/dashboard/shared/HorizontalTimeline';
@@ -118,12 +119,61 @@ it('displays default range options if not defined', () => {
   expect(component.find('button.timeline-button').at(5).hasClass('active')).toBeFalsy();
 });
 
-// it('clicking on the range button adjusts the viewable portion of the graph', () => {
-//   const component = setup();
-// });
+it('renders the graph correctly', () => {
+  const props = {
+    title: 'this is a title',
+    groups: mocks.groupsMock,
+    items: mocks.itemsMock,
+    legendItems: mocks.legendItemsMock,
+    rangeItems: mocks.rangeItemsMock,
+    defaultRange: 'all'
+  };
+  const component = fullRenderComponent(HorizontalTimeline, props);
 
-// all icon dots exist
-// clicking on range buttons works - right amount of icons
+  expect(component.find('div.rct-header')).toExist();
+  expect(component.find('div.rct-today')).toExist();
+  expect(component.find('div.timeline-item')).toHaveLength(7);
+});
+
+it('clicking on the range button adjusts the viewable portion of the graph', () => {
+  const component = setup();
+
+  expect(component.find('div.timeline-item')).toHaveLength(1);
+  expect(component.find('div.timeline-item').prop('title')).toEqual('Documentation of current medications');
+
+  component.find('button.timeline-button').at(0).simulate('click'); // 1 month
+  expect(component.find('div.timeline-item')).toHaveLength(0);
+
+  component.find('button.timeline-button').at(2).simulate('click'); // 6 months
+  expect(component.find('div.timeline-item')).toHaveLength(1);
+  expect(component.find('div.timeline-item').prop('title')).toEqual('Documentation of current medications');
+
+  component.find('button.timeline-button').at(3).simulate('click'); // 1 year
+  expect(component.find('div.timeline-item')).toHaveLength(1);
+  expect(component.find('div.timeline-item').prop('title')).toEqual('Documentation of current medications');
+
+  component.find('button.timeline-button').at(4).simulate('click'); // 3 years
+  expect(component.find('div.timeline-item')).toHaveLength(2);
+  expect(component.find('div.timeline-item').at(0).prop('title')).toEqual('Documentation of current medications');
+  expect(component.find('div.timeline-item').at(1).prop('title')).toEqual('Camila 28 Day Pack');
+
+  component.find('button.timeline-button').at(5).simulate('click'); // 10 years
+  expect(component.find('div.timeline-item')).toHaveLength(3);
+  expect(component.find('div.timeline-item').at(0).prop('title')).toEqual('Documentation of current medications');
+  expect(component.find('div.timeline-item').at(1).prop('title')).toEqual('Low Density Lipoprotein Cholesterol');
+  expect(component.find('div.timeline-item').at(2).prop('title')).toEqual('Camila 28 Day Pack');
+
+  component.find('button.timeline-button').at(6).simulate('click'); // all
+  expect(component.find('div.timeline-item')).toHaveLength(7);
+  expect(component.find('div.timeline-item').at(0).prop('title')).toEqual('Documentation of current medications');
+  expect(component.find('div.timeline-item').at(1).prop('title')).toEqual('Colonoscopy');
+  expect(component.find('div.timeline-item').at(2).prop('title')).toEqual('Viral sinusitis (disorder)');
+  expect(component.find('div.timeline-item').at(3).prop('title')).toEqual('Perennial allergic rhinitis');
+  expect(component.find('div.timeline-item').at(4).prop('title')).toEqual('Triglycerides');
+  expect(component.find('div.timeline-item').at(5).prop('title')).toEqual('Low Density Lipoprotein Cholesterol');
+  expect(component.find('div.timeline-item').at(6).prop('title')).toEqual('Camila 28 Day Pack');
+});
+
 // scrolling works?
 // test tooltips
 
