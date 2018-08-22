@@ -4,6 +4,8 @@ import { connect } from 'react-redux';
 import { withRouter } from 'react-router-dom';
 import { ActionCableProvider } from 'react-actioncable-provider';
 
+// Custom wrapper component to allow using a token from state
+// in the URL provided to the ActionCableProvider
 class TokenActionCableProvider extends Component {
   render() {
     const { url, token, children } = this.props;

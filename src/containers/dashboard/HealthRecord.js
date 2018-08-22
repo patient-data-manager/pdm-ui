@@ -106,10 +106,12 @@ export class HealthRecord extends Component {
     return (
       <div className="health-record">
         <div className="health-record__toc"></div>
-        <ActionCable
+        { this.context.cable &&
+          // only render if this component is wrapped in an ActionCableProvider
+          <ActionCable
           channel={{ channel: 'UpdateChannel', profile_id: profile.id }}
           onReceived={this.handleReceivedData}
-        />
+        /> }
         <div className="health-record__content">
           {sections.map((section) => {
             return this.renderSection(section.header, section.component, section.props);
@@ -126,6 +128,10 @@ HealthRecord.propTypes = {
   loadingProfile: PropTypes.bool.isRequired,
   loadingHealthRecord: PropTypes.bool.isRequired,
   receiveHealthRecord: PropTypes.func.isRequired
+};
+
+HealthRecord.contextTypes = {
+  cable: PropTypes.object
 };
 
 HealthRecord.defaultProps = {
