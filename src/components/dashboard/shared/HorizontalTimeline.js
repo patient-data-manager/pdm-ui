@@ -91,7 +91,7 @@ export default class HorizontalTimeline extends Component {
             return (
               <div className="legend-item" key={index}>
                 <div className="legend-item__icon"><FontAwesomeIcon icon={item.icon} fixedWidth /></div>
-                <div className="lengend-item__text">: {item.text}</div>
+                <div className="legend-item__text">: {item.text}</div>
               </div>
             );
           }
@@ -103,6 +103,8 @@ export default class HorizontalTimeline extends Component {
   }
 
   renderLegend = (legendItems) => {
+    if (legendItems.length === 0) return null;
+    
     return (
       <div className="horizontal-timeline__legend">
         {legendItems.length > 0 && this.renderLegendRow(legendItems, 0)}
@@ -116,6 +118,8 @@ export default class HorizontalTimeline extends Component {
     const { visibleTimeStart, visibleTimeEnd, activeRange, width } = this.state;
     const chartWidth = width - 350;
     const graphWidthStyle = { width: `${chartWidth}px` };
+
+    if (items.length < 1) return null;
 
     return (
       <div className="horizontal-timeline" style={graphWidthStyle}>
@@ -165,7 +169,7 @@ export default class HorizontalTimeline extends Component {
 }
 
 HorizontalTimeline.propTypes = {
-  title: PropTypes.string,
+  title: PropTypes.string.isRequired,
   groups: PropTypes.arrayOf(groupProps).isRequired,
   items: PropTypes.arrayOf(itemProps).isRequired,
   legendItems: PropTypes.arrayOf(legendProps),
@@ -175,6 +179,15 @@ HorizontalTimeline.propTypes = {
 };
 
 HorizontalTimeline.defaultProps = {
+  legendItems: [],
+  rangeItems: [
+    { rangeText: '1mo', rangeNum: 1, rangeType: 'months', rangeFutureType: 'days' },
+    { rangeText: '3mo', rangeNum: 3, rangeType: 'months', rangeFutureType: 'days' },
+    { rangeText: '6mo', rangeNum: 6, rangeType: 'months', rangeFutureType: 'months' },
+    { rangeText: '1yr', rangeNum: 1, rangeType: 'year', rangeFutureType: 'months' },
+    { rangeText: '5yr', rangeNum: 5, rangeType: 'year', rangeFutureType: 'months' },
+    { rangeText: 'all' }
+  ],
   defaultRange: '1yr',
   stackItems: false
 };

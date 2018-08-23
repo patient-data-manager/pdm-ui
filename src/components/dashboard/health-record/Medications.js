@@ -52,17 +52,6 @@ export default class Medications extends Component {
     return filteredCurrentMedications;
   }
 
-  getRangeItems = () => {
-    return [
-      { rangeText: '1mo', rangeNum: 1, rangeType: 'months', rangeFutureType: 'days' },
-      { rangeText: '3mo', rangeNum: 3, rangeType: 'months', rangeFutureType: 'days' },
-      { rangeText: '6mo', rangeNum: 6, rangeType: 'months', rangeFutureType: 'months' },
-      { rangeText: '1yr', rangeNum: 1, rangeType: 'year', rangeFutureType: 'months' },
-      { rangeText: '5yr', rangeNum: 5, rangeType: 'year', rangeFutureType: 'months' },
-      { rangeText: 'all' }
-    ];
-  }
-
   getMedicationItems = () => {
     const { medicationRequests, medicationStatements } = this.props;
     const medications = medicationRequests.concat(medicationStatements);
@@ -135,8 +124,6 @@ export default class Medications extends Component {
             title="Medication history"
             groups={[{ 'id': 1, 'title': 'medication' }]}
             items={this.getMedicationItems()}
-            rangeItems={this.getRangeItems()}
-            defaultRange={'1yr'}
             stackItems={true} />
         </div>
 

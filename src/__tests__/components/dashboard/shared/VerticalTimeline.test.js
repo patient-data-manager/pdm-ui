@@ -1,6 +1,6 @@
 import { fullRenderComponent } from '../../../../utils/testHelpers';
 import VerticalTimeline from '../../../../components/dashboard/shared/VerticalTimeline';
-import * as mocks from '../../../../__mocks__/verticalListMocks';
+import * as mocks from '../../../../__mocks__/verticalTimelineMocks';
 
 function setup() {
   const props = {

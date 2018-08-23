@@ -38,17 +38,6 @@ export default class Summary extends Component {
     ];
   }
 
-  getRangeItems = () => {
-    return [
-      { rangeText: '1mo', rangeNum: 1, rangeType: 'months', rangeFutureType: 'days' },
-      { rangeText: '3mo', rangeNum: 3, rangeType: 'months', rangeFutureType: 'days' },
-      { rangeText: '6mo', rangeNum: 6, rangeType: 'months', rangeFutureType: 'months' },
-      { rangeText: '1yr', rangeNum: 1, rangeType: 'year', rangeFutureType: 'months' },
-      { rangeText: '5yr', rangeNum: 5, rangeType: 'year', rangeFutureType: 'months' },
-      { rangeText: 'all' }
-    ];
-  }
-
   getResourceItems = (resources, resourceType, group, displayField, dateField) => {
     if (!resources) return [];
 
@@ -149,9 +138,7 @@ export default class Summary extends Component {
             title="Timeline"
             groups={this.getSummaryGroups()}
             items={this.getSummaryItems()}
-            legendItems={this.getLegendItems()}
-            rangeItems={this.getRangeItems()}
-            defaultRange={'1yr'} />
+            legendItems={this.getLegendItems()} />
         </div>
       </div>
     );
