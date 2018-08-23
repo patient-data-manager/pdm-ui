@@ -10,10 +10,7 @@ function setup() {
     items: mocks.itemsMock,
     legendItems: mocks.legendItemsMock,
     rangeItems: mocks.rangeItemsMock,
-    defaultRange: '3mo',
-
-    // TO-DO: add these and how to test it
-    // stackItems: PropTypes.bool
+    defaultRange: '3mo'
   };
 
   return fullRenderComponent(HorizontalTimeline, props);
