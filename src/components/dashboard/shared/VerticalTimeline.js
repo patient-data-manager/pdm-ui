@@ -16,10 +16,19 @@ export default class VerticalTimeline extends Component {
   sortItems = memoize((items) => items.sort(((a, b) => moment(b.date) - moment(a.date))));
 
   handleViewMore = () => {
-    const { items, viewMoreCount } = this.props;
+    const { items, viewCount } = this.props;
     const { displayCount  } = this.state;
-    let newDisplayCount = displayCount + viewMoreCount;
+    let newDisplayCount = displayCount + viewCount;
     if (newDisplayCount > items.length) { newDisplayCount = items.length; }
+
+    this.setState({ displayCount: newDisplayCount });
+  }
+
+  handleViewLess = () => {
+    const { viewCount } = this.props;
+    const { displayCount  } = this.state;
+    let newDisplayCount = displayCount - viewCount;
+    if (newDisplayCount <= viewCount) { newDisplayCount = viewCount; }
 
     this.setState({ displayCount: newDisplayCount });
   }
@@ -28,8 +37,17 @@ export default class VerticalTimeline extends Component {
     return (
       <button className="vertical-timeline__view-more" onClick={this.handleViewMore}>
         <FontAwesomeIcon icon="ellipsis-h" className="icon-health-record" />
-
         <div className="vertical-timeline__view-more-text">View More</div>
+      </button>
+    );
+  }
+
+  renderViewLess = (showViewMore) => {
+    return (
+      <button className="vertical-timeline__view-less" onClick={this.handleViewLess}>
+        {showViewMore && <span className="view-less-slash">/</span>}
+        {!showViewMore && <FontAwesomeIcon icon="ellipsis-h" className="icon-health-record" />}
+        <div className="vertical-timeline__view-less-text">View Less</div>
       </button>
     );
   }
@@ -51,14 +69,18 @@ export default class VerticalTimeline extends Component {
   }
 
   render() {
-    const { items } = this.props;
+    const { items, viewCount } = this.props;
     const { displayCount } = this.state;
     const sortedItems = this.sortItems(items);
 
     return (
       <div className="vertical-timeline">
         {sortedItems.slice(0, displayCount).map((item, index) => this.renderItem(item, index))}
-        {(sortedItems.length > displayCount) && this.renderViewMore()}
+
+        <p className="vertical-timeline__view-more-less">
+          {(sortedItems.length > displayCount) && this.renderViewMore()}
+          {(displayCount > viewCount) && this.renderViewLess(sortedItems.length > displayCount)}
+        </p>
       </div>
     );
   }
@@ -68,11 +90,11 @@ VerticalTimeline.propTypes = {
   items: PropTypes.array.isRequired,
   icon: PropTypes.string,
   initialDisplayCount: PropTypes.number,
-  viewMoreCount: PropTypes.number
+  viewCount: PropTypes.number
 };
 
 VerticalTimeline.defaultProps = {
   icon: 'circle',
   initialDisplayCount: 3, // number to initially display
-  viewMoreCount: 3        // additional number to display when view more selected
+  viewCount: 3            // +/- number to display when view more or less is selected
 };
