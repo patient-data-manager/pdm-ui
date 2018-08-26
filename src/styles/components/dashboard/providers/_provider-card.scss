@@ -17,6 +17,10 @@
     &-icon {
       align-self: center;
       padding-right: 10px;
+      
+      &:hover {
+        cursor: pointer;
+      }
     }
   }
 }
