@@ -1,0 +1,22 @@
+.provider-card {
+  &__titlebar {
+    display: flex;
+    flex-direction: row;
+    justify-content: space-between;
+    height: 40px;
+    color: $color-gray-darker;
+    background-color: $color-gray-lightest;
+    margin-bottom: 5px;
+
+    &-name {
+      align-self: center;
+      font-weight: bold;
+      padding-left: 15px;
+    }
+    
+    &-icon {
+      align-self: center;
+      padding-right: 10px;
+    }
+  }
+}
