@@ -18,9 +18,13 @@
       align-self: center;
       padding-right: 10px;
       
-      &:hover {
+      & svg:hover {
         cursor: pointer;
       }
     }
+  }
+
+  &__details {
+    margin: 20px 30px 40px;
   }
 }

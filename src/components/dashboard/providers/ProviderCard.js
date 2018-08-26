@@ -6,9 +6,7 @@ export default class ProfileCard extends Component {
   constructor(props) {
     super(props);
 
-    this.state = {
-      detailsExpanded: false
-    };
+    this.state = { detailsExpanded: false };
   }
 
   toggleDetails = () => {
@@ -23,6 +21,16 @@ export default class ProfileCard extends Component {
     }
   }
 
+  renderDetails = () => {
+    if (!this.state.detailsExpanded) return null;
+
+    return (
+      <div className="provider-card__details"> 
+        insert details here
+      </div>
+    );
+  }
+
   render() {
     return ( 
       <div className="provider-card">
@@ -34,7 +42,7 @@ export default class ProfileCard extends Component {
             {this.renderCollapseExpandIcon()}
           </div>
         </div>
-        <div className="provider-card__details"></div>
+        {this.renderDetails()}
       </div>
     );
   }
