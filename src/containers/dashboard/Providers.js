@@ -5,31 +5,34 @@ import { bindActionCreators } from 'redux';
 
 import { linkProvider, loadProviders, loadProfileProviders } from '../../actions/providers';
 
+import ProviderCard from '../../components/dashboard/providers/ProviderCard';
+
 export class Providers extends Component {
   componentDidMount() {
     this.props.loadProviders();
     this.props.loadProfileProviders(this.props.profile.id);
   }
 
-  renderProvider = (provider) => {
-    if (!provider || !this.props.profile) return;
-    const profileId = this.props.profile.id;
-
-    return (
-      <div className="provider" key={provider.id}>
-        <button
-          className="button button-secondary"
-          onClick={() => this.props.linkProvider(provider.id, profileId)}>
-          {provider.name}
-        </button>
-      </div>
-    );
+  renderProvidersList = () => {
+    if (this.props.providers.length === 0) return <div className="providers no-entries">No providers.</div>;
+    
+    return this.props.providers.map((provider) => {
+      return (
+        <ProviderCard
+          key={provider.id}
+          provider={provider}
+        />
+      );
+    });
   }
 
   render() {
     return (
       <div className="providers">
-        {this.props.providers.map(provider => this.renderProvider(provider))}
+        {/* TO-DO: insert search bar here */}
+        <div className="providers-list">
+          {this.renderProvidersList()}
+        </div>
       </div>
     );
   }
