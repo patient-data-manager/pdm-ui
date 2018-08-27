@@ -47,10 +47,10 @@ it('groups and displays lab values as graphs', () => {
   expect(component.find('div.recharts-wrapper')).toHaveLength(2);
   expect(component.find('div.line-graph').at(0)
     .find('div.line-graph__header').find('h5').text())
-    .toEqual('White blood cell count (procedure)(mL)');
+    .toEqual('White blood cell count (procedure) (mL)');
   expect(component.find('div.line-graph').at(1)
     .find('div.line-graph__header').find('h5').text())
-    .toEqual('Demo Test(mL)');
+    .toEqual('Demo Test (mL)');
 });
 
 it('groups labs correctly', () => {
@@ -61,10 +61,10 @@ it('groups labs correctly', () => {
   expect(grouped['767002'].values).toHaveLength(3);
   expect(grouped['252275004'].values).toHaveLength(1);
   expect(grouped['396550006'].values).toHaveLength(1);
-  expect(grouped['767003'].title).toEqual('Demo Test(mL)');
-  expect(grouped['767002'].title).toEqual('White blood cell count (procedure)(mL)');
-  expect(grouped['252275004'].title).toEqual('Hematology test (procedure)(mL)');
-  expect(grouped['396550006'].title).toEqual('Blood Test (procedure)(L)');
+  expect(grouped['767003'].title).toEqual('Demo Test (mL)');
+  expect(grouped['767002'].title).toEqual('White blood cell count (procedure) (mL)');
+  expect(grouped['252275004'].title).toEqual('Hematology test (procedure) (mL)');
+  expect(grouped['396550006'].title).toEqual('Blood Test (procedure) (L)');
 });
 
 it('displays no entries message if no lab entries are present', () => {
