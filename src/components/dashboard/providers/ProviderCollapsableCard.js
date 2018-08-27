@@ -1,17 +1,27 @@
 import React, { Component } from 'react';
 import PropTypes from 'prop-types';
 import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
+import FormControlLabel from '@material-ui/core/FormControlLabel';
+import Radio from '@material-ui/core/Radio';
 
-export default class ProfileCard extends Component {
+export default class ProviderCollapsableCard extends Component {
   constructor(props) {
     super(props);
 
-    this.state = { detailsExpanded: false };
+    const state = { 
+      detailsExpanded: false,
+      healthRecordAccess: 'none'
+    };
+    this.state = state;
   }
 
   toggleDetails = () => {
     this.setState({ detailsExpanded: !this.state.detailsExpanded });
   }
+
+  // handleAccessChange = (value) => {
+  //   this.setState({ healthRecordAccess: value });
+  // };
 
   renderCollapseExpandIcon = () => {
     if (this.state.detailsExpanded) {
@@ -19,6 +29,24 @@ export default class ProfileCard extends Component {
     } else {
       return <FontAwesomeIcon icon="chevron-right" onClick={this.toggleDetails} />;
     }
+  }
+
+  renderRadioButton = (value) => {
+    return (
+      <FormControlLabel
+        className="access-radio"
+        control={
+          <Radio
+            checked={this.state.healthRecordAccess === value}
+            // onChange={this.handleAccessChange(value)}
+            value={value}
+            name="access"
+            aria-label={value}
+          />
+        }
+        label={value}
+      />
+    );
   }
 
   renderDetails = () => {
@@ -44,11 +72,20 @@ export default class ProfileCard extends Component {
             </div>
           </div>
           <div className="details-logo">
+            {/* to-do: insert logo logic */}
             insert logo here
           </div>
         </div>
         <div className="details-permissions">
-          insert permissions here
+          <div className="permissions-title">Permissions</div>
+          <div className="permissions-content">
+            <div className="permissions-content__label">Health Record Access</div>
+            <div className="permissions-content__form-group access-group">
+              {this.renderRadioButton('none')}
+              {this.renderRadioButton('full')}
+              {this.renderRadioButton('custom')}
+            </div>
+          </div>
         </div>
       </div>
     );
@@ -71,6 +108,6 @@ export default class ProfileCard extends Component {
   }
 }
 
-ProfileCard.propTypes = {
+ProviderCollapsableCard.propTypes = {
   provider: PropTypes.object.isRequired,
 };

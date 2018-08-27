@@ -26,11 +26,13 @@
 
   &__details {
     margin: 20px 30px 40px;
+    color: $color-gray-darker;
 
     .details-dates-logo {
       display: flex;
       flex-direction: row;
       justify-content: space-between;
+      margin-bottom: 15px;
 
       .details-dates {
         display: flex;
@@ -43,7 +45,6 @@
 
           .date-key {
             flex-basis: 115px;
-            color: $color-gray-darker;
             font-weight: bold;
           }
 
@@ -55,6 +56,32 @@
             flex-basis: 75px;
             color: $color-blue;
             font-weight: bold;
+          }
+        }
+      }
+    }
+
+    .details-permissions {
+      .permissions-title {
+        font-weight: 600;
+        font-style: italic;
+        width: 100%;
+        border-bottom: 2px solid $color-gray-lightest;
+      }
+
+      .permissions-content {
+        display: flex;
+        flex-direction: row;
+        justify-content: space-between;
+
+        &__label {
+          align-self: center;
+          margin-top: -8px;
+        }
+
+        &__form-group {
+          .access-radio > span {
+            color: $color-gray-dark;
           }
         }
       }

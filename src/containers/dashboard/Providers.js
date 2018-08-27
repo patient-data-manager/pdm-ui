@@ -5,7 +5,7 @@ import { bindActionCreators } from 'redux';
 
 import { linkProvider, loadProviders, loadProfileProviders } from '../../actions/providers';
 
-import ProviderCard from '../../components/dashboard/providers/ProviderCard';
+import ProviderCollapsableCard from '../../components/dashboard/providers/ProviderCollapsableCard';
 
 export class Providers extends Component {
   componentDidMount() {
@@ -18,7 +18,7 @@ export class Providers extends Component {
     
     return this.props.providers.map((provider) => {
       return (
-        <ProviderCard
+        <ProviderCollapsableCard
           key={provider.id}
           provider={provider}
         />
