@@ -62,7 +62,7 @@ export default class Labs extends Component {
           group['referenceRanges'] = rr.map(function(r) { return { high: r.high, low: r.low, assessment: r.text }; });
         }
         if (value.unit && !group.unit) {
-          group.title += `(${value.unit})`;
+          group.title += ` (${value.unit})`;
           group.unit = value.unit;
         }
         group.values.push({ value: value.value, date: lab.effectiveDateTime });

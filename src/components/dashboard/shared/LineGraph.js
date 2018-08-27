@@ -11,7 +11,6 @@ import CustomGraphTooltip from './CustomGraphTooltip';
 export default class LineGraph extends Component {
   constructor(props) {
     super(props);
-
     this.state = { width: 600 };
   }
 
@@ -49,7 +48,7 @@ export default class LineGraph extends Component {
 
   getMostRecentValue = (orderedData) => {
     const lastIndex = orderedData.length - 1;
-    return orderedData[lastIndex].value;
+    return this.toFixed(orderedData[lastIndex].value);
   }
 
   getMinMax = (data, key) => {
