@@ -76,7 +76,7 @@ const labMockF = {
       display: 'Demo Test',
       system: 'http://snomed.info/sct'
     }],
-    text: 'White blood cell count (procedure)'
+    text: 'Demo Test'
   },
   id: '7b3c17a0-6e53-0136-7848-4a00016726c0',
   valueQuantity: { value: '5', unit: 'mL' }
@@ -90,7 +90,7 @@ const labMockG = {
       display: 'Demo Test',
       system: 'http://snomed.info/sct'
     }],
-    text: 'White blood cell count (procedure)'
+    text: 'Demo Test'
   },
   id: '7b3c17a0-6e53-0136-7848-4a00016726c0',
   valueQuantity: { value: '5', unit: 'mL' }
@@ -104,7 +104,7 @@ const labMockH = {
       display: 'Demo Test',
       system: 'http://snomed.info/sct'
     }],
-    text: 'White blood cell count (procedure)'
+    text: 'Demo Test'
   },
   id: '7b3c17a0-6e53-0136-7848-4a00016726c0',
   valueQuantity: { value: '5', unit: 'mL' }
