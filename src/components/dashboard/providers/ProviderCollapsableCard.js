@@ -9,7 +9,7 @@ export default class ProviderCollapsableCard extends Component {
     super(props);
 
     const state = { 
-      detailsExpanded: false,
+      detailsExpanded: true, // CHANGE THIS BACK BEFORE PR
       healthRecordAccess: 'none'
     };
     this.state = state;
@@ -19,9 +19,9 @@ export default class ProviderCollapsableCard extends Component {
     this.setState({ detailsExpanded: !this.state.detailsExpanded });
   }
 
-  // handleAccessChange = (value) => {
-  //   this.setState({ healthRecordAccess: value });
-  // };
+  handleAccessChange = (event) => {
+    this.setState({ healthRecordAccess: event.target.value });
+  };
 
   renderCollapseExpandIcon = () => {
     if (this.state.detailsExpanded) {
@@ -38,7 +38,7 @@ export default class ProviderCollapsableCard extends Component {
         control={
           <Radio
             checked={this.state.healthRecordAccess === value}
-            // onChange={this.handleAccessChange(value)}
+            onChange={this.handleAccessChange}
             value={value}
             name="access"
             aria-label={value}
