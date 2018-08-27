@@ -25,8 +25,31 @@ export default class ProfileCard extends Component {
     if (!this.state.detailsExpanded) return null;
 
     return (
-      <div className="provider-card__details"> 
-        insert details here
+      <div className="provider-card__details">
+        <div className="details-dates-logo">
+          <div className="details-dates">
+            <div className="details-dates-added-on">
+              <div className="date-key">Added on</div>
+              {/* to-do: get date */}
+              <div className="date-value">insert date here</div>
+              {/* to-do: insert logic for this */}
+              <div className="date-verified">
+                <FontAwesomeIcon icon="check" /> verified
+              </div>
+            </div>          
+            <div className="details-dates-last-updated">
+              <div className="date-key">Last updated</div>
+              {/* to-do: get date */}
+              <div className="date-value">insert date here</div>
+            </div>
+          </div>
+          <div className="details-logo">
+            insert logo here
+          </div>
+        </div>
+        <div className="details-permissions">
+          insert permissions here
+        </div>
       </div>
     );
   }

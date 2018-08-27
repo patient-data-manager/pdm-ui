@@ -26,5 +26,38 @@
 
   &__details {
     margin: 20px 30px 40px;
+
+    .details-dates-logo {
+      display: flex;
+      flex-direction: row;
+      justify-content: space-between;
+
+      .details-dates {
+        display: flex;
+        flex-direction: column;
+        flex-basis: 50%;
+
+        &-added-on, &-last-updated {
+          display: flex;
+          flex-direction: row;
+
+          .date-key {
+            flex-basis: 115px;
+            color: $color-gray-darker;
+            font-weight: bold;
+          }
+
+          .date-value {
+            flex-basis: 130px;
+          }
+
+          .date-verified {
+            flex-basis: 75px;
+            color: $color-blue;
+            font-weight: bold;
+          }
+        }
+      }
+    }
   }
 }
