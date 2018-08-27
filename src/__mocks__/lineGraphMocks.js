@@ -40,13 +40,13 @@ const referenceRangesMock = [
     assessment: 'high'
   },
   {
-    low: 100,
+    low: 105,
     high: 450,
     assessment: 'average'
   },
   {
     low: 0,
-    high: 100,
+    high: 105,
     assessment: 'low'
   }
 ];

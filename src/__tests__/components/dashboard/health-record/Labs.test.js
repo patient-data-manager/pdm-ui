@@ -5,7 +5,8 @@ import * as mocks from '../../../../__mocks__/labMocks';
 
 function setup() {
   const props = {
-    labs: [mocks.labMockA, mocks.labMockB, mocks.labMockC, mocks.labMockD]
+    labs: [mocks.labMockA, mocks.labMockB, mocks.labMockC, mocks.labMockD,
+      mocks.labMockE, mocks.labMockF, mocks.labMockG, mocks.labMockH]
   };
   return fullRenderComponent(Labs, props);
 }
@@ -33,9 +34,14 @@ it('view more button works correctly', () => {
   expect(component.find('div.vertical-timeline__item')).toHaveLength(3);
   expect(component.find('button.vertical-timeline__view-more')).toExist();
   component.find('button.vertical-timeline__view-more').simulate('click');
-  expect(component.find('div.vertical-timeline__item')).toHaveLength(4);
+  expect(component.find('div.vertical-timeline__item')).toHaveLength(6);
   expect(component.find('div.vertical-timeline__item-info').at(3)
     .find('.info-description').text()).toEqual('White blood cell count (procedure) 5 mL');
+});
+
+it('groups and displays lab values as graphs', () => {
+
+
 });
 
 it('displays no entries message if no lab entries are present', () => {

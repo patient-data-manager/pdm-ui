@@ -39,10 +39,17 @@ export default class LineGraph extends Component {
     return processedData;
   }
 
+  toFixed(value) {
+    if (value && !Number.isInteger(value) && value.toFixed) {
+      return value.toFixed(2);
+    } else {
+      return value;
+    }
+  }
+
   getMostRecentValue = (orderedData) => {
     const lastIndex = orderedData.length - 1;
-    return Number.isInteger(orderedData[lastIndex].value) ?
-      orderedData[lastIndex].value : orderedData[lastIndex].value.toFixed(2);
+    return orderedData[lastIndex].value;
   }
 
   getMinMax = (data, key) => {
