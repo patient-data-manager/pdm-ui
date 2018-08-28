@@ -45,3 +45,18 @@ export function loadHealthRecord(id) {
       .catch(error => dispatch(loadHealthRecordFailure(error)));
   };
 }
+
+// ------------------------- RECEIVE HEALTH RECORD VIA PUSH ---------------------------- //
+
+function pushedHealthRecord() {
+  return {
+    type: types.RECEIVE_HEALTH_RECORD_PUSH_REQUEST
+  };
+}
+
+export function receiveHealthRecord(data) {
+  return (dispatch) => {
+    dispatch(pushedHealthRecord(data));
+    dispatch(loadHealthRecordSuccess(data));
+  };
+}

@@ -4,8 +4,10 @@ import { Provider } from 'react-redux';
 import { BrowserRouter as Router, Route, Switch } from 'react-router-dom';
 import { MuiThemeProvider, createMuiTheme } from 'material-ui/styles';
 
+
 import PrivateRoute from './PrivateRoute';
 import Landing from './Landing';
+import TokenActionCableProvider from './TokenActionCableProvider';
 import Login from './auth/Login';
 import Register from './auth/Register';
 import Dashboard from './dashboard/Dashboard';
@@ -34,6 +36,8 @@ const THEME = createMuiTheme({
   shape: {}
 });
 
+const websocketURL = process.env.REACT_APP_WEBSOCKET_URL || 'ws://127.0.0.1:3000/cable';
+
 const Root = ({ store }) => {
   return (
     <MuiThemeProvider theme={THEME}>
@@ -46,15 +50,17 @@ const Root = ({ store }) => {
 
             <PrivateRoute path="/oauth" component={OAuth} />
             <PrivateRoute path="/dashboard">
-              <Dashboard>
-                <Switch>
-                  <PrivateRoute path="/dashboard/profiles" component={Profiles} />
-                  <PrivateRoute path="/dashboard/health-record" component={HealthRecord}/>
-                  <PrivateRoute path="/dashboard/alerts" component={Alerts} />
-                  <PrivateRoute path="/dashboard/providers" component={Providers} />
-                  <Route component={NoMatch} />
-                </Switch>
-              </Dashboard>
+              <TokenActionCableProvider url={websocketURL}>
+                <Dashboard>
+                  <Switch>
+                    <PrivateRoute path="/dashboard/profiles" component={Profiles} />
+                    <PrivateRoute path="/dashboard/health-record" component={HealthRecord}/>
+                    <PrivateRoute path="/dashboard/alerts" component={Alerts} />
+                    <PrivateRoute path="/dashboard/providers" component={Providers} />
+                    <Route component={NoMatch} />
+                  </Switch>
+                </Dashboard>
+              </TokenActionCableProvider>
             </PrivateRoute>
 
             <Route component={NoMatch} />

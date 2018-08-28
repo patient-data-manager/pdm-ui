@@ -1,8 +1,10 @@
 import React, { Component } from 'react';
 import PropTypes from 'prop-types';
 import { connect } from 'react-redux';
+import { bindActionCreators } from 'redux';
 import tocbot from 'tocbot';
 import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
+import { ActionCable } from 'react-actioncable-provider';
 import Allergies from '../../components/dashboard/health-record/Allergies';
 import Conditions from '../../components/dashboard/health-record/Conditions';
 import Immunizations from '../../components/dashboard/health-record/Immunizations';
@@ -11,6 +13,8 @@ import Medications from '../../components/dashboard/health-record/Medications';
 import Procedures from '../../components/dashboard/health-record/Procedures';
 import Summary from '../../components/dashboard/health-record/Summary';
 import Vitals from '../../components/dashboard/health-record/Vitals';
+
+import { receiveHealthRecord } from '../../actions/healthRecords';
 
 export class HealthRecord extends Component {
   tocbotInitialized = false;
@@ -59,6 +63,10 @@ export class HealthRecord extends Component {
     });
   }
 
+  handleReceivedData = (data) => {
+    this.props.receiveHealthRecord(data);
+  }
+
   renderSection = (header, SectionComponent, props) => {
     return (
       <div className="health-record__section" key={header}>
@@ -66,7 +74,6 @@ export class HealthRecord extends Component {
           <h4 id={header}>{header}</h4>
           <div className="header-divider"></div>
         </div>
-
         <SectionComponent {...props} />
       </div>
     );
@@ -99,7 +106,12 @@ export class HealthRecord extends Component {
     return (
       <div className="health-record">
         <div className="health-record__toc"></div>
-
+        { this.context.cable &&
+          // only render if this component is wrapped in an ActionCableProvider
+          <ActionCable
+            channel={{ channel: 'UpdateChannel', profile_id: profile.id }}
+            onReceived={this.handleReceivedData}
+          /> }
         <div className="health-record__content">
           {sections.map((section) => {
             return this.renderSection(section.header, section.component, section.props);
@@ -114,12 +126,23 @@ HealthRecord.propTypes = {
   profile: PropTypes.object,
   healthRecord: PropTypes.object,
   loadingProfile: PropTypes.bool.isRequired,
-  loadingHealthRecord: PropTypes.bool.isRequired
+  loadingHealthRecord: PropTypes.bool.isRequired,
+  receiveHealthRecord: PropTypes.func.isRequired
+};
+
+HealthRecord.contextTypes = {
+  cable: PropTypes.object
 };
 
 HealthRecord.defaultProps = {
   healthRecord: {}
 };
+
+function mapDispatchToProps(dispatch) {
+  return bindActionCreators({
+    receiveHealthRecord
+  }, dispatch);
+}
 
 function mapStateToProps(state) {
   return {
@@ -130,4 +153,4 @@ function mapStateToProps(state) {
   };
 }
 
-export default connect(mapStateToProps)(HealthRecord);
+export default connect(mapStateToProps, mapDispatchToProps)(HealthRecord);

@@ -54,6 +54,7 @@
     "rc-calendar": "^9.0.4",
     "rc-tooltip": "^3.4.8",
     "react": "16.4.1",
+    "react-actioncable-provider": "^1.0.3",
     "react-autosuggest": "9.3.2",
     "react-bootstrap": "^0.32.1",
     "react-calendar-timeline": "0.15.2",

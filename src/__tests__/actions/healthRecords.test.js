@@ -31,5 +31,16 @@ describe('health records actions', () => {
         expect(store.getActions()).toEqual(expectedActions);
       });
     });
+
+    it('should create LOAD_HEALTH_RECORD_SUCCESS after successfully receiving a health record push', () => {
+      const store = mockStore({ healthRecord: {}, auth: { accessToken: 'abc' } });
+      const expectedActions = [
+        { type: types.RECEIVE_HEALTH_RECORD_PUSH_REQUEST },
+        { type: types.LOAD_HEALTH_RECORD_SUCCESS, healthRecord: mockHealthRecord }
+      ];
+
+      store.dispatch(actions.receiveHealthRecord(mockHealthRecord));
+      expect(store.getActions()).toEqual(expectedActions);
+    });
   });
 });
