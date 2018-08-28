@@ -46,7 +46,7 @@ export function loadHealthRecord(id) {
   };
 }
 
-// ------------------------- RECEIEVE HEALTH RECORD VIA PUSH ---------------------------- //
+// ------------------------- RECEIVE HEALTH RECORD VIA PUSH ---------------------------- //
 
 function pushedHealthRecord() {
   return {
@@ -55,7 +55,7 @@ function pushedHealthRecord() {
 }
 
 export function receiveHealthRecord(data) {
-  return (dispatch, getState) => {
+  return (dispatch) => {
     dispatch(pushedHealthRecord(data));
     dispatch(loadHealthRecordSuccess(data));
   };
