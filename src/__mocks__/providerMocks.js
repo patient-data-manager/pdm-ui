@@ -1,6 +1,6 @@
 const providerMockA = {
   id: 1,
-  name: 'Fitbit',
+  name: 'FitBit',
 };
 
 const providerMockB = {
@@ -13,8 +13,14 @@ const providerMockC = {
   name: 'Partners Health Care',
 };
 
+const providerMockD = {
+  id: 4,
+  name: 'Blue Cross Blue Shield',
+};
+
 export {
   providerMockA,
   providerMockB,
-  providerMockC
+  providerMockC,
+  providerMockD
 };

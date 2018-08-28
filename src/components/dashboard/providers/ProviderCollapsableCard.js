@@ -9,7 +9,7 @@ export default class ProviderCollapsableCard extends Component {
     super(props);
 
     const state = { 
-      detailsExpanded: true, // CHANGE THIS BACK BEFORE PR
+      detailsExpanded: false,
       healthRecordAccess: 'none'
     };
     this.state = state;
@@ -98,7 +98,7 @@ export default class ProviderCollapsableCard extends Component {
   render() {
     return ( 
       <div className="provider-card">
-        <div className="provider-card__titlebar" role="button">
+        <div className="provider-card__titlebar">
           <div className="provider-card__titlebar-name">
             {this.props.provider.name}
           </div>
