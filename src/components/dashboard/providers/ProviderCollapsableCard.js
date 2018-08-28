@@ -21,6 +21,7 @@ export default class ProviderCollapsableCard extends Component {
 
   handleAccessChange = (event) => {
     this.setState({ healthRecordAccess: event.target.value });
+    // TO-DO: change access levels in DB not just state
   };
 
   renderCollapseExpandIcon = () => {
@@ -29,6 +30,16 @@ export default class ProviderCollapsableCard extends Component {
     } else {
       return <FontAwesomeIcon icon="chevron-right" onClick={this.toggleDetails} />;
     }
+  }
+
+  renderLogo = () => {
+    if (!this.props.imageUrl) return null;
+
+    return (
+      <div className="details-logo">
+        <img className="details-logo__img" src={this.props.imageUrl} alt="" />
+      </div>
+    );
   }
 
   renderRadioButton = (value) => {
@@ -71,10 +82,7 @@ export default class ProviderCollapsableCard extends Component {
               <div className="date-value">insert date here</div>
             </div>
           </div>
-          <div className="details-logo">
-            {/* to-do: insert logo logic */}
-            insert logo here
-          </div>
+          {this.renderLogo()}
         </div>
         <div className="details-permissions">
           <div className="permissions-title">Permissions</div>
@@ -110,4 +118,5 @@ export default class ProviderCollapsableCard extends Component {
 
 ProviderCollapsableCard.propTypes = {
   provider: PropTypes.object.isRequired,
+  imageUrl: PropTypes.string
 };

@@ -13,6 +13,24 @@ export class Providers extends Component {
     this.props.loadProfileProviders(this.props.profile.id);
   }
 
+  getProviders = () => {
+    return [
+      { 'name': 'Partners Health Care', 'imageUrl': '/assets/images/provider-logos/partners-healthcare.png' },
+      { 'name': 'Brigham and Womens', 'imageUrl': '/assets/images/provider-logos/brigham-and-womens.png' },
+      { 'name': 'FitBit', 'imageUrl': '/assets/images/provider-logos/fitbit.png' },
+      { 'name': 'smart_sandbox', 'imageUrl': '/assets/images/provider-logos/smart-sandbox.png' },
+    ];
+  }
+
+  getImageUrl = (providerName) => {
+    const providers = this.getProviders();
+    const matchingProvider = providers.filter((provider) => providerName === provider.name);
+    if (matchingProvider.length > 0) {
+      return matchingProvider[0].imageUrl;
+    }
+    return null;
+  }
+
   renderProvidersList = () => {
     if (this.props.providers.length === 0) return <div className="providers no-entries">No providers.</div>;
     
@@ -21,6 +39,7 @@ export class Providers extends Component {
         <ProviderCollapsableCard
           key={provider.id}
           provider={provider}
+          imageUrl={this.getImageUrl(provider.name)}
         />
       );
     });
