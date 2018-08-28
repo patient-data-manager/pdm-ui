@@ -1,6 +1,7 @@
 import React, { Component } from 'react';
 import PropTypes from 'prop-types';
 import moment from 'moment';
+import toFixed from '../../../utils/roundNumber';
 
 export default class CustomGraphTooltip extends Component {
   render() {
@@ -16,7 +17,7 @@ export default class CustomGraphTooltip extends Component {
           </div>
 
           <div className="custom-graph-tooltip__field">
-            <b>{title}:</b> {details.value} {unit}
+            <b>{title}:</b> {toFixed(details.value)} {unit}
           </div>
         </div>
       );
