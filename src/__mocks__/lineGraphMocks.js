@@ -45,7 +45,7 @@ const referenceRangesMock = [
     assessment: 'average'
   },
   {
-    low: 0,
+    low: 'min',
     high: 105,
     assessment: 'low'
   }

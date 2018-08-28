@@ -65,14 +65,30 @@ export default class LineGraph extends Component {
     return moment(dateString).format(`MMM 'YY`);
   }
 
-  renderReferenceRange(y1, y2, yMax, color, key) {
-    if (y2 === 'max') {
+  renderReferenceRange(y1, y2, yMin, yMax, color, key) {
+    if (y2 === 'max' && y1 === 'min') {
+      // Draw refence area using yMin and yMax
+      return (
+        <ReferenceArea key={key} y1={yMin} y2={yMax} fill={color} fillOpacity="0.1" alwaysShow/>
+      );
+    } else if (y2 === 'max' && y1 !== 'min') {
       // If reference area has no upper limit, draw it only if patient data would be captured by it
       if (yMax > y1) {
         // Draw refence area large enough to capture max data element if it's greater than the y1
         // (bottom of reference area)
         return (
           <ReferenceArea key={key} y1={y1} y2={yMax} fill={color} fillOpacity="0.1" alwaysShow/>
+        );
+      } else {
+        // Else  draw nothing -- no relevant values would be captured by that rectangle
+      }
+    } else if (y2 !== 'max' && y1 === 'min') {
+      // If reference area has no lower limit, draw it only if patient data would be captured by it
+      if (yMin < y2) {
+        // Draw refence area large enough to capture min data element if it's less than the y2
+        // (bottom of reference area)
+        return (
+          <ReferenceArea key={key} y1={yMin} y2={y2} fill={color} fillOpacity="0.1" alwaysShow/>
         );
       } else {
         // Else  draw nothing -- no relevant values would be captured by that rectangle
@@ -85,7 +101,7 @@ export default class LineGraph extends Component {
     }
   }
 
-  renderReferenceRanges(yMax) {
+  renderReferenceRanges(yMin, yMax) {
     const { referenceRanges } = this.props;
     const colors = { low: '#eddadf', average: '#e7eaee', high: '#d08c9f' };
 
@@ -101,16 +117,14 @@ export default class LineGraph extends Component {
       });
 
       renderedRanges = ranges.map((range, i) => {
-        return this.renderReferenceRange(range.y1, range.y2, yMax, range.color, i);
+        return this.renderReferenceRange(range.y1, range.y2, yMin, yMax, range.color, i);
       });
     } else {
-      renderedRanges = [this.renderReferenceRange(0, yMax, yMax, '#e7eaee', '0')];
+      renderedRanges = [this.renderReferenceRange('min', 'max', yMin, yMax, '#e7eaee', 0)];
     }
 
     return renderedRanges;
   }
-
-
 
   render() {
     const { title, data, unit, minPoints } = this.props;
@@ -119,10 +133,12 @@ export default class LineGraph extends Component {
     const sortedData = this.sortDataByDate(data);
     const processedData = this.processData(sortedData);
     const [xMin, xMax] = this.getMinMax(sortedData, 'date');
-    const [, maxValue] = this.getMinMax(sortedData, 'value');
+    const [yMinValue, yMaxValue] = this.getMinMax(sortedData, 'value');
     const chartWidth = this.state.width - 350;
     const graphWidthStyle = { width: `${chartWidth}px` };
-    const yMax = Math.ceil(maxValue+(maxValue*.2));
+    const yMax = Math.ceil(yMaxValue + (yMaxValue * .1));
+    const yMin = Math.floor(yMinValue - (yMinValue * .1));
+
     return (
       <div className="line-graph"
         ref={(graphParentDiv) => { this.graphParentDiv = graphParentDiv; }}>
@@ -135,14 +151,14 @@ export default class LineGraph extends Component {
         </div>
 
         <LineChart data={processedData} height={200} width={chartWidth}>
-          {this.renderReferenceRanges(yMax)}
+          {this.renderReferenceRanges(yMin, yMax)}
           <XAxis
             dataKey="date"
             type="number"
             domain={[xMin, xMax]}
             ticks={this.getTicks([xMin, xMax], 4)}
             tickFormatter={this.formatDate} />
-          <YAxis dataKey="value" type="number" domain={[0, yMax]} />
+          <YAxis dataKey="value" type="number" domain={[yMin, yMax]} />
           <Line type="monotone" dataKey="value" stroke="#4a4a4a" />
           <Tooltip content={<CustomGraphTooltip title={title} unit={unit} />} />
         </LineChart>

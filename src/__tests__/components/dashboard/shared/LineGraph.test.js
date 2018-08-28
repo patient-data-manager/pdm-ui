@@ -58,9 +58,13 @@ it('displays the graph correctly', () => {
   expect(component.find('svg.recharts-surface').prop('width')).toEqual(674);
   expect(component.find('g.recharts-layer')).toExist();
   expect(component.find('div.recharts-tooltip-wrapper')).toExist();
+});
+
+it('displays axis correctly', () => {
+  const component = setup();
 
   expect(component.find('g.recharts-xAxis').find('text.recharts-cartesian-axis-tick-value')).toHaveLength(4);
-  expect(component.find('g.recharts-yAxis').find('text.recharts-cartesian-axis-tick-value')).toHaveLength(5);
+  expect(component.find('g.recharts-yAxis').find('text.recharts-cartesian-axis-tick-value')).toHaveLength(4);
   expect(component.find('g.recharts-xAxis')
     .find('text.recharts-cartesian-axis-tick-value').at(0).text()).toEqual(`Jan '80`);
   expect(component.find('g.recharts-xAxis')
@@ -70,13 +74,13 @@ it('displays the graph correctly', () => {
   expect(component.find('g.recharts-xAxis')
     .find('text.recharts-cartesian-axis-tick-value').at(3).text()).toEqual(`Jan '10`);
   expect(component.find('g.recharts-yAxis')
-    .find('text.recharts-cartesian-axis-tick-value').at(0).text()).toEqual('0');
+    .find('text.recharts-cartesian-axis-tick-value').at(0).text()).toEqual('45');
   expect(component.find('g.recharts-yAxis')
-    .find('text.recharts-cartesian-axis-tick-value').at(1).text()).toEqual('150');
+    .find('text.recharts-cartesian-axis-tick-value').at(1).text()).toEqual('195');
   expect(component.find('g.recharts-yAxis')
-    .find('text.recharts-cartesian-axis-tick-value').at(2).text()).toEqual('300');
+    .find('text.recharts-cartesian-axis-tick-value').at(2).text()).toEqual('345');
   expect(component.find('g.recharts-yAxis')
-    .find('text.recharts-cartesian-axis-tick-value').at(3).text()).toEqual('450');
+    .find('text.recharts-cartesian-axis-tick-value').at(3).text()).toEqual('550');
 });
 
 it('displays reference ranges correctly', () => {
@@ -86,9 +90,9 @@ it('displays reference ranges correctly', () => {
   expect(component.find('g.recharts-reference-area').at(0).find('path').prop('fill')).toEqual('#d08c9f');
   expect(component.find('g.recharts-reference-area').at(1).find('path').prop('fill')).toEqual('#e7eaee');
   expect(component.find('g.recharts-reference-area').at(2).find('path').prop('fill')).toEqual('#eddadf');
-  expect(component.find('g.recharts-reference-area').at(0).find('path').prop('height')).toEqual(40);
-  expect(component.find('g.recharts-reference-area').at(1).find('path').prop('height')).toEqual(92);
-  expect(component.find('g.recharts-reference-area').at(2).find('path').prop('height')).toEqual(28);
+  expect(component.find('g.recharts-reference-area').at(0).find('path').prop('height')).toEqual(31.683168316831683);
+  expect(component.find('g.recharts-reference-area').at(1).find('path').prop('height')).toEqual(109.30693069306932);
+  expect(component.find('g.recharts-reference-area').at(2).find('path').prop('height')).toEqual(19.009900990099);
 });
 
 it('graph is not displayed if data.length is less than minPoints', () => {
