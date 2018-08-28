@@ -71,10 +71,6 @@ export default class ProviderCollapsableCard extends Component {
               <div className="date-key">Added on</div>
               {/* to-do: get date */}
               <div className="date-value">insert date here</div>
-              {/* to-do: insert logic for this */}
-              <div className="date-verified">
-                <FontAwesomeIcon icon="check" /> verified
-              </div>
             </div>          
             <div className="details-dates-last-updated">
               <div className="date-key">Last updated</div>
