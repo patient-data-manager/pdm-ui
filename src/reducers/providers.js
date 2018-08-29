@@ -41,6 +41,7 @@ function providers(state = defaultState, action) {
   case types.LOAD_PROFILE_PROVIDERS_FAILURE:
     return {
       ...state,
+      profileProviders: [],
       loadProfileProviders: { isLoading: false, loadStatus: 'failure' }
     };
   case types.DELETE_PROFILE_PROVIDER_FAILURE:

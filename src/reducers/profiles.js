@@ -6,7 +6,6 @@ const defaultState = {
   profiles: [],
   activeProfileId: null,
   activeProfile: null,
-  activeProfileProviders: null,
   statusMessage: null,
   loadProfiles: { isLoading: false, loadStatus: null },
   addProfile: { isAdding: false, addStatus: null },
