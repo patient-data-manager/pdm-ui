@@ -105,13 +105,17 @@ export default class Summary extends Component {
 
   render() {
     const { patient, profile } = this.props;
-    let patientName, patientAge, patientDOB, patientAddress;
+    let patientName, patientAge, patientDOB, patientStreet, patientCity, patientState, patientZip, patientAddress;
 
     if (Object.keys(patient).length > 0) {
       patientName = `${patient.name[0].given[0]} ${patient.name[0].family}`;
       patientAge = moment().diff(profile.dob, 'years');
-      patientDOB = `${moment(profile.dob).format('MMM D, YYYY')} (age ${patientAge})`;
-      patientAddress = `${profile.street}, ${profile.city}, ${profile.state} ${profile.zip}`;
+      patientDOB = profile.dob ? `${moment(profile.dob).format('MMM D, YYYY')} (age ${patientAge})` : '';
+      patientStreet = profile.street ? `${profile.street}, ` : '';
+      patientCity = profile.city ? `${profile.city}, ` : '';
+      patientState = profile.state ? `${profile.state} ` : '';
+      patientZip = profile.zip ? `${profile.zip}` : '';
+      patientAddress = patientStreet + patientCity + patientState + patientZip;
     }
 
     return (

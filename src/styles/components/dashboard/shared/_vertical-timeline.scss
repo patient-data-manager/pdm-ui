@@ -27,15 +27,14 @@
     .info-date {
       font-weight: 600;
     }
-
-    &.last-item {
-      .vertical-timeline__item-info {
-        border: 0;
-      }
-    }
   }
 
-  &__view-more {
+  &__view-more-less {
+    display: flex;
+  }
+
+  &__view-more,
+  &__view-less {
     display: flex;
     margin-left: -7px;
     border: 0;
@@ -51,5 +50,9 @@
         color: $color-text;
       }
     }
+  }
+
+  &__view-less .view-less-slash {
+    margin-left: 4px;
   }
 }
