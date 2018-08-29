@@ -3,11 +3,12 @@ import PropTypes from 'prop-types';
 import { connect } from 'react-redux';
 import { bindActionCreators } from 'redux';
 
-import { linkProvider, loadProviders } from '../../actions/providers';
+import { linkProvider, loadProviders, loadProfileProviders } from '../../actions/providers';
 
 export class Providers extends Component {
   componentDidMount() {
     this.props.loadProviders();
+    this.props.loadProfileProviders(this.props.profile.id);
   }
 
   renderProvider = (provider) => {
@@ -36,9 +37,11 @@ export class Providers extends Component {
 
 Providers.propTypes = {
   providers: PropTypes.array,
+  profileProviders: PropTypes.array,
   profile: PropTypes.object,
   linkProvider: PropTypes.func.isRequired,
-  loadProviders: PropTypes.func.isRequired
+  loadProviders: PropTypes.func.isRequired,
+  loadProfileProviders: PropTypes.func.isRequired
 };
 
 Providers.defaultTypes = {
@@ -48,14 +51,16 @@ Providers.defaultTypes = {
 function mapDispatchToProps(dispatch) {
   return bindActionCreators({
     linkProvider,
-    loadProviders
+    loadProviders,
+    loadProfileProviders
   }, dispatch);
 }
 
 function mapStateToProps(state) {
   return {
     providers: state.providers.providers,
-    profile: state.profiles.activeProfile
+    profile: state.profiles.activeProfile,
+    profileProviders: state.providers.profileProviders,
   };
 }
 

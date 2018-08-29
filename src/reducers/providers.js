@@ -2,8 +2,11 @@ import * as types from '../actions/types';
 
 const defaultState = {
   providers: [],
+  profileProviders: [],
   loadProviders: { isLoading: false, loadStatus: null },
-  linkProvider: { isLinking: false, linkStatus: null }
+  loadProfileProviders: { isLoading: false, loadStatus: null },
+  linkProvider: { isLinking: false, linkStatus: null },
+
 };
 
 function providers(state = defaultState, action) {
@@ -23,6 +26,35 @@ function providers(state = defaultState, action) {
     return {
       ...state,
       loadProviders: { isLoading: false, loadStatus: 'failure' }
+    };
+  case types.PROFILE_PROVIDERS_REQUEST:
+    return {
+      ...state,
+      loadProfileProviders: { isLoading: true, loadStatus: null }
+    };
+  case types.LOAD_PROFILE_PROVIDERS_SUCCESS:
+    return {
+      ...state,
+      profileProviders: action.providers,
+      loadProfileProviders: { isLoading: false, loadStatus: 'success' }
+    };
+  case types.LOAD_PROFILE_PROVIDERS_FAILURE:
+    return {
+      ...state,
+      loadProfileProviders: { isLoading: false, loadStatus: 'failure' }
+    };
+  case types.DELETE_PROFILE_PROVIDER_FAILURE:
+    return {
+      ...state
+    };
+  case types.DELETE_PROFILE_PROVIDER_SUCCESS:
+    return {
+      ...state,
+      profileProviders: state.profileProviders.filter(profProvider => profProvider.id !== action.profileProviderId)
+    };
+  case types.DELETE_PROFILE_PROVIDER_REQUEST:
+    return {
+      ...state
     };
   case types.LINK_PROVIDER_REQUEST:
     return {

@@ -24,6 +24,7 @@ function loadProvidersFailure(error) {
   };
 }
 
+
 function sendProvidersRequest(accessToken) {
   return new Promise((resolve, reject) => {
     axios.get(
@@ -34,6 +35,7 @@ function sendProvidersRequest(accessToken) {
       .catch(error => reject(error));
   });
 }
+
 
 export function loadProviders() {
   return (dispatch, getState) => {
@@ -46,6 +48,55 @@ export function loadProviders() {
       .catch(error => dispatch(loadProvidersFailure(error)));
   };
 }
+
+//-------------------- Profile Providers ------------------------------------//
+function requestProfileProviders(profileId) {
+  return {
+    type: types.PROFILE_PROVIDERS_REQUEST,
+    profileId
+  };
+}
+
+function loadProfileProvidersSuccess(profileId, providers) {
+  return {
+    type: types.LOAD_PROFILE_PROVIDERS_SUCCESS,
+    providers: providers,
+    profileId: profileId
+  };
+}
+
+function loadProfileProvidersFailure(profileId, error) {
+  return {
+    type: types.LOAD_PROFILE_PROVIDERS_FAILURE,
+    status: error.response.status,
+    statusText: error.response.statusText,
+    profileId
+  };
+}
+
+function sendProfileProvidersRequest(profileId, accessToken) {
+  return new Promise((resolve, reject) => {
+    axios.get(
+      `/api/v1/profiles/${profileId}/providers`,
+      { headers: { 'X-Key-Inflection': 'camel', Accept: 'application/json', Authorization: `Bearer ${accessToken}` } }
+    )
+      .then(result => resolve(result.data))
+      .catch(error => reject(error));
+  });
+}
+
+export function loadProfileProviders(profileId) {
+  return (dispatch, getState) => {
+    const accessToken = getState().auth.accessToken;
+
+    dispatch(requestProfileProviders(profileId));
+
+    return sendProfileProvidersRequest(profileId, accessToken)
+      .then(data => dispatch(loadProfileProvidersSuccess(profileId, data)))
+      .catch(error => dispatch(loadProfileProvidersFailure(profileId, error)));
+  };
+}
+
 
 // ------------------------- LINK PROVIDER --------------------------------- //
 
