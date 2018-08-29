@@ -69,7 +69,7 @@ export default class VerticalTimeline extends Component {
   }
 
   render() {
-    const { items, initialDisplayCount, viewCount } = this.props;
+    const { items, initialDisplayCount } = this.props;
     const { displayCount } = this.state;
     const sortedItems = this.sortItems(items);
 
