@@ -7,7 +7,6 @@ import { scaleTime } from 'd3-scale';
 import _ from 'lodash';
 
 import CustomGraphTooltip from './CustomGraphTooltip';
-import toFixed from '../../../utils/roundNumber';
 
 export default class LineGraph extends Component {
   constructor(props) {
@@ -41,7 +40,7 @@ export default class LineGraph extends Component {
 
   getMostRecentValue = (orderedData) => {
     const lastIndex = orderedData.length - 1;
-    return toFixed(orderedData[lastIndex].value);
+    return _.round(orderedData[lastIndex].value, 2);
   }
 
   getMinMax = (data, key) => {
