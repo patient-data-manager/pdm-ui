@@ -36,19 +36,19 @@ it('view less button works correctly', () => {
   component.find('button.vertical-timeline__view-more').simulate('click');
   expect(component.find('div.vertical-timeline__item')).toHaveLength(6);
   component.find('button.vertical-timeline__view-less').simulate('click');
-  expect(component.find('div.vertical-timeline__item')).toHaveLength(4);
+  expect(component.find('div.vertical-timeline__item')).toHaveLength(2);
   component.find('button.vertical-timeline__view-more').simulate('click');
-  expect(component.find('div.vertical-timeline__item')).toHaveLength(8);
-  component.find('button.vertical-timeline__view-more').simulate('click');
-  expect(component.find('div.vertical-timeline__item')).toHaveLength(10);
-  component.find('button.vertical-timeline__view-less').simulate('click');
   expect(component.find('div.vertical-timeline__item')).toHaveLength(6);
   component.find('button.vertical-timeline__view-more').simulate('click');
   expect(component.find('div.vertical-timeline__item')).toHaveLength(10);
   component.find('button.vertical-timeline__view-less').simulate('click');
   expect(component.find('div.vertical-timeline__item')).toHaveLength(6);
+  component.find('button.vertical-timeline__view-more').simulate('click');
+  expect(component.find('div.vertical-timeline__item')).toHaveLength(10);
   component.find('button.vertical-timeline__view-less').simulate('click');
-  expect(component.find('div.vertical-timeline__item')).toHaveLength(4);
+  expect(component.find('div.vertical-timeline__item')).toHaveLength(6);
+  component.find('button.vertical-timeline__view-less').simulate('click');
+  expect(component.find('div.vertical-timeline__item')).toHaveLength(2);
 });
 
 it('sorts the timeline correctly', () => {

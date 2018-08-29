@@ -25,10 +25,10 @@ export default class VerticalTimeline extends Component {
   }
 
   handleViewLess = () => {
-    const { viewCount } = this.props;
+    const { initialDisplayCount, viewCount } = this.props;
     const { displayCount  } = this.state;
     let newDisplayCount = displayCount - viewCount;
-    if (newDisplayCount <= viewCount) { newDisplayCount = viewCount; }
+    if (newDisplayCount <= viewCount) { newDisplayCount = initialDisplayCount; }
 
     this.setState({ displayCount: newDisplayCount });
   }
@@ -69,7 +69,7 @@ export default class VerticalTimeline extends Component {
   }
 
   render() {
-    const { items, viewCount } = this.props;
+    const { items, initialDisplayCount, viewCount } = this.props;
     const { displayCount } = this.state;
     const sortedItems = this.sortItems(items);
 
@@ -79,7 +79,7 @@ export default class VerticalTimeline extends Component {
 
         <p className="vertical-timeline__view-more-less">
           {(sortedItems.length > displayCount) && this.renderViewMore()}
-          {(displayCount > viewCount) && this.renderViewLess(sortedItems.length > displayCount)}
+          {(displayCount > initialDisplayCount) && this.renderViewLess(sortedItems.length > displayCount)}
         </p>
       </div>
     );
