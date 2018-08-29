@@ -47,7 +47,6 @@ it('renders logo correctly', () => {
   expect(component.find('div.details-logo')).toExist();
   expect(component.find('img.details-logo__img').prop('src'))
     .toEqual('/assets/images/provider-logos/partners-healthcare.png');
-
 });
 
 it('renders permission details correctly', () => {
