@@ -19,8 +19,9 @@
 
   &__toc {
     min-width: 200px;
+    max-width: 200px;
     height: 100vh;
-    padding: 20px;
+    padding: 10px;
     background-color: $color-gray-lightest;
 
     .toc-list {
@@ -47,7 +48,7 @@
           font-style: italic;
           text-transform: inherit;
           font-weight: 600;
-          font-size: 0.9em;
+          font-size: 0.8em;
         }
       }
     }
