@@ -28,7 +28,7 @@ export default class VerticalTimeline extends Component {
     const { initialDisplayCount, viewCount } = this.props;
     const { displayCount  } = this.state;
     let newDisplayCount = displayCount - viewCount;
-    if (newDisplayCount <= viewCount) { newDisplayCount = initialDisplayCount; }
+    if (newDisplayCount < viewCount) { newDisplayCount = initialDisplayCount; }
 
     this.setState({ displayCount: newDisplayCount });
   }
