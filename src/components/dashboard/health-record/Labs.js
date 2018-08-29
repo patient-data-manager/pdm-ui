@@ -18,48 +18,26 @@ export default class Labs extends Component {
     return text;
   }
 
-  render() {
-    if (this.props.labs.length === 0) return <div className="labs no-entries">No entries.</div>;
-
-    return (
-      <div className="labs">
-        {this.renderLabGraphs()}
-        <VerticalTimeline items={this.labs()} icon="flask" />
-      </div>
-    );
-  }
-
-  renderLabGraphs() {
-    let groups = this.groupLabs();
-    let graphs = [];
-    for (var x in groups) {
-      let group = groups[x];
-      graphs.push(<LineGraph  key={x} title={group.title}
-        data={group.values}
-        referenceRanges={group.referenceRanges}
-        unit={group.unit} />);
-    }
-    return graphs.length > 0 ? graphs : '' ;
-  }
-
   groupLabs() {
     let grouped = {};
-    this.props.labs.forEach(function(lab) {
-      let code = getProperty(lab, "code.coding.firstObject.code");
-      let rr = getProperty(lab, "referenceRange");
-      let value = getProperty(lab, "valueQuantity");
+    this.props.labs.forEach((lab) => {
+      const code = getProperty(lab, "code.coding.firstObject.code");
+      const referenceRange = getProperty(lab, "referenceRange");
+      const value = getProperty(lab, "valueQuantity");
       if (code && code !== "" && value) {
         let group = grouped[code];
         if (!group) {
-          group = { values: [],
-            title: getProperty(lab, "code.text") ||
-                           getProperty(lab, "code.coding.firstObject.display") };
-
+          group = { 
+            values: [],
+            title: getProperty(lab, "code.text") || getProperty(lab, "code.coding.firstObject.display") 
+          };
           grouped[code] = group;
         }
 
-        if (rr) {
-          group['referenceRanges'] = rr.map(function(r) { return { high: r.high, low: r.low, assessment: r.text }; });
+        if (referenceRange) {
+          group['referenceRanges'] = referenceRange.map((refRange) => {
+            return { high: refRange.high, low: refRange.low, assessment: refRange.text };
+          });
         }
         if (value.unit && !group.unit) {
           group.title += ` (${value.unit})`;
@@ -69,6 +47,34 @@ export default class Labs extends Component {
       }
     });
     return grouped;
+  }
+
+  renderLabGraphs() {
+    const groups = this.groupLabs();
+    let graphs = [];
+    for (const index in groups) {
+      let group = groups[index];
+      graphs.push(
+        <LineGraph  
+          key={index} 
+          title={group.title}
+          data={group.values}
+          referenceRanges={group.referenceRanges}
+          unit={group.unit} />
+      );
+    }
+    return graphs.length > 0 ? graphs : '' ;
+  }
+
+  render() {
+    if (this.props.labs.length === 0) return <div className="labs no-entries">No entries.</div>;
+
+    return (
+      <div className="labs">
+        {this.renderLabGraphs()}
+        <VerticalTimeline items={this.labs()} icon="flask" />
+      </div>
+    );
   }
 }
 
