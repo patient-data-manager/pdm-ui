@@ -1,5 +1,6 @@
 import React, { Component } from 'react';
 import PropTypes from 'prop-types';
+import moment from 'moment';
 import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
 import FormControlLabel from '@material-ui/core/FormControlLabel';
 import Radio from '@material-ui/core/Radio';
@@ -22,7 +23,11 @@ export default class ProviderCollapsableCard extends Component {
   handleAccessChange = (event) => {
     this.setState({ healthRecordAccess: event.target.value });
     // TO-DO: change access levels in DB not just state
-  };
+  }
+
+  formatDate = (date) => {
+    if (date !== null) return moment(date).format('YYYY-MM-DD');
+  }
 
   renderCollapseExpandIcon = () => {
     if (this.state.detailsExpanded) {
@@ -69,13 +74,11 @@ export default class ProviderCollapsableCard extends Component {
           <div className="details-dates">
             <div className="details-dates-added-on">
               <div className="date-key">Added on</div>
-              {/* to-do: get date */}
-              <div className="date-value">insert date here</div>
+              <div className="date-value">{this.formatDate(this.props.provider.addedOn)}</div>
             </div>          
             <div className="details-dates-last-updated">
               <div className="date-key">Last updated</div>
-              {/* to-do: get date */}
-              <div className="date-value">insert date here</div>
+              <div className="date-value">{this.formatDate(this.props.provider.lastUpdated)}</div>
             </div>
           </div>
           {this.renderLogo()}
