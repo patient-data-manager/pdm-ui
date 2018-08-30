@@ -35,27 +35,18 @@ function providers(state = defaultState, action) {
   case types.LOAD_PROFILE_PROVIDERS_SUCCESS:
     return {
       ...state,
-      profileProviders: action.providers,
+      profileProviders: action.profileProviders,
       loadProfileProviders: { isLoading: false, loadStatus: 'success' }
     };
   case types.LOAD_PROFILE_PROVIDERS_FAILURE:
     return {
       ...state,
-      profileProviders: [],
       loadProfileProviders: { isLoading: false, loadStatus: 'failure' }
     };
-  case types.DELETE_PROFILE_PROVIDER_FAILURE:
-    return {
-      ...state
-    };
-  case types.DELETE_PROFILE_PROVIDER_SUCCESS:
+  case types.DELETE_PROFILE_PROVIDER:
     return {
       ...state,
       profileProviders: state.profileProviders.filter(profProvider => profProvider.id !== action.profileProviderId)
-    };
-  case types.DELETE_PROFILE_PROVIDER_REQUEST:
-    return {
-      ...state
     };
   case types.LINK_PROVIDER_REQUEST:
     return {

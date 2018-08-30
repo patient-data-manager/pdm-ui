@@ -49,28 +49,26 @@ export function loadProviders() {
   };
 }
 
-//-------------------- Profile Providers ------------------------------------//
-function requestProfileProviders(profileId) {
+// ------------------------- LOAD PROFILE PROVIDERS ------------------------ //
+
+function requestProfileProviders() {
   return {
-    type: types.PROFILE_PROVIDERS_REQUEST,
-    profileId
+    type: types.PROFILE_PROVIDERS_REQUEST
   };
 }
 
-function loadProfileProvidersSuccess(profileId, providers) {
+function loadProfileProvidersSuccess(profileProviders) {
   return {
     type: types.LOAD_PROFILE_PROVIDERS_SUCCESS,
-    providers: providers,
-    profileId: profileId
+    profileProviders
   };
 }
 
-function loadProfileProvidersFailure(profileId, error) {
+function loadProfileProvidersFailure(error) {
   return {
     type: types.LOAD_PROFILE_PROVIDERS_FAILURE,
     status: error.response.status,
-    statusText: error.response.statusText,
-    profileId
+    statusText: error.response.statusText
   };
 }
 
@@ -89,14 +87,22 @@ export function loadProfileProviders(profileId) {
   return (dispatch, getState) => {
     const accessToken = getState().auth.accessToken;
 
-    dispatch(requestProfileProviders(profileId));
+    dispatch(requestProfileProviders());
 
     return sendProfileProvidersRequest(profileId, accessToken)
-      .then(data => dispatch(loadProfileProvidersSuccess(profileId, data)))
-      .catch(error => dispatch(loadProfileProvidersFailure(profileId, error)));
+      .then(data => dispatch(loadProfileProvidersSuccess(data)))
+      .catch(error => dispatch(loadProfileProvidersFailure(error)));
   };
 }
 
+// ------------------------- DELETE PROFILE PROVIDER ----------------------- //
+
+export function deleteProfileProvider(profileProviderId) {
+  return {
+    type: types.DELETE_PROFILE_PROVIDER,
+    profileProviderId
+  };
+}
 
 // ------------------------- LINK PROVIDER --------------------------------- //
 

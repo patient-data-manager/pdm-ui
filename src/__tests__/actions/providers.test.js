@@ -37,6 +37,12 @@ describe('providers actions', () => {
         expect(store.getActions()).toEqual(expectedActions);
       });
     });
+  });
+
+  // ----------------------- LOAD PROFILE PROVIDERS ------------------------ //
+  describe('should handle loading profile providers', () => {
+    beforeEach(() => { moxios.install(); });
+    afterEach(() => { moxios.uninstall(); });
 
     it('should create LOAD_PROFILE_PROVIDERS_SUCCESS after successfully loading providers', () => {
       moxios.wait(() => {
@@ -44,11 +50,10 @@ describe('providers actions', () => {
         request.respondWith({ status: 200, response: [mockProfileProviderA, mockProfileProviderB] });
       });
 
-      const store = mockStore({ providers: [], auth: { accessToken: 'abc' } });
+      const store = mockStore({ providers: [mockProviderA, mockProviderB], auth: { accessToken: 'abc' } });
       const expectedActions = [
-        { type: types.PROFILE_PROVIDERS_REQUEST, profileId: 1, },
-        { type: types.LOAD_PROFILE_PROVIDERS_SUCCESS, profileId: 1,
-          providers: [mockProfileProviderA, mockProfileProviderB] }
+        { type: types.PROFILE_PROVIDERS_REQUEST },
+        { type: types.LOAD_PROFILE_PROVIDERS_SUCCESS, profileProviders: [mockProfileProviderA, mockProfileProviderB] }
       ];
 
       return store.dispatch(actions.loadProfileProviders(1)).then(() => {

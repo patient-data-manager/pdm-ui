@@ -40,37 +40,39 @@ describe('providers reducer', () => {
     expect(reducer(previousState, action)).toEqual(newState);
   });
 
-
-  // ----------------------- LOAD PROFILE  PROVIDERS -------------------------------- //
+  // ----------------------- LOAD PROFILE PROVIDERS ------------------------ //
   it('should handle loading profile providers', () => {
-    const previousState = { profileProviders: [],  loadProfileProviders: { isLoading: false, loadStatus: null } };
+    const previousState = { profileProviders: [], loadProfileProviders: { isLoading: false, loadStatus: null } };
 
     let action = { type: types.PROFILE_PROVIDERS_REQUEST };
     let newState = { loadProfileProviders: { isLoading: true, loadStatus: null } };
     expect(reducer([], action)).toEqual(newState);
 
-    action = { type: types.LOAD_PROFILE_PROVIDERS_SUCCESS,
-      providers: [mockProfileProviderA, mockProfileProviderB] };
+    action = {
+      type: types.LOAD_PROFILE_PROVIDERS_SUCCESS,
+      profileProviders: [mockProfileProviderA, mockProfileProviderB]
+    };
     newState = {
       profileProviders: [mockProfileProviderA, mockProfileProviderB],
       loadProfileProviders: { isLoading: false, loadStatus: 'success' }
     };
     expect(reducer(previousState, action)).toEqual(newState);
 
-    action = { type: types.LOAD_PROFILE_PROVIDERS_FAILURE,
-      status: 'Test status', statusText: 'Test status message' };
+    action = { type: types.LOAD_PROFILE_PROVIDERS_FAILURE, status: 'Test status', statusText: 'Test status message' };
     newState = { profileProviders: [], loadProfileProviders: { isLoading: false, loadStatus: 'failure' } };
     expect(reducer(previousState, action)).toEqual(newState);
   });
 
   it('should handle deleting profile providers', () => {
-    const previousState = { profileProviders: [mockProfileProviderA, mockProfileProviderB],
-      loadProfileProviders: { isLoading: false, loadStatus: null } };
-
-    let action = { type: types.DELETE_PROFILE_PROVIDER_SUCCESS,
-      profileProviderId: mockProfileProviderA.id };
-    let newState = { profileProviders: [mockProfileProviderB],
-      loadProfileProviders: { isLoading: false, loadStatus: null } };
+    const previousState = {
+      profileProviders: [mockProfileProviderA, mockProfileProviderB],
+      loadProfileProviders: { isLoading: false, loadStatus: null }
+    };
+    let action = { type: types.DELETE_PROFILE_PROVIDER, profileProviderId: mockProfileProviderA.id };
+    let newState = {
+      profileProviders: [mockProfileProviderB],
+      loadProfileProviders: { isLoading: false, loadStatus: null }
+    };
     expect(reducer(previousState, action)).toEqual(newState);
   });
 
