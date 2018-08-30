@@ -2,9 +2,7 @@ import React, { Component } from 'react';
 import PropTypes from 'prop-types';
 import { connect } from 'react-redux';
 import { bindActionCreators } from 'redux';
-
 import { linkProvider, loadProviders, loadProfileProviders } from '../../actions/providers';
-
 import ProviderCollapsableCard from '../../components/dashboard/providers/ProviderCollapsableCard';
 
 export class Providers extends Component {
@@ -63,7 +61,7 @@ export class Providers extends Component {
   }
 
   render() {
-    console.log(this.props.profileProviders)
+    console.log(this.props.profileProviders);
     return (
       <div className="providers">
         {/* TO-DO: insert search bar here */}
