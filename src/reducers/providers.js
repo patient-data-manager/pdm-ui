@@ -5,8 +5,7 @@ const defaultState = {
   profileProviders: [],
   loadProviders: { isLoading: false, loadStatus: null },
   loadProfileProviders: { isLoading: false, loadStatus: null },
-  linkProvider: { isLinking: false, linkStatus: null },
-
+  linkProvider: { isLinking: false, linkStatus: null }
 };
 
 function providers(state = defaultState, action) {
@@ -60,8 +59,6 @@ function providers(state = defaultState, action) {
       ...state,
       linkProvider: { isLinking: false, linkStatus: 'success' }
     };
-  case types.OAUTH_CALLBACK_SUCCESS:
-    return state;
   case types.LINK_PROVIDER_FAILURE:
     return {
       ...state,

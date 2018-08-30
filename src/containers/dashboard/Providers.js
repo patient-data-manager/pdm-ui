@@ -12,6 +12,7 @@ export class Providers extends Component {
 
   providersList = () => {
     const { providers, profileProviders } = this.props;
+    if (providers.length === 0 || profileProviders.length === 0) return [];
 
     let providersList = [];
     profileProviders.forEach((profileProvider) => {
@@ -74,16 +75,11 @@ export class Providers extends Component {
 }
 
 Providers.propTypes = {
+  profile: PropTypes.object,
   providers: PropTypes.array,
   profileProviders: PropTypes.array,
-  profile: PropTypes.object,
   linkProvider: PropTypes.func.isRequired,
   loadProfileProviders: PropTypes.func.isRequired
-};
-
-Providers.defaultTypes = {
-  providers: [],
-  profileProviders: []
 };
 
 function mapDispatchToProps(dispatch) {
@@ -95,8 +91,8 @@ function mapDispatchToProps(dispatch) {
 
 function mapStateToProps(state) {
   return {
-    providers: state.providers.providers,
     profile: state.profiles.activeProfile,
+    providers: state.providers.providers,
     profileProviders: state.providers.profileProviders
   };
 }
