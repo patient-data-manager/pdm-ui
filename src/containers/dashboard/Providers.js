@@ -2,6 +2,7 @@ import React, { Component } from 'react';
 import PropTypes from 'prop-types';
 import { connect } from 'react-redux';
 import { bindActionCreators } from 'redux';
+import _ from 'lodash';
 import { linkProvider, loadProfileProviders } from '../../actions/providers';
 import ProviderCollapsableCard from '../../components/dashboard/providers/ProviderCollapsableCard';
 
@@ -24,8 +25,7 @@ export class Providers extends Component {
         providersList.push(newProvider);
       }
     });
-    // TODO: sort alphabetically
-    return providersList;
+    return _.orderBy(providersList, ['name'], ['asc']);
   }
 
   getProviderImages = () => {
