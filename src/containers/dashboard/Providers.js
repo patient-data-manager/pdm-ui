@@ -49,7 +49,7 @@ export class Providers extends Component {
 
   renderProvidersList = () => {
     const providersList = this.providersList();
-    if (providersList.length === 0) return <div className="providers no-entries">No providers.</div>;
+    if (providersList.length === 0) return <div className="providers no-entries">No linked providers.</div>;
 
     return providersList.map((provider) => {
       return (
