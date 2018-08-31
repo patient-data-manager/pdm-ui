@@ -27,7 +27,7 @@ it('renders self and self components', () => {
   expect(component.find('div.providers')).toExist();
 });
 
-it.only('renders all providers', () => {
+it('renders all providers', () => {
   const providers = [providerMockA, providerMockB, providerMockC, providerMockD];
   const profileProviders = [profileProviderMockA, profileProviderMockB];
   const component = setup(providers, profileProviders);
