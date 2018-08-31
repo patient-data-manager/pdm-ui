@@ -2,9 +2,9 @@ import { fullRenderComponent } from '../../../../utils/testHelpers';
 import ProviderCollapsableCard from '../../../../components/dashboard/providers/ProviderCollapsableCard';
 import * as mocks from '../../../../__mocks__/providerMocks';
 
-function setup() {
+function setup(provider) {
   const props = {
-    provider: mocks.providerMockC,
+    provider: provider,
     imageUrl: '/assets/images/provider-logos/partners-healthcare.png'
   };
 
@@ -12,7 +12,7 @@ function setup() {
 }
 
 it('renders self and self components', () => {
-  const component = setup();
+  const component = setup(mocks.providerMockC);
 
   expect(component).toBeDefined();
   expect(component.find('div.provider-card')).toExist();
@@ -21,7 +21,7 @@ it('renders self and self components', () => {
 });
 
 it('renders titlebar correctly', () => {
-  const component = setup();
+  const component = setup(mocks.providerMockC);
 
   expect(component.find('div.provider-card__titlebar-name')).toExist();
   expect(component.find('div.provider-card__titlebar-name').text()).toEqual('Partners Health Care');
@@ -30,18 +30,29 @@ it('renders titlebar correctly', () => {
 });
 
 it('renders date details correctly', () => {
-  const component = setup();
+  const component = setup(mocks.providerMockC);
 
   component.find('div.provider-card__titlebar-icon').find('svg').simulate('click');
   expect(component.find('div.details-dates')).toExist();
   expect(component.find('div.details-dates-added-on').find('div.date-key').text()).toEqual('Added on');
-  expect(component.find('div.details-dates-added-on').find('div.date-value').text()).toEqual('insert date here');
+  expect(component.find('div.details-dates-added-on').find('div.date-value').text()).toEqual('2001-09-16');
   expect(component.find('div.details-dates-last-updated').find('div.date-key').text()).toEqual('Last updated');
-  expect(component.find('div.details-dates-last-updated').find('div.date-value').text()).toEqual('insert date here');
+  expect(component.find('div.details-dates-last-updated').find('div.date-value').text()).toEqual('2018-04-05');
+});
+
+it('does not display date details if field values not defined', () => {
+  const component = setup(mocks.providerMockA);
+
+  component.find('div.provider-card__titlebar-icon').find('svg').simulate('click');
+  expect(component.find('div.details-dates')).toExist();
+  expect(component.find('div.details-dates-added-on').find('div.date-key').text()).toEqual('Added on');
+  expect(component.find('div.details-dates-added-on').find('div.date-value').text()).toEqual('');
+  expect(component.find('div.details-dates-last-updated').find('div.date-key').text()).toEqual('Last updated');
+  expect(component.find('div.details-dates-last-updated').find('div.date-value').text()).toEqual('');
 });
 
 it('renders logo correctly', () => {
-  const component = setup();
+  const component = setup(mocks.providerMockC);
 
   component.find('div.provider-card__titlebar-icon').find('svg').simulate('click');
   expect(component.find('div.details-logo')).toExist();
@@ -50,7 +61,7 @@ it('renders logo correctly', () => {
 });
 
 it('renders permission details correctly', () => {
-  const component = setup();
+  const component = setup(mocks.providerMockC);
   
   component.find('div.provider-card__titlebar-icon').find('svg').simulate('click');
   expect(component.find('div.details-permissions')).toExist();
@@ -73,7 +84,7 @@ it('no provider logo is displayed if no imageUrl is given', () => {
 });
 
 it('component collapses and expands on click', () => {
-  const component = setup();
+  const component = setup(mocks.providerMockC);
 
   expect(component.find('div.provider-card__titlebar')).toExist();
   expect(component.find('div.provider-card__details')).toHaveLength(0);

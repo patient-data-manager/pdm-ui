@@ -26,7 +26,9 @@ export default class ProviderCollapsableCard extends Component {
   }
 
   formatDate = (date) => {
-    if (date !== null) return moment(date).format('YYYY-MM-DD');
+    if (date !== null && date !== undefined) {
+      return moment(date).format('YYYY-MM-DD');
+    }
   }
 
   renderCollapseExpandIcon = () => {
