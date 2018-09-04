@@ -2,7 +2,9 @@ import * as types from '../actions/types';
 
 const defaultState = {
   providers: [],
+  profileProviders: [],
   loadProviders: { isLoading: false, loadStatus: null },
+  loadProfileProviders: { isLoading: false, loadStatus: null },
   linkProvider: { isLinking: false, linkStatus: null }
 };
 
@@ -24,6 +26,27 @@ function providers(state = defaultState, action) {
       ...state,
       loadProviders: { isLoading: false, loadStatus: 'failure' }
     };
+  case types.PROFILE_PROVIDERS_REQUEST:
+    return {
+      ...state,
+      loadProfileProviders: { isLoading: true, loadStatus: null }
+    };
+  case types.LOAD_PROFILE_PROVIDERS_SUCCESS:
+    return {
+      ...state,
+      profileProviders: action.profileProviders,
+      loadProfileProviders: { isLoading: false, loadStatus: 'success' }
+    };
+  case types.LOAD_PROFILE_PROVIDERS_FAILURE:
+    return {
+      ...state,
+      loadProfileProviders: { isLoading: false, loadStatus: 'failure' }
+    };
+  case types.DELETE_PROFILE_PROVIDER:
+    return {
+      ...state,
+      profileProviders: state.profileProviders.filter(profProvider => profProvider.id !== action.profileProviderId)
+    };
   case types.LINK_PROVIDER_REQUEST:
     return {
       ...state,
@@ -36,8 +59,6 @@ function providers(state = defaultState, action) {
       ...state,
       linkProvider: { isLinking: false, linkStatus: 'success' }
     };
-  case types.OAUTH_CALLBACK_SUCCESS:
-    return state;
   case types.LINK_PROVIDER_FAILURE:
     return {
       ...state,

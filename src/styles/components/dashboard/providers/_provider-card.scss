@@ -1,0 +1,95 @@
+.provider-card {
+  &__titlebar {
+    display: flex;
+    flex-direction: row;
+    justify-content: space-between;
+    height: 40px;
+    color: $color-gray-darker;
+    background-color: $color-gray-lightest;
+    margin-bottom: 5px;
+    cursor: pointer;
+
+    &:hover,
+    &:focus,
+    &:active {
+      outline: none;
+      background-color: darken($color-gray-lightest, 5%);
+    }
+
+    &-name {
+      align-self: center;
+      font-weight: bold;
+      padding-left: 15px;
+    }
+
+    &-icon {
+      align-self: center;
+      padding-right: 10px;
+    }
+  }
+
+  &__details {
+    margin: 20px 30px 10px;
+    color: $color-gray-darker;
+
+    .details-dates-logo {
+      display: flex;
+      flex-direction: row;
+      justify-content: space-between;
+      margin-bottom: 15px;
+
+      .details-dates {
+        display: flex;
+        flex-direction: column;
+        flex-basis: 50%;
+
+        &-added-on, &-last-updated {
+          display: flex;
+          flex-direction: row;
+          flex-basis: 40%;
+
+          .date-key {
+            flex-basis: 115px;
+            font-weight: bold;
+          }
+
+          .date-value {
+            flex-basis: 130px;
+          }
+        }
+      }
+
+      .details-logo {
+        &__img {
+          height: 60px;
+        }
+      }
+    }
+
+    .details-permissions {
+      .permissions-title {
+        font-weight: 600;
+        font-style: italic;
+        width: 100%;
+        border-bottom: 2px solid $color-gray-lightest;
+      }
+
+      .permissions-content {
+        display: flex;
+        flex-direction: row;
+        justify-content: space-between;
+
+        &__label {
+          align-self: center;
+          margin-top: -8px;
+        }
+
+        &__form-group {
+          .access-radio > span {
+            color: $color-gray-dark;
+          }
+        }
+      }
+    }
+  }
+}

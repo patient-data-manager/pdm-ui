@@ -21,6 +21,7 @@ import ChevronRightIcon from '@material-ui/icons/ChevronRight';
 
 import { logoutUser } from '../../actions/auth';
 import { loadProfiles } from '../../actions/profiles';
+import { loadProviders } from '../../actions/providers';
 
 import Header from '../../components/Header';
 import ProfileCard from '../../components/dashboard/profiles/ProfileCard';
@@ -104,6 +105,7 @@ export class Dashboard extends Component {
 
   componentWillMount() {
     this.props.loadProfiles();
+    this.props.loadProviders();
   }
 
   handleDrawerOpen = () => {
@@ -203,13 +205,16 @@ Dashboard.propTypes = {
   activeProfile: PropTypes.object,
   classes: PropTypes.object.isRequired,
   theme: PropTypes.object.isRequired,
-  logoutUser: PropTypes.func.isRequired
+  logoutUser: PropTypes.func.isRequired,
+  loadProfiles: PropTypes.func.isRequired,
+  loadProviders: PropTypes.func.isRequired
 };
 
 function mapDispatchToProps(dispatch) {
   return bindActionCreators({
     logoutUser,
-    loadProfiles
+    loadProfiles,
+    loadProviders
   }, dispatch);
 }
 

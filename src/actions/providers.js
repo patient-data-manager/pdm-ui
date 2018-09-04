@@ -24,6 +24,7 @@ function loadProvidersFailure(error) {
   };
 }
 
+
 function sendProvidersRequest(accessToken) {
   return new Promise((resolve, reject) => {
     axios.get(
@@ -35,6 +36,7 @@ function sendProvidersRequest(accessToken) {
   });
 }
 
+
 export function loadProviders() {
   return (dispatch, getState) => {
     const accessToken = getState().auth.accessToken;
@@ -44,6 +46,61 @@ export function loadProviders() {
     return sendProvidersRequest(accessToken)
       .then(data => dispatch(loadProvidersSuccess(data)))
       .catch(error => dispatch(loadProvidersFailure(error)));
+  };
+}
+
+// ------------------------- LOAD PROFILE PROVIDERS ------------------------ //
+
+function requestProfileProviders() {
+  return {
+    type: types.PROFILE_PROVIDERS_REQUEST
+  };
+}
+
+function loadProfileProvidersSuccess(profileProviders) {
+  return {
+    type: types.LOAD_PROFILE_PROVIDERS_SUCCESS,
+    profileProviders
+  };
+}
+
+function loadProfileProvidersFailure(error) {
+  return {
+    type: types.LOAD_PROFILE_PROVIDERS_FAILURE,
+    status: error.response.status,
+    statusText: error.response.statusText
+  };
+}
+
+function sendProfileProvidersRequest(profileId, accessToken) {
+  return new Promise((resolve, reject) => {
+    axios.get(
+      `/api/v1/profiles/${profileId}/providers`,
+      { headers: { 'X-Key-Inflection': 'camel', Accept: 'application/json', Authorization: `Bearer ${accessToken}` } }
+    )
+      .then(result => resolve(result.data))
+      .catch(error => reject(error));
+  });
+}
+
+export function loadProfileProviders(profileId) {
+  return (dispatch, getState) => {
+    const accessToken = getState().auth.accessToken;
+
+    dispatch(requestProfileProviders());
+
+    return sendProfileProvidersRequest(profileId, accessToken)
+      .then(data => dispatch(loadProfileProvidersSuccess(data)))
+      .catch(error => dispatch(loadProfileProvidersFailure(error)));
+  };
+}
+
+// ------------------------- DELETE PROFILE PROVIDER ----------------------- //
+
+export function deleteProfileProvider(profileProviderId) {
+  return {
+    type: types.DELETE_PROFILE_PROVIDER,
+    profileProviderId
   };
 }
 
