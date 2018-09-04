@@ -9,12 +9,19 @@
     margin-bottom: 5px;
     cursor: pointer;
 
+    &:hover,
+    &:focus,
+    &:active {
+      outline: none;
+      background-color: darken($color-gray-lightest, 5%);
+    }
+
     &-name {
       align-self: center;
       font-weight: bold;
       padding-left: 15px;
     }
-    
+
     &-icon {
       align-self: center;
       padding-right: 10px;
