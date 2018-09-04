@@ -15,14 +15,22 @@ export default class ProviderCard extends Component {
       healthRecordAccess: 'none'
     };
   }
+  
+  loadAccessModal = () => {
+    console.log('loading modal...');
+  }
 
   toggleDetails = () => {
     this.setState({ detailsExpanded: !this.state.detailsExpanded });
   }
 
   handleAccessChange = (event) => {
-    this.setState({ healthRecordAccess: event.target.value });
     // TO-DO: change access levels in DB not just state
+    this.setState({ healthRecordAccess: event.target.value });
+  }
+
+  handleAccessClick = (event) => {
+    if (event.target.value === 'custom') this.loadAccessModal();
   }
 
   formatDate = (date) => {
@@ -57,6 +65,7 @@ export default class ProviderCard extends Component {
           <Radio
             checked={this.state.healthRecordAccess === value}
             onChange={this.handleAccessChange}
+            onClick={this.handleAccessClick}
             value={value}
             name="access"
             aria-label={value}
