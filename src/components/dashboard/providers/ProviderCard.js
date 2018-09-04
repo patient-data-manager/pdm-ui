@@ -102,7 +102,8 @@ export default class ProviderCard extends Component {
   render() {
     return ( 
       <div className="provider-card">
-        <div className="provider-card__titlebar" onClick={this.toggleDetails}>
+        <div className="provider-card__titlebar" onClick={this.toggleDetails} onKeyPress={this.toggleDetails} 
+          role="button" tabIndex={0}>
           <div className="provider-card__titlebar-name">
             {this.props.provider.name}
           </div>
