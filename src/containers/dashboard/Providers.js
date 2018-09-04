@@ -4,7 +4,7 @@ import { connect } from 'react-redux';
 import { bindActionCreators } from 'redux';
 import _ from 'lodash';
 import { linkProvider, loadProfileProviders } from '../../actions/providers';
-import ProviderCollapsableCard from '../../components/dashboard/providers/ProviderCollapsableCard';
+import ProviderCard from '../../components/dashboard/providers/ProviderCard';
 
 export class Providers extends Component {
   componentWillMount() {
@@ -53,7 +53,7 @@ export class Providers extends Component {
 
     return providersList.map((provider) => {
       return (
-        <ProviderCollapsableCard
+        <ProviderCard
           key={provider.id}
           provider={provider}
           imageUrl={this.getImageUrl(provider.name)}

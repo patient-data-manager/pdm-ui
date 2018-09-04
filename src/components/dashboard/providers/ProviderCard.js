@@ -5,15 +5,14 @@ import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
 import FormControlLabel from '@material-ui/core/FormControlLabel';
 import Radio from '@material-ui/core/Radio';
 
-export default class ProviderCollapsableCard extends Component {
+export default class ProviderCard extends Component {
   constructor(props) {
     super(props);
 
-    const state = { 
+    this.state = { 
       detailsExpanded: false,
       healthRecordAccess: 'none'
     };
-    this.state = state;
   }
 
   toggleDetails = () => {
@@ -33,9 +32,9 @@ export default class ProviderCollapsableCard extends Component {
 
   renderCollapseExpandIcon = () => {
     if (this.state.detailsExpanded) {
-      return <FontAwesomeIcon icon="chevron-down" onClick={this.toggleDetails} />;
+      return <FontAwesomeIcon icon="chevron-down" />;
     } else {
-      return <FontAwesomeIcon icon="chevron-right" onClick={this.toggleDetails} />;
+      return <FontAwesomeIcon icon="chevron-right" />;
     }
   }
 
@@ -103,7 +102,7 @@ export default class ProviderCollapsableCard extends Component {
   render() {
     return ( 
       <div className="provider-card">
-        <div className="provider-card__titlebar">
+        <div className="provider-card__titlebar" onClick={this.toggleDetails}>
           <div className="provider-card__titlebar-name">
             {this.props.provider.name}
           </div>
@@ -117,7 +116,7 @@ export default class ProviderCollapsableCard extends Component {
   }
 }
 
-ProviderCollapsableCard.propTypes = {
+ProviderCard.propTypes = {
   provider: PropTypes.object.isRequired,
   imageUrl: PropTypes.string
 };

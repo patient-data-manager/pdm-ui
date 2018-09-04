@@ -1,5 +1,5 @@
 import { fullRenderComponent } from '../../../../utils/testHelpers';
-import ProviderCollapsableCard from '../../../../components/dashboard/providers/ProviderCollapsableCard';
+import ProviderCard from '../../../../components/dashboard/providers/ProviderCard';
 import * as mocks from '../../../../__mocks__/providerMocks';
 
 function setup(provider) {
@@ -8,7 +8,7 @@ function setup(provider) {
     imageUrl: '/assets/images/provider-logos/partners-healthcare.png'
   };
 
-  return fullRenderComponent(ProviderCollapsableCard, props);
+  return fullRenderComponent(ProviderCard, props);
 }
 
 it('renders self and self components', () => {
@@ -77,7 +77,7 @@ it('renders permission details correctly', () => {
 
 it('no provider logo is displayed if no imageUrl is given', () => {
   const props = { provider: mocks.providerMockC };
-  const component = fullRenderComponent(ProviderCollapsableCard, props);
+  const component = fullRenderComponent(ProviderCard, props);
 
   component.find('div.provider-card__titlebar-icon').find('svg').simulate('click');
   expect(component.find('div.details-logo')).toHaveLength(0);
