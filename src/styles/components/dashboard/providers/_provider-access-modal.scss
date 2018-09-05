@@ -1,8 +1,9 @@
 .provider-modal {
   position: absolute;
   overflow: auto;
-  top: 25%;
-  left: 35%;
+  width: 60%;
+  top: 20%;
+  left: 20%;
   right: auto;
   bottom: auto;
   background: $color-white;
@@ -31,6 +32,52 @@
     &-icon {
       align-self: center;
       cursor: pointer;
+    }
+  }
+
+  &__body {
+    padding: 15px 25px;
+
+    .permissions {
+      &-title {
+        font-weight: 600;
+        font-style: italic;
+        width: 100%;
+        border-bottom: 2px solid $color-gray-lightest;
+        margin-bottom: 12px
+      }
+
+      &-buttons {
+        display: flex;
+        flex-direction: column;
+        
+        label {
+          height: 20px;
+        }
+      }
+
+      &-partial {
+        margin-left: 35px;
+
+        &__section {
+          display: flex;
+          flex-direction: row;
+          justify-content: space-between;
+          padding: 3px 10px;
+
+          &-title {
+            font-style: italic;
+          }
+
+          &-access:hover {
+            cursor: pointer;
+          }
+        }
+
+        &__section:hover {
+          background-color: $color-gray-lightest;
+        }
+      }
     }
   }
 
