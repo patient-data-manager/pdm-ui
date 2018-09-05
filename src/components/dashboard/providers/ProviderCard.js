@@ -5,6 +5,7 @@ import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
 import FormControlLabel from '@material-ui/core/FormControlLabel';
 import Radio from '@material-ui/core/Radio';
 import isValid from '../../../utils/isValid';
+import ProviderAccessModal from './ProviderAccessModal';
 
 export default class ProviderCard extends Component {
   constructor(props) {
@@ -12,12 +13,9 @@ export default class ProviderCard extends Component {
 
     this.state = {
       detailsExpanded: false,
-      healthRecordAccess: 'none'
+      healthRecordAccess: 'none',
+      modalIsOpen: false
     };
-  }
-  
-  loadAccessModal = () => {
-    console.log('loading modal...');
   }
 
   toggleDetails = () => {
@@ -29,8 +27,12 @@ export default class ProviderCard extends Component {
     this.setState({ healthRecordAccess: event.target.value });
   }
 
-  handleAccessClick = (event) => {
-    if (event.target.value === 'custom') this.loadAccessModal();
+  openAccessModal = (event) => {
+    if (event.target.value === 'custom') this.setState({ modalIsOpen: true });
+  }
+
+  closeAccessModal = () => {
+    this.setState({ modalIsOpen: false });
   }
 
   formatDate = (date) => {
@@ -65,7 +67,7 @@ export default class ProviderCard extends Component {
           <Radio
             checked={this.state.healthRecordAccess === value}
             onChange={this.handleAccessChange}
-            onClick={this.handleAccessClick}
+            onClick={this.openAccessModal}
             value={value}
             name="access"
             aria-label={value}
@@ -122,6 +124,9 @@ export default class ProviderCard extends Component {
           </div>
         </div>
         {this.renderDetails()}
+        <ProviderAccessModal
+          isOpen={this.state.modalIsOpen}
+          closeModal={this.closeAccessModal} />
       </div>
     );
   }

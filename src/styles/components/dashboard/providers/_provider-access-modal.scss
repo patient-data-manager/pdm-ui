@@ -1,0 +1,22 @@
+.provider-access-modal {
+  position: absolute;
+  overflow: auto;
+  top: 25%;
+  left: 35%;
+  right: auto;
+  bottom: auto;
+  background: $color-white;
+  border-radius: 4px;
+  outline: none;
+  padding: 20px;
+
+  &__overlay {
+    z-index: 1000;
+    position: fixed;
+    top: 0px;
+    left: 0px;
+    right: 0px;
+    bottom: 0px;
+    background-color: rgba(126, 144, 163, 0.7);
+  }
+}
