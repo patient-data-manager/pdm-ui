@@ -19,6 +19,7 @@ import {
   faSignOutAlt,
   faSpinner,
   faSyringe,
+  faTimes,
   faUserCircle
 } from '@fortawesome/free-solid-svg-icons';
 
@@ -42,5 +43,6 @@ library.add(
   faSignOutAlt,
   faSpinner,
   faSyringe,
+  faTimes,
   faUserCircle
 );

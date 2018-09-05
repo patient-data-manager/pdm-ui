@@ -126,7 +126,8 @@ export default class ProviderCard extends Component {
         {this.renderDetails()}
         <ProviderAccessModal
           isOpen={this.state.modalIsOpen}
-          closeModal={this.closeAccessModal} />
+          closeModal={this.closeAccessModal}
+          title={this.props.provider.name} />
       </div>
     );
   }

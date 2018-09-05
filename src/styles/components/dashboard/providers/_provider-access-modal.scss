@@ -8,7 +8,6 @@
   background: $color-white;
   border-radius: 4px;
   outline: none;
-  padding: 20px;
 
   &__overlay {
     z-index: 1000;
@@ -18,5 +17,20 @@
     right: 0px;
     bottom: 0px;
     background-color: rgba(126, 144, 163, 0.7);
+  }
+
+  &__header {
+    display: flex;
+    flex-direction: row;
+    justify-content: space-between;
+    background-color: $color-gray-lightest;
+    padding: 20px 30px;
+    font-size: 1.2em;
+    font-weight: bold;
+
+    &-icon {
+      align-self: center;
+      cursor: pointer;
+    }
   }
 }
