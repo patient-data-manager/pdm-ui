@@ -1,4 +1,4 @@
-.provider-access-modal {
+.provider-modal {
   position: absolute;
   overflow: auto;
   top: 25%;
@@ -31,6 +31,31 @@
     &-icon {
       align-self: center;
       cursor: pointer;
+    }
+  }
+
+  &__footer {
+    background-color: $color-gray-lightest;
+    padding: 12px 25px;
+
+    &-buttons {
+      display: flex;
+      justify-content: flex-end;
+
+      button {
+        min-width: 120px;
+        border: 0;
+      }
+  
+      .button-cancel {
+        margin-right: 10px;
+        font-size: .8em;
+        color: $color-blue;
+      }
+
+      .button-save {
+        font-size: 1.2em;
+      }
     }
   }
 }
