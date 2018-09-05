@@ -3,7 +3,9 @@ import PropTypes from 'prop-types';
 import Modal from 'react-modal';
 import Button from '@material-ui/core/Button';
 import FormControlLabel from '@material-ui/core/FormControlLabel';
+import MenuItem from '@material-ui/core/MenuItem';
 import Radio from '@material-ui/core/Radio';
+import Select from '@material-ui/core/Select';
 import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
 
 export default class ProviderAccessModal extends Component {
@@ -39,6 +41,12 @@ export default class ProviderAccessModal extends Component {
     this.setState({ accessLevel: event.target.value });
   }
 
+  handleSelectChange = index => event => {
+    let sections = this.state.sectionAccess;
+    sections[index].access = event.target.value;
+    this.setState({ sectionAccess: sections });
+  }
+
   renderRadioButton = (value, label) => {
     return (
       <FormControlLabel
@@ -55,11 +63,23 @@ export default class ProviderAccessModal extends Component {
     );
   }
 
+  renderSelect = (index, access) => {
+    return (
+      <Select
+        value={access}
+        onChange={this.handleSelectChange(index)} >
+        <MenuItem key={'none'} value={'none'}>No access</MenuItem>
+        <MenuItem key={'view'} value={'view'}>Can view</MenuItem>
+        <MenuItem key={'edit'} value={'edit'}>Can edit</MenuItem>
+      </Select>
+    );
+  }
+
   renderPartialPermissionRow = (section, index) => {
     return (
       <div className="permissions-partial__section" key={index}>
         <div className="permissions-partial__section-title">{section.title} </div>
-        <div className="permissions-partial__section-access">{section.access} </div>
+        <div className="permissions-partial__section-access">{this.renderSelect(index, section.access)} </div>
       </div>
     );
   }
