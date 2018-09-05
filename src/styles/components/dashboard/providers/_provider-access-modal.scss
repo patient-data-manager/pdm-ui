@@ -67,6 +67,12 @@
 
           &-title {
             font-style: italic;
+            align-self: center;
+          }
+
+          &-access > div > div > div {
+            font-size: .8em;
+            height: 14px;
           }
 
           &-access:hover {
