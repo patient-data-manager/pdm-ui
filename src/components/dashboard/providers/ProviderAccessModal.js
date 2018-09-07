@@ -30,7 +30,7 @@ export default class ProviderAccessModal extends Component {
       { title: 'Allergies', access: 'none' }, 
       { title: 'Medications', access: 'none' }, 
       { title: 'Immunizations', access: 'none' }, 
-      { title: 'Proceedures', access: 'none' }, 
+      { title: 'Procedures', access: 'none' }, 
       { title: 'Labs', access: 'none' },
       { title: 'Vitals', access: 'none' }
     ];
@@ -42,6 +42,7 @@ export default class ProviderAccessModal extends Component {
   }
 
   handleSelectChange = index => event => {
+    console.log('HEREEEEE')
     let sections = this.state.sectionAccess;
     sections[index].access = event.target.value;
     this.setState({ sectionAccess: sections });
@@ -78,8 +79,8 @@ export default class ProviderAccessModal extends Component {
   renderPartialPermissionRow = (section, index) => {
     return (
       <div className="permissions-partial__section" key={index}>
-        <div className="permissions-partial__section-title">{section.title} </div>
-        <div className="permissions-partial__section-access">{this.renderSelect(index, section.access)} </div>
+        <div className="permissions-partial__section-title">{section.title}</div>
+        <div className="permissions-partial__section-access">{this.renderSelect(index, section.access)}</div>
       </div>
     );
   }
