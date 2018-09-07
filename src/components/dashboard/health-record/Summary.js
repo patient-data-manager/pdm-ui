@@ -2,6 +2,7 @@ import React, { Component } from 'react';
 import ReactDOMServer from 'react-dom/server';
 import PropTypes from 'prop-types';
 import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
+import UserStarIcon from '../../../icons/UserStarIcon';
 import moment from 'moment';
 import _ from 'lodash';
 
@@ -103,6 +104,13 @@ export default class Summary extends Component {
     );
   }
 
+  renderProfileImage = () => {
+    if (this.props.profile.relationship === 'self') {
+      return <UserStarIcon height={135} />;
+    }
+    return <FontAwesomeIcon icon="user-circle" />;
+  }
+
   render() {
     const { patient, profile } = this.props;
     let patientName, patientAge, patientDOB, patientStreet, patientCity, patientState, patientZip, patientAddress;
@@ -122,7 +130,7 @@ export default class Summary extends Component {
       <div className="summary">
         <div className="summary__image-table">
           <div className="summary__image">
-            <img src="/assets/images/patient-image.png" alt="patient" />
+            {this.renderProfileImage()}
           </div>
 
           <div className="summary__divider" />
@@ -133,7 +141,7 @@ export default class Summary extends Component {
             {this.renderSummaryRow('DOB', patientDOB)}
             {this.renderSummaryRow('Address', patientAddress)}
             {this.renderSummaryRow('Phone', profile.telephone)}
-            {this.renderSummaryRow('PCP', 'Dr. Parul Desai')} {/* TODO: hook up */}
+            {this.renderSummaryRow('PCP', '')} {/* TODO: hook up */}
           </div>
         </div>
 
