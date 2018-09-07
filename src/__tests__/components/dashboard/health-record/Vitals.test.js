@@ -1,6 +1,5 @@
 import { fullRenderComponent } from '../../../../utils/testHelpers';
 import Vitals from '../../../../components/dashboard/health-record/Vitals';
-import VerticalTimeline from '../../../../components/dashboard/shared/VerticalTimeline';
 import * as mocks from '../../../../__mocks__/vitalMocks';
 
 function setup() {
@@ -15,6 +14,8 @@ it('renders self and self components', () => {
 
   expect(component).toBeDefined();
   expect(component.find('div.vitals')).toExist();
+  expect(component.find('div.vertical-timeline')).toExist();
+  expect(component.find('div.no-entries')).toHaveLength(0);
 });
 
 it('it renders and filters the vital results as a vertical timeline correctly', () => {
@@ -28,19 +29,9 @@ it('it renders and filters the vital results as a vertical timeline correctly', 
     .find('.info-description').text()).toEqual('Heart rate (observable) 50 bpm');
 });
 
-it('view more button works correctly', () => {
-  const component = setup();
-  expect(component.find('div.vertical-timeline__item')).toHaveLength(3);
-  expect(component.find('button.vertical-timeline__view-more')).toExist();
-  component.find('button.vertical-timeline__view-more').simulate('click');
-  expect(component.find('div.vertical-timeline__item')).toHaveLength(4);
-  expect(component.find('div.vertical-timeline__item-info').at(3)
-    .find('.info-description').text()).toEqual('Heart rate (observable) 40 bpm');
-});
-
 it('displays no entries message if no vital entries are present', () => {
   const component = fullRenderComponent(Vitals, { vitals: [] });
 
   expect(component.find('div.no-entries')).toExist();
-  expect(component.find(VerticalTimeline)).toHaveLength(0);
+  expect(component.find('div.vertical-timeline')).toHaveLength(0);
 });
