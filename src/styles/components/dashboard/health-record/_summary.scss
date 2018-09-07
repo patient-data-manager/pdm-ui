@@ -1,9 +1,20 @@
 .summary {
   margin-bottom: 20px;
 
-  &__image-table {
-    display: flex;
-    flex-direction: row;
+
+  &__image {
+    align-self: center;
+    color: $color-gray-lightest;
+    fill: $color-gray-lightest;
+
+    svg {
+      font-size: 10em;
+    }
+  
+    &-table {
+      display: flex;
+      flex-direction: row;
+    }
   }
 
   &__divider {
