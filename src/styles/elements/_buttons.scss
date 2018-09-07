@@ -31,6 +31,17 @@
     }
   }
 
+  &.button-transparent {
+    background-color: transparent;
+    color: $color-blue;
+    border: 0;
+    font-size: 1em;
+
+    &:hover {
+      color: darken($color-blue, 10%);
+    }
+  }
+
   &.button-responsive {
     font-size: calc(0.8em + 0.6vw);
     min-width: calc(100px + 14vw);

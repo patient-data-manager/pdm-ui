@@ -1,0 +1,84 @@
+.provider-modal {
+  .permissions {
+    &-title {
+      font-style: italic;
+      width: 100%;
+      border-bottom: 1px solid $color-blue-gray-dark;
+      margin-bottom: 20px;
+      padding-bottom: 5px;
+      color: $color-blue-gray-dark;
+    }
+
+    &-buttons {
+      display: flex;
+      flex-direction: column;
+
+      span:not(:first-child) {
+        color: $color-blue-gray-dark;
+        font-size: 1.1em;
+      }
+
+      .radio-button {
+        display: flex;
+        align-items: center;
+        height: 35px;
+
+        .access-radio {
+          margin-bottom: 2px;
+        }
+
+        .label-note {
+          margin-left: 10px;
+          font-style: italic;
+        }
+      }
+    }
+
+    &-partial {
+      margin-left: 40px;
+      color: $color-blue-gray-dark;
+
+      &__section {
+        display: flex;
+        flex-direction: row;
+        justify-content: space-between;
+        padding: 0 10px;
+
+        &-title {
+          font-style: italic;
+          align-self: center;
+        }
+
+        &-access {
+          > div:before {
+            background-image: linear-gradient(to right, $color-blue 33%, rgba(255,255,255,0) 0%);
+            background-position: bottom;
+            background-size: 3px 1px;
+            background-repeat: repeat-x;
+            border: 0;
+          }
+
+          > div:hover:before {
+            border: 0 !important;
+          }
+
+          > div > div > div {
+            font-size: 0.9em;
+            height: 14px;
+            font-style: italic;
+            color: $color-blue-gray-dark;
+            padding-bottom: 5px;
+          }
+        }
+
+        &-access:hover {
+          cursor: pointer;
+        }
+      }
+
+      &__section:hover {
+        background-color: $color-gray-lightest;
+      }
+    }
+  }
+}

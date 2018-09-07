@@ -5,7 +5,7 @@ import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
 import FormControlLabel from '@material-ui/core/FormControlLabel';
 import Radio from '@material-ui/core/Radio';
 import isValid from '../../../utils/isValid';
-import ProviderAccessModal from './ProviderAccessModal';
+import ProviderModal from './ProviderModal';
 
 export default class ProviderCard extends Component {
   constructor(props) {
@@ -119,12 +119,15 @@ export default class ProviderCard extends Component {
           <div className="provider-card__titlebar-name">
             {this.props.provider.name}
           </div>
+
           <div className="provider-card__titlebar-icon">
             {this.renderCollapseExpandIcon()}
           </div>
         </div>
+
         {this.renderDetails()}
-        <ProviderAccessModal
+
+        <ProviderModal
           isOpen={this.state.modalIsOpen}
           closeModal={this.closeAccessModal}
           title={this.props.provider.name} />

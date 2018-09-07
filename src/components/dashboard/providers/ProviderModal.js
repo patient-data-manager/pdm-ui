@@ -1,36 +1,30 @@
 import React, { Component } from 'react';
 import PropTypes from 'prop-types';
-import Modal from 'react-modal';
-import Button from '@material-ui/core/Button';
 import FormControlLabel from '@material-ui/core/FormControlLabel';
 import MenuItem from '@material-ui/core/MenuItem';
 import Radio from '@material-ui/core/Radio';
 import Select from '@material-ui/core/Select';
-import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
 
-export default class ProviderAccessModal extends Component {
+import Modal from '../../elements/Modal';
+
+export default class ProviderModal extends Component {
   constructor(props) {
     super(props);
 
-    let state = { 
+    this.state = {
       accessLevel: 'none',
       sectionAccess: this.getSections()
     };
-    this.state = state;
-  }
-
-  componentWillMount() {
-    Modal.setAppElement('body');
   }
 
   getSections = () => {
     return [
-      { title: 'Summary', access: 'none' }, 
-      { title: 'Conditions', access: 'none' }, 
-      { title: 'Allergies', access: 'none' }, 
-      { title: 'Medications', access: 'none' }, 
-      { title: 'Immunizations', access: 'none' }, 
-      { title: 'Procedures', access: 'none' }, 
+      { title: 'Summary', access: 'none' },
+      { title: 'Conditions', access: 'none' },
+      { title: 'Allergies', access: 'none' },
+      { title: 'Medications', access: 'none' },
+      { title: 'Immunizations', access: 'none' },
+      { title: 'Procedures', access: 'none' },
       { title: 'Labs', access: 'none' },
       { title: 'Vitals', access: 'none' }
     ];
@@ -47,19 +41,23 @@ export default class ProviderAccessModal extends Component {
     this.setState({ sectionAccess: sections });
   }
 
-  renderRadioButton = (value, label) => {
+  renderRadioButton = (value, label, labelNote) => {
     return (
-      <FormControlLabel
-        className="access-radio"
-        control={
-          <Radio
-            checked={this.state.accessLevel === value}
-            onChange={this.handleAccessChange}
-            value={value}
-            name="access"
-            aria-label={value} />
-        }
-        label={label} />
+      <div className="radio-button">
+        <FormControlLabel
+          className="access-radio"
+          label={label}
+          control={
+            <Radio
+              checked={this.state.accessLevel === value}
+              onChange={this.handleAccessChange}
+              value={value}
+              name="access"
+              aria-label={value} />
+          } />
+
+        {labelNote && <span className="label-note">{labelNote}</span>}
+      </div>
     );
   }
 
@@ -95,54 +93,31 @@ export default class ProviderAccessModal extends Component {
   }
 
   render() {
-    return ( 
+    return (
       <Modal
-        isOpen={this.props.isOpen}
-        onRequestClose={this.props.closeModal}
-        className="provider-modal"
-        overlayClassName="provider-modal__overlay">
-
-        <div className="provider-modal__header">
-          <div className="provider-modal__header-title">{this.props.title}</div>
-          <div className="provider-modal__header-icon"> 
-            <FontAwesomeIcon icon="times" onClick={this.props.closeModal} />
-          </div>
-        </div>
-
-        <div className="provider-modal__body">
+        title={this.props.title}
+        submitButtonText="SAVE"
+        cancelButtonText="CANCEL"
+        handleShowModal={this.props.isOpen}
+        handleCloseModal={this.props.closeModal}
+        handleSaveModal={this.props.closeModal}>
+        <div className="provider-modal">
           <div className="permissions-title">Custom Permissions</div>
+
           <div className="permissions-buttons">
             {this.renderRadioButton('none', 'No access')}
-            {this.renderRadioButton('full', 'Full access (includes full view and edit access)')}
+            {this.renderRadioButton('full', 'Full access', '(includes full view and edit access)')}
             {this.renderRadioButton('partial', 'Partial access')}
           </div>
-          {this.renderPartialPermissions()}
-        </div>
 
-        <div className="provider-modal__footer">
-          <div className="provider-modal__footer-buttons">
-            <Button
-              variant="outlined"
-              onClick={this.props.closeModal}
-              className="provider_modal__footer-button button-cancel">
-              CANCEL
-            </Button>
-            <Button
-              variant="contained"
-              color="primary"
-              onClick={this.props.closeModal}
-              // type="submit"
-              className="provider_modal__footer-button button-save">
-              SAVE
-            </Button>
-          </div>
+          {this.renderPartialPermissions()}
         </div>
       </Modal>
     );
   }
 }
 
-ProviderAccessModal.propTypes = {
+ProviderModal.propTypes = {
   closeModal: PropTypes.func.isRequired,
   isOpen: PropTypes.bool.isRequired,
   title: PropTypes.string.isRequired
