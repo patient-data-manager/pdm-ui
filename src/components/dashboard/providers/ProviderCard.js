@@ -28,7 +28,7 @@ export default class ProviderCard extends Component {
   }
 
   openAccessModal = (event) => {
-    if (event.target.value === 'custom') this.setState({ modalIsOpen: true });
+    if (event.target.value === 'custom \u25bc') this.setState({ modalIsOpen: true });
   }
 
   closeAccessModal = () => {
@@ -103,7 +103,7 @@ export default class ProviderCard extends Component {
             <div className="permissions-content__form-group access-group">
               {this.renderRadioButton('none')}
               {this.renderRadioButton('full')}
-              {this.renderRadioButton('custom')}
+              {this.renderRadioButton('custom \u25bc')}
             </div>
           </div>
         </div>

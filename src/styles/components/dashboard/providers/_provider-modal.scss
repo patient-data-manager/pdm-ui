@@ -24,7 +24,7 @@
         height: 35px;
 
         .access-radio {
-          margin-bottom: 2px;
+          margin: 0;
         }
 
         .label-note {
@@ -35,7 +35,7 @@
     }
 
     &-partial {
-      margin-left: 40px;
+      margin-left: 50px;
       color: $color-blue-gray-dark;
 
       &__section {
