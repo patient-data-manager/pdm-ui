@@ -56,7 +56,7 @@ export default class Summary extends Component {
         end_time: moment(date).add(1, 'day').valueOf(),
         className: 'timeline-item theme-dark',
         icon: this.getTimelineIcon(resourceType),
-        hoverElement: this.getHoverElement(startDate, resourceType, title)
+        hoverElement: this.renderHoverElement(startDate, resourceType, title)
       });
     });
 
@@ -79,16 +79,7 @@ export default class Summary extends Component {
     return procedureItems.concat(conditionItems).concat(labItems).concat(medicationItems);
   }
 
-  renderSummaryRow = (key, value) => {
-    return (
-      <div className="summary__table-row">
-        <div className="summary__table-key">{key}</div>
-        <div className="summary__table-value">{value}</div>
-      </div>
-    );
-  }
-
-  getHoverElement = (date, group, text) => {
+  renderHoverElement = (date, group, text) => {
     const dateIcon = ReactDOMServer.renderToString(<FontAwesomeIcon icon="calendar" fixedWidth />);
     const typeIcon = ReactDOMServer.renderToString(<FontAwesomeIcon icon="notes-medical" fixedWidth />);
 
@@ -109,6 +100,15 @@ export default class Summary extends Component {
       return <UserStarIcon height={135} />;
     }
     return <FontAwesomeIcon icon="user-circle" />;
+  }
+
+  renderSummaryRow = (key, value) => {
+    return (
+      <div className="summary__table-row">
+        <div className="summary__table-key">{key}</div>
+        <div className="summary__table-value">{value}</div>
+      </div>
+    );
   }
 
   render() {

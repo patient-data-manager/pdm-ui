@@ -1,16 +1,40 @@
 import { fullRenderComponent } from '../../../../utils/testHelpers';
 import Summary from '../../../../components/dashboard/health-record/Summary';
+import { healthRecordMockA, healthRecordMockB } from '../../../../__mocks__/healthRecordMocks';
 import { patientMock } from '../../../../__mocks__/patientMocks';
 import { profileMockA, profileMockB, profileMockD } from '../../../../__mocks__/profileMocks';
 
-function setup(profile) {
-  const props = {
+
+function setup(profile, healthRecord) {
+  let props = { 
     patient: patientMock, 
-    profile: profile
+    profile: profile,
+    healthRecord: healthRecord
   };
 
   return fullRenderComponent(Summary, props);
 }
+
+it('renders self and self components', () => {
+  const component = setup(profileMockB, healthRecordMockA);
+
+  expect(component).toBeDefined();
+  expect(component.find('div.summary__image')).toExist();
+  expect(component.find('div.summary__divider')).toExist();
+  expect(component.find('div.summary__table')).toExist();
+  expect(component.find('div.summary__table-row')).toHaveLength(6);
+  expect(component.find('div.summary__timeline')).toExist();
+});
+
+it('does not display timeline if there is no health record', () => {
+  const component = setup(profileMockB);
+  expect(component.find('div.horizontal-timeline')).toHaveLength(0);
+});
+
+it('does not display timeline if there are no items', () => {
+  const component = setup(profileMockB, healthRecordMockB);
+  expect(component.find('div.horizontal-timeline')).toHaveLength(0);
+});
 
 it('renders self and self components', () => {
   const component = setup(profileMockB);
