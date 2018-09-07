@@ -32,7 +32,7 @@ it('renders titlebar correctly', () => {
 it('renders date details correctly', () => {
   const component = setup(mocks.providerMockC);
 
-  component.find('div.provider-card__titlebar-icon').find('svg').simulate('click');
+  component.find('div.provider-card__titlebar').simulate('click');
   expect(component.find('div.details-dates')).toExist();
   expect(component.find('div.details-dates-added-on').find('div.date-key').text()).toEqual('Added on');
   expect(component.find('div.details-dates-added-on').find('div.date-value').text()).toEqual('2001-09-16');
@@ -43,7 +43,7 @@ it('renders date details correctly', () => {
 it('does not display date details if field values not defined', () => {
   const component = setup(mocks.providerMockA);
 
-  component.find('div.provider-card__titlebar-icon').find('svg').simulate('click');
+  component.find('div.provider-card__titlebar').simulate('click');
   expect(component.find('div.details-dates')).toExist();
   expect(component.find('div.details-dates-added-on').find('div.date-key').text()).toEqual('Added on');
   expect(component.find('div.details-dates-added-on').find('div.date-value').text()).toEqual('');
@@ -54,7 +54,7 @@ it('does not display date details if field values not defined', () => {
 it('renders logo correctly', () => {
   const component = setup(mocks.providerMockC);
 
-  component.find('div.provider-card__titlebar-icon').find('svg').simulate('click');
+  component.find('div.provider-card__titlebar').simulate('click');
   expect(component.find('div.details-logo')).toExist();
   expect(component.find('img.details-logo__img').prop('src'))
     .toEqual('/assets/images/provider-logos/partners-healthcare.png');
@@ -63,7 +63,7 @@ it('renders logo correctly', () => {
 it('renders permission details correctly', () => {
   const component = setup(mocks.providerMockC);
   
-  component.find('div.provider-card__titlebar-icon').find('svg').simulate('click');
+  component.find('div.provider-card__titlebar').simulate('click');
   expect(component.find('div.details-permissions')).toExist();
   expect(component.find('div.permissions-title')).toExist();
   expect(component.find('div.permissions-content')).toExist();
@@ -83,20 +83,65 @@ it('no provider logo is displayed if no imageUrl is given', () => {
   expect(component.find('div.details-logo')).toHaveLength(0);
 });
 
-it('component collapses and expands on click', () => {
+it('details collapse and expand on click', () => {
   const component = setup(mocks.providerMockC);
 
   expect(component.find('div.provider-card__titlebar')).toExist();
   expect(component.find('div.provider-card__details')).toHaveLength(0);
   expect(component.find('div.provider-card__titlebar-icon').find('svg').prop('data-icon')).toEqual('chevron-right');
 
-  component.find('div.provider-card__titlebar-icon').find('svg').simulate('click');
+  component.find('div.provider-card__titlebar').simulate('click');
   expect(component.find('div.provider-card__titlebar')).toExist();
   expect(component.find('div.provider-card__details')).toExist();
   expect(component.find('div.provider-card__titlebar-icon').find('svg').prop('data-icon')).toEqual('chevron-down');
 
-  component.find('div.provider-card__titlebar-icon').find('svg').simulate('click');
+  component.find('div.provider-card__titlebar').simulate('click');
   expect(component.find('div.provider-card__titlebar')).toExist();
   expect(component.find('div.provider-card__details')).toHaveLength(0);
   expect(component.find('div.provider-card__titlebar-icon').find('svg').prop('data-icon')).toEqual('chevron-right');
+});
+
+it('clicking on the custom radio button opens the provider access modal', () => {
+  const component = setup(mocks.providerMockC);
+
+  component.find('div.provider-card__titlebar').simulate('click');
+  expect(component.find('div.provider-modal')).toHaveLength(0);
+
+  component.find('label.access-radio').find('input').at(2).simulate('click');
+  expect(component.find('div.provider-modal')).toExist();
+});
+
+it('clicking the x button closes the provider access modal', () => {
+  const component = setup(mocks.providerMockC);
+
+  component.find('div.provider-card__titlebar').simulate('click');
+  component.find('label.access-radio').find('input').at(2).simulate('click');
+  expect(component.find('div.provider-modal')).toExist();
+
+  component.find('div.provider-modal__header-icon').find('svg').simulate('click');
+  expect(component.find('div.provider-modal')).toHaveLength(0);
+});
+
+
+it('clicking the cancel button closes the provider access modal', () => {
+  const component = setup(mocks.providerMockC);
+
+  component.find('div.provider-card__titlebar').simulate('click');
+  component.find('label.access-radio').find('input').at(2).simulate('click');
+  expect(component.find('div.provider-modal')).toExist();
+
+  component.find('div.provider-modal').find('button.button-cancel').simulate('click');
+  expect(component.find('div.provider-modal')).toHaveLength(0);
+});
+
+it('clicking on save button closes the provider access modal', () => {
+  // TO-DO: test that it actually saves everything too when hooked up
+  const component = setup(mocks.providerMockC);
+
+  component.find('div.provider-card__titlebar').simulate('click');
+  component.find('label.access-radio').find('input').at(2).simulate('click');
+  expect(component.find('div.provider-modal')).toExist();
+
+  component.find('div.provider-modal').find('button.button-save').simulate('click');
+  expect(component.find('div.provider-modal')).toHaveLength(0);
 });
