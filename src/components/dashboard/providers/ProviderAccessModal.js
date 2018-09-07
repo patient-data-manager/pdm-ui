@@ -42,7 +42,6 @@ export default class ProviderAccessModal extends Component {
   }
 
   handleSelectChange = index => event => {
-    console.log('HEREEEEE')
     let sections = this.state.sectionAccess;
     sections[index].access = event.target.value;
     this.setState({ sectionAccess: sections });
