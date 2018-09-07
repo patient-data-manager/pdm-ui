@@ -1,5 +1,5 @@
 import { fullRenderComponent } from '../../../../utils/testHelpers';
-import ProviderAccessModal from '../../../../components/dashboard/providers/ProviderAccessModal';
+import ProviderModal from '../../../../components/dashboard/providers/ProviderModal';
 import * as mocks from '../../../../__mocks__/providerMocks';
 
 function setup() {
@@ -9,7 +9,7 @@ function setup() {
     closeModal: jest.fn()
   };
 
-  return fullRenderComponent(ProviderAccessModal, props);
+  return fullRenderComponent(ProviderModal, props);
 }
 
 it('renders self and self components', () => {
