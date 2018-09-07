@@ -4,6 +4,10 @@ import ReactModal from 'react-modal';
 import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
 
 export default class Modal extends Component {
+  componentWillMount() {
+    ReactModal.setAppElement('body');
+  }
+
   handleFormSubmit = (event) => {
     event.preventDefault();
     this.props.handleSaveModal(event);

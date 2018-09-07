@@ -3,7 +3,6 @@ import 'babel-polyfill';
 import React from 'react';
 import { render } from 'react-dom';
 import { PersistGate } from 'redux-persist/integration/react';
-import ReactModal from 'react-modal';
 
 import registerServiceWorker from './utils/registerServiceWorker';
 import configureStore from './store/configureStore';
@@ -22,9 +21,6 @@ window.store = store;
 
 let axiosDefaults = require('axios/lib/defaults');
 axiosDefaults.baseURL = process.env.REACT_APP_BACKEND_URL || 'http://127.0.0.1:3000';
-
-// set modal root
-ReactModal.setAppElement('#root');
 
 render(
   <PersistGate loading={null} persistor={persistor}>
