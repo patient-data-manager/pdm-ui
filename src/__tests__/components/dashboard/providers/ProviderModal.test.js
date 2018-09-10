@@ -41,11 +41,12 @@ it('renders body section correctly', () => {
   expect(component.find('label.access-radio')).toHaveLength(3);
   expect(component.find('label.access-radio').at(0).find('span').at(3).text()).toEqual('No access');
   expect(component.find('label.access-radio').at(1).find('span').at(3).text()).toEqual('Full access');
-  // add test for note
+  expect(component.find('div.radio-button').at(1).find('span.label-note').text())
+    .toEqual('(includes full view and edit access)');
   expect(component.find('label.access-radio').at(2).find('span').at(3).text()).toEqual('Partial access');
 });
 
-it.only('renders footer section correctly', () => {
+it('renders footer section correctly', () => {
   const component = setup(mocks.providerMockC);
 
   expect(component.find('footer.modal__footer')).toExist();
