@@ -42,10 +42,16 @@ export default class Modal extends Component {
 
           <footer className="modal__footer">
             {cancelButtonText &&
-              <button className="button button-transparent" onClick={handleCloseModal}>{cancelButtonText}</button>
+              <button className="button button-transparent button-cancel" onClick={handleCloseModal}>
+                {cancelButtonText}
+              </button>
             }
 
-            {submitButtonText && <button type="submit" className="button button-primary">{submitButtonText}</button>}
+            {submitButtonText && 
+              <button type="submit" className="button button-primary button-save" onClick={handleCloseModal}>
+                {submitButtonText}
+              </button>
+            }
           </footer>
         </form>
       </ReactModal>

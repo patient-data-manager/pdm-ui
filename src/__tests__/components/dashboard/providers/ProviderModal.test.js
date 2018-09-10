@@ -17,18 +17,18 @@ it('renders self and self components', () => {
 
   expect(component).toBeDefined();
   expect(component.find('div.provider-modal')).toExist();
-  expect(component.find('div.provider-modal__header')).toExist();
-  expect(component.find('div.provider-modal__body')).toExist();
-  expect(component.find('div.provider-modal__footer')).toExist();
+  expect(component.find('div.modal__header')).toExist();
+  expect(component.find('div.modal__body')).toExist();
+  expect(component.find('footer.modal__footer')).toExist();
 });
 
 it('renders header section correctly', () => {
   const component = setup(mocks.providerMockC);
 
-  expect(component.find('div.provider-modal__header-title')).toExist();
-  expect(component.find('div.provider-modal__header-title').text()).toEqual('this is a title');
-  expect(component.find('div.provider-modal__header-icon')).toExist();
-  expect(component.find('div.provider-modal__header-icon').find('svg').prop('data-icon')).toEqual('times');
+  expect(component.find('div.modal__heading')).toExist();
+  expect(component.find('div.modal__heading').text()).toEqual('this is a title');
+  expect(component.find('div.modal__buttonbar')).toExist();
+  expect(component.find('div.modal__buttonbar').find('svg').prop('data-icon')).toEqual('times');
 });
 
 it('renders body section correctly', () => {
@@ -40,16 +40,16 @@ it('renders body section correctly', () => {
   expect(component.find('div.permissions-buttons')).toExist();
   expect(component.find('label.access-radio')).toHaveLength(3);
   expect(component.find('label.access-radio').at(0).find('span').at(3).text()).toEqual('No access');
-  expect(component.find('label.access-radio').at(1)
-    .find('span').at(3).text()).toEqual('Full access (includes full view and edit access)');
+  expect(component.find('label.access-radio').at(1).find('span').at(3).text()).toEqual('Full access');
+  // add test for note
   expect(component.find('label.access-radio').at(2).find('span').at(3).text()).toEqual('Partial access');
 });
 
-it('renders footer section correctly', () => {
+it.only('renders footer section correctly', () => {
   const component = setup(mocks.providerMockC);
 
-  expect(component.find('div.provider-modal__footer-buttons')).toExist();
-  expect(component.find('button.provider_modal__footer-button')).toHaveLength(2);
+  expect(component.find('footer.modal__footer')).toExist();
+  expect(component.find('footer.modal__footer').find('button')).toHaveLength(2);
   expect(component.find('button.button-cancel').text()).toEqual('CANCEL');
   expect(component.find('button.button-save').text()).toEqual('SAVE');
 });

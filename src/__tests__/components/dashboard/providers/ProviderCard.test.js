@@ -72,7 +72,7 @@ it('renders permission details correctly', () => {
   expect(component.find('label.access-radio')).toHaveLength(3);
   expect(component.find('label.access-radio').at(0).find('span').at(3).text()).toEqual('none');
   expect(component.find('label.access-radio').at(1).find('span').at(3).text()).toEqual('full');
-  expect(component.find('label.access-radio').at(2).find('span').at(3).text()).toEqual('custom');
+  expect(component.find('label.access-radio').at(2).find('span').at(3).text()).toEqual('custom ▼');
 });
 
 it('no provider logo is displayed if no imageUrl is given', () => {
@@ -112,25 +112,27 @@ it('clicking on the custom radio button opens the provider access modal', () => 
 });
 
 it('clicking the x button closes the provider access modal', () => {
+  // TO-DO: add that it resets the modal to original state when everything is hooked up
   const component = setup(mocks.providerMockC);
 
   component.find('div.provider-card__titlebar').simulate('click');
   component.find('label.access-radio').find('input').at(2).simulate('click');
   expect(component.find('div.provider-modal')).toExist();
 
-  component.find('div.provider-modal__header-icon').find('svg').simulate('click');
+  component.find('div.modal__buttonbar').find('button').simulate('click');
   expect(component.find('div.provider-modal')).toHaveLength(0);
 });
 
 
 it('clicking the cancel button closes the provider access modal', () => {
+  // TO-DO: add that it resets the modal to original state when everything is hooked up
   const component = setup(mocks.providerMockC);
 
   component.find('div.provider-card__titlebar').simulate('click');
   component.find('label.access-radio').find('input').at(2).simulate('click');
   expect(component.find('div.provider-modal')).toExist();
 
-  component.find('div.provider-modal').find('button.button-cancel').simulate('click');
+  component.find('footer.modal__footer').find('button.button-cancel').simulate('click');
   expect(component.find('div.provider-modal')).toHaveLength(0);
 });
 
@@ -142,6 +144,6 @@ it('clicking on save button closes the provider access modal', () => {
   component.find('label.access-radio').find('input').at(2).simulate('click');
   expect(component.find('div.provider-modal')).toExist();
 
-  component.find('div.provider-modal').find('button.button-save').simulate('click');
+  component.find('footer.modal__footer').find('button.button-save').simulate('click');
   expect(component.find('div.provider-modal')).toHaveLength(0);
 });
