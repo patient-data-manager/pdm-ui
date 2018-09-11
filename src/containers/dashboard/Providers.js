@@ -8,7 +8,9 @@ import ProviderCard from '../../components/dashboard/providers/ProviderCard';
 
 export class Providers extends Component {
   componentWillMount() {
-    if (this.props.profile) this.props.loadProfileProviders(this.props.profile.id);
+    if (this.props.profileId) {
+      this.props.loadProfileProviders(this.props.profileId);
+    }
   }
 
   providersList = () => {
@@ -75,7 +77,7 @@ export class Providers extends Component {
 }
 
 Providers.propTypes = {
-  profile: PropTypes.object,
+  profileId: PropTypes.number,
   providers: PropTypes.array,
   profileProviders: PropTypes.array,
   linkProvider: PropTypes.func.isRequired,
@@ -91,7 +93,7 @@ function mapDispatchToProps(dispatch) {
 
 function mapStateToProps(state) {
   return {
-    profile: state.profiles.activeProfile,
+    profileId: state.profiles.activeProfileId,
     providers: state.providers.providers,
     profileProviders: state.providers.profileProviders
   };
