@@ -6,7 +6,7 @@ import { profileProviderMockA, profileProviderMockB } from '../../../__mocks__/p
 
 function setup(providers = [], profileProviders = []) {
   const store = {
-    profiles: { activeProfile: profileMockA },
+    profiles: { activeProfileId: profileMockA.id },
     providers: { providers, profileProviders }
   };
 
@@ -18,14 +18,14 @@ function setup(providers = [], profileProviders = []) {
   return fullRenderContainer(Providers, props, store);
 }
 
-it.only('renders self and self components', () => {
+it('renders self and self components', () => {
   const providers = [providerMockA, providerMockB, providerMockC];
   const profileProviders = [profileProviderMockA, profileProviderMockB];
   const component = setup(providers, profileProviders);
 
   expect(component).toBeDefined();
   expect(component.find('div.providers')).toExist();
-  expect(component.find('div.providers-search')).toExist();
+  expect(component.find('div.provider-search')).toExist();
   expect(component.find('div.providers-list')).toExist();
   expect(component.find('div.no-entries')).toHaveLength(0);
 });

@@ -3,14 +3,16 @@ import PropTypes from 'prop-types';
 import { connect } from 'react-redux';
 import { bindActionCreators } from 'redux';
 import _ from 'lodash';
+
 import { linkProvider, loadProfileProviders } from '../../actions/providers';
+
 import ProviderCard from '../../components/dashboard/providers/ProviderCard';
 import ProviderSearch from '../../components/dashboard/providers/ProviderSearch';
 
 export class Providers extends Component {
   componentWillMount() {
-    if (this.props.profileId) {
-      this.props.loadProfileProviders(this.props.profileId);
+    if (this.props.activeProfileId) {
+      this.props.loadProfileProviders(this.props.activeProfileId);
     }
   }
 
@@ -68,12 +70,13 @@ export class Providers extends Component {
   render() {
     return (
       <div className="providers">
-        <div className="providers-search">
+        <div className="provider-search">
           <ProviderSearch
             providers={this.props.providers}
             linkProvider={this.props.linkProvider}
-            profile={this.props.profile} />
+            activeProfileId={this.props.activeProfileId} />
         </div>
+
         <div className="providers-list">
           {this.renderProvidersList()}
         </div>
@@ -83,7 +86,7 @@ export class Providers extends Component {
 }
 
 Providers.propTypes = {
-  profileId: PropTypes.number,
+  activeProfileId: PropTypes.number,
   providers: PropTypes.array,
   profileProviders: PropTypes.array,
   linkProvider: PropTypes.func.isRequired,
@@ -99,7 +102,7 @@ function mapDispatchToProps(dispatch) {
 
 function mapStateToProps(state) {
   return {
-    profileId: state.profiles.activeProfileId,
+    activeProfileId: state.profiles.activeProfileId,
     providers: state.providers.providers,
     profileProviders: state.providers.profileProviders
   };

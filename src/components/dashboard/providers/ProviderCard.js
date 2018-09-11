@@ -4,6 +4,7 @@ import moment from 'moment';
 import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
 import FormControlLabel from '@material-ui/core/FormControlLabel';
 import Radio from '@material-ui/core/Radio';
+
 import isValid from '../../../utils/isValid';
 
 export default class ProviderCard extends Component {
