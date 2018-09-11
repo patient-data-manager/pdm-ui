@@ -10,7 +10,7 @@ export default class ProviderCard extends Component {
   constructor(props) {
     super(props);
 
-    this.state = { 
+    this.state = {
       detailsExpanded: false,
       healthRecordAccess: 'none'
     };
@@ -77,7 +77,7 @@ export default class ProviderCard extends Component {
             <div className="details-dates-added-on">
               <div className="date-key">Added on</div>
               <div className="date-value">{this.formatDate(this.props.provider.addedOn)}</div>
-            </div>          
+            </div>
             <div className="details-dates-last-updated">
               <div className="date-key">Last updated</div>
               <div className="date-value">{this.formatDate(this.props.provider.lastUpdated)}</div>
@@ -101,9 +101,9 @@ export default class ProviderCard extends Component {
   }
 
   render() {
-    return ( 
+    return (
       <div className="provider-card">
-        <div className="provider-card__titlebar" onClick={this.toggleDetails} onKeyPress={this.toggleDetails} 
+        <div className="provider-card__titlebar" onClick={this.toggleDetails} onKeyPress={this.toggleDetails}
           role="button" tabIndex={0}>
           <div className="provider-card__titlebar-name">
             {this.props.provider.name}
