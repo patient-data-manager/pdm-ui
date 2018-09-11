@@ -68,7 +68,7 @@ export class Providers extends Component {
   render() {
     return (
       <div className="providers">
-        <div className="providers-lookup">
+        <div className="providers-search">
           <ProviderSearch
             providers={this.props.providers}
             linkProvider={this.props.linkProvider}

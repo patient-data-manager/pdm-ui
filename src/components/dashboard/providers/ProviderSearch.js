@@ -30,14 +30,11 @@ class ProviderSearch extends Component {
   }
 
   renderSuggestion(provider) {
-    return (
-      <div>{provider.name}</div>);
+    return (<div>{provider.name}</div>);
   }
 
-  onChange = ({ newValue }) => {
-    this.setState({
-      value: newValue
-    });
+  onChange = (event, { newValue }) => {
+    this.setState({ value: newValue });
   };
 
   // Autosuggest will call this function every time you need to update suggestions.
@@ -50,12 +47,10 @@ class ProviderSearch extends Component {
 
   // Autosuggest will call this function every time you need to clear suggestions.
   onSuggestionsClearRequested = () => {
-    this.setState({
-      suggestions: []
-    });
+    this.setState({ suggestions: [] });
   };
 
-  onSuggestionSelected = (props) => {
+  onSuggestionSelected = (event, props) => {
     this.onProviderSelected(props.suggestion);
   }
 
