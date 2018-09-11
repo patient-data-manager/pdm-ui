@@ -1,5 +1,6 @@
 import React, { Component } from 'react';
 import PropTypes from 'prop-types';
+import isValid from '../../../utils/isValid';
 import getDisplayString from '../../../utils/getDisplayString';
 
 import VerticalTimeline from '../shared/VerticalTimeline';
@@ -13,7 +14,10 @@ export default class Vitals extends Component {
 
   vitalDescription = (vital) => {
     let text = getDisplayString(vital, 'code');
-    if (vital.valueQuantity) text = `${text} ${vital.valueQuantity.value} ${vital.valueQuantity.unit}`;
+    if (isValid(vital.valueQuantity)) text = `${text} ${vital.valueQuantity.value} ${vital.valueQuantity.unit}`;
+    // else if (!isValid(vital.valueQuantity) && text === 'Blood Pressure') {
+    //   console.log(vital)
+    // }
     return text;
   }
 

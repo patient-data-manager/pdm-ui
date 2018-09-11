@@ -9,6 +9,7 @@ import _ from 'lodash';
 import getDisplayString from '../../../utils/getDisplayString';
 import getLabs from '../../../utils/healthRecordResources';
 import getProperty from '../../../utils/getProperty';
+import isValid from '../../../utils/isValid';
 
 import HorizontalTimeline from '../shared/HorizontalTimeline';
 
@@ -40,7 +41,7 @@ export default class Summary extends Component {
   }
 
   getResourceItems = (resources, resourceType, group, displayField, dateField) => {
-    if (!resources) return [];
+    if (!isValid(resources)) return [];
 
     let items = [];
     resources.forEach((resource) => {
@@ -65,7 +66,7 @@ export default class Summary extends Component {
 
   getSummaryItems = () => {
     const { healthRecord } = this.props;
-    if (!healthRecord) return [];
+    if (!isValid(healthRecord)) return [];
 
     const procedureItems = this.getResourceItems(
       healthRecord.Procedure, 'procedure', 1, 'code', 'performedPeriod.start'
