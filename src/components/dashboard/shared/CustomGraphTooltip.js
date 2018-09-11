@@ -2,13 +2,14 @@ import React, { Component } from 'react';
 import PropTypes from 'prop-types';
 import moment from 'moment';
 import _ from 'lodash';
+import isValid from '../../../utils/isValid';
 
 export default class CustomGraphTooltip extends Component {
   render() {
     const { title, unit, active, payload } = this.props;
     const details = payload.length > 0 ? payload[0].payload : null;
 
-    if (active && details) {
+    if (active && isValid(details)) {
       const displayDate = moment(details.date).format('MMM D, YYYY');
       return (
         <div className="custom-graph-tooltip">

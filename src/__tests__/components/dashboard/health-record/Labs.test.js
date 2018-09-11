@@ -33,11 +33,11 @@ it('renders the lab results as a vertical timeline correctly', () => {
 
   expect(component.find('div.vertical-timeline__item')).toHaveLength(3);
   expect(component.find('div.vertical-timeline__item-info').at(0)
-    .find('.info-description').text()).toEqual("Blood Test (procedure) 15 L");
+    .find('.info-description').text()).toEqual("Blood Test (procedure) 15.19 L");
   expect(component.find('div.vertical-timeline__item-info').at(1)
-    .find('.info-description').text()).toEqual('Hematology test (procedure) 2 mL');
+    .find('.info-description').text()).toEqual('White blood cell count (procedure) 5.13 mL');
   expect(component.find('div.vertical-timeline__item-info').at(2)
-    .find('.info-description').text()).toEqual('White blood cell count (procedure) 5 mL');
+    .find('.info-description').text()).toEqual('Hematology test (procedure) 2.32 mL');
 });
 
 it('groups and displays lab values as graphs', () => {

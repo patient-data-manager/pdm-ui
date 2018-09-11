@@ -9,7 +9,7 @@ const labMockA = {
     text: 'Blood Test (procedure)'
   },
   id: '7b3c17a0-6e53-0136-7848-4a00016726c0',
-  valueQuantity: { value: '15', unit: 'L' }
+  valueQuantity: { value: '15.192038412938471234', unit: 'L' }
 };
 
 const labMockB = {
@@ -23,11 +23,11 @@ const labMockB = {
     text: 'Hematology test (procedure)'
   },
   id: '7b3c17a0-6e53-0136-7848-4a00016726c0',
-  valueQuantity: { value: '2', unit: 'mL' }
+  valueQuantity: { value: '2.3245234524', unit: 'mL' }
 };
 
 const labMockC = {
-  effectiveDateTime: '2009-09-05T18:19:22-04:00',
+  effectiveDateTime: '1999-09-05T18:19:22-04:00',
   code: {
     coding: [{
       code: '767002',
@@ -37,11 +37,11 @@ const labMockC = {
     text: 'White blood cell count (procedure)'
   },
   id: '7b3c17a0-6e53-0136-7848-4a00016726c0',
-  valueQuantity: { value: '5', unit: 'mL' }
+  valueQuantity: { value: '5.93487109234871029', unit: 'mL' }
 };
 
 const labMockD = {
-  effectiveDateTime: '2009-09-07T18:19:22-04:00',
+  effectiveDateTime: '2014-09-07T18:19:22-04:00',
   code: {
     coding: [{
       code: '767002',
@@ -51,7 +51,7 @@ const labMockD = {
     text: 'White blood cell count (procedure)'
   },
   id: '7b3c17a0-6e53-0136-7848-4a00016726c0',
-  valueQuantity: { value: '5', unit: 'mL' }
+  valueQuantity: { value: '5.12941234', unit: 'mL' }
 };
 
 const labMockE = {
@@ -69,7 +69,7 @@ const labMockE = {
 };
 
 const labMockF = {
-  effectiveDateTime: '2009-09-05T18:19:22-04:00',
+  effectiveDateTime: '2001-09-05T18:19:22-04:00',
   code: {
     coding: [{
       code: '767003',
@@ -83,7 +83,7 @@ const labMockF = {
 };
 
 const labMockG = {
-  effectiveDateTime: '2009-09-06T18:19:22-04:00',
+  effectiveDateTime: '1994-09-06T18:19:22-04:00',
   code: {
     coding: [{
       code: '767003',
@@ -97,7 +97,7 @@ const labMockG = {
 };
 
 const labMockH = {
-  effectiveDateTime: '2009-09-07T18:19:22-04:00',
+  effectiveDateTime: '2008-09-07T18:19:22-04:00',
   code: {
     coding: [{
       code: '767003',

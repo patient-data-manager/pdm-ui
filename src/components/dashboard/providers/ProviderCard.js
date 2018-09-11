@@ -4,6 +4,7 @@ import moment from 'moment';
 import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
 import FormControlLabel from '@material-ui/core/FormControlLabel';
 import Radio from '@material-ui/core/Radio';
+import isValid from '../../../utils/isValid';
 
 export default class ProviderCard extends Component {
   constructor(props) {
@@ -25,7 +26,7 @@ export default class ProviderCard extends Component {
   }
 
   formatDate = (date) => {
-    if (date !== null && date !== undefined) {
+    if (isValid(date)) {
       return moment(date).format('YYYY-MM-DD');
     }
   }
@@ -39,7 +40,7 @@ export default class ProviderCard extends Component {
   }
 
   renderLogo = () => {
-    if (!this.props.imageUrl) return null;
+    if (!isValid(this.props.imageUrl)) return null;
 
     return (
       <div className="details-logo">

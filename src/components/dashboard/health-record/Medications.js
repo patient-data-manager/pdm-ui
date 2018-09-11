@@ -8,6 +8,7 @@ import classNames from 'classnames';
 
 import getDisplayString from '../../../utils/getDisplayString';
 import getProperty from '../../../utils/getProperty';
+import isValid from '../../../utils/isValid';
 import HorizontalTimeline from '../shared/HorizontalTimeline';
 import TableList from '../shared/TableList';
 import VerticalTimeline from '../shared/VerticalTimeline';
@@ -55,7 +56,7 @@ export default class Medications extends Component {
   getMedicationItems = () => {
     const { medicationRequests, medicationStatements } = this.props;
     const medications = medicationRequests.concat(medicationStatements);
-    if (!medications) return [];
+    if (!isValid(medications)) return [];
 
     let items = [];
     medications.forEach((medication) => {
