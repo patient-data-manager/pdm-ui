@@ -79,15 +79,3 @@ it('renders partial permissions section correctly', () => {
   expect(component.find('div.permissions-partial__section-title').at(6).text()).toEqual('Labs');
   expect(component.find('div.permissions-partial__section-title').at(7).text()).toEqual('Vitals');
 });
-
-// TO-DO: fix this
-// it('changing partial permissions updates the view and the state', () => {
-//   const component = setup(mocks.providerMockC);
-
-//   component.setState({ accessLevel: 'partial' });
-
-//   const sectionInput = component.find('div.permissions-partial__section-access').at(0).find('input');
-//   expect(sectionInput.prop('value')).toEqual('none');
-//   sectionInput.simulate('change', { target: { value: 'view' } });
-//   expect(sectionInput.prop('value')).toEqual('view');
-// });
