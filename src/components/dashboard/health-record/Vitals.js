@@ -25,7 +25,9 @@ export default class Vitals extends Component {
 
   vitalDescription = (vital) => {
     let text = getDisplayString(vital, 'code');
-    if (isValid(vital.valueQuantity)) text = `${text} ${_.round(vital.valueQuantity.value, 2)} ${vital.valueQuantity.unit}`;
+    if (isValid(vital.valueQuantity)) {
+      text = `${text} ${_.round(vital.valueQuantity.value, 2)} ${vital.valueQuantity.unit}`;
+    }
     return text;
   }
 
