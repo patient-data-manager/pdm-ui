@@ -55,11 +55,7 @@ it('displays the correct images for each provider', () => {
   const component = setup(providers, profileProviders);
 
   expect(component.find('div.provider-card__titlebar-icon')).toHaveLength(2);
-
-  component.find('div.provider-card__titlebar-icon').at(0).find('svg').simulate('click');
   expect(component.find('div.provider-card__details').at(0).find('img.details-logo__img')).toHaveLength(0);
-
-  component.find('div.provider-card__titlebar-icon').at(1).find('svg').simulate('click');
   expect(component.find('div.provider-card__details').at(1).find('img.details-logo__img')).toHaveLength(1);
   expect(component.find('div.provider-card__details').at(1).find('img.details-logo__img').prop('src'))
     .toEqual('/assets/images/provider-logos/fitbit.png');
