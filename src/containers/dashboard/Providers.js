@@ -5,7 +5,8 @@ import { bindActionCreators } from 'redux';
 import _ from 'lodash';
 import { linkProvider, loadProfileProviders } from '../../actions/providers';
 import ProviderCard from '../../components/dashboard/providers/ProviderCard';
-import ProviderLookup from '../../components/dashboard/providers/ProviderLookup';
+import ProviderSearch from '../../components/dashboard/providers/ProviderSearch';
+
 export class Providers extends Component {
   componentWillMount() {
     if (this.props.profileId) {
@@ -67,8 +68,12 @@ export class Providers extends Component {
   render() {
     return (
       <div className="providers">
-        <ProviderLookup providers={this.props.providers} linkProvider={this.props.linkProvider} profile={this.props.profile}/>
-        {/* TO-DO: insert search bar here */}
+        <div className="providers-lookup">
+          <ProviderSearch
+            providers={this.props.providers}
+            linkProvider={this.props.linkProvider}
+            profile={this.props.profile} />
+        </div>
         <div className="providers-list">
           {this.renderProvidersList()}
         </div>
