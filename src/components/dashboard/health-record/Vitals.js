@@ -3,6 +3,7 @@ import PropTypes from 'prop-types';
 import isValid from '../../../utils/isValid';
 import getBloodPressureString from '../../../utils/getBloodPressureString';
 import getDisplayString from '../../../utils/getDisplayString';
+import _ from 'lodash';
 
 import VerticalTimeline from '../shared/VerticalTimeline';
 
@@ -24,7 +25,7 @@ export default class Vitals extends Component {
 
   vitalDescription = (vital) => {
     let text = getDisplayString(vital, 'code');
-    if (isValid(vital.valueQuantity)) text = `${text} ${vital.valueQuantity.value} ${vital.valueQuantity.unit}`;
+    if (isValid(vital.valueQuantity)) text = `${text} ${_.round(vital.valueQuantity.value, 2)} ${vital.valueQuantity.unit}`;
     return text;
   }
 

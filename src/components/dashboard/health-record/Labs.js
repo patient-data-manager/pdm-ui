@@ -6,6 +6,7 @@ import isValid from '../../../utils/isValid';
 import isValidAndNotEmpty from '../../../utils/isValidAndNotEmpty';
 import LineGraph from '../shared/LineGraph';
 import VerticalTimeline from '../shared/VerticalTimeline';
+import _ from 'lodash';
 
 export default class Labs extends Component {
   labs = () => {
@@ -16,7 +17,7 @@ export default class Labs extends Component {
 
   labDescription = (lab) => {
     let text = getDisplayString(lab, 'code');
-    if (lab.valueQuantity) text = `${text} ${lab.valueQuantity.value} ${lab.valueQuantity.unit}`;
+    if (lab.valueQuantity) text = `${text} ${_.round(lab.valueQuantity.value, 2)} ${lab.valueQuantity.unit}`;
     return text;
   }
 
