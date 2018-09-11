@@ -13,7 +13,7 @@ export default class ProviderCard extends Component {
     super(props);
 
     this.state = {
-      detailsExpanded: false,
+      detailsExpanded: true,
       healthRecordAccess: 'none',
       modalIsOpen: false
     };
