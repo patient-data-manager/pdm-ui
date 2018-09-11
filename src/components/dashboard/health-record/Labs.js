@@ -63,7 +63,7 @@ export default class Labs extends Component {
           unit={group.unit} />
       );
     }
-    return graphs.length > 0 ? graphs : '' ;
+    return graphs.length > 0 ? graphs : null;
   }
 
   render() {

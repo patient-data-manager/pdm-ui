@@ -3,11 +3,20 @@ import PropTypes from 'prop-types';
 import getDisplayString from '../../../utils/getDisplayString';
 
 import TableList from '../shared/TableList';
+import VerticalTimeline from '../shared/VerticalTimeline';
 
 export default class Allergies extends Component {
+  allergies() {
+    return this.props.allergies.map((allergy) => {
+      return { date: allergy.assertedDate, text: getDisplayString(allergy, 'code') };
+    });
+  }
+
   currentAllergies() {
+    const currentAllergies = this.props.allergies.filter((allergy) => allergy.clinicalStatus === 'active');
+
     let filteredCurrentAllergies = [];
-    this.props.allergies.forEach((allergy, index) => {
+    currentAllergies.forEach((allergy, index) => {
       filteredCurrentAllergies[index] = {
         allergy: getDisplayString(allergy, 'code'),
         criticality: allergy.criticality,
@@ -27,6 +36,7 @@ export default class Allergies extends Component {
           title="Current allergies list"
           headers={['allergy', 'criticality', 'current status']}
           data={this.currentAllergies()} />
+        <VerticalTimeline items={this.allergies()} icon="allergies" />
       </div>
     );
   }
