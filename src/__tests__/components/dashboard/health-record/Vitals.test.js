@@ -22,11 +22,11 @@ it('it renders and filters the vital results as a vertical timeline correctly', 
   const component = setup();
   expect(component.find('div.vertical-timeline__item')).toHaveLength(3);
   expect(component.find('div.vertical-timeline__item-info').at(0)
-    .find('.info-description').text()).toEqual('Body Temperature 98 F');
+    .find('.info-description').text()).toEqual('Body Height 165.28 cm');
   expect(component.find('div.vertical-timeline__item-info').at(1)
-    .find('.info-description').text()).toEqual('Body Temperature 97 F');
+    .find('.info-description').text()).toEqual('Systolic Blood Pressure 101.51 mmHg');
   expect(component.find('div.vertical-timeline__item-info').at(2)
-    .find('.info-description').text()).toEqual('Heart rate (observable) 50 bpm');
+    .find('.info-description').text()).toEqual('Diastolic Blood Pressure 70.91 mmHg');
 });
 
 it('displays no entries message if no vital entries are present', () => {
