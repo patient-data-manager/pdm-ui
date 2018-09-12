@@ -9,6 +9,7 @@ import match from 'autosuggest-highlight/match';
 import parse from 'autosuggest-highlight/parse';
 import { withStyles } from '@material-ui/core/styles';
 import isValidAndNotEmpty from '../../../utils/isValidAndNotEmpty';
+import isValid from '../../../utils/isValid';
 
 const styles = theme => ({
   root: {
@@ -44,7 +45,8 @@ class ProviderSearch extends Component {
 
     this.state = {
       value: '',
-      selected: false,
+      // selected: false,
+      selectedProvider: null,
       suggestions: []
     };
   }
@@ -78,11 +80,11 @@ class ProviderSearch extends Component {
   };
 
   onSuggestionSelected = (event, props) => {
-    this.setState({ selected: true });
+    this.setState({ selectedProvider: props.suggestion.id });
   }
 
   providerSelected = () => {
-    this.props.linkProvider(this.state.value, this.props.activeProfileId);
+    this.props.linkProvider(this.state.selectedProvider, this.props.activeProfileId);
   }
 
   renderSuggestion = (provider, { query, isHighlighted }) => {
@@ -112,7 +114,11 @@ class ProviderSearch extends Component {
     if (!isValidAndNotEmpty(this.state.value)) return null;
 
     return (
-      <Button variant="fab" mini disabled={!this.state.selected} color="primary" onClick={this.providerSelected}>
+      <Button 
+        variant="fab" mini 
+        color="primary" 
+        disabled={!isValid(this.state.selectedProvider)}
+        onClick={this.providerSelected}>
         <FontAwesomeIcon icon="plus" />
       </Button>
     );
