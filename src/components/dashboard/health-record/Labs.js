@@ -1,12 +1,14 @@
 import React, { Component } from 'react';
 import PropTypes from 'prop-types';
+import _ from 'lodash';
+
 import getDisplayString from '../../../utils/getDisplayString';
 import getProperty from '../../../utils/getProperty';
 import isValid from '../../../utils/isValid';
 import isValidAndNotEmpty from '../../../utils/isValidAndNotEmpty';
+
 import LineGraph from '../shared/LineGraph';
 import VerticalTimeline from '../shared/VerticalTimeline';
-import _ from 'lodash';
 
 export default class Labs extends Component {
   labs = () => {
@@ -30,9 +32,9 @@ export default class Labs extends Component {
       if (isValidAndNotEmpty(code) && isValid(value)) {
         let group = grouped[code];
         if (!isValid(group)) {
-          group = { 
+          group = {
             values: [],
-            title: getProperty(lab, 'code.text') || getProperty(lab, 'code.coding.firstObject.display') 
+            title: getProperty(lab, 'code.text') || getProperty(lab, 'code.coding.firstObject.display')
           };
           grouped[code] = group;
         }
@@ -58,8 +60,8 @@ export default class Labs extends Component {
     for (const index in groups) {
       let group = groups[index];
       graphs.push(
-        <LineGraph  
-          key={index} 
+        <LineGraph
+          key={index}
           title={group.title}
           data={group.values}
           referenceRanges={group.referenceRanges}
