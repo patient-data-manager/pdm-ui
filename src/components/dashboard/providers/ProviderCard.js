@@ -5,6 +5,7 @@ import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
 import FormControlLabel from '@material-ui/core/FormControlLabel';
 import Radio from '@material-ui/core/Radio';
 import isValid from '../../../utils/isValid';
+import ProviderModal from './ProviderModal';
 
 export default class ProviderCard extends Component {
   constructor(props) {
@@ -12,7 +13,8 @@ export default class ProviderCard extends Component {
 
     this.state = {
       detailsExpanded: false,
-      healthRecordAccess: 'none'
+      healthRecordAccess: 'none',
+      modalIsOpen: false
     };
   }
 
@@ -21,8 +23,16 @@ export default class ProviderCard extends Component {
   }
 
   handleAccessChange = (event) => {
-    this.setState({ healthRecordAccess: event.target.value });
     // TO-DO: change access levels in DB not just state
+    this.setState({ healthRecordAccess: event.target.value });
+  }
+
+  openAccessModal = (event) => {
+    if (event.target.value === 'custom \u25bc') this.setState({ modalIsOpen: true });
+  }
+
+  closeAccessModal = () => {
+    this.setState({ modalIsOpen: false });
   }
 
   formatDate = (date) => {
@@ -57,6 +67,7 @@ export default class ProviderCard extends Component {
           <Radio
             checked={this.state.healthRecordAccess === value}
             onChange={this.handleAccessChange}
+            onClick={this.openAccessModal}
             value={value}
             name="access"
             aria-label={value}
@@ -92,7 +103,7 @@ export default class ProviderCard extends Component {
             <div className="permissions-content__form-group access-group">
               {this.renderRadioButton('none')}
               {this.renderRadioButton('full')}
-              {this.renderRadioButton('custom')}
+              {this.renderRadioButton('custom \u25bc')}
             </div>
           </div>
         </div>
@@ -108,11 +119,18 @@ export default class ProviderCard extends Component {
           <div className="provider-card__titlebar-name">
             {this.props.provider.name}
           </div>
+
           <div className="provider-card__titlebar-icon">
             {this.renderCollapseExpandIcon()}
           </div>
         </div>
+
         {this.renderDetails()}
+
+        <ProviderModal
+          isOpen={this.state.modalIsOpen}
+          closeModal={this.closeAccessModal}
+          title={this.props.provider.name} />
       </div>
     );
   }

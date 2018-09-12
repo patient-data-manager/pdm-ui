@@ -1,0 +1,77 @@
+.modal {
+  position: absolute;
+  overflow: auto;
+  display: inherit;
+  width: 60%;
+  top: 20%;
+  left: 20%;
+  right: auto;
+  bottom: auto;
+  background: $color-white;
+  border-radius: 4px;
+  outline: none;
+
+  &__overlay {
+    position: fixed;
+    top: 0px;
+    left: 0px;
+    right: 0px;
+    bottom: 0px;
+    background-color: $color-modal-overlay;
+  }
+
+  &__header,
+  &__footer {
+    background-color: lighten($color-blue-gray, 30%);
+    padding: 20px 30px;
+  }
+
+  &__header {
+    display: flex;
+    flex-direction: row;
+    justify-content: space-between;
+    align-items: center;
+    color: $color-gray-darker;
+    font-size: 1.3em;
+    font-weight: 600;
+
+    &-icon {
+      align-self: center;
+      cursor: pointer;
+    }
+  }
+
+  &__buttonbar {
+    button {
+      border: 0;
+      background-color: transparent;
+      color: $color-gray-darker;
+
+      &:hover {
+        color: $color-blue;
+      }
+    }
+  }
+
+  &__body {
+    padding: 20px 30px 40px 30px;
+  }
+
+  &__footer {
+    display: flex;
+    justify-content: flex-end;
+
+    button {
+      min-width: 120px;
+      margin-right: 0;
+    }
+  }
+}
+
+body.ReactModal__Body--open {
+  overflow: hidden;
+
+  #root {
+    filter: blur(5px);
+  }
+}

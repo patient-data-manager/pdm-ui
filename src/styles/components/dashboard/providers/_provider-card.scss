@@ -76,7 +76,6 @@
 
       .permissions-content {
         display: flex;
-        flex-direction: row;
         justify-content: space-between;
 
         &__label {
@@ -85,8 +84,16 @@
         }
 
         &__form-group {
-          .access-radio > span {
-            color: $color-gray-dark;
+          .access-radio {
+            margin: 0 0 0 20px;
+
+            > span {
+              color: $color-gray-dark;
+            }
+          }
+
+          &.access-group {
+            display: flex;
           }
         }
       }
