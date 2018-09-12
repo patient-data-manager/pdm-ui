@@ -49,12 +49,6 @@ it('displays no entries message if there are no provider profiles', () => {
   expect(component.find('div.provider-card')).toHaveLength(0);
 });
 
-it('search is hidden if there are no providers', () => {
-  const component = setup([], [profileProviderMockA, profileProviderMockB]);
-
-  expect(component.find('div.providers-search')).toHaveLength(0);
-});
-
 it('displays the correct images for each provider', () => {
   const providers = [providerMockA, providerMockB, providerMockC, providerMockD];
   const profileProviders = [profileProviderMockA, profileProviderMockB];
