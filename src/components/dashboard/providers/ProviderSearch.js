@@ -107,6 +107,8 @@ class ProviderSearch extends Component {
   }
 
   render() {
+    if (this.props.providers.length === 0) return null;
+
     const { value, suggestions } = this.state;
     const { classes } = this.props;
 
@@ -146,6 +148,10 @@ ProviderSearch.propTypes = {
   activeProfileId: PropTypes.number,
   linkProvider: PropTypes.func.isRequired,
   classes: PropTypes.object.isRequired
+};
+
+ProviderSearch.defaultProps = {
+  providers: []
 };
 
 export default withStyles(styles)(ProviderSearch);

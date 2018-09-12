@@ -141,3 +141,7 @@ ProviderCard.propTypes = {
   provider: PropTypes.object.isRequired,
   imageUrl: PropTypes.string
 };
+
+ProviderCard.defaultProps = {
+  imageUrl: ''
+};
