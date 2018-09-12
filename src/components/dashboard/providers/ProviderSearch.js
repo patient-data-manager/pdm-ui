@@ -81,9 +81,8 @@ class ProviderSearch extends Component {
     this.setState({ selected: true });
   }
 
-  providerSelected(provider) {
-    // console.log(this.state)
-    // this.props.linkProvider(this.state.value, this.props.activeProfileId);
+  providerSelected = () => {
+    this.props.linkProvider(this.state.value, this.props.activeProfileId);
   }
 
   renderSuggestion = (provider, { query, isHighlighted }) => {
