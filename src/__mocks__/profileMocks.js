@@ -61,8 +61,15 @@ const profileMockC = {
   telephone_use: "home"
 };
 
+const profileMockD = {
+  id: 4,
+  user_id: 4,
+  patient_id: "3d0b1d2b-ffac-4a8d-b9ef-eb5bb71878f1",
+};
+
 export {
   profileMockA,
   profileMockB,
-  profileMockC
+  profileMockC,
+  profileMockD
 };

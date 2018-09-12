@@ -6,7 +6,7 @@ import { profileProviderMockA, profileProviderMockB } from '../../../__mocks__/p
 
 function setup(providers = [], profileProviders = []) {
   const store = {
-    profiles: { activeProfile: profileMockA },
+    profiles: { activeProfileId: profileMockA.id },
     providers: { providers, profileProviders }
   };
 
@@ -25,6 +25,9 @@ it('renders self and self components', () => {
 
   expect(component).toBeDefined();
   expect(component.find('div.providers')).toExist();
+  expect(component.find('div.provider-search')).toExist();
+  expect(component.find('div.providers-list')).toExist();
+  expect(component.find('div.no-entries')).toHaveLength(0);
 });
 
 it('renders all providers', () => {
@@ -32,8 +35,6 @@ it('renders all providers', () => {
   const profileProviders = [profileProviderMockA, profileProviderMockB];
   const component = setup(providers, profileProviders);
 
-  expect(component.find('div.providers-list')).toExist();
-  expect(component.find('div.no-entries')).toHaveLength(0);
   expect(component.find('div.provider-card')).toHaveLength(2);
   expect(component.find('div.provider-card__titlebar-name').at(0).text()).toEqual('Blue Cross Blue Shield');
   expect(component.find('div.provider-card__titlebar-name').at(1).text()).toEqual('FitBit');
@@ -42,6 +43,7 @@ it('renders all providers', () => {
 it('displays no entries message if there are no provider profiles', () => {
   const component = setup([], [profileProviderMockA, profileProviderMockB]);
 
+  expect(component.find('div.providers-search')).toHaveLength(0);
   expect(component.find('div.providers-list')).toExist();
   expect(component.find('div.no-entries')).toExist();
   expect(component.find('div.provider-card')).toHaveLength(0);

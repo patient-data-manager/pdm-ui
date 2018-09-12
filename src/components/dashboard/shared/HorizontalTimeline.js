@@ -7,6 +7,7 @@ import moment from 'moment';
 import ReactTooltip from 'react-tooltip';
 import classNames from 'classnames';
 import _ from 'lodash';
+import isValid from '../../../utils/isValid';
 
 import { groupProps, itemProps, legendProps, rangeProps } from '../../../prop-types/horizontalTimelineProps';
 
@@ -39,9 +40,9 @@ export default class HorizontalTimeline extends Component {
 
   initializeRange() {
     const { rangeItems, defaultRange } = this.props;
-    if (!rangeItems) return;
+    if (!isValid(rangeItems)) return;
     const rangeItem = rangeItems.filter((item) => item.rangeText === defaultRange)[0];
-    if (!rangeItem) return;
+    if (!isValid(rangeItem)) return;
     this.handleChangeTimeRange(defaultRange, rangeItem.rangeNum, rangeItem.rangeType, rangeItem.rangeFutureType);
   }
 

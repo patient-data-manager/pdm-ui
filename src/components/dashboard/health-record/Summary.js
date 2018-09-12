@@ -2,12 +2,14 @@ import React, { Component } from 'react';
 import ReactDOMServer from 'react-dom/server';
 import PropTypes from 'prop-types';
 import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
+import UserStarIcon from '../../../icons/UserStarIcon';
 import moment from 'moment';
 import _ from 'lodash';
 
 import getDisplayString from '../../../utils/getDisplayString';
 import getLabs from '../../../utils/healthRecordResources';
 import getProperty from '../../../utils/getProperty';
+import isValid from '../../../utils/isValid';
 
 import HorizontalTimeline from '../shared/HorizontalTimeline';
 
@@ -39,7 +41,7 @@ export default class Summary extends Component {
   }
 
   getResourceItems = (resources, resourceType, group, displayField, dateField) => {
-    if (!resources) return [];
+    if (!isValid(resources)) return [];
 
     let items = [];
     resources.forEach((resource) => {
@@ -55,7 +57,7 @@ export default class Summary extends Component {
         end_time: moment(date).add(1, 'day').valueOf(),
         className: 'timeline-item theme-dark',
         icon: this.getTimelineIcon(resourceType),
-        hoverElement: this.getHoverElement(startDate, resourceType, title)
+        hoverElement: this.renderHoverElement(startDate, resourceType, title)
       });
     });
 
@@ -64,7 +66,7 @@ export default class Summary extends Component {
 
   getSummaryItems = () => {
     const { healthRecord } = this.props;
-    if (!healthRecord) return [];
+    if (!isValid(healthRecord)) return [];
 
     const procedureItems = this.getResourceItems(
       healthRecord.Procedure, 'procedure', 1, 'code', 'performedPeriod.start'
@@ -78,16 +80,7 @@ export default class Summary extends Component {
     return procedureItems.concat(conditionItems).concat(labItems).concat(medicationItems);
   }
 
-  renderSummaryRow = (key, value) => {
-    return (
-      <div className="summary__table-row">
-        <div className="summary__table-key">{key}</div>
-        <div className="summary__table-value">{value}</div>
-      </div>
-    );
-  }
-
-  getHoverElement = (date, group, text) => {
+  renderHoverElement = (date, group, text) => {
     const dateIcon = ReactDOMServer.renderToString(<FontAwesomeIcon icon="calendar" fixedWidth />);
     const typeIcon = ReactDOMServer.renderToString(<FontAwesomeIcon icon="notes-medical" fixedWidth />);
 
@@ -100,6 +93,22 @@ export default class Summary extends Component {
         <div class="hover-element__group"><span class="hover-element__label">${typeIcon}</span>${group}</div>
         <div class="hover-element__text">${text}</div>
       </div>`
+    );
+  }
+
+  renderProfileImage = () => {
+    if (this.props.profile.relationship === 'self') {
+      return <UserStarIcon height={135} />;
+    }
+    return <FontAwesomeIcon icon="user-circle" />;
+  }
+
+  renderSummaryRow = (key, value) => {
+    return (
+      <div className="summary__table-row">
+        <div className="summary__table-key">{key}</div>
+        <div className="summary__table-value">{value}</div>
+      </div>
     );
   }
 
@@ -122,7 +131,7 @@ export default class Summary extends Component {
       <div className="summary">
         <div className="summary__image-table">
           <div className="summary__image">
-            <img src="/assets/images/patient-image.png" alt="patient" />
+            {this.renderProfileImage()}
           </div>
 
           <div className="summary__divider" />
@@ -133,7 +142,7 @@ export default class Summary extends Component {
             {this.renderSummaryRow('DOB', patientDOB)}
             {this.renderSummaryRow('Address', patientAddress)}
             {this.renderSummaryRow('Phone', profile.telephone)}
-            {this.renderSummaryRow('PCP', 'Dr. Parul Desai')} {/* TODO: hook up */}
+            {this.renderSummaryRow('PCP', '')} {/* TODO: hook up */}
           </div>
         </div>
 

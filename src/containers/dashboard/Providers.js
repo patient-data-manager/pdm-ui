@@ -3,12 +3,16 @@ import PropTypes from 'prop-types';
 import { connect } from 'react-redux';
 import { bindActionCreators } from 'redux';
 import _ from 'lodash';
+
 import { linkProvider, loadProfileProviders } from '../../actions/providers';
+
 import ProviderCard from '../../components/dashboard/providers/ProviderCard';
-import ProviderLookup from '../../components/dashboard/providers/ProviderLookup';
+import ProviderSearch from '../../components/dashboard/providers/ProviderSearch';
 export class Providers extends Component {
   componentWillMount() {
-    if (this.props.profile) this.props.loadProfileProviders(this.props.profile.id);
+    if (this.props.activeProfileId) {
+      this.props.loadProfileProviders(this.props.activeProfileId);
+    }
   }
 
   providersList = () => {
@@ -65,18 +69,23 @@ export class Providers extends Component {
   render() {
     return (
       <div className="providers">
-        <ProviderLookup providers={this.props.providers} linkProvider={this.props.linkProvider} profile={this.props.profile}/>
-        {/* TO-DO: insert search bar here */}
-        <div className="providers-list">
-          {this.renderProvidersList()}
-        </div>
-      </div>
+              <div className="provider-search">
+                <ProviderSearch
+                  providers={this.props.providers}
+                  linkProvider={this.props.linkProvider}
+                  activeProfileId={this.props.activeProfileId} />
+              </div>
+
+              <div className="providers-list">
+                {this.renderProvidersList()}
+              </div>
+            </div>
     );
   }
 }
 
 Providers.propTypes = {
-  profile: PropTypes.object,
+  activeProfileId: PropTypes.number,
   providers: PropTypes.array,
   profileProviders: PropTypes.array,
   linkProvider: PropTypes.func.isRequired,
@@ -92,7 +101,7 @@ function mapDispatchToProps(dispatch) {
 
 function mapStateToProps(state) {
   return {
-    profile: state.profiles.activeProfile,
+    activeProfileId: state.profiles.activeProfileId,
     providers: state.providers.providers,
     profileProviders: state.providers.profileProviders
   };

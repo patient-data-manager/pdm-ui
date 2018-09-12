@@ -13,6 +13,7 @@ import TextField from '@material-ui/core/TextField';
 import { ValidatorForm, TextValidator } from 'react-material-ui-form-validator';
 import { confirmAlert } from 'react-confirm-alert';
 
+import isValid from '../../../utils/isValid';
 import { states } from '../../../utils/usStates';
 import { phoneTypes } from '../../../utils/phoneTypes';
 import { relationshipTypes } from '../../../utils/relationshipTypes';
@@ -49,7 +50,7 @@ export default class ProfileForm extends Component {
     let profile = this.state;
     let fullName = this.state.first_name + ' ';
 
-    if (this.state.middle_name !== undefined) {
+    if (isValid(this.state.middle_name)) {
       fullName += this.state.middle_name + ' ';
     }
 

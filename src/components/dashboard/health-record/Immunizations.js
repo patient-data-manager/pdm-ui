@@ -1,6 +1,7 @@
 import React, { Component } from 'react';
 import PropTypes from 'prop-types';
 import getDisplayString from '../../../utils/getDisplayString';
+import isValid from '../../../utils/isValid';
 
 import VerticalTimeline from '../shared/VerticalTimeline';
 
@@ -12,7 +13,7 @@ export default class Immunizations extends Component {
   }
   
   immunizationText = (immunization) => {
-    if (immunization.vaccineCode !== undefined) {
+    if (isValid(immunization.vaccineCode)) {
       if (immunization.vaccineCode.text) return immunization.vaccineCode.text;
       if (immunization.vaccineCode.coding[0].display) return immunization.vaccineCode.coding[0].display;
     }

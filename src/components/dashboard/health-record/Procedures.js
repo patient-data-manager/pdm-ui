@@ -1,13 +1,14 @@
 import React, { Component } from 'react';
 import PropTypes from 'prop-types';
 import getDisplayString from '../../../utils/getDisplayString';
+import isValid from '../../../utils/isValid';
 
 import VerticalTimeline from '../shared/VerticalTimeline';
 
 export default class Procedures extends Component {
   procedureDate(procedure) {
     let date = procedure.performedDateTime;
-    if (!date && procedure.performedPeriod) {
+    if (!isValid(date) && procedure.performedPeriod) {
       date = procedure.performedPeriod.start;
     }
     return date;

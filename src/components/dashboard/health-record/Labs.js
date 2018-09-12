@@ -2,8 +2,11 @@ import React, { Component } from 'react';
 import PropTypes from 'prop-types';
 import getDisplayString from '../../../utils/getDisplayString';
 import getProperty from '../../../utils/getProperty';
+import isValid from '../../../utils/isValid';
+import isValidAndNotEmpty from '../../../utils/isValidAndNotEmpty';
 import LineGraph from '../shared/LineGraph';
 import VerticalTimeline from '../shared/VerticalTimeline';
+import _ from 'lodash';
 
 export default class Labs extends Component {
   labs = () => {
@@ -14,22 +17,22 @@ export default class Labs extends Component {
 
   labDescription = (lab) => {
     let text = getDisplayString(lab, 'code');
-    if (lab.valueQuantity) text = `${text} ${lab.valueQuantity.value} ${lab.valueQuantity.unit}`;
+    if (lab.valueQuantity) text = `${text} ${_.round(lab.valueQuantity.value, 2)} ${lab.valueQuantity.unit}`;
     return text;
   }
 
   groupLabs() {
     let grouped = {};
     this.props.labs.forEach((lab) => {
-      const code = getProperty(lab, "code.coding.firstObject.code");
-      const referenceRange = getProperty(lab, "referenceRange");
-      const value = getProperty(lab, "valueQuantity");
-      if (code && code !== "" && value) {
+      const code = getProperty(lab, 'code.coding.firstObject.code');
+      const referenceRange = getProperty(lab, 'referenceRange');
+      const value = getProperty(lab, 'valueQuantity');
+      if (isValidAndNotEmpty(code) && isValid(value)) {
         let group = grouped[code];
-        if (!group) {
+        if (!isValid(group)) {
           group = { 
             values: [],
-            title: getProperty(lab, "code.text") || getProperty(lab, "code.coding.firstObject.display") 
+            title: getProperty(lab, 'code.text') || getProperty(lab, 'code.coding.firstObject.display') 
           };
           grouped[code] = group;
         }
@@ -39,7 +42,7 @@ export default class Labs extends Component {
             return { high: refRange.high, low: refRange.low, assessment: refRange.text };
           });
         }
-        if (value.unit && !group.unit) {
+        if (isValid(value.unit) && !isValid(group.unit)) {
           group.title += ` (${value.unit})`;
           group.unit = value.unit;
         }
@@ -63,7 +66,7 @@ export default class Labs extends Component {
           unit={group.unit} />
       );
     }
-    return graphs.length > 0 ? graphs : '' ;
+    return graphs.length > 0 ? graphs : null;
   }
 
   render() {
