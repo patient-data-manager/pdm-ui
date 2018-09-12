@@ -5,8 +5,42 @@ import _ from 'lodash';
 import isValid from '../../../utils/isValid';
 
 export default class CustomGraphTooltip extends Component {
+
+
+  renderBP(entry,title,unit){
+    let systolic = entry.component[0];
+    let diastolic = entry.component[1];
+    if(systolic.code.coding[0].code !== "8480-6"){
+      let temp = systolic;
+      systolic = diastolic;
+      diastolic = temp;
+    }
+    let sysVal = _.round(systolic.valueQuantity.value)
+    let diaVal  = _.round(diastolic.valueQuantity.value)
+
+    return (<div className="custom-graph-tooltip__field">
+      <b>{title}:</b> {`${sysVal}/${diaVal}`} {unit}
+    </div>);
+  }
+
+
+  renderDefault(details, title, unit){
+    return (<div className="custom-graph-tooltip__field">
+      <b>{title}:</b> {_.round(details.value, 2)} {unit}
+    </div>);
+  }
+
+  renderDetails(details,title, unit){
+    if(!this.props.isBp){
+      return this.renderDefault(details,title,unit);
+    }
+    else {
+      return this.renderBP(details,title,unit);
+    }
+  }
+
   render() {
-    const { title, unit, active, payload } = this.props;
+    const { title, unit, active, payload, isBp } = this.props;
     const details = payload.length > 0 ? payload[0].payload : null;
 
     if (active && isValid(details)) {
@@ -16,10 +50,7 @@ export default class CustomGraphTooltip extends Component {
           <div className="custom-graph-tooltip__field">
             <b>Date:</b> {displayDate}
           </div>
-
-          <div className="custom-graph-tooltip__field">
-            <b>{title}:</b> {_.round(details.value, 2)} {unit}
-          </div>
+          {this.renderDetails(details,title, unit)}
         </div>
       );
     }
