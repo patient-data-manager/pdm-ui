@@ -1,22 +1,30 @@
 .providers-search {
+  display: flex;
+  flex-direction: row;
+  justify-content: stretch;
   margin-bottom: 20px;
 
-  input {
-    height: 50px;
-    width: 100%;
-    border: 1px solid $color-gray;
-    border-radius: 25px;
-    padding-left: 40px;
-    font-size: 1.2em;
+  &__input {
+    flex-basis: 100%;
+    margin-right: 10px;
 
-    &:hover,
-    &:active,
-    &:focus {
-      outline: none;
-    }
+    input {
+      height: 40px;
+      width: 100%;
+      border: 1px solid $color-gray;
+      border-radius: 25px;
+      padding-left: 40px;
+      font-size: 1.2em;
 
-    &::placeholder {
-      font-style: italic;
+      &:hover,
+      &:active,
+      &:focus {
+        outline: none;
+      }
+
+      &::placeholder {
+        font-style: italic;
+      }
     }
   }
 

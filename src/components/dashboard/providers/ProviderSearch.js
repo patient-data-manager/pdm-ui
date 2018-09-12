@@ -1,11 +1,14 @@
 import React, { Component } from 'react';
 import PropTypes from 'prop-types';
 import Autosuggest from 'react-autosuggest';
+import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
+import Button from '@material-ui/core/Button';
 import MenuItem from '@material-ui/core/MenuItem';
 import Paper from '@material-ui/core/Paper';
 import match from 'autosuggest-highlight/match';
 import parse from 'autosuggest-highlight/parse';
 import { withStyles } from '@material-ui/core/styles';
+import isValidAndNotEmpty from '../../../utils/isValidAndNotEmpty';
 
 const styles = theme => ({
   root: {
@@ -41,6 +44,7 @@ class ProviderSearch extends Component {
 
     this.state = {
       value: '',
+      selected: false,
       suggestions: []
     };
   }
@@ -58,10 +62,6 @@ class ProviderSearch extends Component {
     );
   }
 
-  onProviderSelected(provider) {
-    this.props.linkProvider(provider.id, this.props.activeProfileId);
-  }
-
   onChange = (event, { newValue }) => {
     this.setState({ value: newValue });
   };
@@ -69,9 +69,7 @@ class ProviderSearch extends Component {
   // Autosuggest will call this function every time you need to update suggestions.
   // You already implemented this logic above, so just use it.
   onSuggestionsFetchRequested = ({ value }) => {
-    this.setState({
-      suggestions: this.getSuggestions(value)
-    });
+    this.setState({ suggestions: this.getSuggestions(value) });
   };
 
   // Autosuggest will call this function every time you need to clear suggestions.
@@ -80,7 +78,12 @@ class ProviderSearch extends Component {
   };
 
   onSuggestionSelected = (event, props) => {
-    this.onProviderSelected(props.suggestion);
+    this.setState({ selected: true });
+  }
+
+  providerSelected(provider) {
+    // console.log(this.state)
+    // this.props.linkProvider(this.state.value, this.props.activeProfileId);
   }
 
   renderSuggestion = (provider, { query, isHighlighted }) => {
@@ -106,6 +109,16 @@ class ProviderSearch extends Component {
     );
   }
 
+  renderAddButton = () => {
+    if (!isValidAndNotEmpty(this.state.value)) return null;
+
+    return (
+      <Button variant="fab" mini disabled={!this.state.selected} color="primary" onClick={this.providerSelected}>
+        <FontAwesomeIcon icon="plus" />
+      </Button>
+    );
+  }
+
   render() {
     if (this.props.providers.length === 0) return null;
 
@@ -123,21 +136,27 @@ class ProviderSearch extends Component {
 
     return (
       <div className="providers-search">
-        <Autosuggest
-          suggestions={suggestions}
-          onSuggestionsFetchRequested={this.onSuggestionsFetchRequested}
-          onSuggestionsClearRequested={this.onSuggestionsClearRequested}
-          onSuggestionSelected={onSelect}
-          getSuggestionValue={this.getSuggestionValue}
-          renderSuggestion={this.renderSuggestion}
-          inputProps={inputProps}
-          renderSuggestionsContainer={options => (<Paper {...options.containerProps} square>{options.children}</Paper>)}
-          theme={{
-            container: classes.container,
-            suggestionsContainerOpen: classes.suggestionsContainerOpen,
-            suggestionsList: classes.suggestionsList,
-            suggestion: classes.suggestion,
-          }} />
+        <div className="providers-search__input">
+          <Autosuggest
+            suggestions={suggestions}
+            onSuggestionsFetchRequested={this.onSuggestionsFetchRequested}
+            onSuggestionsClearRequested={this.onSuggestionsClearRequested}
+            onSuggestionSelected={onSelect}
+            getSuggestionValue={this.getSuggestionValue}
+            renderSuggestion={this.renderSuggestion}
+            inputProps={inputProps}
+            renderSuggestionsContainer={options => 
+              (<Paper {...options.containerProps} square>{options.children}</Paper>)}
+            theme={{
+              container: classes.container,
+              suggestionsContainerOpen: classes.suggestionsContainerOpen,
+              suggestionsList: classes.suggestionsList,
+              suggestion: classes.suggestion,
+            }} />
+        </div>
+        <div className="providers-search__add-button">
+          {this.renderAddButton()}
+        </div>
       </div>
     );
   }
