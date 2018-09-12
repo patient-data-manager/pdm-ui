@@ -52,7 +52,18 @@ export class Providers extends Component {
     return null;
   }
 
-  renderProvidersList = () => {
+  renderProviderSearch = () => {
+    if (this.props.providers.length === 0) return null;
+
+    return (
+      <ProviderSearch
+        providers={this.props.providers}
+        linkProvider={this.props.linkProvider}
+        activeProfileId={this.props.activeProfileId} />
+    );
+  }
+
+  renderProviderList = () => {
     const providersList = this.providersList();
     if (providersList.length === 0) return <div className="providers no-entries">No linked providers.</div>;
 
@@ -61,8 +72,7 @@ export class Providers extends Component {
         <ProviderCard
           key={provider.id}
           provider={provider}
-          imageUrl={this.getImageUrl(provider.name)}
-        />
+          imageUrl={this.getImageUrl(provider.name)} />
       );
     });
   }
@@ -70,15 +80,12 @@ export class Providers extends Component {
   render() {
     return (
       <div className="providers">
-        <div className="provider-search">
-          <ProviderSearch
-            providers={this.props.providers}
-            linkProvider={this.props.linkProvider}
-            activeProfileId={this.props.activeProfileId} />
+        <div className="providers-search-container">
+          {this.renderProviderSearch()}
         </div>
 
         <div className="providers-list">
-          {this.renderProvidersList()}
+          {this.renderProviderList()}
         </div>
       </div>
     );

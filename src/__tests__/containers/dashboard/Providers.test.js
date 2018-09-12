@@ -25,7 +25,7 @@ it('renders self and self components', () => {
 
   expect(component).toBeDefined();
   expect(component.find('div.providers')).toExist();
-  expect(component.find('div.provider-search')).toExist();
+  expect(component.find('div.providers-search-container')).toExist();
   expect(component.find('div.providers-list')).toExist();
   expect(component.find('div.no-entries')).toHaveLength(0);
 });
@@ -41,12 +41,19 @@ it('renders all providers', () => {
 });
 
 it('displays no entries message if there are no provider profiles', () => {
-  const component = setup([], [profileProviderMockA, profileProviderMockB]);
+  const component = setup([providerMockA, providerMockB, providerMockC, providerMockD], []);
 
-  expect(component.find('div.providers-search')).toHaveLength(0);
+  expect(component.find('div.providers-search')).toExist();
   expect(component.find('div.providers-list')).toExist();
   expect(component.find('div.no-entries')).toExist();
   expect(component.find('div.provider-card')).toHaveLength(0);
+});
+
+it('search is hidden if there are no providers', () => {
+  const component = setup([], [profileProviderMockA, profileProviderMockB]);
+
+  expect(component.find('div.providers-search-container')).toExist();
+  expect(component.find('div.providers-search')).toHaveLength(0);
 });
 
 it('displays the correct images for each provider', () => {

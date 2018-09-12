@@ -32,7 +32,7 @@ const styles = theme => ({
   },
   divider: {
     height: theme.spacing.unit * 2,
-  },
+  }
 });
 
 class ProviderSearch extends Component {
@@ -120,22 +120,23 @@ class ProviderSearch extends Component {
     const onSelect = (event, props) => this.onSuggestionSelected(event, props);
 
     return (
-      <Autosuggest
-        suggestions={suggestions}
-        onSuggestionsFetchRequested={this.onSuggestionsFetchRequested}
-        onSuggestionsClearRequested={this.onSuggestionsClearRequested}
-        onSuggestionSelected={onSelect}
-        getSuggestionValue={this.getSuggestionValue}
-        renderSuggestion={this.renderSuggestion}
-        inputProps={inputProps}
-        renderSuggestionsContainer={options => (<Paper {...options.containerProps} square>{options.children}</Paper>)}
-        theme={{
-          container: classes.container,
-          suggestionsContainerOpen: classes.suggestionsContainerOpen,
-          suggestionsList: classes.suggestionsList,
-          suggestion: classes.suggestion,
-        }}
-      />
+      <div className="providers-search">
+        <Autosuggest
+          suggestions={suggestions}
+          onSuggestionsFetchRequested={this.onSuggestionsFetchRequested}
+          onSuggestionsClearRequested={this.onSuggestionsClearRequested}
+          onSuggestionSelected={onSelect}
+          getSuggestionValue={this.getSuggestionValue}
+          renderSuggestion={this.renderSuggestion}
+          inputProps={inputProps}
+          renderSuggestionsContainer={options => (<Paper {...options.containerProps} square>{options.children}</Paper>)}
+          theme={{
+            container: classes.container,
+            suggestionsContainerOpen: classes.suggestionsContainerOpen,
+            suggestionsList: classes.suggestionsList,
+            suggestion: classes.suggestion,
+          }} />
+      </div>
     );
   }
 }
