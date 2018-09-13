@@ -101,9 +101,7 @@ it('details collapse and expand on click', () => {
 it('clicking on the custom radio button opens the provider access modal', () => {
   const component = setup(mocks.providerMockC);
 
-  component.find('div.provider-card__titlebar').simulate('click');
   expect(component.find('div.provider-modal')).toHaveLength(0);
-
   component.find('label.access-radio').find('input').at(2).simulate('click');
   expect(component.find('div.provider-modal')).toExist();
 });
@@ -112,7 +110,6 @@ it('clicking the x button closes the provider access modal', () => {
   // TO-DO: add that it resets the modal to original state when everything is hooked up
   const component = setup(mocks.providerMockC);
 
-  component.find('div.provider-card__titlebar').simulate('click');
   component.find('label.access-radio').find('input').at(2).simulate('click');
   expect(component.find('div.provider-modal')).toExist();
 
@@ -125,7 +122,6 @@ it('clicking the cancel button closes the provider access modal', () => {
   // TO-DO: add that it resets the modal to original state when everything is hooked up
   const component = setup(mocks.providerMockC);
 
-  component.find('div.provider-card__titlebar').simulate('click');
   component.find('label.access-radio').find('input').at(2).simulate('click');
   expect(component.find('div.provider-modal')).toExist();
 
@@ -137,7 +133,6 @@ it('clicking on save button closes the provider access modal', () => {
   // TO-DO: test that it actually saves everything too when hooked up
   const component = setup(mocks.providerMockC);
 
-  component.find('div.provider-card__titlebar').simulate('click');
   component.find('label.access-radio').find('input').at(2).simulate('click');
   expect(component.find('div.provider-modal')).toExist();
 
