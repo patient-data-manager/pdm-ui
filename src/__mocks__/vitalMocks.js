@@ -62,29 +62,29 @@ const vitalMockB = {
 const vitalMockC = {
   code: {
     coding: [{
-      code: '386725007',
-      display: 'Body Temperature',
+      code: '8331-1',
+      display: 'Oral Temperature',
       system: 'http://snomed.info/sct'
     }],
-    text: 'Body Temperature'
+    text: 'Oral Temperature'
   },
-  effectiveDateTime: '2016-04-05T18:19:22-04:00',
-  id: '7b3c17a0-6e53-0136-7848-4a00016726c0',
-  valueQuantity: { value: '97', unit: 'F' }
+  effectiveDateTime: '2008-12-21T06:40:06-05:00',
+  id: '1e4885b0-771c-0136-3f3e-7e009128ee01',
+  valueQuantity: { value: '37.91023456078337', unit: 'Cel' }
 };
 
 const vitalMockD = {
   code: {
     coding: [{
-      code: '386725007',
+      code: '8302-2',
       display: 'Body Height',
-      system: 'http://snomed.info/sct'
+      system: 'http://loinc.org'
     }],
     text: 'Body Height'
   },
-  effectiveDateTime: '2018-07-05T18:19:22-04:00',
-  id: '7b3c17a0-6e53-0136-7848-4a00016726c0',
-  valueQuantity: { value: '165.279192834129348', unit: 'cm' }
+  effectiveDateTime: '2009-07-19T15:35:55-04:00',
+  id: 'a6f44bf0-8d32-0136-91c6-7e009128ee01',
+  valueQuantity: { value: 179.5143676627678, unit: 'cm' }
 };
 
 const vitalMockE = {
@@ -101,10 +101,70 @@ const vitalMockE = {
   valueQuantity: { value: '40', unit: 'bpm' }
 };
 
+const vitalMockF = {
+  code: {
+    coding: [{
+      code: '29463-7',
+      display: 'Body Weight',
+      system: 'http://loinc.org'
+    }],
+    text: 'Body Weight'
+  },
+  effectiveDateTime: '2015-08-02T15:35:55-04:00',
+  id: 'a83866b0-8d32-0136-91c6-7e009128ee01',
+  valueQuantity: { value: 96.44676490364593, unit: 'kg' }
+};
+
+const vitalMockG = {
+  code: {
+    coding: [{
+      code: '39156-5',
+      display: 'Body Mass Index',
+      system: 'http://loinc.org'
+    }],
+    text: 'Body Mass Index'
+  },
+  effectiveDateTime: '2012-07-29T15:35:55-04:00',
+  id: 'a8017cf0-8d32-0136-91c6-7e009128ee01',
+  valueQuantity: { value: 28.425251287577726, unit: 'kg/m2' }
+};
+
+const vitalMockH = {
+  code: {
+    coding: [{
+      code: '39156-5',
+      display: 'Body Mass Index',
+      system: 'http://loinc.org'
+    }],
+    text: 'Body Mass Index'
+  },
+  effectiveDateTime: '2012-07-30T15:35:55-04:00',
+  id: 'a8017cf0-8d32-0136-91c6-7e009128ee02',
+  valueQuantity: { value: 29.425251287577726, unit: 'kg/m2' }
+};
+
+const vitalMockI = {
+  code: {
+    coding: [{
+      code: '39156-5',
+      display: 'Body Mass Index',
+      system: 'http://loinc.org'
+    }],
+    text: 'Body Mass Index'
+  },
+  effectiveDateTime: '2012-07-31T15:35:55-04:00',
+  id: 'a8017cf0-8d32-0136-91c6-7e009128ee03',
+  valueQuantity: { value: 30.425251287577726, unit: 'kg/m2' }
+};
+
 export {
   vitalMockA,
   vitalMockB,
   vitalMockC,
   vitalMockD,
-  vitalMockE
+  vitalMockE,
+  vitalMockF,
+  vitalMockG,
+  vitalMockH,
+  vitalMockI
 };
