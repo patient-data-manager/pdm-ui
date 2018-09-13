@@ -75,7 +75,6 @@ ProviderSearch.propTypes = {
   providers: PropTypes.array,
   activeProfileId: PropTypes.number,
   linkProvider: PropTypes.func.isRequired
-  // classes: PropTypes.object.isRequired
 };
 
 ProviderSearch.defaultProps = {
