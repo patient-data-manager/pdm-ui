@@ -71,7 +71,8 @@ export class Providers extends Component {
       <div className="providers">
         <ProviderSearch
           providers={this.props.providers}
-          activeProfileId={this.props.activeProfileId} />
+          activeProfileId={this.props.activeProfileId}
+          linkProvider={this.props.linkProvider} />
 
         <div className="providers-list">
           {this.renderProviderList()}

@@ -37,6 +37,7 @@ export default class ProviderSearch extends Component {
         isSearchable={true}
         options={this.getProviderOptions(this.props.providers)}
         onChange={this.onSelectChange}
+        placeholder="select/enter a provider name"
       />
     );
   }
@@ -45,9 +46,9 @@ export default class ProviderSearch extends Component {
     if (this.props.providers.length === 0) return null;
 
     return (
-      <Button 
-        variant="fab" mini 
-        color="primary" 
+      <Button
+        variant="fab" mini
+        color="primary"
         disabled={!isValid(this.state.selectedProvider)}
         onClick={this.providerSelected}>
         <FontAwesomeIcon icon="plus" />
@@ -61,6 +62,7 @@ export default class ProviderSearch extends Component {
         <div className="providers-search__input">
           {this.renderSearch()}
         </div>
+
         <div className="providers-search__add-button">
           {this.renderAddButton()}
         </div>
@@ -72,7 +74,7 @@ export default class ProviderSearch extends Component {
 ProviderSearch.propTypes = {
   providers: PropTypes.array,
   activeProfileId: PropTypes.number,
-  // linkProvider: PropTypes.func.isRequired,
+  linkProvider: PropTypes.func.isRequired
   // classes: PropTypes.object.isRequired
 };
 

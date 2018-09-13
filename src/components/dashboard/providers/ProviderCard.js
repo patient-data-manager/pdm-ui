@@ -90,6 +90,7 @@ export default class ProviderCard extends Component {
               <div className="date-key">Added on</div>
               <div className="date-value">{this.formatDate(this.props.provider.addedOn)}</div>
             </div>
+
             <div className="details-dates-last-updated">
               <div className="date-key">Last updated</div>
               <div className="date-value">{this.formatDate(this.props.provider.lastUpdated)}</div>
@@ -97,6 +98,7 @@ export default class ProviderCard extends Component {
           </div>
           {this.renderLogo()}
         </div>
+
         <div className="details-permissions">
           <div className="permissions-title">Permissions</div>
           <div className="permissions-content">
@@ -115,8 +117,12 @@ export default class ProviderCard extends Component {
   render() {
     return (
       <div className="provider-card">
-        <div className="provider-card__titlebar" onClick={this.toggleDetails} onKeyPress={this.toggleDetails}
-          role="button" tabIndex={0}>
+        <div
+          className="provider-card__titlebar"
+          onClick={this.toggleDetails}
+          onKeyPress={this.toggleDetails}
+          role="button"
+          tabIndex={0}>
           <div className="provider-card__titlebar-name">
             {this.props.provider.name}
           </div>
