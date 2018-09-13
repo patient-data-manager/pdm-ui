@@ -32,6 +32,7 @@ export default class ProviderSearch extends Component {
   renderSearch = () => {
     return (
       <Select
+        className="provider-select"
         isDisabled={this.props.providers.length === 0}
         isClearable={true}
         isSearchable={true}
