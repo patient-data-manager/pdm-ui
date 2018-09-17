@@ -10,7 +10,7 @@ import TableList from '../shared/TableList';
 export default class Conditions extends Component {
   conditions() {
     return this.props.conditions.map((condition) => {
-      return { date: condition.onsetDateTime, text: getDisplayString(condition, 'code') };
+      return { date: condition.onsetDateTime, text: getDisplayString(condition, 'code'), icon: 'heartbeat' };
     });
   }
 
@@ -39,7 +39,7 @@ export default class Conditions extends Component {
           data={this.currentConditions()}
           formatters={{ 'diagnosed date': (value) => moment(value).format('MMM D, YYYY') }}
           sort={{ order: 'desc', orderBy: 1 }} />
-        <VerticalTimeline items={this.conditions()} icon="heartbeat" />
+        <VerticalTimeline items={this.conditions()} />
       </div>
     );
   }

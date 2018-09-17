@@ -8,7 +8,7 @@ import VerticalTimeline from '../shared/VerticalTimeline';
 export default class Allergies extends Component {
   allergies() {
     return this.props.allergies.map((allergy) => {
-      return { date: allergy.assertedDate, text: getDisplayString(allergy, 'code') };
+      return { date: allergy.assertedDate, text: getDisplayString(allergy, 'code'), icon: 'allergies' };
     });
   }
 
@@ -36,7 +36,7 @@ export default class Allergies extends Component {
           title="Current allergies list"
           headers={['allergy', 'criticality', 'current status']}
           data={this.currentAllergies()} />
-        <VerticalTimeline items={this.allergies()} icon="allergies" />
+        <VerticalTimeline items={this.allergies()} />
       </div>
     );
   }

@@ -18,7 +18,8 @@ export default class Medications extends Component {
     return this.props.medicationRequests.map((medication) => {
       return {
         date: medication.authoredOn,
-        text: getDisplayString(medication, 'medicationCodeableConcept')
+        text: getDisplayString(medication, 'medicationCodeableConcept'),
+        icon: 'pills'
       };
     });
   }
@@ -27,7 +28,8 @@ export default class Medications extends Component {
     return this.props.medicationStatements.map((medication) => {
       return {
         date: medication.authoredOn,
-        text: getDisplayString(medication, 'medicationCodeableConcept')
+        text: getDisplayString(medication, 'medicationCodeableConcept'),
+        icon: 'pills'
       };
     });
   }
@@ -129,7 +131,7 @@ export default class Medications extends Component {
             chartWidth={this.props.chartWidth} />
         </div>
 
-        <VerticalTimeline items={this.medications()} icon="pills" />
+        <VerticalTimeline items={this.medications()} />
       </div>
     );
   }

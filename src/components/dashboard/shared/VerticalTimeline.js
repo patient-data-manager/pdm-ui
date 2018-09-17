@@ -53,13 +53,13 @@ export default class VerticalTimeline extends Component {
   }
 
   renderItem = (item, index) => {
-    const { items, icon } = this.props;
+    const { items, initialDisplayCount, icon } = this.props;
     const itemClassname = classNames('vertical-timeline__item', 
-      { 'last-item': index + 1 === items.length && items.length <= this.props.initialDisplayCount });
+      { 'last-item': index + 1 === items.length && items.length <= initialDisplayCount });
 
     return (
       <div key={index} className={itemClassname}>
-        <FontAwesomeIcon icon={icon} className="icon-health-record" />
+        <FontAwesomeIcon icon={item.icon} className="icon-health-record" />
 
         <div className="vertical-timeline__item-info">
           <div className="info-date">{moment(item.date).format('MMM D, YYYY')}</div>
@@ -89,13 +89,11 @@ export default class VerticalTimeline extends Component {
 
 VerticalTimeline.propTypes = {
   items: PropTypes.array.isRequired,
-  icon: PropTypes.string,
   initialDisplayCount: PropTypes.number,
   viewCount: PropTypes.number
 };
 
 VerticalTimeline.defaultProps = {
-  icon: 'circle',
   initialDisplayCount: 3, // number to initially display
   viewCount: 3            // +/- number to display when view more or less is selected
 };

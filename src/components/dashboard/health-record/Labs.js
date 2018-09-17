@@ -13,7 +13,7 @@ import VerticalTimeline from '../shared/VerticalTimeline';
 export default class Labs extends Component {
   labs = () => {
     return this.props.labs.map((lab) => {
-      return { date: lab.effectiveDateTime, text: this.labDescription(lab) };
+      return { date: lab.effectiveDateTime, text: this.labDescription(lab), icon: 'flask' };
     });
   }
 
@@ -78,7 +78,7 @@ export default class Labs extends Component {
     return (
       <div className="labs">
         {this.renderLabGraphs()}
-        <VerticalTimeline items={this.labs()} icon="flask" />
+        <VerticalTimeline items={this.labs()} />
       </div>
     );
   }

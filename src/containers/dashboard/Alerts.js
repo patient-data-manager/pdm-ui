@@ -17,10 +17,10 @@ export class Alerts extends Component {
   render() {
     // remove later 
     const items = [
-      { text: 'text2', date: '2017-04-05T18:19:22-04:00' },
-      { text: 'text1', date: '2018-04-05T18:19:22-04:00' },
-      { text: 'text4', date: '2006-04-05T18:19:22-04:00' },
-      { text: 'text3', date: '2016-04-05T18:19:22-04:00' }
+      { text: 'text2', date: '2017-04-05T18:19:22-04:00', icon: 'circle' },
+      { text: 'text1', date: '2018-04-05T18:19:22-04:00', icon: 'circle' },
+      { text: 'text4', date: '2006-04-05T18:19:22-04:00', icon: 'circle' },
+      { text: 'text3', date: '2016-04-05T18:19:22-04:00', icon: 'circle' }
     ];
 
     return (
