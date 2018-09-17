@@ -52,6 +52,12 @@
     }
   }
 
+  .last-item {
+    .vertical-timeline__item-info {
+      border: none;
+    }
+  }
+
   &__view-less .view-less-slash {
     margin-left: 4px;
   }
