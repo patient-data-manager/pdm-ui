@@ -4,10 +4,9 @@ import * as mocks from '../../../../__mocks__/verticalTimelineMocks';
 
 function setup() {
   const props = {
-    items: mocks.verticalListMock,
-    icon: 'syringe',
+    items: mocks.verticalListMockA,
     initialDisplayCount: 2,
-    viewCount: 4,
+    viewCount: 4
   };
 
   return fullRenderComponent(VerticalTimeline, props);
@@ -17,8 +16,36 @@ it('renders self and self components', () => {
   const component = setup();
 
   expect(component).toBeDefined();
+  expect(component.find('div.vertical-timeline')).toExist();
+});
+
+it('renders timeline correctly on init', () => {
+  const component = setup();
+
   expect(component.find('div.vertical-timeline__item')).toHaveLength(2);
+  expect(component.find('div.vertical-timeline__item').at(0).find('div.info-description').text()).toEqual('1');
+  expect(component.find('div.vertical-timeline__item').at(1).find('div.info-description').text()).toEqual('2');
   expect(component.find('button.vertical-timeline__view-more')).toExist();
+  expect(component.find('button.vertical-timeline__view-less')).toHaveLength(0);
+});
+
+it('it handles rendering different icons', () => {
+  const component = setup();
+
+  expect(component.find('div.vertical-timeline__item').at(0).find('svg').prop('data-icon')).toEqual('circle');
+  expect(component.find('div.vertical-timeline__item').at(1).find('svg').prop('data-icon')).toEqual('heartbeat');
+});
+
+it('no line after last item if the total items is less than the initialDisplayCount', () => {
+  const props = {
+    items: mocks.verticalListMockB,
+  };
+  const component = fullRenderComponent(VerticalTimeline, props);
+
+  expect(component.find('div.vertical-timeline__item').at(0).hasClass('last-item')).toBeFalsy();
+  expect(component.find('div.vertical-timeline__item').at(1).hasClass('last-item')).toBeTruthy();
+  expect(component.find('button.vertical-timeline__view-more')).toHaveLength(0);
+  expect(component.find('button.vertical-timeline__view-less')).toHaveLength(0);
 });
 
 it('view more button works correctly', () => {

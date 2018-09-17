@@ -1,4 +1,4 @@
-const verticalListMock = [
+const verticalListMockA = [
   {
     'date': '2014-07-13T02:27:04.196Z',
     'text': '5',
@@ -47,10 +47,24 @@ const verticalListMock = [
   {
     'date': '2017-07-13T02:27:04.196Z',
     'text': '2',
+    'icon': 'heartbeat'
+  }
+];
+
+const verticalListMockB = [
+  {
+    'date': '2014-07-13T02:27:04.196Z',
+    'text': '5',
+    'icon': 'circle'
+  },
+  {
+    'date': '2010-07-13T02:27:04.196Z',
+    'text': '9',
     'icon': 'circle'
   }
 ];
 
 export {
-  verticalListMock
+  verticalListMockA,
+  verticalListMockB
 };
