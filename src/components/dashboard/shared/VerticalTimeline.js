@@ -53,7 +53,7 @@ export default class VerticalTimeline extends Component {
   }
 
   renderItem = (item, index) => {
-    const { items, initialDisplayCount, icon } = this.props;
+    const { items, initialDisplayCount } = this.props;
     const itemClassname = classNames('vertical-timeline__item', 
       { 'last-item': index + 1 === items.length && items.length <= initialDisplayCount });
 
