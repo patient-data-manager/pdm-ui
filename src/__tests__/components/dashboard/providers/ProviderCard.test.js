@@ -17,7 +17,7 @@ it('renders self and self components', () => {
   expect(component).toBeDefined();
   expect(component.find('div.provider-card')).toExist();
   expect(component.find('div.provider-card__titlebar')).toExist();
-  expect(component.find('div.provider-card__details')).toHaveLength(0);
+  expect(component.find('div.provider-card__details')).toExist();
 });
 
 it('renders titlebar correctly', () => {
@@ -26,13 +26,12 @@ it('renders titlebar correctly', () => {
   expect(component.find('div.provider-card__titlebar-name')).toExist();
   expect(component.find('div.provider-card__titlebar-name').text()).toEqual('Partners Health Care');
   expect(component.find('div.provider-card__titlebar-icon')).toExist();
-  expect(component.find('div.provider-card__titlebar-icon').find('svg').prop('data-icon')).toEqual('chevron-right');
+  expect(component.find('div.provider-card__titlebar-icon').find('svg').prop('data-icon')).toEqual('chevron-down');
 });
 
 it('renders date details correctly', () => {
   const component = setup(mocks.providerMockC);
 
-  component.find('div.provider-card__titlebar').simulate('click');
   expect(component.find('div.details-dates')).toExist();
   expect(component.find('div.details-dates-added-on').find('div.date-key').text()).toEqual('Added on');
   expect(component.find('div.details-dates-added-on').find('div.date-value').text()).toEqual('2001-09-16');
@@ -43,7 +42,6 @@ it('renders date details correctly', () => {
 it('does not display date details if field values not defined', () => {
   const component = setup(mocks.providerMockA);
 
-  component.find('div.provider-card__titlebar').simulate('click');
   expect(component.find('div.details-dates')).toExist();
   expect(component.find('div.details-dates-added-on').find('div.date-key').text()).toEqual('Added on');
   expect(component.find('div.details-dates-added-on').find('div.date-value').text()).toEqual('');
@@ -54,7 +52,6 @@ it('does not display date details if field values not defined', () => {
 it('renders logo correctly', () => {
   const component = setup(mocks.providerMockC);
 
-  component.find('div.provider-card__titlebar').simulate('click');
   expect(component.find('div.details-logo')).toExist();
   expect(component.find('img.details-logo__img').prop('src'))
     .toEqual('/assets/images/provider-logos/partners-healthcare.png');
@@ -62,8 +59,7 @@ it('renders logo correctly', () => {
 
 it('renders permission details correctly', () => {
   const component = setup(mocks.providerMockC);
-  
-  component.find('div.provider-card__titlebar').simulate('click');
+
   expect(component.find('div.details-permissions')).toExist();
   expect(component.find('div.permissions-title')).toExist();
   expect(component.find('div.permissions-content')).toExist();
@@ -86,6 +82,7 @@ it('no provider logo is displayed if no imageUrl is given', () => {
 it('details collapse and expand on click', () => {
   const component = setup(mocks.providerMockC);
 
+  component.find('div.provider-card__titlebar').find('svg').simulate('click');
   expect(component.find('div.provider-card__titlebar')).toExist();
   expect(component.find('div.provider-card__details')).toHaveLength(0);
   expect(component.find('div.provider-card__titlebar-icon').find('svg').prop('data-icon')).toEqual('chevron-right');
@@ -104,9 +101,7 @@ it('details collapse and expand on click', () => {
 it('clicking on the custom radio button opens the provider access modal', () => {
   const component = setup(mocks.providerMockC);
 
-  component.find('div.provider-card__titlebar').simulate('click');
   expect(component.find('div.provider-modal')).toHaveLength(0);
-
   component.find('label.access-radio').find('input').at(2).simulate('click');
   expect(component.find('div.provider-modal')).toExist();
 });
@@ -115,7 +110,6 @@ it('clicking the x button closes the provider access modal', () => {
   // TO-DO: add that it resets the modal to original state when everything is hooked up
   const component = setup(mocks.providerMockC);
 
-  component.find('div.provider-card__titlebar').simulate('click');
   component.find('label.access-radio').find('input').at(2).simulate('click');
   expect(component.find('div.provider-modal')).toExist();
 
@@ -128,7 +122,6 @@ it('clicking the cancel button closes the provider access modal', () => {
   // TO-DO: add that it resets the modal to original state when everything is hooked up
   const component = setup(mocks.providerMockC);
 
-  component.find('div.provider-card__titlebar').simulate('click');
   component.find('label.access-radio').find('input').at(2).simulate('click');
   expect(component.find('div.provider-modal')).toExist();
 
@@ -140,7 +133,6 @@ it('clicking on save button closes the provider access modal', () => {
   // TO-DO: test that it actually saves everything too when hooked up
   const component = setup(mocks.providerMockC);
 
-  component.find('div.provider-card__titlebar').simulate('click');
   component.find('label.access-radio').find('input').at(2).simulate('click');
   expect(component.find('div.provider-modal')).toExist();
 

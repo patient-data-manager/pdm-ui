@@ -1,0 +1,26 @@
+.providers-search {
+  display: flex;
+  margin-bottom: 20px;
+
+  &__input {
+    flex-basis: 100%;
+    margin-right: 10px;
+
+    > div > div {
+      height: 40px;
+      border-radius: 25px;
+
+      &:hover,
+      &:focus,
+      &:active,
+      &:active:focus {
+        border-color: $color-blue;
+        box-shadow: none;
+      }
+    }
+
+    > div:last-child {
+      height: 35px;
+    }
+  }
+}

@@ -3,13 +3,16 @@ import PropTypes from 'prop-types';
 import { connect } from 'react-redux';
 import { bindActionCreators } from 'redux';
 import _ from 'lodash';
+
 import { linkProvider, loadProfileProviders } from '../../actions/providers';
+
 import ProviderCard from '../../components/dashboard/providers/ProviderCard';
+import ProviderSearch from '../../components/dashboard/providers/ProviderSearch';
 
 export class Providers extends Component {
   componentWillMount() {
-    if (this.props.profileId) {
-      this.props.loadProfileProviders(this.props.profileId);
+    if (this.props.activeProfileId) {
+      this.props.loadProfileProviders(this.props.activeProfileId);
     }
   }
 
@@ -49,7 +52,7 @@ export class Providers extends Component {
     return null;
   }
 
-  renderProvidersList = () => {
+  renderProviderList = () => {
     const providersList = this.providersList();
     if (providersList.length === 0) return <div className="providers no-entries">No linked providers.</div>;
 
@@ -58,8 +61,7 @@ export class Providers extends Component {
         <ProviderCard
           key={provider.id}
           provider={provider}
-          imageUrl={this.getImageUrl(provider.name)}
-        />
+          imageUrl={this.getImageUrl(provider.name)} />
       );
     });
   }
@@ -67,9 +69,13 @@ export class Providers extends Component {
   render() {
     return (
       <div className="providers">
-        {/* TO-DO: insert search bar here */}
+        <ProviderSearch
+          providers={this.props.providers}
+          activeProfileId={this.props.activeProfileId}
+          linkProvider={this.props.linkProvider} />
+
         <div className="providers-list">
-          {this.renderProvidersList()}
+          {this.renderProviderList()}
         </div>
       </div>
     );
@@ -77,7 +83,7 @@ export class Providers extends Component {
 }
 
 Providers.propTypes = {
-  profileId: PropTypes.number,
+  activeProfileId: PropTypes.number,
   providers: PropTypes.array,
   profileProviders: PropTypes.array,
   linkProvider: PropTypes.func.isRequired,
@@ -93,7 +99,7 @@ function mapDispatchToProps(dispatch) {
 
 function mapStateToProps(state) {
   return {
-    profileId: state.profiles.activeProfileId,
+    activeProfileId: state.profiles.activeProfileId,
     providers: state.providers.providers,
     profileProviders: state.providers.profileProviders
   };
