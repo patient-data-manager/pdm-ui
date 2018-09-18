@@ -5,9 +5,9 @@ import React from 'react';
 export default function ViewIcon(props) {
   return (
     <svg viewBox="0 0 65 65" xmlns="http://www.w3.org/2000/svg" {...props}>
-      <g fill="none" fill-rule="evenodd">
+      <g fill="none" fillRule="evenodd">
         <g transform="translate(31 31)">
-          <circle stroke="#6B8EB6" stroke-width="4" cx="12" cy="12" r="12"/>
+          <circle stroke="#6B8EB6" strokeWidth="4" cx="12" cy="12" r="12"/>
           <path d="M21.4 23.3l1.9-1.7a2 2 0 0 1 2.8 0l6.4 6.6c.8.7.8 2 0 2.8l-1.7 1.8a2 2 0 0 1-2.9 0l-6.6-6.6a2 2 0 0 1 0-2.9z" fill="#6B8EB6"/>
           <path fill="#6B8EB6" d="M20.3 22.5l2.1-2 1.2 1-2.2 2z"/>
         </g>
