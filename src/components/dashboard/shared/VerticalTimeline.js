@@ -5,7 +5,10 @@ import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
 import moment from 'moment';
 import memoize from 'memoize-one';
 import classNames from 'classnames';
+
 import isValid from '../../../utils/isValid';
+
+import ViewIcon from '../../../icons/ViewIcon';
 
 export default class VerticalTimeline extends Component {
   constructor(props) {
@@ -58,9 +61,9 @@ export default class VerticalTimeline extends Component {
     if (!isValid(this.props.viewItem)) return null;
 
     return (
-      <div className="item__view-button"> 
+      <div className="item__view-button">
         <Button color="primary" onClick={this.props.viewItem}>
-          <img className="details-logo__img" src="/assets/images/icons/view_file_icon.png" alt="" /> VIEW
+          <ViewIcon height={14} /> VIEW
         </Button>
       </div>
     );
@@ -70,7 +73,7 @@ export default class VerticalTimeline extends Component {
     if (!isValid(this.props.approveItem)) return null;
 
     return (
-      <div className="item__approve-button"> 
+      <div className="item__approve-button">
         <Button color="primary" onClick={this.props.approveItem}>
           <FontAwesomeIcon icon="check-circle" /> APPROVE
         </Button>
@@ -80,7 +83,7 @@ export default class VerticalTimeline extends Component {
 
   renderItem = (item, index) => {
     const { items, initialDisplayCount } = this.props;
-    const itemClassname = classNames('vertical-timeline__item', 
+    const itemClassname = classNames('vertical-timeline__item',
       { 'last-item': index + 1 === items.length && items.length <= initialDisplayCount });
 
     return (

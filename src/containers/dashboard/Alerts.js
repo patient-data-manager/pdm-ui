@@ -22,7 +22,7 @@ export class Alerts extends Component {
 
     return (
       <div className="alerts-list__timeline">
-        <VerticalTimeline 
+        <VerticalTimeline
           items={alerts}
           approveItem={approve}
           viewItem={this.viewAlert} />
@@ -31,7 +31,7 @@ export class Alerts extends Component {
   }
 
   render() {
-    // remove later 
+    // remove later
     const items = [
       { text: 'text2', date: '2017-04-05T18:19:22-04:00', icon: 'circle' },
       { text: 'text1', date: '2018-04-05T18:19:22-04:00', icon: 'circle' },
@@ -45,6 +45,7 @@ export class Alerts extends Component {
           <div className="alerts-list__title">Alerts ({items.length})</div>
           {this.renderAlertsList(items, false)}
         </div>
+
         <div className="alerts-list">
           <div className="alerts-list__title">Recently Approved</div>
           {this.renderAlertsList(items, true)}
