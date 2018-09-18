@@ -5,6 +5,16 @@
 
   &__item {
     display: flex;
+    justify-content: space-between;
+    width: 100%;
+
+    &:hover {
+      background-color: $color-gray-lightest;
+    }
+
+    &-timeline {
+      display: flex;
+    }
 
     &-info {
       padding: 0 20px 15px 20px;
@@ -26,6 +36,29 @@
 
     .info-date {
       font-weight: 600;
+    }
+
+    &-buttons {
+      display: flex;
+      align-items: center;
+
+      button {
+        font-size: .9em;
+        
+        &:hover {
+          background-color: transparent;
+        }
+
+        svg {
+          margin-right: 3px;
+        }
+
+        img {
+          margin-right: 3px;
+          height: 12px;
+          color: $color-black;
+        }
+      }
     }
   }
 

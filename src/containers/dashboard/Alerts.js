@@ -4,12 +4,28 @@ import { connect } from 'react-redux';
 import VerticalTimeline from '../../components/dashboard/shared/VerticalTimeline';
 
 export class Alerts extends Component {
-  renderAlertsList(alerts) {
+  approveAlert = () => {
+    // remove later
+    console.log('approving alert');
+  }
+
+  viewAlert = () => {
+    // remove later
+    console.log('viewing alert');
+  }
+
+  renderAlertsList(alerts, recentlyApproved) {
     if (alerts.length === 0) return null;
+
+    let approve = this.approveAlert;
+    if (recentlyApproved) approve = null;
 
     return (
       <div className="alerts-list__timeline">
-        <VerticalTimeline items={alerts} />
+        <VerticalTimeline 
+          items={alerts}
+          approveItem={approve}
+          viewItem={this.viewAlert} />
       </div>
     );
   }
@@ -26,12 +42,12 @@ export class Alerts extends Component {
     return (
       <div className="alerts">
         <div className="alerts-list">
-          <div className="alerts-list__title">Alerts (insert count here)</div>
-          {this.renderAlertsList(items)}
+          <div className="alerts-list__title">Alerts ({items.length})</div>
+          {this.renderAlertsList(items, false)}
         </div>
         <div className="alerts-list">
           <div className="alerts-list__title">Recently Approved</div>
-          {this.renderAlertsList([])}
+          {this.renderAlertsList(items, true)}
         </div>
       </div>
     );

@@ -3,6 +3,7 @@ import {
   faAllergies,
   faCalendar,
   faCheck,
+  faCheckCircle,
   faChevronDown,
   faChevronRight,
   faCircle,
@@ -21,13 +22,14 @@ import {
   faSpinner,
   faSyringe,
   faTimes,
-  faUserCircle
+  faUserCircle,
 } from '@fortawesome/free-solid-svg-icons';
 
 library.add(
   faAllergies,
   faCalendar,
   faCheck,
+  faCheckCircle,
   faChevronDown,
   faChevronRight,
   faCircle,
