@@ -79,11 +79,11 @@ function addProfileFailure(error) {
   };
 }
 
-function sendAddProfileRequest(profileProps, accessToken) {
+function sendAddProfileRequest(profile, accessToken) {
   return new Promise((resolve, reject) => {
     axios.post(
       '/api/v1/profiles',
-      { profile: profileProps },
+      profile,
       { headers: { 'X-Key-Inflection': 'camel', Accept: 'application/json', Authorization: `Bearer ${accessToken}` } }
     )
       .then(result => resolve(result.data))
@@ -91,13 +91,13 @@ function sendAddProfileRequest(profileProps, accessToken) {
   });
 }
 
-export function addProfile(profileProps) {
+export function addProfile(profile) {
   return (dispatch, getState) => {
     const accessToken = getState().auth.accessToken;
 
     dispatch(requestAddProfile());
 
-    return sendAddProfileRequest(profileProps, accessToken)
+    return sendAddProfileRequest(profile, accessToken)
       .then(profile => dispatch(addProfileSuccess(profile)))
       .catch(error => dispatch(addProfileFailure(error)));
   };
@@ -129,8 +129,8 @@ function updateProfileFailure(error) {
 function sendUpdateProfileRequest(profile, accessToken) {
   return new Promise((resolve, reject) => {
     axios.put(
-      `/api/v1/profiles/${profile.id}`,
-      { profile },
+      `/api/v1/profiles/${profile.get('profile[id]')}`,
+      profile,
       { headers: { 'X-Key-Inflection': 'camel', Accept: 'application/json', Authorization: `Bearer ${accessToken}` } }
     )
       .then(result => resolve(result.data))
