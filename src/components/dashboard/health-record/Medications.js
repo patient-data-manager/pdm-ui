@@ -119,7 +119,7 @@ export default class Medications extends Component {
           title="Current medications list"
           headers={['medication', 'status', 'prescribed date']}
           data={this.currentMedications()}
-          formatters={{ 'perscribed date': (value) => moment(value).format('MMM D, YYYY') }}
+          formatters={{ 'prescribed date': (value) => moment(value).format('MMM D, YYYY') }}
           sort={{ order: 'desc', orderBy: 2 }} />
 
         <div className="medications__timeline">
