@@ -6,12 +6,10 @@ import VerticalTimeline from '../../components/dashboard/shared/VerticalTimeline
 export class Alerts extends Component {
   approveAlert = () => {
     // remove later
-    console.log('approving alert');
   }
 
   viewAlert = () => {
     // remove later
-    console.log('viewing alert');
   }
 
   renderAlertsList(alerts, recentlyApproved) {

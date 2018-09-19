@@ -27,6 +27,8 @@ it('renders timeline correctly on init', () => {
   expect(component.find('div.vertical-timeline__item').at(1).find('div.info-description').text()).toEqual('2');
   expect(component.find('button.vertical-timeline__view-more')).toExist();
   expect(component.find('button.vertical-timeline__view-less')).toHaveLength(0);
+  expect(component.find('div.item__approve-button')).toHaveLength(0);
+  expect(component.find('div.item__edit-button')).toHaveLength(0);
 });
 
 it('it handles rendering different icons', () => {
@@ -34,6 +36,20 @@ it('it handles rendering different icons', () => {
 
   expect(component.find('div.vertical-timeline__item').at(0).find('svg').prop('data-icon')).toEqual('circle');
   expect(component.find('div.vertical-timeline__item').at(1).find('svg').prop('data-icon')).toEqual('heartbeat');
+});
+
+it('it renders view and approve buttons if methods are passed in', () => {
+  const props = {
+    approveItem: jest.fn(),
+    items: mocks.verticalListMockA,
+    initialDisplayCount: 2,
+    viewCount: 4,
+    viewItem: jest.fn()
+  };
+  const component = fullRenderComponent(VerticalTimeline, props);
+
+  expect(component.find('div.item__approve-button')).toExist();
+  expect(component.find('div.item__view-button')).toExist();
 });
 
 it('no line after last item if the total items is less than the initialDisplayCount', () => {
