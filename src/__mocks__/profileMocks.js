@@ -1,4 +1,5 @@
 const profileMockA = {
+  alerts: [],
   id: 1,
   user_id: 1,
   patient_id: "3d0b1d2b-ffac-4a8d-b9ef-eb5bb71835e5",
@@ -21,6 +22,7 @@ const profileMockA = {
 };
 
 const profileMockB = {
+  alerts: [],
   id: 2,
   user_id: 2,
   patient_id: "3d0b1d2b-ffac-4a8d-b9ef-eb5bb71835e6",
@@ -43,6 +45,7 @@ const profileMockB = {
 };
 
 const profileMockC = {
+  alerts: [],
   id: 3,
   user_id: 3,
   patient_id: "3d0b1d2b-ffac-4a8d-b9ef-eb5bb71835e7",
@@ -65,6 +68,7 @@ const profileMockC = {
 };
 
 const profileMockD = {
+  alerts: [],
   id: 4,
   user_id: 4,
   patient_id: "3d0b1d2b-ffac-4a8d-b9ef-eb5bb71878f1",

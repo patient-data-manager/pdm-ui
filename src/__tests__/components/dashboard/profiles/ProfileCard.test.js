@@ -7,7 +7,6 @@ function setup(profile) {
     profile,
     activeProfile: profile,
     isHeader: false,
-    alertsCount: 3,
     updateProfile: jest.fn(),
     deleteProfile: jest.fn(),
     setActiveProfile: jest.fn()
@@ -46,3 +45,5 @@ it('renders other placeholder image correctly', () => {
   expect(component.find('.profile-card__image')).toExist();
   expect(component.find('.profile-card__image').find('svg').prop('data-icon')).toEqual('user-circle');
 });
+
+// add in alert badge testing

@@ -6,6 +6,7 @@ import Badge from '@material-ui/core/Badge';
 import Button from '@material-ui/core/Button';
 
 import computeAgeString from '../../../utils/convertToString';
+import isValid from '../../../utils/isValid';
 
 import ProfileForm from './ProfileForm';
 import UserStarIcon from '../../../icons/UserStarIcon';
@@ -36,11 +37,11 @@ export default class ProfileCard extends Component {
   }
 
   renderNameAlerts = () => {
-    const { alertsCount, profile } = this.props;
+    const { profile } = this.props;
 
-    if (alertsCount > 0) {
+    if (isValid(profile.alerts) && profile.alerts.length > 0) {
       return (
-        <Badge className="details-alerts" badgeContent={alertsCount} color="error">
+        <Badge className="details-alerts" badgeContent={profile.alerts.length} color="error">
           <div className="details-name">{profile.name}</div>
         </Badge>
       );
@@ -140,7 +141,6 @@ ProfileCard.propTypes = {
   profile: PropTypes.object,
   activeProfile: PropTypes.object,
   isHeader: PropTypes.bool,
-  alertsCount: PropTypes.number,
   updateProfile: PropTypes.func,
   deleteProfile: PropTypes.func,
   setActiveProfile: PropTypes.func,
@@ -148,6 +148,5 @@ ProfileCard.propTypes = {
 };
 
 ProfileCard.defaultProps = {
-  isHeader: false,
-  alertsCount: 3 // TODO: remove when alerts working
+  isHeader: false
 };
