@@ -1,11 +1,11 @@
 import { fullRenderComponent } from '../../../../utils/testHelpers';
 import ProfileCard from '../../../../components/dashboard/profiles/ProfileCard';
-import * as mocks from '../../../../__mocks__/profileMocks';
+import { profileMockA, profileMockB, profileMockC } from '../../../../__mocks__/profileMocks';
 
-function setup() {
+function setup(profile) {
   const props = {
-    profile: mocks.profileMockA,
-    activeProfile: mocks.profileMockA,
+    profile,
+    activeProfile: profile,
     isHeader: false,
     alertsCount: 3,
     updateProfile: jest.fn(),
@@ -17,11 +17,32 @@ function setup() {
 }
 
 it('renders self and self components', () => {
-  const component = setup();
+  const component = setup(profileMockC);
 
   expect(component).toBeDefined();
   expect(component.find('div.profile-card__info')).toExist();
   expect(component.find('div.profile-card__edit-button')).toExist();
-  expect(component.find('div.profile-card__icon')).toExist();
+  expect(component.find('div.profile-card__image')).toExist();
   expect(component.find('div.profile-card__details')).toExist();
+});
+
+it('renders a profile picture correctly', () => {
+  const component = setup(profileMockC);
+
+  expect(component.find('.profile-card__image')).toExist();
+  expect(component.find('.profile-card__image img[src="http://localhost:3001/photo.jpg"]')).toHaveLength(1);
+});
+
+it('renders self placeholder image correctly', () => {
+  const component = setup(profileMockA);
+
+  expect(component.find('.profile-card__image')).toExist();
+  expect(component.find('.profile-card__image').find('svg').prop('xmlns')).toEqual('http://www.w3.org/2000/svg');
+});
+
+it('renders other placeholder image correctly', () => {
+  const component = setup(profileMockB);
+
+  expect(component.find('.profile-card__image')).toExist();
+  expect(component.find('.profile-card__image').find('svg').prop('data-icon')).toEqual('user-circle');
 });
