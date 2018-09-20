@@ -17,7 +17,7 @@ const profileMockA = {
   relationship: "self",
   telephone: "(555) 298-9827",
   telephone_use: "mobile",
-  photo: "http://localhost:3001/photo.jpg"
+  photo: null
 };
 
 const profileMockB = {
@@ -39,7 +39,7 @@ const profileMockB = {
   relationship: "son",
   telephone: "(555) 934-2938",
   telephone_use: "home",
-  photo: "http://localhost:3001/photo.jpg"
+  photo: null
 };
 
 const profileMockC = {

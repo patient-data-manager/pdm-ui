@@ -2,14 +2,13 @@ import { fullRenderComponent } from '../../../../utils/testHelpers';
 import Summary from '../../../../components/dashboard/health-record/Summary';
 import { healthRecordMockA, healthRecordMockB } from '../../../../__mocks__/healthRecordMocks';
 import { patientMock } from '../../../../__mocks__/patientMocks';
-import { profileMockA, profileMockB, profileMockD } from '../../../../__mocks__/profileMocks';
-
+import { profileMockA, profileMockB, profileMockC, profileMockD } from '../../../../__mocks__/profileMocks';
 
 function setup(profile, healthRecord) {
-  let props = { 
-    patient: patientMock, 
-    profile: profile,
-    healthRecord: healthRecord
+  let props = {
+    patient: patientMock,
+    profile,
+    healthRecord
   };
 
   return fullRenderComponent(Summary, props);
@@ -61,6 +60,13 @@ it('renders table rows correctly', () => {
   expect(component.find('.summary__table-value').at(4).text()).toEqual('(555) 934-2938');
   expect(component.find('.summary__table-key').at(5).text()).toEqual('PCP');
   expect(component.find('.summary__table-value').at(5).text()).toEqual('');
+});
+
+it('renders a profile picture correctly', () => {
+  const component = setup(profileMockC);
+
+  expect(component.find('.summary__image')).toExist();
+  expect(component.find('.summary__image img[src="http://localhost:3001/photo.jpg"]')).toHaveLength(1);
 });
 
 it('renders self placeholder image correctly', () => {
