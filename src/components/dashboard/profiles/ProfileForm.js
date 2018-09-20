@@ -62,7 +62,7 @@ export default class ProfileForm extends Component {
 
     const formData = new FormData();
     for (const key in profile) {
-      if (key !== 'photo' && profile.hasOwnProperty(key)) {
+      if (key !== 'photo' && profile.hasOwnProperty(key) && profile[key] != null) {
         formData.append(`profile[${key}]`, profile[key]);
       }
     }
