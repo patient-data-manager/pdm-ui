@@ -97,7 +97,11 @@ export default class Summary extends Component {
   }
 
   renderProfileImage = () => {
-    if (this.props.profile.relationship === 'self') {
+    const { profile } = this.props;
+
+    if (profile.photo) {
+      return <img src={profile.photo} alt="Profile" className="summary__profile-photo" />;
+    } else if (profile.relationship === 'self') {
       return <UserStarIcon height={135} />;
     }
     return <FontAwesomeIcon icon="user-circle" />;

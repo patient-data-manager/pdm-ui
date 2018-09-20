@@ -1,8 +1,56 @@
 .profile-form {
-  padding: 0 80px 40px 80px;
+  padding: 0 40px 40px 40px;
   border-bottom: 1px solid $color-gray-lightest;
 
+  &__photo {
+    margin: 20px 0;
+    position: relative;
+
+    .upload-image {
+      display: none;
+    }
+
+    img,
+    svg {
+      margin-bottom: 20px;
+    }
+
+    img {
+      border-radius: 50%;
+      width: 140px;
+      height: 140px;
+      object-fit: cover;
+      object-position: center;
+    }
+
+    svg {
+      fill: $color-blue-gray-light;
+    }
+
+    svg.fa-user-circle {
+      font-size: 10em;
+      color: $color-blue-gray-light;
+    }
+
+    .clear-image {
+      position: absolute;
+      left: 100px;
+      top: 0;
+
+      > span {
+        padding-top: 13px;
+      }
+    }
+  }
+
+  &__form-photo {
+    margin-right: 40px;
+    min-width: 140px;
+  }
+
   &__form {
+    display: flex;
+
     .profile-form__form-group {
       display: inline-block;
       width: 50%;

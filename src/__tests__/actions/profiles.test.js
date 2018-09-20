@@ -88,7 +88,10 @@ describe('profiles actions', () => {
         { type: types.UPDATE_PROFILE_SUCCESS, profile: mockProfileC }
       ];
 
-      return store.dispatch(actions.updateProfile(mockProfileC)).then(() => {
+      const formData = new FormData();
+      formData.append('profile[id]', mockProfileC.id);
+
+      return store.dispatch(actions.updateProfile(formData)).then(() => {
         expect(store.getActions()).toEqual(expectedActions);
       });
     });

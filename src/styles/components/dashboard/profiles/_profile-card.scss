@@ -14,7 +14,7 @@
     }
 
     &.is-header {
-      .profile-card__icon svg {
+      .profile-card__image svg {
         fill: $color-white;
         color: $color-white;
       }
@@ -33,10 +33,18 @@
     align-items: center;
   }
 
-  &__icon {
+  &__image {
     display: flex;
     font-size: 3em;
     margin-right: 20px;
+
+    img {
+      border-radius: 50%;
+      width: 42px;
+      height: 42px;
+      object-fit: cover;
+      object-position: center;
+    }
 
     svg {
       fill: $color-gray;

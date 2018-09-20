@@ -26,9 +26,9 @@ export default class ProfileCard extends Component {
     }
   }
 
-  loadEditForm = (event) => {
+  toggleEditForm = (event) => {
     event.stopPropagation();
-    this.setState({ showEditForm: true });
+    this.setState({ showEditForm: !this.state.showEditForm });
   }
 
   handleFormCancel = () => {
@@ -52,7 +52,7 @@ export default class ProfileCard extends Component {
   renderEditButton = () => {
     return (
       <div className="profile-card__edit-button">
-        <Button color="primary" onClick={this.loadEditForm}>
+        <Button color="primary" onClick={this.toggleEditForm}>
           <FontAwesomeIcon icon="edit" /> EDIT
         </Button>
       </div>
@@ -73,11 +73,13 @@ export default class ProfileCard extends Component {
     return null;
   }
 
-  renderIcon = () => {
+  renderImage = () => {
     const { profile, activeProfile } = this.props;
     const iconClassnames = classNames('user-icon', { 'active': activeProfile && profile.id === activeProfile.id });
 
-    if (profile.relationship === 'self') {
+    if (profile.photo) {
+      return <img src={profile.photo} alt="Profile" />;
+    } else if (profile.relationship === 'self') {
       return <UserStarIcon height="43" className={iconClassnames} />;
     }
 
@@ -110,8 +112,8 @@ export default class ProfileCard extends Component {
           role="button"
           tabIndex={-1}>
           <div className="profile-card__info">
-            <div className="profile-card__icon">
-              {this.renderIcon()}
+            <div className="profile-card__image">
+              {this.renderImage()}
             </div>
 
             <div className="profile-card__details">

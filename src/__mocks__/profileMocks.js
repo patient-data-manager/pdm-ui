@@ -16,7 +16,8 @@ const profileMockA = {
   zip: "00000",
   relationship: "self",
   telephone: "(555) 298-9827",
-  telephone_use: "mobile"
+  telephone_use: "mobile",
+  photo: null
 };
 
 const profileMockB = {
@@ -37,7 +38,8 @@ const profileMockB = {
   zip: "00000",
   relationship: "son",
   telephone: "(555) 934-2938",
-  telephone_use: "home"
+  telephone_use: "home",
+  photo: null
 };
 
 const profileMockC = {
@@ -58,13 +60,15 @@ const profileMockC = {
   zip: "00000",
   relationship: "daughter",
   telephone: "(555) 934-2938",
-  telephone_use: "home"
+  telephone_use: "home",
+  photo: "http://localhost:3001/photo.jpg"
 };
 
 const profileMockD = {
   id: 4,
   user_id: 4,
   patient_id: "3d0b1d2b-ffac-4a8d-b9ef-eb5bb71878f1",
+  photo: "http://localhost:3001/photo.jpg"
 };
 
 export {

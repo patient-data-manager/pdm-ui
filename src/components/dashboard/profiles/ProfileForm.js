@@ -12,6 +12,9 @@ import Select from '@material-ui/core/Select';
 import TextField from '@material-ui/core/TextField';
 import { ValidatorForm, TextValidator } from 'react-material-ui-form-validator';
 import { confirmAlert } from 'react-confirm-alert';
+import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
+
+import UserStarIcon from '../../../icons/UserStarIcon';
 
 import isValid from '../../../utils/isValid';
 import { states } from '../../../utils/usStates';
@@ -57,7 +60,21 @@ export default class ProfileForm extends Component {
     fullName += this.state.last_name;
     profile.name = fullName;
 
-    this.props.saveProfile(profile);
+    const formData = new FormData();
+    for (const key in profile) {
+      if (key !== 'photo' && profile.hasOwnProperty(key) && profile[key] != null) {
+        formData.append(`profile[${key}]`, profile[key]);
+      }
+    }
+
+    const { profileInput } = this.refs;
+    if (profileInput.files && profileInput.files[0]) {
+      formData.append('profile[photo]', profileInput.files[0]);
+    } else if (this.state.photo === null) {
+      formData.append('profile[photo]', '');
+    }
+
+    this.props.saveProfile(formData);
     this.props.cancel();
   }
 
@@ -70,6 +87,24 @@ export default class ProfileForm extends Component {
         { label: 'No', onClick: () => {} }
       ]
     });
+  }
+
+  setProfileImage = () => {
+    const { profileInput } = this.refs;
+    if (profileInput.files && profileInput.files[0]) {
+      const reader = new FileReader();
+
+      reader.onload = (event) => {
+        this.setState({ photo: event.target.result });
+      };
+
+      reader.readAsDataURL(profileInput.files[0]);
+    }
+  }
+
+  clearProfileImage = () => {
+    this.refs.profileInput.value = null;
+    this.setState({ photo: null });
   }
 
   renderTextField = (label, field, name, autoComplete, classname='', isRequired=false) => {
@@ -126,6 +161,7 @@ export default class ProfileForm extends Component {
     return (
       <FormControl className={`profile-form__inputfield ${classname}`}>
         <InputLabel htmlFor={name}>{label}</InputLabel>
+
         <Select
           value={this.state[field] || ''}
           onChange={this.handleChange(field)}
@@ -148,6 +184,7 @@ export default class ProfileForm extends Component {
     return (
       <FormControl className={`profile-form__inputfield ${classname}`}>
         <InputLabel htmlFor={name}>{label}</InputLabel>
+
         <Input
           value={this.state[field] || ''}
           onChange={this.handleChange(field)}
@@ -157,6 +194,49 @@ export default class ProfileForm extends Component {
         />
       </FormControl>
     );
+  }
+
+  renderPhotoSelect = () => {
+    return (
+      <div className="profile-form__photo">
+        {this.state.photo ? this.renderProfileImage() : this.renderGenericProfileImage()}
+
+        <div className="photo-upload">
+          <input
+            accept="image/*"
+            className="upload-image"
+            id="raised-button-file"
+            type="file"
+            onChange={this.setProfileImage}
+            ref="profileInput"
+          />
+
+          <label htmlFor="raised-button-file">
+            <Button variant="contained" color="primary" component="span" className="upload-image-label">
+              Upload Image
+            </Button>
+          </label>
+
+          {this.state.photo &&
+            <Button variant="fab" mini={true} onClick={this.clearProfileImage} className="clear-image">
+              <FontAwesomeIcon icon="times" />
+            </Button>
+          }
+        </div>
+      </div>
+    );
+  }
+
+  renderGenericProfileImage() {
+    if (this.state.relationship === 'self') {
+      return <UserStarIcon height={135} />;
+    }
+
+    return <FontAwesomeIcon icon="user-circle" />;
+  }
+
+  renderProfileImage() {
+    return <img src={this.state.photo} alt="Profile" />;
   }
 
   render() {
@@ -169,69 +249,75 @@ export default class ProfileForm extends Component {
           ref="form"
           onSubmit={this.submitProfile}
           instantValidate={false} >
-          <div className="profile-form__form-group">
-            {this.renderTextField('FIRST NAME', 'first_name', 'firstName', 'given-name', '', true)}
+          <div className="profile-form__form-photo">
+            {this.renderPhotoSelect()}
           </div>
 
-          <div className="profile-form__form-group">
-            {this.renderTextField('MIDDLE INITIAL', 'middle_name', 'middleName', 'additional-name', 'middle-initial')}
-            {this.renderTextField('LAST NAME', 'last_name', 'lastName', 'family-name', 'last-name', true)}
-          </div>
+          <div className="profile-form__form-inputs">
+            <div className="profile-form__form-group">
+              {this.renderTextField('FIRST NAME', 'first_name', 'firstName', 'given-name', '', true)}
+            </div>
 
-          <div className="profile-form__form-group">
-            {this.renderDatePicker('DATE OF BIRTH', 'dob', 'dob')}
-          </div>
+            <div className="profile-form__form-group">
+              {this.renderTextField('MIDDLE INITIAL', 'middle_name', 'middleName', 'additional-name', 'middle-initial')}
+              {this.renderTextField('LAST NAME', 'last_name', 'lastName', 'family-name', 'last-name', true)}
+            </div>
 
-          <div className="profile-form__form-group gender-group">
-            <FormLabel component="label" className="gender-label">GENDER</FormLabel>
-            {this.renderRadioButton('female')}
-            {this.renderRadioButton('male')}
-            {this.renderRadioButton('other')}
-          </div>
+            <div className="profile-form__form-group">
+              {this.renderDatePicker('DATE OF BIRTH', 'dob', 'dob')}
+            </div>
 
-          <div className="profile-form__form-group">
-            {this.renderTextField('STREET ADDRESS', 'street', 'street', 'street-address')}
-          </div>
+            <div className="profile-form__form-group gender-group">
+              <FormLabel component="label" className="gender-label">GENDER</FormLabel>
+              {this.renderRadioButton('female')}
+              {this.renderRadioButton('male')}
+              {this.renderRadioButton('other')}
+            </div>
 
-          <div className="profile-form__form-group">
-            {this.renderTextField('CITY', 'city', 'city', 'address-line1', 'city')}
-            {this.renderSelect('STATE', 'state', 'state', states, 'state')}
-            {this.renderTextField('ZIP CODE', 'zip', 'zip', 'postal-code', 'zip-code')}
-          </div>
+            <div className="profile-form__form-group">
+              {this.renderTextField('STREET ADDRESS', 'street', 'street', 'street-address')}
+            </div>
 
-          <div className="profile-form__form-group">
-            {this.renderPhoneInput('PHONE', 'phone', 'telephone', 'phone')}
-            {this.renderSelect('PHONE TYPE', 'phoneType', 'telephone_use', phoneTypes, 'phone-type')}
-          </div>
+            <div className="profile-form__form-group">
+              {this.renderTextField('CITY', 'city', 'city', 'address-line1', 'city')}
+              {this.renderSelect('STATE', 'state', 'state', states, 'state')}
+              {this.renderTextField('ZIP CODE', 'zip', 'zip', 'postal-code', 'zip-code')}
+            </div>
 
-          <div className="profile-form__form-group">
-            {this.renderSelect('RELATIONSHIP', 'relationship', 'relationship', relationshipTypes)}
-          </div>
+            <div className="profile-form__form-group">
+              {this.renderPhoneInput('PHONE', 'phone', 'telephone', 'phone')}
+              {this.renderSelect('PHONE TYPE', 'phoneType', 'telephone_use', phoneTypes, 'phone-type')}
+            </div>
 
-          <div className="profile-form__buttons">
-            <Button
-              variant="outlined"
-              onClick={this.props.cancel}
-              className="profile-form__button button-cancel">
-              CANCEL
-            </Button>
+            <div className="profile-form__form-group">
+              {this.renderSelect('RELATIONSHIP', 'relationship', 'relationship', relationshipTypes)}
+            </div>
 
-            {showDelete &&
+            <div className="profile-form__buttons">
+              <Button
+                variant="outlined"
+                onClick={this.props.cancel}
+                className="profile-form__button button-cancel">
+                CANCEL
+              </Button>
+
+              {showDelete &&
+                <Button
+                  variant="contained"
+                  onClick={this.deleteProfile}
+                  className="profile-form__button button-delete">
+                  DELETE
+                </Button>
+              }
+
               <Button
                 variant="contained"
-                onClick={this.deleteProfile}
-                className="profile-form__button button-delete">
-                DELETE
+                color="primary"
+                type="submit"
+                className="profile-form__button button-save">
+                SAVE
               </Button>
-            }
-
-            <Button
-              variant="contained"
-              color="primary"
-              type="submit"
-              className="profile-form__button button-save">
-              SAVE
-            </Button>
+            </div>
           </div>
         </ValidatorForm>
       </div>
