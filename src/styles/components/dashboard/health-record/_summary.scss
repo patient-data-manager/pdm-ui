@@ -1,6 +1,10 @@
 .summary {
   margin-bottom: 20px;
 
+  &__profile-photo {
+    width: 140px;
+    border-radius: 50%;
+  }
 
   &__image {
     align-self: center;
@@ -10,7 +14,7 @@
     svg {
       font-size: 10em;
     }
-  
+
     &-table {
       display: flex;
       flex-direction: row;

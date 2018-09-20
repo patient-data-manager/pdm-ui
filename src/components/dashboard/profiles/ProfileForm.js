@@ -71,7 +71,7 @@ export default class ProfileForm extends Component {
     if (profileInput.files && profileInput.files[0]) {
       formData.append('profile[photo]', profileInput.files[0]);
     } else if (this.state.photo === null) {
-      formData.append('profile[photo]', null);
+      formData.append('profile[photo]', '');
     }
 
     this.props.saveProfile(formData);
