@@ -26,9 +26,9 @@ export default class ProfileCard extends Component {
     }
   }
 
-  loadEditForm = (event) => {
+  toggleEditForm = (event) => {
     event.stopPropagation();
-    this.setState({ showEditForm: true });
+    this.setState({ showEditForm: !this.state.showEditForm });
   }
 
   handleFormCancel = () => {
@@ -52,7 +52,7 @@ export default class ProfileCard extends Component {
   renderEditButton = () => {
     return (
       <div className="profile-card__edit-button">
-        <Button color="primary" onClick={this.loadEditForm}>
+        <Button color="primary" onClick={this.toggleEditForm}>
           <FontAwesomeIcon icon="edit" /> EDIT
         </Button>
       </div>

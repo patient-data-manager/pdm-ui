@@ -2,8 +2,11 @@
   margin-bottom: 20px;
 
   &__profile-photo {
-    width: 140px;
     border-radius: 50%;
+    width: 140px;
+    height: 140px;
+    object-fit: cover;
+    object-position: center;
   }
 
   &__image {
