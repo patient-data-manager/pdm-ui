@@ -35,4 +35,4 @@ it('clicking the approve button updates the alerts list', () => {
   expect(component.find('div.vertical-timeline').at(0).find('div.vertical-timeline__item')).toHaveLength(2);
 });
 
-// view button works
+// TO-DO: add alert view button works test
