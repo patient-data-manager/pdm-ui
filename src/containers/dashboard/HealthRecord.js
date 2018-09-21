@@ -95,8 +95,9 @@ export class HealthRecord extends Component {
       } },
       { header: 'immunizations', component: Immunizations, props: { immunizations: healthRecord.Immunization || [] } },
       { header: 'procedures', component: Procedures, props: { procedures: healthRecord.Procedure || [] } },
-      { header: 'labs', component: Labs, props: { labs: this.filterObservationsByCategory('laboratory') || [] } },
-      { header: 'vitals', component: Vitals, props: { vitals: this.filterObservationsByCategory('vital-signs') || [] } }
+      { header: 'vitals', component: Vitals, props: { vitals: this.filterObservationsByCategory('vital-signs') || [] } },
+      { header: 'labs', component: Labs, props: { labs: this.filterObservationsByCategory('laboratory') || [] } }
+
     ];
 
     if (loadingProfile || loadingHealthRecord) {
