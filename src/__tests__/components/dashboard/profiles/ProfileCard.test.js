@@ -46,4 +46,4 @@ it('renders other placeholder image correctly', () => {
   expect(component.find('.profile-card__image').find('svg').prop('data-icon')).toEqual('user-circle');
 });
 
-// add in alert badge testing
+// TO-DO: add in alert badge testing

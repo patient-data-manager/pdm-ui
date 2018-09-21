@@ -39,15 +39,11 @@ export default class ProfileCard extends Component {
   renderNameAlerts = () => {
     const { profile } = this.props;
 
-    if (isValid(profile.alerts) && profile.alerts.length > 0) {
-      return (
-        <Badge className="details-alerts" badgeContent={profile.alerts.length} color="error">
-          <div className="details-name">{profile.name}</div>
-        </Badge>
-      );
-    }
-
-    return <div className="details-name">{profile.name}</div>;
+    return (
+      <Badge className="details-alerts" badgeContent={3} color="error">
+        <div className="details-name">{profile.name}</div>
+      </Badge>
+    );
   }
 
   renderEditButton = () => {
