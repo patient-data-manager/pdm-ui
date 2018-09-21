@@ -34,8 +34,20 @@ it('renders timeline correctly on init', () => {
 it('it handles rendering different icons', () => {
   const component = setup();
 
-  expect(component.find('div.vertical-timeline__item').at(0).find('svg').prop('data-icon')).toEqual('circle');
-  expect(component.find('div.vertical-timeline__item').at(1).find('svg').prop('data-icon')).toEqual('heartbeat');
+  expect(component.find('div.vertical-timeline__item-timeline').at(0)
+    .find('svg').prop('data-icon')).toEqual('circle');
+  expect(component.find('div.vertical-timeline__item-timeline').at(1)
+    .find('svg').prop('data-icon')).toEqual('heartbeat');
+});
+
+it('it handles rendering conflicts', () => {
+  const component = setup();
+
+  expect(component.find('div.vertical-timeline__item').at(0).find('div.item__conflicts-content')).toExist();
+  expect(component.find('div.vertical-timeline__item').at(0)
+    .find('div.item__conflicts-content').text()).toEqual(' conflicts (4)');
+  expect(component.find('div.vertical-timeline__item').at(1).find('div.item__conflicts-content')).toHaveLength(0);
+  expect(component.find('div.vertical-timeline__item').at(2).find('div.item__conflicts-content')).toHaveLength(0);
 });
 
 it('it renders view and approve buttons if methods are passed in', () => {

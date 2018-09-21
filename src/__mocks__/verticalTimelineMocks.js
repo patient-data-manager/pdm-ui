@@ -12,7 +12,8 @@ const verticalListMockA = [
   {
     'date': '2018-07-13T02:27:04.196Z',
     'text': '1',
-    'icon': 'circle'
+    'icon': 'circle',
+    'conflictCount': 4
   },
   {
     'date': '2016-07-13T02:27:04.196Z',

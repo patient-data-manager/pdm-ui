@@ -59,7 +59,11 @@ export default class VerticalTimeline extends Component {
 
   renderConflicts = (conflictCount) => {
     if (!isValid(conflictCount) || conflictCount === 0) return null;
-    return (<div><FontAwesomeIcon icon="exclamation-triangle" /> conflicts ({conflictCount})</div>);
+    return (
+      <div className="item__conflicts-content">
+        <FontAwesomeIcon icon="exclamation-triangle" /> conflicts ({conflictCount})
+      </div>
+    );
   }
 
   renderViewItemButton = () => {
