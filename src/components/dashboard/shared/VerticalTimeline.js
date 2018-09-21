@@ -57,6 +57,11 @@ export default class VerticalTimeline extends Component {
     );
   }
 
+  renderConflicts = (conflictCount) => {
+    if (!isValid(conflictCount) || conflictCount === 0) return null;
+    return (<div><FontAwesomeIcon icon="exclamation-triangle" /> conflicts ({conflictCount})</div>);
+  }
+
   renderViewItemButton = () => {
     if (!isValid(this.props.viewItem)) return null;
 
@@ -95,7 +100,9 @@ export default class VerticalTimeline extends Component {
             <div className="info-description">{item.text}</div>
           </div>
         </div>
-
+        <div className="vertical-timeline__item-conflicts">
+          {this.renderConflicts(item.conflictCount)}
+        </div>
         <div className="vertical-timeline__item-buttons">
           {this.renderViewItemButton()}
           {this.renderApproveItemButton(item)}

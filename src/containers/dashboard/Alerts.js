@@ -13,6 +13,7 @@ export class Alerts extends Component {
           text: 'white blood cell count: 7.1 10^9L', 
           date: '2018-09-05T18:19:22-04:00', 
           icon: 'flask', 
+          conflictCount: 2,
           approved: false 
         },
         { id: 1, 
