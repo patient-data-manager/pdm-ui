@@ -69,12 +69,12 @@ export default class VerticalTimeline extends Component {
     );
   }
 
-  renderApproveItemButton = () => {
+  renderApproveItemButton = (item) => {
     if (!isValid(this.props.approveItem)) return null;
 
     return (
       <div className="item__approve-button">
-        <Button color="primary" onClick={this.props.approveItem}>
+        <Button color="primary" onClick={() => this.props.approveItem(item)}>
           <FontAwesomeIcon icon="check-circle" /> APPROVE
         </Button>
       </div>
@@ -98,7 +98,7 @@ export default class VerticalTimeline extends Component {
 
         <div className="vertical-timeline__item-buttons">
           {this.renderViewItemButton()}
-          {this.renderApproveItemButton()}
+          {this.renderApproveItemButton(item)}
         </div>
       </div>
     );
