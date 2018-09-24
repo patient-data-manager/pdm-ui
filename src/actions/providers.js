@@ -162,8 +162,9 @@ function requestOauthCallback() {
   };
 }
 
-function oauthCallbackSuccess(profileId) {
+function oauthCallbackSuccess(data) {
   return {
+    profileProvider: data,
     type: types.OAUTH_CALLBACK_SUCCESS,
   };
 }
@@ -183,7 +184,7 @@ function sendOauthCallbackRequest(state, code) {
       `/oauth/callback?state=${state}&code=${code}&redirect_uri=${redirectUri}`,
       { headers: { 'X-Key-Inflection': 'camel', Accept: 'application/json' } }
     )
-      .then(result => resolve(result.data.id))
+      .then(result => resolve(result.data))
       .catch(error => reject(error));
   });
 }
@@ -193,7 +194,7 @@ export function oauthCallback(state, code) {
     dispatch(requestOauthCallback());
 
     return sendOauthCallbackRequest(state, code)
-      .then(id => dispatch(oauthCallbackSuccess(id)))
+      .then(result => dispatch(oauthCallbackSuccess(result)))
       .catch(error => dispatch(oauthCallbackFailure(error)));
   };
 }

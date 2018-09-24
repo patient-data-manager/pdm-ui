@@ -96,9 +96,10 @@ describe('providers actions', () => {
     afterEach(() => { moxios.uninstall(); });
 
     it('should create OAUTH_CALLBACK_SUCCESS after successfully handling an oauth callback', () => {
+      const profileProvider = { id: 1234, profile_id: mockProfile.id, provider_id: mockProviderA.id };
       moxios.wait(() => {
         const request = moxios.requests.mostRecent();
-        request.respondWith({ status: 200, response: { redirect_uri: 'http://localhost:8000/oauth' } });
+        request.respondWith({ status: 200, response: profileProvider });
       });
 
       const store = mockStore({
@@ -109,7 +110,7 @@ describe('providers actions', () => {
 
       const expectedActions = [
         { type: types.OAUTH_CALLBACK_REQUEST },
-        { type: types.OAUTH_CALLBACK_SUCCESS, profileId: undefined }
+        { type: types.OAUTH_CALLBACK_SUCCESS, profileProvider: profileProvider }
       ];
 
       return store.dispatch(actions.oauthCallback('abc', '123')).then(() => {

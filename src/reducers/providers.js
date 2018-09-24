@@ -64,6 +64,12 @@ function providers(state = defaultState, action) {
       ...state,
       linkProvider: { isLinking: false, linkStatus: 'failure' }
     };
+  case types.OAUTH_CALLBACK_SUCCESS:
+    return {
+      ...state,
+      profileProviders: state.profileProviders.concat([action.profileProvider]),
+      linkProvider: { isLinking: false, linkStatus: 'failure' }
+    };
   default:
     return state;
   }
