@@ -50,11 +50,11 @@ it('does not display date details if field values not defined', () => {
 });
 
 it('renders logo correctly', () => {
-  const component = setup(mocks.providerMockC);
+  const component = setup(mocks.providerMockE);
 
   expect(component.find('div.details-logo')).toExist();
   expect(component.find('img.details-logo__img').prop('src'))
-    .toEqual('/assets/images/provider-logos/partners-healthcare.png');
+    .toEqual('data:image/jpeg;base64,' + mocks.providerMockE.logo);
 });
 
 it('renders permission details correctly', () => {

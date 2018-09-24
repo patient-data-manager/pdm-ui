@@ -22,9 +22,29 @@ const providerMockD = {
   name: 'Blue Cross Blue Shield',
 };
 
+const providerMockE = {
+  authorization_endpoint: null,
+  base_endpoint: 'https://epicarr.aahs.org/fhir/api/FHIR/DSTU2/',
+  city: 'Annapolis',
+  client_id: null,
+  client_secret: null,
+  description: '',
+  id: 924063134,
+  logo: 'R0lGODlhAQABAIAAAAAAAP///yH5BAEAAAAALAAAAAABAAEAAAIBRAA7',
+  name: 'Anne Arundel Medical Center',
+  parent_id: null,
+  provider_type: 'smart_epic',
+  scopes: null,
+  state: 'MD',
+  street: '2001 Medical Parkway',
+  token_endpoint: null,
+  zip: '21401'
+};
+
 export {
   providerMockA,
   providerMockB,
   providerMockC,
-  providerMockD
+  providerMockD,
+  providerMockE
 };
