@@ -7,7 +7,6 @@ import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
 import classNames from 'classnames';
 import { withStyles } from '@material-ui/core/styles';
 import AppBar from '@material-ui/core/AppBar';
-import Badge from '@material-ui/core/Badge';
 import ChevronLeftIcon from '@material-ui/icons/ChevronLeft';
 import ChevronRightIcon from '@material-ui/icons/ChevronRight';
 import Divider from '@material-ui/core/Divider';
@@ -120,7 +119,8 @@ export class Dashboard extends Component {
 
     return navList.map((navItem, index) => {
       const selected = navItem.path === this.props.location.pathname;
-      const menuClassname = classNames({ selected });
+      const menuClassname = classNames('dashboard__menu-item', { selected });
+      const navItemClassname = classNames('alert-badge', { 'open': this.state.open });
 
       return (
         <MenuItem
@@ -129,9 +129,8 @@ export class Dashboard extends Component {
           to={navItem.path}
           selected={navItem.path === this.props.location.pathname}
           className={menuClassname}>
-          <Badge className="details-alerts" badgeContent={3} color="error">
-            <ListItemIcon><FontAwesomeIcon icon={navItem.iconName} fixedWidth /></ListItemIcon>
-          </Badge>
+          {navItem.name === 'Alerts' && <div className={navItemClassname}>3</div>}
+          <ListItemIcon><FontAwesomeIcon icon={navItem.iconName} fixedWidth /></ListItemIcon>
           <ListItemText primary={navItem.name} />
         </MenuItem>
       );

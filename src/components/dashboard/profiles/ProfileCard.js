@@ -6,7 +6,6 @@ import Badge from '@material-ui/core/Badge';
 import Button from '@material-ui/core/Button';
 
 import computeAgeString from '../../../utils/convertToString';
-import isValid from '../../../utils/isValid';
 
 import ProfileForm from './ProfileForm';
 import UserStarIcon from '../../../icons/UserStarIcon';

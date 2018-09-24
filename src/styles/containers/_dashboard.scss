@@ -7,6 +7,10 @@
     margin-bottom: 60px;
   }
 
+  &__menu-item {
+    position: relative;
+  }
+
   .nav-list-items {
     a {
       padding: 22px 15px;
