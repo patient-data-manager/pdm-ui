@@ -51,11 +51,11 @@ export default class ProviderCard extends Component {
   }
 
   renderLogo = () => {
-    if (!isValid(this.props.imageUrl)) return null;
+    if (!isValid(this.props.provider.logo)) return null;
 
     return (
       <div className="details-logo">
-        <img className="details-logo__img" src={this.props.imageUrl} alt="" />
+        <img className="details-logo__img" src={"data:image/jpeg;base64," + this.props.provider.logo} alt="" />
       </div>
     );
   }
