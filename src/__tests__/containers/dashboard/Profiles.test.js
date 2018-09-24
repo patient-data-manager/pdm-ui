@@ -41,4 +41,19 @@ it('renders all profile cards', () => {
   const component = setup();
 
   expect(component.find('div.profile-card')).toHaveLength(3);
+  expect(component.find('div.profile-card').at(0).find('div.details-name').text()).toEqual('Jane E Doe');
+  expect(component.find('div.profile-card').at(1).find('div.details-name').text()).toEqual('John Doe');
+  expect(component.find('div.profile-card').at(2).find('div.details-name').text()).toEqual('Jenny Doe');
+});
+
+it('clicking the new button opens profile form', () => {
+  const component = setup();
+
+  expect(component.find('div.profiles__new-button')).toExist();
+  expect(component.find('div.profile-form')).toHaveLength(0);
+
+  component.find('div.profiles__new-button').find('button').simulate('click');
+  expect(component.find('div.profiles__new-form-title')).toExist();
+  expect(component.find('div.profiles__new-form-label').text()).toEqual('Create new profile:');
+  expect(component.find('div.profile-form')).toExist();
 });

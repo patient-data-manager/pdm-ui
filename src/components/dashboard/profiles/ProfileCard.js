@@ -56,17 +56,15 @@ export default class ProfileCard extends Component {
   }
 
   renderEditForm = () => {
-    if (this.state.showEditForm) {
-      return (
-        <ProfileForm
-          profile={this.props.profile}
-          deleteProfile={this.props.deleteProfile}
-          saveProfile={this.props.updateProfile}
-          cancel={this.handleFormCancel} />
-      );
-    }
+    if (!this.state.showEditForm) return null;
 
-    return null;
+    return (
+      <ProfileForm
+        profile={this.props.profile}
+        deleteProfile={this.props.deleteProfile}
+        saveProfile={this.props.updateProfile}
+        cancel={this.handleFormCancel} />
+    );
   }
 
   renderImage = () => {

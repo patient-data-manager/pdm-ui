@@ -143,13 +143,13 @@ export default class ProfileForm extends Component {
     );
   }
 
-  renderDatePicker = (label, name, value) => {
+  renderDatePicker = (label, name, value, classname='') => {
     return (
       <TextField
         label={label}
         name={name}
         type="date"
-        className="profile-form__inputfield"
+        className={`profile-form__inputfield ${classname}`}
         onChange={this.handleChange(value)}
         value={this.state[value] || ''}
         InputLabelProps={{ shrink: true }}
@@ -157,7 +157,7 @@ export default class ProfileForm extends Component {
     );
   }
 
-  renderSelect = (label, name, field, selectArray, classname) => {
+  renderSelect = (label, name, field, selectArray, classname='') => {
     return (
       <FormControl className={`profile-form__inputfield ${classname}`}>
         <InputLabel htmlFor={name}>{label}</InputLabel>
@@ -255,7 +255,7 @@ export default class ProfileForm extends Component {
 
           <div className="profile-form__form-inputs">
             <div className="profile-form__form-group">
-              {this.renderTextField('FIRST NAME', 'first_name', 'firstName', 'given-name', '', true)}
+              {this.renderTextField('FIRST NAME', 'first_name', 'firstName', 'given-name', 'first-name', true)}
             </div>
 
             <div className="profile-form__form-group">
@@ -264,7 +264,7 @@ export default class ProfileForm extends Component {
             </div>
 
             <div className="profile-form__form-group">
-              {this.renderDatePicker('DATE OF BIRTH', 'dob', 'dob')}
+              {this.renderDatePicker('DATE OF BIRTH', 'dob', 'dob', 'birthday')}
             </div>
 
             <div className="profile-form__form-group gender-group">
@@ -275,7 +275,7 @@ export default class ProfileForm extends Component {
             </div>
 
             <div className="profile-form__form-group">
-              {this.renderTextField('STREET ADDRESS', 'street', 'street', 'street-address')}
+              {this.renderTextField('STREET ADDRESS', 'street', 'street', 'street-address', 'street-address')}
             </div>
 
             <div className="profile-form__form-group">
@@ -285,12 +285,12 @@ export default class ProfileForm extends Component {
             </div>
 
             <div className="profile-form__form-group">
-              {this.renderPhoneInput('PHONE', 'phone', 'telephone', 'phone')}
+              {this.renderPhoneInput('PHONE', 'phone', 'telephone', 'phone', 'phone')}
               {this.renderSelect('PHONE TYPE', 'phoneType', 'telephone_use', phoneTypes, 'phone-type')}
             </div>
 
             <div className="profile-form__form-group">
-              {this.renderSelect('RELATIONSHIP', 'relationship', 'relationship', relationshipTypes)}
+              {this.renderSelect('RELATIONSHIP', 'relationship', 'relationship', relationshipTypes, 'relationship')}
             </div>
 
             <div className="profile-form__buttons">
