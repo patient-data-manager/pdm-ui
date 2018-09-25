@@ -82,7 +82,8 @@ export default class Vitals extends Component {
           title={group.title}
           data={group.values}
           referenceRanges={group.referenceRanges}
-          unit={group.unit} />
+          unit={group.unit}
+          chartWidth={this.props.chartWidth} />
       );
     }
 
@@ -102,7 +103,8 @@ export default class Vitals extends Component {
 }
 
 Vitals.propTypes = {
-  vitals: PropTypes.array
+  vitals: PropTypes.array,
+  chartWidth: PropTypes.number
 };
 
 Vitals.defaultProps = {

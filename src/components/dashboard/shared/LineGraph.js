@@ -9,24 +9,6 @@ import _ from 'lodash';
 import CustomGraphTooltip from './CustomGraphTooltip';
 
 export default class LineGraph extends Component {
-  constructor(props) {
-    super(props);
-    this.state = { width: 600 };
-  }
-
-  componentDidMount() {
-    this.resize();
-    window.addEventListener('resize', this.resize);
-  }
-
-  componentWillUnmount() {
-    window.removeEventListener('resize', this.resize);
-  }
-
-  resize = () => {
-    this.setState({ width: window.innerWidth });
-  }
-
   // memoize will only call the function if items has changed, otherwise it will return the last value
   sortDataByDate = memoize((items) => items.sort(((a, b) => moment(a.date) - moment(b.date))));
 
@@ -126,14 +108,13 @@ export default class LineGraph extends Component {
   }
 
   render() {
-    const { title, data, unit, minPoints } = this.props;
+    const { title, data, unit, minPoints, chartWidth } = this.props;
     if (data.length < minPoints) return null;
 
     const sortedData = this.sortDataByDate(data);
     const processedData = this.processData(sortedData);
     const [xMin, xMax] = this.getMinMax(sortedData, 'date');
     const [yMinValue, yMaxValue] = this.getMinMax(sortedData, 'value');
-    const chartWidth = this.state.width - 350;
     const graphWidthStyle = { width: `${chartWidth}px` };
     const yMax = Math.ceil(yMaxValue + (yMaxValue * .1));
     const yMin = Math.floor(yMinValue - (yMinValue * .1));
@@ -171,10 +152,12 @@ LineGraph.propTypes = {
   data: PropTypes.array.isRequired,
   unit: PropTypes.string.isRequired,
   referenceRanges: PropTypes.array,
-  minPoints: PropTypes.number
+  minPoints: PropTypes.number,
+  chartWidth: PropTypes.number
 };
 
 LineGraph.defaultProps = {
   referenceRanges: [],
-  minPoints: 3
+  minPoints: 3,
+  chartWidth: 600
 };

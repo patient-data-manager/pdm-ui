@@ -16,17 +16,34 @@ import Vitals from '../../components/dashboard/health-record/Vitals';
 
 import { receiveHealthRecord } from '../../actions/healthRecords';
 
+const drawerWidthOpen = 259;
+const drawerWidthClosed = 71;
+const tocWidth = 200;
+const timelinePadding = 80;
+
 export class HealthRecord extends Component {
-  tocbotInitialized = false;
+  constructor(props) {
+    super(props);
+
+    this.state = {
+      tocbotInitialized: false,
+      width: 600
+    };
+  }
+
+  componentWillMount() {
+    this.resize();
+    window.addEventListener('resize', this.resize);
+  }
 
   componentDidMount() {
-    if (!this.tocbotInitialized && !this.props.loading) {
+    if (!this.state.tocbotInitialized && !this.props.loading) {
       this.initializeTocbot();
     }
   }
 
   componentDidUpdate() {
-    if (!this.tocbotInitialized && !this.props.loading) {
+    if (!this.state.tocbotInitialized && !this.props.loading) {
       this.initializeTocbot();
     } else if (!this.props.loading) {
       tocbot.refresh();
@@ -34,7 +51,14 @@ export class HealthRecord extends Component {
   }
 
   componentWillUnmount() {
+    window.removeEventListener('resize', this.resize);
     tocbot.destroy();
+  }
+
+  componentWillReceiveProps(nextProps) {
+    if (this.props.dashboardNavIsOpen !== nextProps.dashboardNavIsOpen) {
+      window.setTimeout(this.resize, 10);
+    }
   }
 
   initializeTocbot() {
@@ -48,7 +72,13 @@ export class HealthRecord extends Component {
       fixedSidebarOffset: 160                         // offset from top
     });
 
-    this.tocbotInitialized = true;
+    this.setState({ tocbotInitialized: true });
+  }
+
+  resize = () => {
+    let width = window.innerWidth - drawerWidthClosed;
+    if (this.props.dashboardNavIsOpen) width = window.innerWidth - drawerWidthOpen;
+    this.setState({ width: width - tocWidth });
   }
 
   filterObservationsByCategory(category) {
@@ -74,7 +104,8 @@ export class HealthRecord extends Component {
           <h4 id={header}>{header}</h4>
           <div className="header-divider"></div>
         </div>
-        <SectionComponent {...props} />
+
+        <SectionComponent {...props} chartWidth={this.state.width - timelinePadding} />
       </div>
     );
   }
@@ -97,7 +128,6 @@ export class HealthRecord extends Component {
       { header: 'procedures', component: Procedures, props: { procedures: healthRecord.Procedure || [] } },
       { header: 'vitals', component: Vitals, props: { vitals: this.filterObservationsByCategory('vital-signs') || [] } },
       { header: 'labs', component: Labs, props: { labs: this.filterObservationsByCategory('laboratory') || [] } }
-
     ];
 
     if (loadingProfile || loadingHealthRecord) {
@@ -107,16 +137,16 @@ export class HealthRecord extends Component {
     return (
       <div className="health-record">
         <div className="health-record__toc"></div>
-        { this.context.cable &&
-          // only render if this component is wrapped in an ActionCableProvider
+
+        {this.context.cable && // only render if this component is wrapped in an ActionCableProvider
           <ActionCable
             channel={{ channel: 'UpdateChannel', profile_id: profile.id }}
             onReceived={this.handleReceivedData}
-          /> }
+          />
+        }
+
         <div className="health-record__content">
-          {sections.map((section) => {
-            return this.renderSection(section.header, section.component, section.props);
-          })}
+          {sections.map(section => this.renderSection(section.header, section.component, section.props))}
         </div>
       </div>
     );
@@ -128,7 +158,8 @@ HealthRecord.propTypes = {
   healthRecord: PropTypes.object,
   loadingProfile: PropTypes.bool.isRequired,
   loadingHealthRecord: PropTypes.bool.isRequired,
-  receiveHealthRecord: PropTypes.func.isRequired
+  receiveHealthRecord: PropTypes.func.isRequired,
+  dashboardNavIsOpen: PropTypes.bool.isRequired
 };
 
 HealthRecord.contextTypes = {
@@ -150,7 +181,8 @@ function mapStateToProps(state) {
     profile: state.profiles.activeProfile,
     healthRecord: state.healthRecords.healthRecord,
     loadingProfile: state.profiles.loadProfiles.isLoading,
-    loadingHealthRecord: state.healthRecords.loadHealthRecord.isLoading
+    loadingHealthRecord: state.healthRecords.loadHealthRecord.isLoading,
+    dashboardNavIsOpen: state.dashboard.navIsOpen
   };
 }
 

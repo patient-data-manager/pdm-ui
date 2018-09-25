@@ -62,7 +62,7 @@ export default class Medications extends Component {
     medications.forEach((medication) => {
       const title = getDisplayString(medication, 'medicationCodeableConcept');
       const date = getProperty(medication, 'authoredOn') ||
-                   getProperty(medication, 'effectiveDateTime') || 
+                   getProperty(medication, 'effectiveDateTime') ||
                    getProperty(medication, 'effectivePeriod.start');
       const startDate = moment(date).valueOf();
       const isActive = medication.status === 'active';
@@ -125,7 +125,8 @@ export default class Medications extends Component {
             title="Medication history"
             groups={[{ 'id': 1, 'title': 'medication' }]}
             items={this.getMedicationItems()}
-            stackItems={true} />
+            stackItems={true}
+            chartWidth={this.props.chartWidth} />
         </div>
 
         <VerticalTimeline items={this.medications()} icon="pills" />
@@ -137,6 +138,7 @@ export default class Medications extends Component {
 Medications.propTypes = {
   medicationRequests: PropTypes.array,
   medicationStatements: PropTypes.array,
+  chartWidth: PropTypes.number
 };
 
 Medications.defaultProps = {
