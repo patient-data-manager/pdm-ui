@@ -1,6 +1,6 @@
 import * as types from './types';
 
-// ------------------------- DASHBOARD ------------------------------------------ //
+// ------------------------- DASHBOARD NAV --------------------------------- //
 
 export default function setDashboardOpen(navIsOpen) {
   return {

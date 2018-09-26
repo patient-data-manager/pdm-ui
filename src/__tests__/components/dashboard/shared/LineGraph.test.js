@@ -42,7 +42,7 @@ it('displays title and most recent values correctly', () => {
 
 it('displays the graph correctly', () => {
   const component = setup();
-  
+
   expect(component.find(LineChart)).toExist();
   expect(component.find(LineChart).prop('data')).toHaveLength(7);
   expect(component.find(LineChart).prop('data')[0]).toEqual({ value: 200, date: 251149251000 });
@@ -55,7 +55,7 @@ it('displays the graph correctly', () => {
   expect(component.find('Line')).toExist();
 
   expect(component.find('svg.recharts-surface').prop('height')).toEqual(200);
-  expect(component.find('svg.recharts-surface').prop('width')).toEqual(674);
+  expect(component.find('svg.recharts-surface').prop('width')).toEqual(600);
   expect(component.find('g.recharts-layer')).toExist();
   expect(component.find('div.recharts-tooltip-wrapper')).toExist();
 });

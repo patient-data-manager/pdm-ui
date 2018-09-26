@@ -117,7 +117,7 @@ export default class Summary extends Component {
   }
 
   render() {
-    const { patient, profile } = this.props;
+    const { patient, profile, chartWidth } = this.props;
     let patientName, patientAge, patientDOB, patientStreet, patientCity, patientState, patientZip, patientAddress;
 
     if (Object.keys(patient).length > 0) {
@@ -156,7 +156,7 @@ export default class Summary extends Component {
             groups={this.getSummaryGroups()}
             items={this.getSummaryItems()}
             legendItems={this.getLegendItems()}
-            chartWidth={this.props.chartWidth} />
+            chartWidth={chartWidth} />
         </div>
       </div>
     );

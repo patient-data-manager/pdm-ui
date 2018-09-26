@@ -5,6 +5,7 @@ import { bindActionCreators } from 'redux';
 import tocbot from 'tocbot';
 import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
 import { ActionCable } from 'react-actioncable-provider';
+
 import Allergies from '../../components/dashboard/health-record/Allergies';
 import Conditions from '../../components/dashboard/health-record/Conditions';
 import Immunizations from '../../components/dashboard/health-record/Immunizations';
@@ -19,7 +20,7 @@ import { receiveHealthRecord } from '../../actions/healthRecords';
 const drawerWidthOpen = 259;
 const drawerWidthClosed = 71;
 const tocWidth = 200;
-const timelinePadding = 80;
+const chartPadding = 80;
 
 export class HealthRecord extends Component {
   constructor(props) {
@@ -27,7 +28,14 @@ export class HealthRecord extends Component {
 
     this.state = {
       tocbotInitialized: false,
-      width: 600
+      chartWidth: 600
+    };
+
+    let timeout;
+    const debouncedResize = () => this._calculateChartWidth(this.props.dashboardNavIsOpen);
+    this.resize = () => {
+      clearTimeout(timeout);
+      timeout = setTimeout(debouncedResize, 500);
     };
   }
 
@@ -57,7 +65,7 @@ export class HealthRecord extends Component {
 
   componentWillReceiveProps(nextProps) {
     if (this.props.dashboardNavIsOpen !== nextProps.dashboardNavIsOpen) {
-      window.setTimeout(this.resize, 10);
+      this._calculateChartWidth(nextProps.dashboardNavIsOpen);
     }
   }
 
@@ -75,10 +83,10 @@ export class HealthRecord extends Component {
     this.setState({ tocbotInitialized: true });
   }
 
-  resize = () => {
+  _calculateChartWidth(navOpen) {
     let width = window.innerWidth - drawerWidthClosed;
-    if (this.props.dashboardNavIsOpen) width = window.innerWidth - drawerWidthOpen;
-    this.setState({ width: width - tocWidth });
+    if (navOpen) width = window.innerWidth - drawerWidthOpen;
+    this.setState({ chartWidth: width - tocWidth - chartPadding });
   }
 
   filterObservationsByCategory(category) {
@@ -105,7 +113,7 @@ export class HealthRecord extends Component {
           <div className="header-divider"></div>
         </div>
 
-        <SectionComponent {...props} chartWidth={this.state.width - timelinePadding} />
+        <SectionComponent {...props} chartWidth={this.state.chartWidth} />
       </div>
     );
   }
