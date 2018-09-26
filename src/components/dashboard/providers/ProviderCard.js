@@ -110,18 +110,18 @@ export default class ProviderCard extends Component {
         <div className="details-info-logo">
           <div className="details-info">
             <div className="details-info__added-on">
-              <div className="date-key">Added on</div>
-              <div className="date-value">{this.formatDate(this.props.provider.addedOn)}</div>
+              <div className="info-key">Added on</div>
+              <div className="info-value">{this.formatDate(this.props.provider.addedOn)}</div>
             </div>
 
             <div className="details-info__last-updated">
-              <div className="date-key">Last updated</div>
-              <div className="date-value">{this.formatDate(this.props.provider.lastUpdated)}</div>
+              <div className="info-key">Last updated</div>
+              <div className="info-value">{this.formatDate(this.props.provider.lastUpdated)}</div>
             </div>
 
             <div className="details-info__address">
-              <div className="date-key">Address</div>
-              <div className="date-value">{this.renderAddress(this.props.provider)}</div>
+              <div className="info-key">Address</div>
+              <div className="info-value">{this.renderAddress(this.props.provider)}</div>
             </div>
           </div>
           {this.renderLogo()}

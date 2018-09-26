@@ -15,6 +15,7 @@ it('renders self and self components', () => {
   expect(component.find('div.provider-card')).toExist();
   expect(component.find('div.provider-card__titlebar')).toExist();
   expect(component.find('div.provider-card__details')).toExist();
+  expect(component.find('div.details-info')).toExist();
 });
 
 it('renders titlebar correctly', () => {
@@ -29,24 +30,55 @@ it('renders titlebar correctly', () => {
 it('renders date details correctly', () => {
   const component = setup(mocks.providerMockC);
 
-  expect(component.find('div.details-info')).toExist();
-  expect(component.find('div.details-info__added-on').find('div.date-key').text()).toEqual('Added on');
-  expect(component.find('div.details-info__added-on').find('div.date-value').text()).toEqual('2001-09-16');
-  expect(component.find('div.details-info__last-updated').find('div.date-key').text()).toEqual('Last updated');
-  expect(component.find('div.details-info__last-updated').find('div.date-value').text()).toEqual('2018-04-05');
+  expect(component.find('div.details-info__added-on').find('div.info-key').text()).toEqual('Added on');
+  expect(component.find('div.details-info__added-on').find('div.info-value').text()).toEqual('2001-09-16');
+  expect(component.find('div.details-info__last-updated').find('div.info-key').text()).toEqual('Last updated');
+  expect(component.find('div.details-info__last-updated').find('div.info-value').text()).toEqual('2018-04-05');
 });
 
 it('does not display date details if field values not defined', () => {
-  const component = setup(mocks.providerMockE);
+  const component = setup(mocks.providerMockD);
 
-  expect(component.find('div.details-info')).toExist();
-  expect(component.find('div.details-info__added-on').find('div.date-key').text()).toEqual('Added on');
-  expect(component.find('div.details-info__added-on').find('div.date-value').text()).toEqual('');
-  expect(component.find('div.details-info__last-updated').find('div.date-key').text()).toEqual('Last updated');
-  expect(component.find('div.details-info__last-updated').find('div.date-value').text()).toEqual('');
+  expect(component.find('div.details-info__added-on').find('div.info-key').text()).toEqual('Added on');
+  expect(component.find('div.details-info__added-on').find('div.info-value').text()).toEqual('');
+  expect(component.find('div.details-info__last-updated').find('div.info-key').text()).toEqual('Last updated');
+  expect(component.find('div.details-info__last-updated').find('div.info-value').text()).toEqual('');
 });
 
-// add address field tests here
+it('renders different addresses correctly', () => {
+  // 1 line address
+  const component1 = setup(mocks.providerMockC);
+  expect(component1.find('div.details-info__address').find('div.info-value').text()).toEqual('MA');
+  expect(component1.find('div.details-info__address').find('div.address-line')).toHaveLength(1);
+  expect(component1.find('div.details-info__address').find('div.address-line').text()).toEqual('MA');
+
+  // 2 line address
+  const component2 = setup(mocks.providerMockE);
+  expect(component2.find('div.details-info__address').find('div.info-value').text())
+    .toEqual('2001 Medical ParkwayAnnapolis MD, 21401');
+  expect(component2.find('div.details-info__address').find('div.address-line')).toHaveLength(2);
+  expect(component2.find('div.details-info__address').find('div.address-line').at(0).text())
+    .toEqual('2001 Medical Parkway');
+  expect(component2.find('div.details-info__address').find('div.address-line').at(1).text())
+    .toEqual('Annapolis MD, 21401');
+
+  // 3 line address
+  const component3 = setup(mocks.providerMockB);
+  expect(component3.find('div.details-info__address').find('div.info-value').text())
+    .toEqual('123 Boylston StreetP.O. Box 1Boston MA, 00000');
+  expect(component3.find('div.details-info__address').find('div.address-line')).toHaveLength(3);
+  expect(component3.find('div.details-info__address').find('div.address-line').at(0).text())
+    .toEqual('123 Boylston Street');
+  expect(component3.find('div.details-info__address').find('div.address-line').at(1).text()).toEqual('P.O. Box 1');
+  expect(component3.find('div.details-info__address').find('div.address-line').at(2).text()).toEqual('Boston MA, 00000');
+});
+
+it('does not display address details if field values not defined', () => {
+  const component = setup(mocks.providerMockD);
+
+  expect(component.find('div.details-info__address').find('div.info-key').text()).toEqual('Address');
+  expect(component.find('div.details-info__address').find('div.info-value').text()).toEqual('');
+});
 
 it('renders logo correctly', () => {
   const component = setup(mocks.providerMockE);
