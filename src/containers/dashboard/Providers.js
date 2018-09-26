@@ -33,25 +33,6 @@ export class Providers extends Component {
     return _.orderBy(providersList, ['name'], ['asc']);
   }
 
-  getProviderImages = () => {
-    return [
-      { 'name': 'Brigham and Womens', 'imageUrl': '/assets/images/provider-logos/brigham-and-womens.png' },
-      { 'name': 'FitBit', 'imageUrl': '/assets/images/provider-logos/fitbit.png' },
-      { 'name': 'Massachusetts General Hospital', 'imageUrl': '/assets/images/provider-logos/mgh.png' },
-      { 'name': 'Partners Health Care', 'imageUrl': '/assets/images/provider-logos/partners-healthcare.png' },
-      { 'name': 'smart_sandbox', 'imageUrl': '/assets/images/provider-logos/smart-sandbox.png' }
-    ];
-  }
-
-  getImageUrl = (providerName) => {
-    const providers = this.getProviderImages();
-    const matchingProvider = providers.filter((provider) => providerName === provider.name);
-    if (matchingProvider.length > 0) {
-      return matchingProvider[0].imageUrl;
-    }
-    return null;
-  }
-
   renderProviderList = () => {
     const providersList = this.providersList();
     if (providersList.length === 0) return <div className="providers no-entries">No linked providers.</div>;
@@ -60,8 +41,7 @@ export class Providers extends Component {
       return (
         <ProviderCard
           key={provider.id}
-          provider={provider}
-          imageUrl={this.getImageUrl(provider.name)} />
+          provider={provider} />
       );
     });
   }
@@ -70,7 +50,7 @@ export class Providers extends Component {
     return (
       <div className="providers">
         <ProviderSearch
-          providers={this.props.providers}
+          providers={_.orderBy(this.props.providers, ['name'], ['asc'])}
           activeProfileId={this.props.activeProfileId}
           linkProvider={this.props.linkProvider} />
 
