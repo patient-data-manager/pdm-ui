@@ -88,7 +88,7 @@ it('renders logo correctly', () => {
     .toEqual('data:image/jpeg;base64,' + mocks.providerMockE.logo);
 });
 
-it('no provider logo is displayed if no imageUrl is given', () => {
+it('logo is not displayed if logo is not defined', () => {
   const component = setup(mocks.providerMockC);
   expect(component.find('div.details-logo')).toHaveLength(0);
 });
