@@ -37,10 +37,6 @@ export class Providers extends Component {
     const providersList = this.providersList();
     if (providersList.length === 0) return <div className="providers no-entries">No linked providers.</div>;
 
-
-    // TO-DO: comment this back in before merge
-    // TO-TEST: uncomment following line and comment out the one after it
-    // return this.props.providers.map((provider) => {
     return providersList.map((provider) => {
       return (
         <ProviderCard
