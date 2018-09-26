@@ -32,21 +32,21 @@
     margin: 20px 30px 10px;
     color: $color-gray-darker;
 
-    .details-dates-logo {
+    .details-info-logo {
       display: flex;
       flex-direction: row;
       justify-content: space-between;
-      margin-bottom: 15px;
 
-      .details-dates {
+      .details-info {
         display: flex;
         flex-direction: column;
         flex-basis: 50%;
+        justify-content: space-between;
 
-        &-added-on, &-last-updated {
+        &__added-on, &__last-updated, &__address {
           display: flex;
           flex-direction: row;
-          flex-basis: 40%;
+          padding-bottom: 5px;
 
           .date-key {
             flex-basis: 115px;
@@ -54,14 +54,14 @@
           }
 
           .date-value {
-            flex-basis: 130px;
+            flex-basis: 250px;
           }
         }
       }
 
       .details-logo {
         &__img {
-          height: 60px;
+          height: 75px;
         }
       }
     }

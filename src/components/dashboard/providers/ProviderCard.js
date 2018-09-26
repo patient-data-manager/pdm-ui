@@ -6,6 +6,7 @@ import FormControlLabel from '@material-ui/core/FormControlLabel';
 import Radio from '@material-ui/core/Radio';
 
 import isValid from '../../../utils/isValid';
+import isValidAndNotEmpty from '../../../utils/isValidAndNotEmpty';
 import ProviderModal from './ProviderModal';
 
 export default class ProviderCard extends Component {
@@ -40,6 +41,28 @@ export default class ProviderCard extends Component {
     if (isValid(date)) {
       return moment(date).format('YYYY-MM-DD');
     }
+  }
+
+  renderAddress = (provider) => {
+    let addressLines = [];
+    if (isValid(provider.street)) {
+      let addressBlocks = provider.street.split(',');
+      addressBlocks.forEach((block) => {
+        if (isValidAndNotEmpty(block)) addressLines.push(block.trim());
+      });
+    }
+
+    let cityTownZip = '';
+    if (isValidAndNotEmpty(provider.city)) cityTownZip += provider.city + ' ';
+    if (isValidAndNotEmpty(provider.state)) cityTownZip += provider.state;
+    if (isValidAndNotEmpty(provider.zip)) cityTownZip += ', ' + provider.zip;
+    if (isValidAndNotEmpty(cityTownZip)) addressLines.push(cityTownZip);
+
+    if (addressLines.length === 0) return null;
+
+    return addressLines.map((line, index) => {
+      return <div key={index} className="address-line">{line}</div>;
+    });
   }
 
   renderCollapseExpandIcon = () => {
@@ -84,16 +107,21 @@ export default class ProviderCard extends Component {
 
     return (
       <div className="provider-card__details">
-        <div className="details-dates-logo">
-          <div className="details-dates">
-            <div className="details-dates-added-on">
+        <div className="details-info-logo">
+          <div className="details-info">
+            <div className="details-info__added-on">
               <div className="date-key">Added on</div>
               <div className="date-value">{this.formatDate(this.props.provider.addedOn)}</div>
             </div>
 
-            <div className="details-dates-last-updated">
+            <div className="details-info__last-updated">
               <div className="date-key">Last updated</div>
               <div className="date-value">{this.formatDate(this.props.provider.lastUpdated)}</div>
+            </div>
+
+            <div className="details-info__address">
+              <div className="date-key">Address</div>
+              <div className="date-value">{this.renderAddress(this.props.provider)}</div>
             </div>
           </div>
           {this.renderLogo()}
@@ -145,9 +173,4 @@ export default class ProviderCard extends Component {
 
 ProviderCard.propTypes = {
   provider: PropTypes.object.isRequired,
-  imageUrl: PropTypes.string
-};
-
-ProviderCard.defaultProps = {
-  imageUrl: ''
 };
