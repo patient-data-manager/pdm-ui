@@ -120,7 +120,7 @@ export class Dashboard extends Component {
     return navList.map((navItem, index) => {
       const selected = navItem.path === this.props.location.pathname;
       const menuClassname = classNames('dashboard__menu-item', { selected });
-      const navItemClassname = classNames('alert-badge', { 'open': this.state.open });
+      const navItemClassname = classNames('alert-badge', { 'open': this.props.dashboardNavIsOpen });
 
       return (
         <MenuItem
