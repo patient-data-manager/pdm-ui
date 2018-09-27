@@ -77,14 +77,3 @@ it('renders the Drawer correctly', () => {
   expect(component.find('Drawer List')).toExist();
   expect(component.find('Drawer .nav-list-items')).toExist();
 });
-
-// TO-DO: fix this
-// it('properly expands and closes the menu when clicking the icon button', () => {
-//   const component = setup();
-
-//   expect(component.find('WithStyles(Drawer)').prop('open')).toEqual(false);
-//   component.find('WithStyles(IconButton)').at(0).simulate('click');
-//   expect(component.find('WithStyles(Drawer)').prop('open')).toEqual(true);
-//   component.find('WithStyles(IconButton)').at(1).simulate('click');
-//   expect(component.find('WithStyles(Drawer)').prop('open')).toEqual(false);
-// });
