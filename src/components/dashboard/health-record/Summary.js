@@ -117,7 +117,7 @@ export default class Summary extends Component {
   }
 
   render() {
-    const { patient, profile } = this.props;
+    const { patient, profile, chartWidth } = this.props;
     let patientName, patientAge, patientDOB, patientStreet, patientCity, patientState, patientZip, patientAddress;
 
     if (Object.keys(patient).length > 0) {
@@ -155,7 +155,8 @@ export default class Summary extends Component {
             title="Timeline"
             groups={this.getSummaryGroups()}
             items={this.getSummaryItems()}
-            legendItems={this.getLegendItems()} />
+            legendItems={this.getLegendItems()}
+            chartWidth={chartWidth} />
         </div>
       </div>
     );
@@ -165,5 +166,6 @@ export default class Summary extends Component {
 Summary.propTypes = {
   patient: PropTypes.object.isRequired,
   profile: PropTypes.object.isRequired,
-  healthRecord: PropTypes.object
+  healthRecord: PropTypes.object,
+  chartWidth: PropTypes.number
 };

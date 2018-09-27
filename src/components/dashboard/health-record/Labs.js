@@ -65,7 +65,8 @@ export default class Labs extends Component {
           title={group.title}
           data={group.values}
           referenceRanges={group.referenceRanges}
-          unit={group.unit} />
+          unit={group.unit}
+          chartWidth={this.props.chartWidth} />
       );
     }
     return graphs.length > 0 ? graphs : null;
@@ -84,7 +85,8 @@ export default class Labs extends Component {
 }
 
 Labs.propTypes = {
-  labs: PropTypes.array
+  labs: PropTypes.array,
+  chartWidth: PropTypes.number
 };
 
 Labs.defaultProps = {

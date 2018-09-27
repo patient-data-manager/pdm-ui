@@ -27,7 +27,7 @@ export const DELETE_PROFILE_SUCCESS = 'DELETE_PROFILE_SUCCESS';
 export const DELETE_PROFILE_FAILURE = 'DELETE_PROFILE_FAILURE';
 export const SET_ACTIVE_PROFILE = 'SET_ACTIVE_PROFILE';
 
-// ------------------------- PROVIDERS ------------------------------------ //
+// ------------------------- PROVIDERS ------------------------------------- //
 export const PROVIDERS_REQUEST = 'PROVIDERS_REQUEST';
 export const LOAD_PROVIDERS_SUCCESS = 'LOAD_PROVIDERS_SUCCESS';
 export const LOAD_PROVIDERS_FAILURE = 'LOAD_PROVIDERS_FAILURE';
@@ -47,3 +47,6 @@ export const HEALTH_RECORD_REQUEST = "HEALTH_RECORD_REQUEST";
 export const LOAD_HEALTH_RECORD_SUCCESS = "LOAD_HEALTH_RECORD_SUCCESS";
 export const LOAD_HEALTH_RECORD_FAILURE = "LOAD_HEALTH_RECORD_FAILURE";
 export const RECEIVE_HEALTH_RECORD_PUSH_REQUEST = "RECEIVE_HEALTH_RECORD_PUSH_REQUEST";
+
+// ------------------------- DASHBOARD ------------------------------------- //
+export const SET_DASHBOARD_NAV_OPEN = "SET_DASHBOARD_NAV_OPEN";

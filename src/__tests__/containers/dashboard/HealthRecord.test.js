@@ -16,6 +16,9 @@ function setup() {
       loadProfiles: {
         isLoading: false
       }
+    },
+    dashboard: {
+      navIsOpen: false
     }
   };
   const props = {};

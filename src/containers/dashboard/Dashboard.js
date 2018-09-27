@@ -22,6 +22,7 @@ import ChevronRightIcon from '@material-ui/icons/ChevronRight';
 import { logoutUser } from '../../actions/auth';
 import { loadProfiles } from '../../actions/profiles';
 import { loadProviders } from '../../actions/providers';
+import setDashboardOpen from '../../actions/dashboard';
 
 import Header from '../../components/Header';
 import ProfileCard from '../../components/dashboard/profiles/ProfileCard';
@@ -95,25 +96,17 @@ const styles = theme => ({
 });
 
 export class Dashboard extends Component {
-  constructor(props) {
-    super(props);
-
-    this.state = {
-      open: false
-    };
-  }
-
   componentWillMount() {
     this.props.loadProfiles();
     this.props.loadProviders();
   }
 
   handleDrawerOpen = () => {
-    this.setState({ open: true });
+    this.props.setDashboardOpen(true);
   };
 
   handleDrawerClose = () => {
-    this.setState({ open: false });
+    this.props.setDashboardOpen(false);
   };
 
   renderNavListItems = () => {
@@ -143,7 +136,7 @@ export class Dashboard extends Component {
   }
 
   render() {
-    const { authUser, classes, theme, children, activeProfile } = this.props;
+    const { authUser, classes, theme, children, activeProfile, dashboardNavIsOpen } = this.props;
 
     return (
       <div className="dashboard">
@@ -152,13 +145,13 @@ export class Dashboard extends Component {
         <div className={classes.root}>
           <AppBar
             position="absolute"
-            className={classNames(classes.appBar, this.state.open && classes.appBarShift)}>
-            <Toolbar disableGutters={!this.state.open} className="app-toolbar">
+            className={classNames(classes.appBar, dashboardNavIsOpen && classes.appBarShift)}>
+            <Toolbar disableGutters={!dashboardNavIsOpen} className="app-toolbar">
               <IconButton
                 color="inherit"
                 aria-label="open drawer"
                 onClick={this.handleDrawerOpen}
-                className={classNames(classes.menuButton, this.state.open && classes.hide)}>
+                className={classNames(classes.menuButton, dashboardNavIsOpen && classes.hide)}>
                 <MenuIcon />
               </IconButton>
 
@@ -169,9 +162,9 @@ export class Dashboard extends Component {
           <Drawer
             variant="permanent"
             classes={{
-              paper: classNames(classes.drawerPaper, !this.state.open && classes.drawerPaperClose),
+              paper: classNames(classes.drawerPaper, !dashboardNavIsOpen && classes.drawerPaperClose),
             }}
-            open={this.state.open}>
+            open={dashboardNavIsOpen}>
             <div className={classes.toolbar}>
               <IconButton onClick={this.handleDrawerClose}>
                 {theme.direction === 'rtl' ? <ChevronRightIcon /> : <ChevronLeftIcon />}
@@ -205,16 +198,19 @@ Dashboard.propTypes = {
   activeProfile: PropTypes.object,
   classes: PropTypes.object.isRequired,
   theme: PropTypes.object.isRequired,
+  dashboardNavIsOpen: PropTypes.bool,
   logoutUser: PropTypes.func.isRequired,
   loadProfiles: PropTypes.func.isRequired,
-  loadProviders: PropTypes.func.isRequired
+  loadProviders: PropTypes.func.isRequired,
+  setDashboardOpen: PropTypes.func.isRequired
 };
 
 function mapDispatchToProps(dispatch) {
   return bindActionCreators({
     logoutUser,
     loadProfiles,
-    loadProviders
+    loadProviders,
+    setDashboardOpen
   }, dispatch);
 }
 
@@ -222,7 +218,8 @@ function mapStateToProps(state) {
   return {
     isAuthenticated: state.auth.isAuthenticated,
     authUser: state.auth.username,
-    activeProfile: state.profiles.activeProfile
+    activeProfile: state.profiles.activeProfile,
+    dashboardNavIsOpen: state.dashboard.navIsOpen
   };
 }
 

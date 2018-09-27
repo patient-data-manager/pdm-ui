@@ -18,24 +18,12 @@ export default class HorizontalTimeline extends Component {
     this.state = {
       visibleTimeStart: null,
       visibleTimeEnd: null,
-      activeRange: null,
-      width: 600
+      activeRange: null
     };
   }
 
   componentWillMount() {
-    this.resize();
-    window.addEventListener('resize', this.resize);
-
     this.initializeRange();
-  }
-
-  componentWillUnmount() {
-    window.removeEventListener('resize', this.resize);
-  }
-
-  resize = () => {
-    this.setState({ width: window.innerWidth });
   }
 
   initializeRange() {
@@ -105,7 +93,7 @@ export default class HorizontalTimeline extends Component {
 
   renderLegend = (legendItems) => {
     if (legendItems.length === 0) return null;
-    
+
     return (
       <div className="horizontal-timeline__legend">
         {legendItems.length > 0 && this.renderLegendRow(legendItems, 0)}
@@ -115,9 +103,8 @@ export default class HorizontalTimeline extends Component {
   }
 
   render() {
-    const { groups, items, title, legendItems, rangeItems, stackItems } = this.props;
-    const { visibleTimeStart, visibleTimeEnd, activeRange, width } = this.state;
-    const chartWidth = width - 350;
+    const { groups, items, title, legendItems, rangeItems, stackItems, chartWidth } = this.props;
+    const { visibleTimeStart, visibleTimeEnd, activeRange } = this.state;
     const graphWidthStyle = { width: `${chartWidth}px` };
 
     if (items.length < 1) return null;
@@ -176,7 +163,8 @@ HorizontalTimeline.propTypes = {
   legendItems: PropTypes.arrayOf(legendProps),
   rangeItems: PropTypes.arrayOf(rangeProps),
   defaultRange: PropTypes.string, // a rangeText from rangeItems
-  stackItems: PropTypes.bool
+  stackItems: PropTypes.bool,
+  chartWidth: PropTypes.number
 };
 
 HorizontalTimeline.defaultProps = {
@@ -190,5 +178,6 @@ HorizontalTimeline.defaultProps = {
     { rangeText: 'all' }
   ],
   defaultRange: '1yr',
-  stackItems: false
+  stackItems: false,
+  chartWidth: 600
 };
