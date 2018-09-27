@@ -115,20 +115,19 @@ it('form delete button removes card from list and closes form', () => {
   }, 100); // needed to load conformation modal
 });
 
-// TO-DO: fix this
-// it('form save button updates profile', () => {
-//   const component = setup(profileMockA);
+it('form save button closes edit form', () => {
+  const component = setup(profileMockA);
 
-//   component.find('div.profile-card__edit-button').find('button').simulate('click');
-//   expect(component.find('button.button-save')).toExist();
+  component.find('div.profile-card__edit-button').find('button').simulate('click');
+  expect(component.find('button.button-save')).toExist();
 
-//   // expect(component.find('div.first_name').find('input').value()).toEqual('Jane');
-//   expect(component.find('div.first_name').find('input').prop('value')).toEqual('Jane');
-//   component.find('div.first_name').find('input').simulate('change', { target: { value: 'Janie' } });
-//   expect(component.find('div.first_name').find('input').prop('value')).toEqual('Janie');
+  expect(component.find('div.first-name').find('input').prop('value')).toEqual('Jane');
+  component.find('div.first-name').find('input').simulate('change', { target: { value: 'Janie' } });
+  expect(component.find('div.first-name').find('input').prop('value')).toEqual('Janie');
 
-//   component.find('button.button-save').simulate('submit');
-//   expect(component.find('div.profile-card')).toExist();
-//   expect(component.find('div.profile-form')).toHaveLength(0);
-//   expect(component.find('div.details-name').text()).toEqual('Janie E Doe');
-// });
+  component.find('form').simulate('submit');
+  expect(component.find('div.profile-card')).toExist();
+  expect(component.find('div.profile-form')).toHaveLength(0);
+
+  // TO-DO: add that the submit button updates the profile card
+});

@@ -57,3 +57,23 @@ it('clicking the new button opens profile form', () => {
   expect(component.find('div.profiles__new-form-label').text()).toEqual('Create new profile:');
   expect(component.find('div.profile-form')).toExist();
 });
+
+it('form save button closes new form', () => {
+  const component = setup();
+
+  component.find('div.profiles__new-button').find('button').simulate('click');
+  expect(component.find('button.button-save')).toExist();
+
+  expect(component.find('div.first-name').find('input').prop('value')).toEqual('');
+  component.find('div.first-name').find('input').simulate('change', { target: { value: 'Derek' } });
+  expect(component.find('div.first-name').find('input').prop('value')).toEqual('Derek');
+
+  expect(component.find('div.last-name').find('input').prop('value')).toEqual('');
+  component.find('div.last-name').find('input').simulate('change', { target: { value: 'Zoolander' } });
+  expect(component.find('div.last-name').find('input').prop('value')).toEqual('Zoolander');
+
+  component.find('form').simulate('submit');
+  expect(component.find('div.profile-form')).toHaveLength(0);
+
+  // TO-DO: test that an additional profile card is added on submit
+});
