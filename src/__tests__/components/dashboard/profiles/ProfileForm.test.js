@@ -77,8 +77,7 @@ it('renders new form correctly', () => {
   expect(component.find('input#state').prop('value')).toEqual('');
   expect(component.find('div.zip-code').find('input').prop('value')).toEqual('');
 
-  // TO-DO: fix this
-  // expect(component.find('div.phone').find('input').prop('value')).toEqual('');
+  expect(component.state().telephone).toEqual(undefined);
   expect(component.find('input#phoneType').prop('value')).toEqual('');
   expect(component.find('input#relationship').prop('value')).toEqual('');
 
@@ -101,8 +100,7 @@ it('renders edit form correctly', () => {
   expect(component.find('input#state').prop('value')).toEqual('MA');
   expect(component.find('div.zip-code').find('input').prop('value')).toEqual('00000');
 
-  // TO-DO: fix this
-  // expect(component.find('input#phone').text()).toEqual('(555) 934-2938');
+  expect(component.state().telephone).toEqual('(555) 298-9827');
   expect(component.find('input#phoneType').prop('value')).toEqual('mobile');
   expect(component.find('input#relationship').prop('value')).toEqual('self');
 
@@ -155,32 +153,18 @@ it('selector inputs update when changed', () => {
   expect(component.find('input#relationship').prop('value')).toEqual('son');
 });
 
-// it('phone inputs update when changed', () => {
-//   const component = setup();
+it('phone inputs update when changed', () => {
+  const component = setupEdit(mocks.profileMockA);
 
-//   expect(component.find('div.first_name').find('input').prop('value')).toEqual('Jane');
-//   component.find('div.first_name').find('input').simulate('change', { target: { value: 'Janie' } });
-//   expect(component.find('div.first_name').find('input').prop('value')).toEqual('Janie');
+  expect(component.state().telephone).toEqual('(555) 298-9827');
+  component.find('div.phone').find('input').simulate('change', { target: { value: '(222) 298-9827' } });
+  expect(component.state().telephone).toEqual('(222) 298-9827');
+});
 
-//   // add rest of text inputs
-// });
+it('dates inputs update when changed', () => {
+  const component = setupEdit(mocks.profileMockA);
 
-// it('radio inputs update when changed', () => {
-//   const component = setup();
-
-//   expect(component.find('div.first_name').find('input').prop('value')).toEqual('Jane');
-//   component.find('div.first_name').find('input').simulate('change', { target: { value: 'Janie' } });
-//   expect(component.find('div.first_name').find('input').prop('value')).toEqual('Janie');
-
-//   // add rest of text inputs
-// });
-
-// it('dates inputs update when changed', () => {
-//   const component = setup();
-
-//   expect(component.find('div.first_name').find('input').prop('value')).toEqual('Jane');
-//   component.find('div.first_name').find('input').simulate('change', { target: { value: 'Janie' } });
-//   expect(component.find('div.first_name').find('input').prop('value')).toEqual('Janie');
-
-//   // add rest of text inputs
-// });
+  expect(component.find('div.birthday').find('input').prop('value')).toEqual('1982-07-21');
+  component.find('div.birthday').find('input').simulate('change', { target: { value: '1987-07-21' } });
+  expect(component.find('div.birthday').find('input').prop('value')).toEqual('1987-07-21');
+});
