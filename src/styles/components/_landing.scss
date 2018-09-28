@@ -72,21 +72,6 @@
     max-width: 1200px;
   }
 
-  &__footer {
-    display: flex;
-    padding: 25px $responsive-padding;
-    background-color: $color-blue-gray;
-
-    a {
-      margin-left: auto;
-
-      img {
-        width: calc(50px + 10vw);
-        max-width: 150px;
-      }
-    }
-  }
-
   .rosie-title {
     margin-bottom: 0;
   }

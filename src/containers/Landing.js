@@ -3,6 +3,8 @@ import PropTypes from 'prop-types';
 import { connect } from 'react-redux';
 import { Link } from 'react-router-dom';
 
+import Footer from '../components/Footer';
+
 export class Landing extends Component {
   renderNavButtons = () => {
     const { isAuthenticated } = this.props;
@@ -129,11 +131,7 @@ export class Landing extends Component {
           </div>
         </div>
 
-        <div className="landing__footer">
-          <a href="https://www.mitre.org" target="_blank" rel="nofollow noopener noreferrer">
-            <img className="logo-mitre" src="/assets/images/landing/landing-mitre.png" alt="mitre logo" />
-          </a>
-        </div>
+        <Footer />
       </div>
     );
   }

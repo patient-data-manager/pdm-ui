@@ -1,0 +1,15 @@
+.footer {
+  display: flex;
+  padding: 25px $responsive-padding;
+  background-color: $color-blue-gray;
+  z-index: 1;
+
+  a {
+    margin-left: auto;
+
+    img {
+      width: calc(40px + 5vw);
+      max-width: 150px;
+    }
+  }
+}

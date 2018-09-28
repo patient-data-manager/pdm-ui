@@ -25,6 +25,7 @@ import { loadProviders } from '../../actions/providers';
 import setDashboardOpen from '../../actions/dashboard';
 
 import Header from '../../components/Header';
+import Footer from '../../components/Footer';
 import ProfileCard from '../../components/dashboard/profiles/ProfileCard';
 
 const drawerWidth = 260;
@@ -190,6 +191,8 @@ export class Dashboard extends Component {
             </div>
           </main>
         </div>
+
+        <Footer />
       </div>
     );
   }
