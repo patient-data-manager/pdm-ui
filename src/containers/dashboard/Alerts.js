@@ -74,7 +74,8 @@ export class Alerts extends Component {
 
   renderAlertsList(approved) {
     const alerts = this.state.alerts.filter((alert) => alert.approved === approved);
-    if (alerts.length === 0) return null;
+    if (alerts.length === 0 && approved) return null;
+    if (alerts.length === 0 && !approved) return <div className="no-entries">No alerts to approve.</div>;
 
     let approve= this.approveAlert;
     if (approved) approve = null;

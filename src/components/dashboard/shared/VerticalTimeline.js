@@ -83,7 +83,7 @@ export default class VerticalTimeline extends Component {
 
     return (
       <div className="item__approve-button">
-        <Button color="primary" onClick={() => this.props.approveItem(item)}>
+        <Button color="primary" onClick={() => this.props.approveItem(item)} disabled={item.conflictCount > 0}>
           <FontAwesomeIcon icon="check-circle" /> APPROVE
         </Button>
       </div>

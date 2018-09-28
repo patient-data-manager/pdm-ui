@@ -28,11 +28,19 @@ it('renders the alerts lists correctly', () => {
   expect(component.find('div.vertical-timeline').at(1).find('button.vertical-timeline__view-more')).toExist();
 });
 
+// TO-DO: add alert view button works test
+
 it('clicking the approve button updates the alerts list', () => {
   const component = setup();
-  const alertItem = component.find('div.vertical-timeline').at(0).find('div.vertical-timeline__item').at(0);
+  const alertItem = component.find('div.vertical-timeline').at(0).find('div.vertical-timeline__item').at(1);
   alertItem.find('div.item__approve-button').find('button').simulate('click');
   expect(component.find('div.vertical-timeline').at(0).find('div.vertical-timeline__item')).toHaveLength(2);
 });
 
-// TO-DO: add alert view button works test
+// TO-DO: approving all alerts displays no entries message
+
+it('the approve button is disabled if the alert has any conflicts', () => {
+  const component = setup();
+  const alertItem = component.find('div.vertical-timeline').at(0).find('div.vertical-timeline__item').at(0);
+  expect(alertItem.find('div.item__approve-button').find('button').prop('disabled')).toBeTruthy();
+});
