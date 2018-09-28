@@ -1,10 +1,25 @@
 .vertical-timeline {
   display: flex;
   flex-direction: column;
-  margin-left: 20px;
 
   &__item {
     display: flex;
+    justify-content: space-between;
+    width: 100%;
+    padding-left: 8px;
+
+    &:first-child {
+      padding-top: 8px;
+    }
+
+    &:hover {
+      background-color: $color-gray-lightest;
+    }
+
+    &-timeline {
+      flex-basis: 50%;
+      display: flex;
+    }
 
     &-info {
       padding: 0 20px 15px 20px;
@@ -27,10 +42,42 @@
     .info-date {
       font-weight: 600;
     }
+    
+    &-conflicts {
+      align-self: center;
+      flex-basis: 25%;
+      color: $color-red;
+    }
+
+    &-buttons {
+      display: flex;
+      justify-content: flex-end;
+      align-items: center;
+      flex-basis: 25%;
+
+      button {
+        font-size: .9em;
+
+        &:hover {
+          background-color: transparent;
+        }
+
+        svg {
+          margin-right: 3px;
+        }
+
+        img {
+          margin-right: 3px;
+          height: 12px;
+          color: $color-black;
+        }
+      }
+    }
   }
 
   &__view-more-less {
     display: flex;
+    padding-left: 8px;
   }
 
   &__view-more,
@@ -49,6 +96,12 @@
       &:hover {
         color: $color-text;
       }
+    }
+  }
+
+  .last-item {
+    .vertical-timeline__item-info {
+      border: none;
     }
   }
 

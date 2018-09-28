@@ -1,0 +1,21 @@
+.alerts {
+  margin: 25px 20px;
+
+  &-list {
+    margin-bottom: 25px;
+
+    &__title {
+      font-size: 1.1em;
+      font-weight: 600;
+      font-style: italic;
+      width: 100%;
+      border-bottom: 2px solid $color-gray-lightest;
+      margin-bottom: 10px;
+    }
+
+    .no-entries {
+      font-style: italic;
+      color: $color-blue-gray-dark;
+    }
+  }
+}

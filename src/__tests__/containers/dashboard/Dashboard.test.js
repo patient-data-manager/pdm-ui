@@ -44,9 +44,14 @@ it('renders each menu item correctly', () => {
   expect(component.find('MenuItem')).toExist();
   expect(component.find('MenuItem')).toHaveLength(4);
   expect(component.find('MenuItem').at(0).find('ListItemText').text()).toEqual('Profiles');
+  expect(component.find('MenuItem').at(0).find('svg').prop('data-icon')).toEqual('user-circle');
   expect(component.find('MenuItem').at(1).find('ListItemText').text()).toEqual('Health Record');
+  expect(component.find('MenuItem').at(1).find('svg').prop('data-icon')).toEqual('file-medical-alt');
   expect(component.find('MenuItem').at(2).find('ListItemText').text()).toEqual('Alerts');
+  expect(component.find('MenuItem').at(2).find('svg').prop('data-icon')).toEqual('exclamation-circle');
+  expect(component.find('MenuItem').at(2).find('div.alert-badge').text()).toEqual('3');
   expect(component.find('MenuItem').at(3).find('ListItemText').text()).toEqual('Providers');
+  expect(component.find('MenuItem').at(3).find('svg').prop('data-icon')).toEqual('hospital');
 });
 
 it('renders the AppBar correctly', () => {

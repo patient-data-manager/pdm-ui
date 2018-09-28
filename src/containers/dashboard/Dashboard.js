@@ -6,18 +6,18 @@ import { Link, withRouter } from 'react-router-dom';
 import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
 import classNames from 'classnames';
 import { withStyles } from '@material-ui/core/styles';
-import Drawer from '@material-ui/core/Drawer';
 import AppBar from '@material-ui/core/AppBar';
-import Toolbar from '@material-ui/core/Toolbar';
+import ChevronLeftIcon from '@material-ui/icons/ChevronLeft';
+import ChevronRightIcon from '@material-ui/icons/ChevronRight';
+import Divider from '@material-ui/core/Divider';
+import Drawer from '@material-ui/core/Drawer';
+import IconButton from '@material-ui/core/IconButton';
 import List from '@material-ui/core/List';
 import ListItemIcon from '@material-ui/core/ListItemIcon';
 import ListItemText from '@material-ui/core/ListItemText';
-import Divider from '@material-ui/core/Divider';
-import IconButton from '@material-ui/core/IconButton';
 import MenuIcon from '@material-ui/icons/Menu';
 import MenuItem from '@material-ui/core/MenuItem';
-import ChevronLeftIcon from '@material-ui/icons/ChevronLeft';
-import ChevronRightIcon from '@material-ui/icons/ChevronRight';
+import Toolbar from '@material-ui/core/Toolbar';
 
 import { logoutUser } from '../../actions/auth';
 import { loadProfiles } from '../../actions/profiles';
@@ -119,7 +119,8 @@ export class Dashboard extends Component {
 
     return navList.map((navItem, index) => {
       const selected = navItem.path === this.props.location.pathname;
-      const menuClassname = classNames({ selected });
+      const menuClassname = classNames('dashboard__menu-item', { selected });
+      const navItemClassname = classNames('alert-badge', { 'open': this.props.dashboardNavIsOpen });
 
       return (
         <MenuItem
@@ -128,6 +129,7 @@ export class Dashboard extends Component {
           to={navItem.path}
           selected={navItem.path === this.props.location.pathname}
           className={menuClassname}>
+          {navItem.name === 'Alerts' && <div className={navItemClassname}>3</div>}
           <ListItemIcon><FontAwesomeIcon icon={navItem.iconName} fixedWidth /></ListItemIcon>
           <ListItemText primary={navItem.name} />
         </MenuItem>

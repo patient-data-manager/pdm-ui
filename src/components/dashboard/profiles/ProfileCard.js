@@ -36,17 +36,13 @@ export default class ProfileCard extends Component {
   }
 
   renderNameAlerts = () => {
-    const { alertsCount, profile } = this.props;
+    const { profile } = this.props;
 
-    if (alertsCount > 0) {
-      return (
-        <Badge className="details-alerts" badgeContent={alertsCount} color="error">
-          <div className="details-name">{profile.name}</div>
-        </Badge>
-      );
-    }
-
-    return <div className="details-name">{profile.name}</div>;
+    return (
+      <Badge className="details-alerts" badgeContent={3} color="error">
+        <div className="details-name">{profile.name}</div>
+      </Badge>
+    );
   }
 
   renderEditButton = () => {
@@ -60,17 +56,15 @@ export default class ProfileCard extends Component {
   }
 
   renderEditForm = () => {
-    if (this.state.showEditForm) {
-      return (
-        <ProfileForm
-          profile={this.props.profile}
-          deleteProfile={this.props.deleteProfile}
-          saveProfile={this.props.updateProfile}
-          cancel={this.handleFormCancel} />
-      );
-    }
+    if (!this.state.showEditForm) return null;
 
-    return null;
+    return (
+      <ProfileForm
+        profile={this.props.profile}
+        deleteProfile={this.props.deleteProfile}
+        saveProfile={this.props.updateProfile}
+        cancel={this.handleFormCancel} />
+    );
   }
 
   renderImage = () => {
@@ -140,7 +134,6 @@ ProfileCard.propTypes = {
   profile: PropTypes.object,
   activeProfile: PropTypes.object,
   isHeader: PropTypes.bool,
-  alertsCount: PropTypes.number,
   updateProfile: PropTypes.func,
   deleteProfile: PropTypes.func,
   setActiveProfile: PropTypes.func,
@@ -148,6 +141,5 @@ ProfileCard.propTypes = {
 };
 
 ProfileCard.defaultProps = {
-  isHeader: false,
-  alertsCount: 3 // TODO: remove when alerts working
+  isHeader: false
 };

@@ -17,7 +17,7 @@ export default class Procedures extends Component {
   procedures() {
     return this.props.procedures.map((procedure) => {
       const date = this.procedureDate(procedure);
-      return { date, text: getDisplayString(procedure, 'code') };
+      return { date, text: getDisplayString(procedure, 'code'), icon: 'hospital' };
     });
   }
 
@@ -26,7 +26,7 @@ export default class Procedures extends Component {
 
     return (
       <div className="procedures">
-        <VerticalTimeline items={this.procedures()} icon="hospital" />
+        <VerticalTimeline items={this.procedures()} />
       </div>
     );
   }

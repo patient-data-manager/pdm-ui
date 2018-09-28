@@ -17,10 +17,18 @@ export default class Vitals extends Component {
 
     this.props.vitals.forEach((vital) => {
       if (getDisplayString(vital, 'code') === 'Blood Pressure') {
-        vitals.push({ date: vital.effectiveDateTime, text: getBloodPressureString(vital, 'Systolic Blood Pressure') });
-        vitals.push({ date: vital.effectiveDateTime, text: getBloodPressureString(vital, 'Diastolic Blood Pressure') });
+        vitals.push({ 
+          date: vital.effectiveDateTime, 
+          text: getBloodPressureString(vital, 'Systolic Blood Pressure'), 
+          icon: 'heartbeat' 
+        });
+        vitals.push({ 
+          date: vital.effectiveDateTime, 
+          text: getBloodPressureString(vital, 'Diastolic Blood Pressure'), 
+          icon: 'heartbeat' 
+        });
       } else {
-        vitals.push({ date: vital.effectiveDateTime, text: this.vitalDescription(vital) });
+        vitals.push({ date: vital.effectiveDateTime, text: this.vitalDescription(vital), icon: 'heartbeat' });
       }
     });
 
@@ -96,7 +104,7 @@ export default class Vitals extends Component {
     return (
       <div className="vitals">
         {this.renderVitalsGraphs()}
-        <VerticalTimeline items={this.vitals()} icon="heartbeat" />
+        <VerticalTimeline items={this.vitals()} />
       </div>
     );
   }

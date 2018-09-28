@@ -1,9 +1,14 @@
 import React, { Component } from 'react';
 import PropTypes from 'prop-types';
+import Button from '@material-ui/core/Button';
 import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
 import moment from 'moment';
 import memoize from 'memoize-one';
 import classNames from 'classnames';
+
+import isValid from '../../../utils/isValid';
+
+import ViewIcon from '../../../icons/ViewIcon';
 
 export default class VerticalTimeline extends Component {
   constructor(props) {
@@ -52,17 +57,59 @@ export default class VerticalTimeline extends Component {
     );
   }
 
+  renderConflicts = (conflictCount) => {
+    if (!isValid(conflictCount) || conflictCount === 0) return null;
+    return (
+      <div className="item__conflicts-content">
+        <FontAwesomeIcon icon="exclamation-triangle" /> conflicts ({conflictCount})
+      </div>
+    );
+  }
+
+  renderViewItemButton = () => {
+    if (!isValid(this.props.viewItem)) return null;
+
+    return (
+      <div className="item__view-button">
+        <Button color="primary" onClick={this.props.viewItem}>
+          <ViewIcon height={14} /> VIEW
+        </Button>
+      </div>
+    );
+  }
+
+  renderApproveItemButton = (item) => {
+    if (!isValid(this.props.approveItem)) return null;
+
+    return (
+      <div className="item__approve-button">
+        <Button color="primary" onClick={() => this.props.approveItem(item)} disabled={item.conflictCount > 0}>
+          <FontAwesomeIcon icon="check-circle" /> APPROVE
+        </Button>
+      </div>
+    );
+  }
+
   renderItem = (item, index) => {
-    const { items, icon } = this.props;
-    const itemClassname = classNames('vertical-timeline__item', { 'last-item': index + 1 === items.length });
+    const { items, initialDisplayCount } = this.props;
+    const itemClassname = classNames('vertical-timeline__item',
+      { 'last-item': index + 1 === items.length && items.length <= initialDisplayCount });
 
     return (
       <div key={index} className={itemClassname}>
-        <FontAwesomeIcon icon={icon} className="icon-health-record" />
-
-        <div className="vertical-timeline__item-info">
-          <div className="info-date">{moment(item.date).format('MMM D, YYYY')}</div>
-          <div className="info-description">{item.text}</div>
+        <div className="vertical-timeline__item-timeline">
+          <FontAwesomeIcon icon={item.icon} className="icon-health-record" />
+          <div className="vertical-timeline__item-info">
+            <div className="info-date">{moment(item.date).format('MMM D, YYYY')}</div>
+            <div className="info-description">{item.text}</div>
+          </div>
+        </div>
+        <div className="vertical-timeline__item-conflicts">
+          {this.renderConflicts(item.conflictCount)}
+        </div>
+        <div className="vertical-timeline__item-buttons">
+          {this.renderViewItemButton()}
+          {this.renderApproveItemButton(item)}
         </div>
       </div>
     );
@@ -87,14 +134,14 @@ export default class VerticalTimeline extends Component {
 }
 
 VerticalTimeline.propTypes = {
+  approveItem: PropTypes.func,
   items: PropTypes.array.isRequired,
-  icon: PropTypes.string,
   initialDisplayCount: PropTypes.number,
-  viewCount: PropTypes.number
+  viewCount: PropTypes.number,
+  viewItem: PropTypes.func
 };
 
 VerticalTimeline.defaultProps = {
-  icon: 'circle',
   initialDisplayCount: 3, // number to initially display
   viewCount: 3            // +/- number to display when view more or less is selected
 };
