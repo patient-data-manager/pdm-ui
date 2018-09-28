@@ -23,3 +23,9 @@ it('renders the dashboard button when logged in', () => {
 
   expect(component.find('a[href="/dashboard/profiles"]')).toExist();
 });
+
+it('renders the footer correctly', () => {
+  const component = setup();
+
+  expect(component.find('Footer')).toExist();
+});
