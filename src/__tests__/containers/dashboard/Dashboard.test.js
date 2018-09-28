@@ -77,3 +77,9 @@ it('renders the Drawer correctly', () => {
   expect(component.find('Drawer List')).toExist();
   expect(component.find('Drawer .nav-list-items')).toExist();
 });
+
+it('renders the footer correctly', () => {
+  const component = setup();
+
+  expect(component.find('Footer')).toExist();
+});
