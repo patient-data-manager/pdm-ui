@@ -141,6 +141,7 @@ export default class Summary extends Component {
           <div className="summary__divider" />
 
           <div className="summary__table">
+            {this.renderSummaryRow('ID', profile.id)}
             {this.renderSummaryRow('Name', patientName)}
             {this.renderSummaryRow('Gender', profile.gender)}
             {this.renderSummaryRow('DOB', patientDOB)}

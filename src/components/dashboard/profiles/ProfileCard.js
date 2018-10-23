@@ -149,5 +149,5 @@ ProfileCard.propTypes = {
 
 ProfileCard.defaultProps = {
   isHeader: false,
-  alertsCount: 3 // TODO: remove when alerts working
+  alertsCount: 0 // TODO: remove when alerts working
 };

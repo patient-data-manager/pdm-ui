@@ -15,7 +15,7 @@ export default class ProviderCard extends Component {
 
     this.state = {
       detailsExpanded: true,
-      healthRecordAccess: 'none',
+      healthRecordAccess: 'full',
       modalIsOpen: false
     };
   }
