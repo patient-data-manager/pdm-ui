@@ -75,7 +75,7 @@ export class Register extends Component {
           </div>
 
           <div className="register__form-group">
-            <h3 className="auth-title">Rosie Registration</h3>
+            <h3 className="auth-title">Patient Data Manager Registration</h3>
 
             <ValidatorForm
               className="register__form"
