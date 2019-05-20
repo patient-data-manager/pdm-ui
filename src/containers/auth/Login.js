@@ -50,7 +50,7 @@ export class Login extends Component {
           </div>
 
           <div className="login__form-group">
-            <h3 className="auth-title">Rosie Login</h3>
+            <h3 className="auth-title">Patient Data Manager Login</h3>
 
             <ValidatorForm
               className="login__form"

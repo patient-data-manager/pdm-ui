@@ -70,7 +70,7 @@ export class Landing extends Component {
 
         <div className="landing__content-block">
           <div className="landing__content-block-header">
-            <h1 className="rosie-title">Rosie: The Health Data Manager</h1>
+            <h1 className="rosie-title">The Patient Data Manager</h1>
           </div>
 
           <div className="landing__content-block-arrow"></div>
@@ -100,7 +100,7 @@ export class Landing extends Component {
 
               <li>
                 <div className="highlight">
-                  <h2>Health Data Manager</h2>
+                  <h2>Patient Data Manager</h2>
                   A trusted third-party entity will act as the patient’s single source of truth to aggregate and
                   curate the patient’s health information for patient use and sharing with others per the patient’s
                   instructions. Health data managers can be reimbursed by payers, providers, or the patient. Health
