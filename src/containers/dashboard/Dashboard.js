@@ -114,6 +114,7 @@ export class Dashboard extends Component {
     const navList = [
       { name: 'Profiles', iconName: 'user-circle', path: '/dashboard/profiles' },
       { name: 'Health Record', iconName: 'file-medical-alt', path: '/dashboard/health-record' },
+      { name: 'Upload Records', iconName: 'file-medical', path: '/dashboard/upload-records' },
       { name: 'Alerts', iconName: 'exclamation-circle', path: '/dashboard/alerts' },
       { name: 'Providers', iconName: 'hospital', path: '/dashboard/providers' }
     ];

@@ -13,6 +13,7 @@ import Register from './auth/Register';
 import Dashboard from './dashboard/Dashboard';
 import Profiles from './dashboard/Profiles';
 import HealthRecord from './dashboard/HealthRecord';
+import UploadRecords from './dashboard/UploadRecords';
 import Alerts from './dashboard/Alerts';
 import Providers from './dashboard/Providers';
 import NoMatch from '../components/error-pages/Page404';
@@ -54,7 +55,8 @@ const Root = ({ store }) => {
                 <Dashboard>
                   <Switch>
                     <PrivateRoute path="/dashboard/profiles" component={Profiles} />
-                    <PrivateRoute path="/dashboard/health-record" component={HealthRecord}/>
+                    <PrivateRoute path="/dashboard/health-record" component={HealthRecord} />
+                    <PrivateRoute path="/dashboard/upload-records" component={UploadRecords} />
                     <PrivateRoute path="/dashboard/alerts" component={Alerts} />
                     <PrivateRoute path="/dashboard/providers" component={Providers} />
                     <Route component={NoMatch} />
