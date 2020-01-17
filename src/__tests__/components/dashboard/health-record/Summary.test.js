@@ -53,7 +53,7 @@ it('renders table rows correctly', () => {
   expect(component.find('.summary__table-key').at(1).text()).toEqual('Gender');
   expect(component.find('.summary__table-value').at(1).text()).toEqual('male');
   expect(component.find('.summary__table-key').at(2).text()).toEqual('DOB');
-  expect(component.find('.summary__table-value').at(2).text()).toEqual('Jul 21, 2002 (age 16)');
+  expect(component.find('.summary__table-value').at(2).text()).toEqual('Jul 21, 2002 (age 17)');
   expect(component.find('.summary__table-key').at(3).text()).toEqual('Address');
   expect(component.find('.summary__table-value').at(3).text()).toEqual('123 Fake St, Boston, MA 00000');
   expect(component.find('.summary__table-key').at(4).text()).toEqual('Phone');
