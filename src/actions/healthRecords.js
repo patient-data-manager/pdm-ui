@@ -46,7 +46,7 @@ export function loadHealthRecord(id) {
   };
 }
 
-// ------------------------- RECEIVE HEALTH RECORD VIA PUSH ---------------------------- //
+// ------------------------- RECEIVE HEALTH RECORD VIA PUSH ---------------- //
 
 function pushedHealthRecord() {
   return {
@@ -58,5 +58,116 @@ export function receiveHealthRecord(data) {
   return (dispatch) => {
     dispatch(pushedHealthRecord(data));
     dispatch(loadHealthRecordSuccess(data));
+  };
+}
+
+// ------------------------- UPLOAD DOCUMENT ------------------------------- //
+
+function requestUploadDocument() {
+  return {
+    type: types.UPLOAD_DOCUMENT_REQUEST
+  };
+}
+
+function uploadDocumentSuccess(documentFile) {
+  return {
+    type: types.UPLOAD_DOCUMENT_SUCCESS,
+    uploadedDocument: documentFile
+  };
+}
+
+function uploadDocumentFailure(error) {
+  return {
+    type: types.UPLOAD_DOCUMENT_FAILURE,
+    error
+  };
+}
+
+function sendUploadDocumentRequest(accessToken, profileId, documentFile) {
+  let formData = new FormData();
+  formData.set('uploaded_document[profile_id]', profileId);
+  formData.append('uploaded_document[document]', documentFile, documentFile.name);
+
+  return new Promise((resolve, reject) => {
+    axios.post(
+      '/api/pilot/uploaded_documents',
+      {
+        data: formData,
+        headers: {
+          'Content-Type': 'multipart/form-data',
+          'X-Key-Inflection': 'camel',
+          Accept: 'application/json',
+          Authorization: `Bearer ${accessToken}`
+        }
+      }
+    )
+      .then(result => resolve(result.data))
+      .catch(error => reject(error));
+  });
+}
+
+export function uploadDocument(documentFile) {
+  return (dispatch, getState) => {
+    const accessToken = getState().auth.accessToken;
+    const activeProfileId = getState().profiles.activeProfileId;
+
+    dispatch(requestUploadDocument());
+
+    return sendUploadDocumentRequest(accessToken, activeProfileId, documentFile)
+      .then(data => dispatch(uploadDocumentSuccess(data)))
+      .catch(error => dispatch(uploadDocumentFailure(error)));
+  };
+}
+
+// ------------------------- LOAD DOCUMENTS -------------------------------- //
+
+function requestLoadDocuments() {
+  return {
+    type: types.LOAD_DOCUMENTS_REQUEST
+  };
+}
+
+function loadDocumentsSuccess(uploadedDocuments) {
+  return {
+    type: types.LOAD_DOCUMENTS_SUCCESS,
+    uploadedDocuments
+  };
+}
+
+function loadDocumentsFailure(error) {
+  return {
+    type: types.LOAD_DOCUMENTS_FAILURE,
+    error
+  };
+}
+
+function sendLoadDocumentsRequest(accessToken, profileId) {
+  return new Promise((resolve, reject) => {
+    axios.get(
+      '/api/pilot/uploaded_documents',
+      {
+        params: { profile_id: profileId },
+        headers: {
+          'X-Key-Inflection': 'camel',
+          'Accept': 'application/json',
+          Authorization: `Bearer ${accessToken}`
+        }
+      }
+    )
+      .then(result => resolve(result.data))
+      .catch(error => reject(error));
+  });
+}
+
+export function loadDocuments() {
+  return (dispatch, getState) => {
+    const accessToken = getState().auth.accessToken;
+    const activeProfileId = getState().profiles.activeProfileId;
+
+    dispatch(requestLoadDocuments());
+
+    return sendLoadDocumentsRequest(accessToken, activeProfileId)
+      .then(data => dispatch(loadDocumentsSuccess(data)))
+      .catch(error => dispatch(loadDocumentsFailure(error)));
   };
 }

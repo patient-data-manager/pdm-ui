@@ -10,7 +10,7 @@ import ProviderCard from '../../components/dashboard/providers/ProviderCard';
 import ProviderSearch from '../../components/dashboard/providers/ProviderSearch';
 
 export class Providers extends Component {
-  componentWillMount() {
+  UNSAFE_componentWillMount() {
     if (this.props.activeProfileId) {
       this.props.loadProfileProviders(this.props.activeProfileId);
     }

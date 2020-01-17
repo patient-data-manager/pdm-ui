@@ -97,7 +97,7 @@ const styles = theme => ({
 });
 
 export class Dashboard extends Component {
-  componentWillMount() {
+  UNSAFE_componentWillMount() {
     this.props.loadProfiles();
     this.props.loadProviders();
   }

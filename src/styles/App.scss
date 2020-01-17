@@ -1,39 +1,42 @@
 /* ------------------------- IMPORT VARIABLES ------------------------------ */
-@import "elements/variables";
+@import 'elements/variables';
 
 /* ------------------------- IMPORT 3RD PARTY VENDORS ---------------------- */
-@import "node_modules/bootstrap/scss/bootstrap.scss";
-@import "node_modules/tocbot/src/scss/tocbot.scss";
+@import 'node_modules/bootstrap/scss/bootstrap.scss';
+@import 'node_modules/tocbot/src/scss/tocbot.scss';
 
 /* ------------------------- IMPORT CUSTOM SCSS ---------------------------- */
 // site-wide elements
-@import "elements/badges";
-@import "elements/base";
-@import "elements/buttons";
-@import "elements/icons";
-@import "elements/loading";
-@import "elements/modals";
+@import 'elements/badges';
+@import 'elements/banners';
+@import 'elements/base';
+@import 'elements/buttons';
+@import 'elements/dropzone';
+@import 'elements/icons';
+@import 'elements/loading';
+@import 'elements/modals';
 
 // component-specific
-@import "components/dashboard/health-record/summary";
-@import "components/dashboard/profiles/profile-card";
-@import "components/dashboard/profiles/profile-form";
-@import "components/dashboard/providers/provider-card";
-@import "components/dashboard/providers/provider-modal";
-@import "components/dashboard/providers/provider-search";
-@import "components/dashboard/shared/custom-graph-tooltip";
-@import "components/dashboard/shared/horizontal-timeline";
-@import "components/dashboard/shared/line-graph";
-@import "components/dashboard/shared/table-list";
-@import "components/dashboard/shared/vertical-timeline";
-@import "components/footer";
-@import "components/header";
-@import "components/landing";
+@import 'components/dashboard/health-record/summary';
+@import 'components/dashboard/profiles/profile-card';
+@import 'components/dashboard/profiles/profile-form';
+@import 'components/dashboard/providers/provider-card';
+@import 'components/dashboard/providers/provider-modal';
+@import 'components/dashboard/providers/provider-search';
+@import 'components/dashboard/shared/custom-graph-tooltip';
+@import 'components/dashboard/shared/horizontal-timeline';
+@import 'components/dashboard/shared/line-graph';
+@import 'components/dashboard/shared/table-list';
+@import 'components/dashboard/shared/vertical-timeline';
+@import 'components/footer';
+@import 'components/header';
+@import 'components/landing';
 
 // container-specific
-@import "containers/alerts";
-@import "containers/auth";
-@import "containers/dashboard";
-@import "containers/profiles";
-@import "containers/providers";
-@import "containers/health-record";
+@import 'containers/alerts';
+@import 'containers/auth';
+@import 'containers/dashboard';
+@import 'containers/profiles';
+@import 'containers/providers';
+@import 'containers/health-record';
+@import 'containers/upload-records';

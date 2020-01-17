@@ -4,8 +4,10 @@ import * as types from '../actions/types';
 
 const defaultState = {
   healthRecord: {},
+  uploadedDocuments: [],
   statusMessage: null,
-  loadHealthRecord: { isLoading: false, loadStatus: null }
+  uploadDocument: { isUploading: false, uploadStatus: null },
+  loadDocuments: { isLoading: false, loadStatus: null }
 };
 
 const persistConfig = {
@@ -43,6 +45,37 @@ function healthRecord(state = defaultState, action) {
     return {
       ...state,
       loadHealthRecord: { isLoading: false, loadStatus: 'failure' }
+    };
+  case types.UPLOAD_DOCUMENT_REQUEST:
+    return {
+      ...state,
+      uploadDocument: { isUploading: true, loadStatus: null }
+    };
+  case types.UPLOAD_DOCUMENT_SUCCESS:
+    return {
+      ...state,
+      uploadDocument: { isUploading: false, loadStatus: 'success' }
+    };
+  case types.UPLOAD_DOCUMENT_FAILURE:
+    return {
+      ...state,
+      uploadDocument: { isUploading: false, loadStatus: 'failure' }
+    };
+  case types.LOAD_DOCUMENTS_REQUEST:
+    return {
+      ...state,
+      loadDocuments: { isLoading: true, loadStatus: null }
+    };
+  case types.LOAD_DOCUMENTS_SUCCESS:
+    return {
+      ...state,
+      uploadedDocuments: action.uploadedDocuments,
+      loadDocuments: { isLoading: false, loadStatus: 'success' }
+    };
+  case types.LOAD_DOCUMENTS_FAILURE:
+    return {
+      ...state,
+      loadDocuments: { isLoading: false, loadStatus: 'failure' }
     };
   default:
     return state;

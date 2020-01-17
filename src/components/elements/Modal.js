@@ -4,7 +4,7 @@ import ReactModal from 'react-modal';
 import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
 
 export default class Modal extends Component {
-  componentWillMount() {
+  UNSAFE_componentWillMount() {
     ReactModal.setAppElement('body');
   }
 
@@ -47,7 +47,7 @@ export default class Modal extends Component {
               </button>
             }
 
-            {submitButtonText && 
+            {submitButtonText &&
               <button type="submit" className="button button-primary button-save" onClick={handleCloseModal}>
                 {submitButtonText}
               </button>
