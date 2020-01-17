@@ -5,6 +5,7 @@ import clsx from 'clsx';
 
 export default class Banner extends Component {
   handleClose = (event) => {
+    event.stopPropagation();
     const { close } = this.props;
     if (close) close(event);
   }

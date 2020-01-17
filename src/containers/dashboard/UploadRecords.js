@@ -70,8 +70,6 @@ export const UploadRecords = ({
               <tr>
                 <th>File Name</th>
                 <th>Uploaded</th>
-                <th>&nbsp;</th>
-                <th>&nbsp;</th>
               </tr>
             </thead>
             <tbody>
@@ -79,8 +77,6 @@ export const UploadRecords = ({
                 <tr key={document.id}>
                   <td>{document.filename}</td>
                   <td>{document.updated_at}</td>
-                  <td>View</td>
-                  <td>Delete</td>
                 </tr>
               ))}
             </tbody>

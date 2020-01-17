@@ -1,18 +1,19 @@
 .alert-badge {
   position: absolute;
   left: 40px;
-  top: 10px;
+  top: 15px;
   color: $color-white;
   background-color: $color-red;
   border-radius: 50%;
-  width: 24px;
-  min-width: 24px;
-  height: 24px;
+  width: 20px;
+  min-width: 20px;
+  height: 20px;
+  line-height: 20px;
   font-size: 12px;
   text-align: center;
 
   &.open {
-    left: 150px;
+    left: 135px;
     top: 20px;
   }
 }

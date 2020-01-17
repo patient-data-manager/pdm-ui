@@ -89,18 +89,17 @@ function sendUploadDocumentRequest(accessToken, profileId, documentFile) {
   formData.append('uploaded_document[document]', documentFile, documentFile.name);
 
   return new Promise((resolve, reject) => {
-    axios.post(
-      '/api/pilot/uploaded_documents',
-      {
-        data: formData,
-        headers: {
-          'Content-Type': 'multipart/form-data',
-          'X-Key-Inflection': 'camel',
-          Accept: 'application/json',
-          Authorization: `Bearer ${accessToken}`
-        }
+    axios({
+      url: '/api/pilot/uploaded_documents',
+      method: 'POST',
+      data: formData,
+      headers: {
+        'Content-Type': 'multipart/form-data',
+        'X-Key-Inflection': 'camel',
+        Accept: 'application/json',
+        Authorization: `Bearer ${accessToken}`
       }
-    )
+    })
       .then(result => resolve(result.data))
       .catch(error => reject(error));
   });
@@ -115,7 +114,8 @@ export function uploadDocument(documentFile) {
 
     return sendUploadDocumentRequest(accessToken, activeProfileId, documentFile)
       .then(data => dispatch(uploadDocumentSuccess(data)))
-      .catch(error => dispatch(uploadDocumentFailure(error)));
+      .catch(error => dispatch(uploadDocumentFailure(error)))
+      .then(() => dispatch(loadDocuments()));
   };
 }
 

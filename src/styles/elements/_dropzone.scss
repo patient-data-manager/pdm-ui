@@ -9,6 +9,11 @@
   cursor: pointer;
   color: $color-blue-gray-dark;
 
+  &:focus {
+    outline: none;
+    border-color: $color-black;
+  }
+
   &__warning {
     font-size: 0.9em;
     color: $color-red;
@@ -18,9 +23,6 @@
 
   &__instructions {
     font-size: 1.5em;
-  }
-
-  svg {
-    margin-bottom: 20px;
+    margin-top: 20px;
   }
 }

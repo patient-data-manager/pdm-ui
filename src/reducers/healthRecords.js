@@ -6,6 +6,7 @@ const defaultState = {
   healthRecord: {},
   uploadedDocuments: [],
   statusMessage: null,
+  loadHealthRecord: { isLoading: false, loadStatue: null },
   uploadDocument: { isUploading: false, uploadStatus: null },
   loadDocuments: { isLoading: false, loadStatus: null }
 };
