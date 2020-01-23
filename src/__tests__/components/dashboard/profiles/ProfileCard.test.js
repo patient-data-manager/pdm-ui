@@ -55,7 +55,7 @@ it('renders details correctly', () => {
   expect(component.find('div.details-name').text()).toEqual('Jane E Doe');
 
   expect(component.find('div.details-age')).toExist();
-  expect(component.find('div.details-age').text()).toEqual('36 YRS');
+  expect(component.find('div.details-age').text()).toEqual('37 YRS');
   expect(component.find('div.details-gender')).toExist();
   expect(component.find('div.details-gender').text()).toEqual('female');
   expect(component.find('div.details-relation')).toExist();

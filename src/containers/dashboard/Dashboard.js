@@ -77,9 +77,9 @@ const styles = theme => ({
       easing: theme.transitions.easing.sharp,
       duration: theme.transitions.duration.leavingScreen,
     }),
-    width: theme.spacing.unit * 7,
+    width: theme.spacing(7),
     [theme.breakpoints.up('sm')]: {
-      width: theme.spacing.unit * 9,
+      width: theme.spacing(9),
     }
   },
   toolbar: {
@@ -97,7 +97,7 @@ const styles = theme => ({
 });
 
 export class Dashboard extends Component {
-  componentWillMount() {
+  UNSAFE_componentWillMount() {
     this.props.loadProfiles();
     this.props.loadProviders();
   }
@@ -114,6 +114,7 @@ export class Dashboard extends Component {
     const navList = [
       { name: 'Profiles', iconName: 'user-circle', path: '/dashboard/profiles' },
       { name: 'Health Record', iconName: 'file-medical-alt', path: '/dashboard/health-record' },
+      { name: 'Upload Records', iconName: 'file-medical', path: '/dashboard/upload-records' },
       { name: 'Alerts', iconName: 'exclamation-circle', path: '/dashboard/alerts' },
       { name: 'Providers', iconName: 'hospital', path: '/dashboard/providers' }
     ];

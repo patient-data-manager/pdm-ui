@@ -3,6 +3,7 @@ import PropTypes from 'prop-types';
 import Select from 'react-select';
 import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
 import Button from '@material-ui/core/Button';
+
 import isValid from '../../../utils/isValid';
 
 export default class ProviderSearch extends Component {
@@ -48,7 +49,7 @@ export default class ProviderSearch extends Component {
 
     return (
       <Button
-        variant="fab" mini
+        variant="contained"
         color="primary"
         disabled={!isValid(this.state.selectedProvider)}
         onClick={this.providerSelected}>

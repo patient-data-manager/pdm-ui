@@ -1,0 +1,24 @@
+.banner {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  background-color: $color-red;
+  color: $color-white;
+  border-radius: 5px;
+  font-size: 1.2em;
+  padding: 5px 20px;
+  margin: 20px 0;
+
+  .message {
+    display: flex;
+    align-items: center;
+
+    svg {
+      margin-right: 5px;
+    }
+  }
+
+  .close-icon {
+    cursor: pointer;
+  }
+}

@@ -2,7 +2,7 @@ import React from 'react';
 import PropTypes from 'prop-types';
 import { Provider } from 'react-redux';
 import { BrowserRouter as Router, Route, Switch } from 'react-router-dom';
-import { MuiThemeProvider, createMuiTheme } from 'material-ui/styles';
+import { MuiThemeProvider, createMuiTheme } from '@material-ui/core/styles';
 
 
 import PrivateRoute from './PrivateRoute';
@@ -13,6 +13,7 @@ import Register from './auth/Register';
 import Dashboard from './dashboard/Dashboard';
 import Profiles from './dashboard/Profiles';
 import HealthRecord from './dashboard/HealthRecord';
+import UploadRecords from './dashboard/UploadRecords';
 import Alerts from './dashboard/Alerts';
 import Providers from './dashboard/Providers';
 import NoMatch from '../components/error-pages/Page404';
@@ -44,26 +45,27 @@ const Root = ({ store }) => {
       <Provider store={store}>
         <Router>
           <Switch>
-            <Route exact path="/" component={Landing} />
-            <Route path="/login" component={Login} />
-            <Route path="/register" component={Register} />
+            <Route exact path="/"><Landing /></Route>
+            <Route path="/login"><Login /></Route>
+            <Route path="/register"><Register /></Route>
 
-            <PrivateRoute path="/oauth" component={OAuth} />
+            <PrivateRoute path="/oauth"><OAuth /></PrivateRoute>
             <PrivateRoute path="/dashboard">
               <TokenActionCableProvider url={websocketURL}>
                 <Dashboard>
                   <Switch>
-                    <PrivateRoute path="/dashboard/profiles" component={Profiles} />
-                    <PrivateRoute path="/dashboard/health-record" component={HealthRecord}/>
-                    <PrivateRoute path="/dashboard/alerts" component={Alerts} />
-                    <PrivateRoute path="/dashboard/providers" component={Providers} />
-                    <Route component={NoMatch} />
+                    <PrivateRoute path="/dashboard/profiles"><Profiles /></PrivateRoute>
+                    <PrivateRoute path="/dashboard/health-record"><HealthRecord /></PrivateRoute>
+                    <PrivateRoute path="/dashboard/upload-records"><UploadRecords /></PrivateRoute>
+                    <PrivateRoute path="/dashboard/alerts"><Alerts /></PrivateRoute>
+                    <PrivateRoute path="/dashboard/providers"><Providers /></PrivateRoute>
+                    <Route><NoMatch /></Route>
                   </Switch>
                 </Dashboard>
               </TokenActionCableProvider>
             </PrivateRoute>
 
-            <Route component={NoMatch} />
+            <Route><NoMatch /></Route>
           </Switch>
         </Router>
       </Provider>

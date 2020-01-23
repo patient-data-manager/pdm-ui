@@ -1,0 +1,28 @@
+.dropzone {
+  margin-bottom: 40px;
+  padding: 2em 1em;
+  text-align: center;
+  border-width: 0.4em;
+  border-color: $color-blue-gray;
+  border-style: dashed;
+  border-radius: 1em;
+  cursor: pointer;
+  color: $color-blue-gray-dark;
+
+  &:focus {
+    outline: none;
+    border-color: $color-black;
+  }
+
+  &__warning {
+    font-size: 0.9em;
+    color: $color-red;
+    font-style: italic;
+    margin: 0 60px;
+  }
+
+  &__instructions {
+    font-size: 1.5em;
+    margin-top: 20px;
+  }
+}

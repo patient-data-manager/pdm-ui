@@ -22,7 +22,7 @@ export default class HorizontalTimeline extends Component {
     };
   }
 
-  componentWillMount() {
+  UNSAFE_componentWillMount() {
     this.initializeRange();
   }
 

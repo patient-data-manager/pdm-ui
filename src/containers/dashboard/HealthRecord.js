@@ -39,7 +39,7 @@ export class HealthRecord extends Component {
     };
   }
 
-  componentWillMount() {
+  UNSAFE_componentWillMount() {
     this.resize();
     window.addEventListener('resize', this.resize);
   }
@@ -63,7 +63,7 @@ export class HealthRecord extends Component {
     tocbot.destroy();
   }
 
-  componentWillReceiveProps(nextProps) {
+  UNSAFE_componentWillReceiveProps(nextProps) {
     if (this.props.dashboardNavIsOpen !== nextProps.dashboardNavIsOpen) {
       this._calculateChartWidth(nextProps.dashboardNavIsOpen);
     }
