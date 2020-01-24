@@ -36,7 +36,7 @@
     "immutable": "3.8.1",
     "interact.js": "1.2.8",
     "jest-enzyme": "^6.0.2",
-    "jquery": "^2.2.1",
+    "jquery": "^3.4.0",
     "jsdom": "^11.11.0",
     "lodash": "^4.17.10",
     "memoize-one": "4.0.0",
