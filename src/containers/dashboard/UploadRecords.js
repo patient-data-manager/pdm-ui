@@ -3,8 +3,11 @@ import PropTypes from 'prop-types';
 import { connect } from 'react-redux';
 import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
 import { useDropzone } from 'react-dropzone';
+import Button from '@material-ui/core/Button';
 
 import { uploadDocument, loadDocuments } from '../../actions/healthRecords';
+
+import renderDate from '../../utils/dates';
 
 import Banner from '../../components/elements/Banner';
 
@@ -65,18 +68,23 @@ export const UploadRecords = ({
         </div>
 
         <div className="uploaded-records">
-          <table>
+          <table className="uploaded-records__table">
             <thead>
               <tr>
                 <th>File Name</th>
                 <th>Uploaded</th>
+                <th aria-label="buttons"></th>
               </tr>
             </thead>
             <tbody>
               {uploadedDocuments.map(document => (
                 <tr key={document.id}>
-                  <td>{document.filename}</td>
-                  <td>{document.updated_at}</td>
+                  <td className="uploaded-records__tablecell-wide">{document.filename}</td>
+                  <td className="uploaded-records__tablecell-short">{renderDate(document.updated_at)}</td>
+                  <td className="uploaded-records__tablecell-button">
+                    <Button mini={true} color="primary" onClick={() => {}}>View</Button>
+                    <Button mini={true} color="secondary" onClick={() => {}}>Delete</Button>
+                  </td>
                 </tr>
               ))}
             </tbody>

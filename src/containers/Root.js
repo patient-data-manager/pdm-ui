@@ -30,8 +30,6 @@ const THEME = createMuiTheme({
   },
   palette: {
     primary: { light: '#d4e4f6', main: '#6b8eb6', dark: '#5c7ca1', contrastText: '#fff' },
-    secondary: { light: '#96A5B7', main: '#7E90A3', dark: '#6C7988', contrastText: '#fff' },
-    error: { light: '#d08c9f', main: '#b66b80', dark: '#a44d65', contrastText: '#fff' },
     action: { selected: '#d4e4f6' }
   },
   shape: {}

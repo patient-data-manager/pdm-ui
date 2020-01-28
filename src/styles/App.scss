@@ -7,6 +7,7 @@
 
 /* ------------------------- IMPORT CUSTOM SCSS ---------------------------- */
 // site-wide elements
+@import 'elements/mixins'; // keep first in list
 @import 'elements/badges';
 @import 'elements/banners';
 @import 'elements/base';
