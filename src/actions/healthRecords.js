@@ -1,4 +1,5 @@
 import axios from 'axios';
+import download from 'downloadjs';
 import * as types from './types';
 
 // ------------------------- LOAD HEALTH RECORD ---------------------------- //
@@ -114,8 +115,7 @@ export function uploadDocument(documentFile) {
 
     return sendUploadDocumentRequest(accessToken, activeProfileId, documentFile)
       .then(data => dispatch(uploadDocumentSuccess(data)))
-      .catch(error => dispatch(uploadDocumentFailure(error)))
-      .then(() => dispatch(loadDocuments()));
+      .catch(error => dispatch(uploadDocumentFailure(error)));
   };
 }
 
@@ -169,5 +169,35 @@ export function loadDocuments() {
     return sendLoadDocumentsRequest(accessToken, activeProfileId)
       .then(data => dispatch(loadDocumentsSuccess(data)))
       .catch(error => dispatch(loadDocumentsFailure(error)));
+  };
+}
+
+export function downloadDocument(documentId, filename) {
+  return async (dispatch, getState) => {
+    const { auth: { accessToken } } = getState();
+
+    const { data, headers } = await axios.get(`/api/pilot/uploaded_documents/${documentId}/download`, {
+      headers: {
+        Authorization: `Bearer ${accessToken}`
+      },
+      responseType: 'blob'
+    });
+    const contentType = headers['content-type'];
+
+    download(data, filename, contentType);
+  };
+}
+
+export function deleteDocument(documentId) {
+  return async (dispatch, getState) => {
+    const { auth: { accessToken } } = getState();
+
+    await axios.delete(`/api/pilot/uploaded_documents/${documentId}`, {
+      headers: {
+        'X-Key-Inflection': 'camel',
+        'Accept': 'application/json',
+        Authorization: `Bearer ${accessToken}`
+      }
+    });
   };
 }

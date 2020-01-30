@@ -27,6 +27,7 @@
     "d3-array": "^1.2.1",
     "d3-scale": "^2.1.0",
     "d3-time": "^1.0.8",
+    "downloadjs": "^1.4.7",
     "enzyme": "3.0.0",
     "enzyme-adapter-react-16": "1.15.2",
     "enzyme-redux": "^0.2.1",
