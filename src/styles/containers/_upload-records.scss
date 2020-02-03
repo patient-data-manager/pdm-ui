@@ -1,4 +1,45 @@
 .upload-records {
   margin: 40px 0;
   padding: $global-padding;
+  font-size: 1.1em;
+
+  .uploaded-records {
+    margin-top: 40px;
+
+    &__table {
+      @include responsive-table;
+
+      width: 100%;
+
+      tbody tr {
+        &:hover {
+          background-color: lighten($color-blue-gray-light, 15%);
+        }
+      }
+
+      th, td {
+        padding: 0.1em 1em;
+      }
+
+      td:last-of-type {
+        text-align: right;
+      }
+    }
+
+    &__tablecell-wide {
+      width: 15em;
+    }
+
+    &__tablecell-short {
+      width: 11em;
+    }
+
+    &__tablecell-button {
+      white-space: nowrap;
+
+      button {
+        margin-left: 10px;
+      }
+    }
+  }
 }

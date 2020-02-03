@@ -3,12 +3,17 @@ import PropTypes from 'prop-types';
 import { connect } from 'react-redux';
 import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
 import { useDropzone } from 'react-dropzone';
+import Button from '@material-ui/core/Button';
 
-import { uploadDocument, loadDocuments } from '../../actions/healthRecords';
+import { uploadDocument, loadDocuments, downloadDocument, deleteDocument } from '../../actions/healthRecords';
+
+import renderDate from '../../utils/dates';
 
 import Banner from '../../components/elements/Banner';
 
 export const UploadRecords = ({
+  deleteDocument,
+  downloadDocument,
   isUploadingDocument,
   loadDocuments,
   uploadDocument,
@@ -29,7 +34,7 @@ export const UploadRecords = ({
     }
 
     setShowUploadErrorBanner(false);
-    uploadDocument(file);
+    await uploadDocument(file);
     loadDocuments();
   }, []);
 
@@ -65,18 +70,38 @@ export const UploadRecords = ({
         </div>
 
         <div className="uploaded-records">
-          <table>
+          <table className="uploaded-records__table">
             <thead>
               <tr>
                 <th>File Name</th>
                 <th>Uploaded</th>
+                <th aria-label="buttons"></th>
               </tr>
             </thead>
             <tbody>
-              {uploadedDocuments.map(document => (
-                <tr key={document.id}>
-                  <td>{document.filename}</td>
-                  <td>{document.updated_at}</td>
+              {uploadedDocuments.map(doc => (
+                <tr key={doc.id}>
+                  <td className="uploaded-records__tablecell-wide">{doc.filename}</td>
+                  <td className="uploaded-records__tablecell-short">{renderDate(doc.updated_at)}</td>
+                  <td className="uploaded-records__tablecell-button">
+                    <Button
+                      color="primary"
+                      onClick={() => downloadDocument(doc.id, doc.filename)}
+                      mini
+                    >
+                      Download
+                    </Button>
+                    <Button
+                      color="secondary"
+                      onClick={async () => {
+                        await deleteDocument(doc.id);
+                        loadDocuments();
+                      }}
+                      mini
+                    >
+                      Delete
+                    </Button>
+                  </td>
                 </tr>
               ))}
             </tbody>
@@ -92,7 +117,9 @@ UploadRecords.propTypes = {
   isUploadingDocument: PropTypes.bool.isRequired,
   uploadDocumentStatus: PropTypes.string,
   loadDocuments: PropTypes.func.isRequired,
-  uploadDocument: PropTypes.func.isRequired
+  uploadDocument: PropTypes.func.isRequired,
+  downloadDocument: PropTypes.func.isRequired,
+  deleteDocument: PropTypes.func.isRequired
 };
 
 function mapStateToProps(state) {
@@ -103,4 +130,7 @@ function mapStateToProps(state) {
   };
 }
 
-export default connect(mapStateToProps, { uploadDocument, loadDocuments })(UploadRecords);
+export default connect(
+  mapStateToProps,
+  { uploadDocument, loadDocuments, downloadDocument, deleteDocument }
+)(UploadRecords);
